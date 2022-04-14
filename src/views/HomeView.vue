@@ -12,7 +12,7 @@
         The art world's DAO.<br />Collecting contemporary art together.
       </p>
       <a
-        href="http://app.salondao.xyz:3000"
+        href="https://app.salondao.xyz"
         class="border-2 p-5 bg-black text-white text-2xl rounded-full border-black"
         >Enter App</a
       >
