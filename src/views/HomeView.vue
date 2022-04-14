@@ -13,12 +13,12 @@
       </p>
       <a
         href="https://app.salondao.xyz"
-        class="border-2 p-5 bg-black text-white text-2xl rounded-full border-black"
+        class="border-2 p-5 bg-black text-white text-2xl rounded-lg border-black"
         >Enter App</a
       >
       <a
         href="http://docs.salondao.xyz"
-        class="border-2 p-5 bg-black text-white text-2xl rounded-full border-black"
+        class="border-2 p-5 ml-4 bg-white text-black text-2xl rounded-lg border-black"
         >Docs</a
       >
     </div>
