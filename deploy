@@ -1,0 +1,4 @@
+yarn build
+git add -A
+git commit -a -m 'autodeploy'
+git push origin master
