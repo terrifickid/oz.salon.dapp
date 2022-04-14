@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div
+    style="
+      background: url('Logo.png') center center no-repeat;
+      background-size: cover;
+    "
+    class="bg-black w-screen h-screen flex items-center justify-center"
+  >
+    <div class="text-center">
+      <h1 class="text-6xl mb-12 font-extrabold">SalonDAO</h1>
+      <p class="text-3xl mb-20">
+        The art world's DAO.<br />Collecting contemporary art together.
+      </p>
+      <a
+        href="#"
+        class="border-2 p-5 bg-black text-white text-2xl rounded-full border-black"
+        >Enter dapp</a
+      >
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
-  },
+  components: {},
 };
 </script>
