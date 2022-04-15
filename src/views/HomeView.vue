@@ -7,7 +7,7 @@
     class="bg-black w-screen h-screen flex items-center justify-center"
   >
     <div class="text-center">
-      <h1 class="text-6xl mb-12 font-extrabold">SalonDAO</h1>
+      <h1 class="text-6xl mb-12 font-extrabold">Salon</h1>
       <p class="text-3xl mb-20">
         The art world's DAO.<br />Collecting contemporary art together.
       </p>
