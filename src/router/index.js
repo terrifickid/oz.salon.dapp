@@ -8,14 +8,14 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/about",
+    path: "/#/about",
     name: "about",
     component: function () {
       return import(/* webpackChunkName: "About" */ "../views/AboutView.vue");
     },
   },
   {
-    path: "/collection",
+    path: "/#/collection",
     name: "collection",
     component: function () {
       return import(
@@ -24,7 +24,7 @@ const routes = [
     },
   },
   {
-    path: "/members",
+    path: "/#/members",
     name: "members",
     component: function () {
       return import(
