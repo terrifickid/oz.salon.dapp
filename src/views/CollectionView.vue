@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-4">Home</h1>
+    <h1 class="mb-4">Collection</h1>
     <p class="mb-4">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
