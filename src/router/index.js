@@ -7,6 +7,31 @@ const routes = [
     name: "home",
     component: HomeView,
   },
+  {
+    path: "/about",
+    name: "about",
+    component: function () {
+      return import(/* webpackChunkName: "About" */ "../views/AboutView.vue");
+    },
+  },
+  {
+    path: "/collection",
+    name: "collection",
+    component: function () {
+      return import(
+        /* webpackChunkName: "CollectionView" */ "../views/CollectionView.vue"
+      );
+    },
+  },
+  {
+    path: "/members",
+    name: "members",
+    component: function () {
+      return import(
+        /* webpackChunkName: "MembersView" */ "../views/MembersView.vue"
+      );
+    },
+  },
 ];
 
 const router = createRouter({

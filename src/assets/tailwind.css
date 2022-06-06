@@ -3,3 +3,8 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@import url("https://storageapi.fleek.co/30574903-5125-41b1-b206-a65d79fe301c-bucket/haffer/stylesheet.css");
+* {
+  font-family: "Haffer XH";
+}
