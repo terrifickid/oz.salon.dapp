@@ -63,6 +63,7 @@
       name="legalNameOfPerson"
       id="legalNameOfPerson"
       aria-="true"
+      v-model="legalNameOfPerson"
     />
 
     <label
@@ -305,6 +306,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      legalNameOfPerson: "",
       btnTxt: "Submit",
       sending: false,
     };
@@ -316,10 +318,10 @@ export default {
       console.log("Ran Submit!");
       try {
         const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/",
+          "https://salontest-terrifickid.cloud.okteto.net/onboard",
           {
-            walletAddress: "TkWalletAddressTest",
-            legalNameOfPerson: "Tk Croft",
+            walletAddress: this.userAddress,
+            legalNameOfPerson: this.legalNameOfPerson,
           }
         );
         console.log("success", res.data);
