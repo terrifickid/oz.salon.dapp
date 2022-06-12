@@ -32,6 +32,40 @@ const routes = [
       );
     },
   },
+  {
+    path: "/dapp",
+    name: "dappHome",
+    component: function () {
+      return import(/* webpackChunkName: "DappHome" */ "../views/DappHome.vue");
+    },
+  },
+  {
+    path: "/dapp/governance",
+    name: "dappGovernance",
+    component: function () {
+      return import(
+        /* webpackChunkName: "DappHome" */ "../views/DappGovernance.vue"
+      );
+    },
+  },
+  {
+    path: "/dapp/members",
+    name: "dappMembers",
+    component: function () {
+      return import(
+        /* webpackChunkName: "DappHome" */ "../views/DappMembers.vue"
+      );
+    },
+  },
+  {
+    path: "/dapp/profile",
+    name: "dappProfile",
+    component: function () {
+      return import(
+        /* webpackChunkName: "DappHome" */ "../views/DappProfile.vue"
+      );
+    },
+  },
 ];
 
 const router = createRouter({
