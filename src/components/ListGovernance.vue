@@ -26,18 +26,6 @@ export default {
   data() {
     return { proposals: [] };
   },
-  methods: {
-    async verify() {},
-    async yes(id) {
-      const vote = JSON.stringify({
-        address: this.$store.state.userAddress,
-        vote: true,
-        proposal: id,
-      });
-      const signature = await this.$store.state.signer.signMessage(vote);
-      console.log(this.$store.state.userAddress, vote, signature);
-    },
-  },
   async beforeMount() {
     console.log("GLOad!");
     try {

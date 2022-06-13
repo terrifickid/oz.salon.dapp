@@ -325,7 +325,7 @@ export default {
           }
         );
         console.log("success", res.data);
-        this.btnTxt = "Application Sent!";
+        this.$store.dispatch("connect");
       } catch (error) {
         console.log("error", error);
         this.btnTxt = "error!";

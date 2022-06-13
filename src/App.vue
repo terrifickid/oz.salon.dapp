@@ -19,6 +19,10 @@ export default {
   },
   components: { GlobalLoader },
   async beforeMount() {
+    var obj = JSON.parse(localStorage.getItem("salon_profile"));
+    if ("approved" in obj) this.$store.dispatch("connect");
+    this.$store.state.profile = obj;
+
     var loading = setInterval(async () => {
       if (document.fonts.check("1rem Haffer XH")) {
         this.fontsLoaded = true;
@@ -26,7 +30,7 @@ export default {
         console.log("Fonts Loaded!");
       }
     }, 10);
-    this.$store.dispatch("init");
+
     window.ethereum.on("accountsChanged", () => {
       this.$store.dispatch("connect");
     });
@@ -36,7 +40,7 @@ export default {
       return this.$store.state.members;
     },
     ready() {
-      if (this.fontsLoaded == true && this.members.length) return true;
+      if (this.fontsLoaded == true) return true;
       return false;
     },
   },

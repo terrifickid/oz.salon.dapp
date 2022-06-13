@@ -4,10 +4,12 @@ import axios from "axios";
 
 export default createStore({
   state: {
+    connecting: false,
     userAddress: null,
     provider: null,
     signer: null,
     members: [],
+    profile: {},
   },
   getters: {
     getMembers(state) {
@@ -17,24 +19,16 @@ export default createStore({
   },
   mutations: {},
   actions: {
-    async init() {
-      console.log("Ran init!");
-      try {
-        const res = await axios.get(
-          "https://salontest-terrifickid.cloud.okteto.net/members"
-        );
-        console.log("init success", res.data);
-        this.state.members = res.data;
-      } catch (error) {
-        console.log("init error", error);
-      }
-    },
     async disconnect() {
       this.state.provider = null;
       this.state.signer = null;
       this.state.userAddress = null;
+      this.state.profile = {};
+      localStorage.setItem("salon_profile", JSON.stringify({}));
     },
     async connect() {
+      console.log("Connecting!");
+      this.state.connecting = true;
       // A Web3Provider wraps a standard Web3 provider, which is
       // what MetaMask injects as window.ethereum into each page
       this.state.provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -44,7 +38,19 @@ export default createStore({
       // send ether and pay to change state within the blockchain.
       // For this, you need the account signer...
       this.state.signer = this.state.provider.getSigner();
-      this.state.userAddress = await this.state.signer.getAddress();
+      var walletAddress = await this.state.signer.getAddress();
+      try {
+        const res = await axios.post(
+          "https://salontest-terrifickid.cloud.okteto.net/profile",
+          { walletAddress: walletAddress }
+        );
+        console.log("init profile", res.data);
+        this.state.profile = res.data;
+        localStorage.setItem("salon_profile", JSON.stringify(res.data));
+      } catch (error) {
+        console.log("init profile error", error);
+      }
+      this.state.connecting = false;
     },
   },
   modules: {},
