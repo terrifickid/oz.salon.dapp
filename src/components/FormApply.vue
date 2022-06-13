@@ -3,13 +3,8 @@
     <h1>apply to join</h1>
 
     <p>
-      <label>applicant address</label>
-      <input type="text" />
-    </p>
-
-    <p>
       <label>usdc amount</label>
-      <input type="text" />
+      <input type="text" placeholder="30,000" />
       <span
         >This amount will be held in escrow pending a member vote. If the
         proposal passes, the funds will automatically be sent to the DAO. If the

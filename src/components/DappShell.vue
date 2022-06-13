@@ -4,12 +4,12 @@
       class="grid grid-cols-12 flex items-center bg-black px-10 z-10 relative"
     >
       <div class="col-span-6">
-        <a href="/#/" class="flex text-white items-center justify-left"
+        <a href="/#/" class="flex text-white items-center justify-left py-3"
           ><span>EXIT</span></a
         >
       </div>
 
-      <div class="col-span-6 flex justify-end text-white">
+      <div class="col-span-6 flex justify-end text-white overflow-hidden">
         <button @click="connect" v-show="!userAddress" class="px-4 p-3">
           <span>Connect</span>
         </button>
@@ -44,9 +44,11 @@
       </div>
     </template>
     <template v-if="userAddress">
-      <div class="grid grid-cols-12 gap-10 px-10">
-        <div class="col-span-2 py-10"><DappHeader></DappHeader></div>
-        <div class="col-span-8 py-10 flex">
+      <div class="grid grid-cols-12 px-10">
+        <div class="col-span-12 md:col-span-3 py-10">
+          <DappHeader></DappHeader>
+        </div>
+        <div class="col-span-12 md:col-span-8 py-10">
           <slot></slot>
         </div>
       </div>
