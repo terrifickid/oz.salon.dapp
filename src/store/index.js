@@ -22,9 +22,9 @@ export default createStore({
     async disconnect() {
       this.state.provider = null;
       this.state.signer = null;
-      this.state.userAddress = null;
+      this.state.walletAddress = null;
       this.state.profile = {};
-      localStorage.setItem("salon_profile", JSON.stringify({}));
+      localStorage.setItem("salon_login", false);
     },
     async connect() {
       console.log("Connecting!");
@@ -38,15 +38,15 @@ export default createStore({
       // send ether and pay to change state within the blockchain.
       // For this, you need the account signer...
       this.state.signer = this.state.provider.getSigner();
-      var walletAddress = await this.state.signer.getAddress();
+      this.state.walletAddress = await this.state.signer.getAddress();
       try {
         const res = await axios.post(
           "https://salontest-terrifickid.cloud.okteto.net/profile",
-          { walletAddress: walletAddress }
+          { walletAddress: this.state.walletAddress }
         );
         console.log("init profile", res.data);
         this.state.profile = res.data;
-        localStorage.setItem("salon_profile", JSON.stringify(res.data));
+        localStorage.setItem("salon_login", true);
       } catch (error) {
         console.log("init profile error", error);
       }

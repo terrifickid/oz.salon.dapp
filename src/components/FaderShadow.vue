@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed left-0 right-0 bottom-0 bg h-0">&nbsp;</div>
+  <div class="fixed left-0 right-0 bottom-0 bg h-20">&nbsp;</div>
 </template>
 <style scoped>
 .bg {

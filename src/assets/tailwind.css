@@ -5,6 +5,14 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;400&family=Special+Elite&display=swap");
+html,
+body {
+  height: 100%;
+}
 * {
   font-family: "Manrope";
+}
+
+.app-text {
+  @apply text-xl sm:text-2xl lg:text-3xl font-light;
 }

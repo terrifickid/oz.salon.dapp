@@ -1,40 +1,32 @@
 <template>
-  <div class="p-3 bg-black min-h-screen text-white relative">
-    <GlobalHeader :hide="false"></GlobalHeader>
-    <div class="grid grid-cols-12">
-      <div class="col-span-12 sm:col-span-11 md:col-span-11">
-        <p class="text-2xl md:text-3xl font-light indent-folch">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-
+  <div class="bg-black min-h-screen text-white relative">
+    <AppHeader :hide="false"></AppHeader>
+    <div class="grid grid-cols-12 my-20 px-3">
+      <div
+        class="col-span-12 col-start-1 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
+      >
         <p
           v-for="(item, index) in content.fields.content['en-US'].content"
           :key="index"
-          class="text-2xl md:text-3xl indent-folch"
+          class="app-text mb-8"
         >
           {{ item.content[0].value }}
         </p>
       </div>
     </div>
 
-    <FaderShadow />
+    <AppFooter :background="'bg-black'" :fill="'fill-white'" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import GlobalHeader from "@/components/GlobalHeader";
-import FaderShadow from "@/components/FaderShadow";
+import AppHeader from "@/components/AppHeader";
+import AppFooter from "@/components/AppFooter";
 export default {
   name: "AboutView",
-  components: { GlobalHeader, FaderShadow },
+  components: { AppHeader, AppFooter },
   data() {
     return {
       content: {},

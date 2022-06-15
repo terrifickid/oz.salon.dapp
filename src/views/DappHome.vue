@@ -1,6 +1,6 @@
 <template>
   <DappShell>
-    <template v-if="isNew"><FormKyc /></template>
+    <template v-if="isNew"><TypeformKyc /></template>
     <template v-if="!isKycApproved && !isNew"
       ><h1>Your KYC application is being reviewed.</h1></template
     >
@@ -11,11 +11,11 @@
 <script>
 // @ is an alias to /src
 import DappShell from "@/components/DappShell.vue";
-import FormKyc from "@/components/FormKyc.vue";
+import TypeformKyc from "@/components/TypeformKyc.vue";
 import FormApply from "@/components/FormApply.vue";
 export default {
   name: "DappHome",
-  components: { DappShell, FormKyc, FormApply },
+  components: { DappShell, TypeformKyc, FormApply },
   computed: {
     isNew() {
       if ("approved" in this.profile) return false;

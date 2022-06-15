@@ -19,11 +19,9 @@ export default {
   },
   components: { GlobalLoader },
   async beforeMount() {
-    var obj = JSON.parse(localStorage.getItem("salon_profile"));
-    if (obj) {
-      if ("approved" in obj) this.$store.dispatch("connect");
-      this.$store.state.profile = obj;
-    }
+    var connected = localStorage.getItem("salon_login");
+    if (connected) this.$store.dispatch("connect");
+
     var loading = setInterval(async () => {
       if (document.fonts.check("1rem Manrope")) {
         this.fontsLoaded = true;
@@ -37,9 +35,6 @@ export default {
     });
   },
   computed: {
-    members() {
-      return this.$store.state.members;
-    },
     ready() {
       if (this.fontsLoaded == true) return true;
       return false;
