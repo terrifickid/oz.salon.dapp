@@ -1,8 +1,8 @@
 <template>
   <div class="p-3 bg-black min-h-screen text-white">
-    <GlobalHeader></GlobalHeader>
+    <GlobalHeader :hide="false"></GlobalHeader>
     <div class="grid grid-cols-12">
-      <div class="col-span-11">
+      <div class="col-span-10">
         <p class="text-2xl md:text-3xl font-normal" style="text-indent: 15vw">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -21,6 +21,16 @@
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
+        <div class="grid grid-cols-12 gap-3">
+          <div
+            class="col-span-6 md:col-span-4 lg:col-span-3 bg-white text-black"
+            style="height: 25rem"
+            v-for="(item, index) in collection"
+            :key="index"
+          >
+            {{ item.fields.title["en-US"] }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -28,9 +38,26 @@
 
 <script>
 // @ is an alias to /src
+import axios from "axios";
 import GlobalHeader from "@/components/GlobalHeader";
 export default {
   name: "CollectionView",
   components: { GlobalHeader },
+  data() {
+    return {
+      collection: [],
+    };
+  },
+  async beforeMount() {
+    console.log("collection load!");
+    try {
+      const res = await axios.get(
+        "https://salontest-terrifickid.cloud.okteto.net/collection"
+      );
+      this.collection = res.data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
 };
 </script>
