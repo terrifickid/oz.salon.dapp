@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 bg-black min-h-screen text-white">
+  <div class="p-3 bg-black min-h-screen text-white relative">
     <GlobalHeader :hide="false"></GlobalHeader>
     <div class="grid grid-cols-12">
       <div class="col-span-10">
@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+    <FaderShadow></FaderShadow>
   </div>
 </template>
 
@@ -40,9 +41,10 @@
 // @ is an alias to /src
 import axios from "axios";
 import GlobalHeader from "@/components/GlobalHeader";
+import FaderShadow from "@/components/FaderShadow";
 export default {
   name: "CollectionView",
-  components: { GlobalHeader },
+  components: { GlobalHeader, FaderShadow },
   data() {
     return {
       collection: [],
