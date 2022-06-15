@@ -2,28 +2,10 @@
   <div class="p-3 bg-black min-h-screen text-white relative">
     <GlobalHeader :hide="false"></GlobalHeader>
     <div class="grid grid-cols-12">
-      <div class="col-span-10">
-        <p class="text-2xl md:text-3xl font-normal" style="text-indent: 15vw">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <p class="text-2xl md:text-3xl font-normal" style="text-indent: 15vw">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+      <div class="col-span-12 sm:col-span-11 md:col-span-11">
         <div class="grid grid-cols-12 gap-3">
           <div
-            class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3 bg-white text-black"
+            class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 bg-white text-black"
             style="height: 25rem"
             v-for="(item, index) in collection"
             :key="index"

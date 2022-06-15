@@ -3,7 +3,7 @@
     <GlobalHeader :hide="false"></GlobalHeader>
     <div class="grid grid-cols-12">
       <div class="col-span-12 sm:col-span-11 md:col-span-11">
-        <p class="text-2xl md:text-3xl font-light indent-folch">
+        <p class="text-2xl md:text-3xl indent-folch">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -16,7 +16,7 @@
         <p
           v-for="(item, index) in content.fields.content['en-US'].content"
           :key="index"
-          class="text-2xl md:text-3xl font-light indent-folch"
+          class="text-2xl md:text-3xl indent-folch"
         >
           {{ item.content[0].value }}
         </p>
