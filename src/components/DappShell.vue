@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="backgroundClass">
     <div v-if="walletAddress">
       <AppHeader :backgroundClass="backgroundClass" :textClass="textClass" />
       <slot></slot>
