@@ -1,46 +1,46 @@
 <template>
-  <div class="container-fluid mx-auto">
-    <div
-      class="grid grid-cols-12 flex items-center bg-black px-10 z-10 relative"
-    >
-      <div class="col-span-6">
-        <a href="/#/" class="flex text-white items-center justify-left py-3"
-          ><span>EXIT</span></a
-        >
-      </div>
-
-      <div class="col-span-6 flex justify-end text-white overflow-hidden">
-        <button @click="connect" v-show="!userAddress" class="px-4 p-3">
-          <span>Connect</span>
-        </button>
-        <button @click="disconnect" v-show="userAddress" class="px-4 p-3">
-          <span v-show="userAddress">{{ userAddress }}</span>
-        </button>
-      </div>
-    </div>
+  <div style="background: #d54a37">
     <template v-if="!userAddress">
       <div
-        class="absolute top-0 left-0 min-h-screen min-w-full flex items-center justify-center"
+        class="flex min-w-full relative min-h-screen text-black relative items-center justify-center p-3"
       >
-        <div class="text-center" v-if="!connecting">
-          <h1 class="text-4xl font-extrabold">
-            <a href="/"
-              ><img
-                class="w-10 mx-auto mb-5"
-                src="Salon_Symbol_RGB_Positive.svg"
-            /></a>
-          </h1>
-          <p class="text-3xl">Connect wallet to continue.</p>
-          <button
-            @click="connect"
-            class="btn px-4 py-3 mt-4 text-lg hover:bg-black hover:text-white border rounded"
-          >
-            Connect
-          </button>
-        </div>
-        <div class="text-center" v-if="connecting">
-          <p class="text-3xl">Connecting...</p>
-        </div>
+        <template v-if="!connecting">
+          <p class="absolute top-0 left-0 text-3xl md:text-5xl p-3">
+            Connect wallet<br />
+            to continue
+          </p>
+          <div>
+            <button
+              @click="connect"
+              class="flex items-center px-6 py-4 text-2xl md:text-3xl ml-3 text-lg hover:bg-black hover:text-black border-2 border-black rounded-full"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+              Click to Connect
+            </button>
+          </div>
+          <img
+            class="absolute right-3 bottom-3"
+            style="width: 30vw"
+            src="Salon_Logotype_RGB_Positive.svg"
+          />
+        </template>
+
+        <template v-if="connecting">
+          <p class="text-2xl md:text-3xl"><GlobalLoader /></p>
+        </template>
       </div>
     </template>
     <template v-if="userAddress">
@@ -59,9 +59,10 @@
 <script>
 // @ is an alias to /src
 import DappHeader from "@/components/DappHeader.vue";
+import GlobalLoader from "@/components/GlobalLoader.vue";
 export default {
   name: "DappHome",
-  components: { DappHeader },
+  components: { DappHeader, GlobalLoader },
   computed: {
     profile() {
       return this.$store.state.profile;
