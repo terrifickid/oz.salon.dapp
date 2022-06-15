@@ -31,3 +31,9 @@ export default {
   },
 };
 </script>
+<style>
+body,
+html {
+  @apply bg-canary;
+}
+</style>

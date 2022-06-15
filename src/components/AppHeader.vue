@@ -37,8 +37,8 @@
             <li>
               <a href="/#">Home</a>
               <ul class="mb-3 ml-3">
-                <li>Collection</li>
-                <li>About</li>
+                <li><a href="/#/collection">Collection</a></li>
+                <li><a href="/#/about">About</a></li>
               </ul>
             </li>
             <li>
