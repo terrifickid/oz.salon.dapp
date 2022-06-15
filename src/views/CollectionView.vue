@@ -23,7 +23,7 @@
         </p>
         <div class="grid grid-cols-12 gap-3">
           <div
-            class="col-span-6 md:col-span-4 xl:col-span-3 bg-white text-black"
+            class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3 bg-white text-black"
             style="height: 25rem"
             v-for="(item, index) in collection"
             :key="index"
