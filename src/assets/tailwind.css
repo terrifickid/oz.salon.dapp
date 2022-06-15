@@ -4,8 +4,7 @@
 
 @tailwind utilities;
 
-@import url("https://storageapi.fleek.co/30574903-5125-41b1-b206-a65d79fe301c-bucket/hafferq/stylesheet.css");
-
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;400&family=Special+Elite&display=swap");
 * {
-  font-family: "Haffer XH";
+  font-family: "Manrope";
 }

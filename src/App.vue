@@ -25,7 +25,7 @@ export default {
       this.$store.state.profile = obj;
     }
     var loading = setInterval(async () => {
-      if (document.fonts.check("1rem Haffer XH")) {
+      if (document.fonts.check("1rem Manrope")) {
         this.fontsLoaded = true;
         clearInterval(loading);
         console.log("Fonts Loaded!");

@@ -1,46 +1,34 @@
 <template>
-  <div>
-    <GlobalHeader />
-    <div class="container-fluid mx-auto p-10">
-      <div class="grid grid-cols-12">
-        <div class="col-span-4">
-          <ul>
-            <li class="mb-2"><a href="/#/about">About Salon</a></li>
-            <li class="mb-2"><a href="/#/collection">Collection</a></li>
-            <li class="mb-2"><a href="/#/members">Members</a></li>
-          </ul>
-        </div>
-        <div class="col-span-8">
-          <h1 class="mb-4">Home</h1>
-          <p class="mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </div>
+  <div
+    class="bg-black min-h-screen min-w-screen flex items-center justify-center relative"
+  >
+    <div style="min-height: 25rem" class="flex items-center justify-center">
+      <div class="text-center" style="padding: 0 20vw">
+        <img src="metal_logo_op.jpg" />
       </div>
+    </div>
+
+    <div class="bottom-0 absolute p-3">
+      <a href="/#/app/" class="text-white text-2xl md:text-3xl">Join</a>
+    </div>
+
+    <div class="top-0 left-0 absolute p-3">
+      <a href="/#/collection" class="text-white text-2xl md:text-3xl"
+        >Collection</a
+      >
+    </div>
+
+    <div class="top-0 right-0 absolute p-3">
+      <a href="/#/about" class="text-white text-2xl md:text-3xl">About</a>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import GlobalHeader from "@/components/GlobalHeader.vue";
+
 export default {
   name: "HomeView",
-  components: { GlobalHeader },
+  components: {},
 };
 </script>

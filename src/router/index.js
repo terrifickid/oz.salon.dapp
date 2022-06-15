@@ -33,14 +33,14 @@ const routes = [
     },
   },
   {
-    path: "/dapp",
+    path: "/app",
     name: "dappHome",
     component: function () {
       return import(/* webpackChunkName: "DappHome" */ "../views/DappHome.vue");
     },
   },
   {
-    path: "/dapp/governance",
+    path: "/app/governance",
     name: "dappGovernance",
     component: function () {
       return import(
@@ -49,7 +49,7 @@ const routes = [
     },
   },
   {
-    path: "/dapp/members",
+    path: "/app/members",
     name: "dappMembers",
     component: function () {
       return import(
@@ -58,7 +58,7 @@ const routes = [
     },
   },
   {
-    path: "/dapp/profile",
+    path: "/app/profile",
     name: "dappProfile",
     component: function () {
       return import(
