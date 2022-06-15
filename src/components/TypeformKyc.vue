@@ -10,6 +10,6 @@ export default {
 </script>
 <style>
 iframe {
-  @apply fixed;
+  @apply fixed py-28;
 }
 </style>
