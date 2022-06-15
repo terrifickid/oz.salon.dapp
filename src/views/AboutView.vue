@@ -1,7 +1,10 @@
 <template>
   <div class="bg-black min-h-screen text-white relative">
-    <AppHeader :hide="false"></AppHeader>
-    <div class="grid grid-cols-12 my-20 px-3">
+    <AppHeader
+      :backgroundClass="'bg-black'"
+      :textClass="'text-white'"
+    ></AppHeader>
+    <div class="grid grid-cols-12 px-3">
       <div
         class="col-span-12 col-start-1 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
       >
@@ -15,7 +18,7 @@
       </div>
     </div>
 
-    <AppFooter :background="'bg-black'" :fill="'fill-white'" />
+    <AppFooter :backgroundClass="'bg-black'" :fillClass="'fill-white'" />
   </div>
 </template>
 
@@ -45,3 +48,9 @@ export default {
   },
 };
 </script>
+<style>
+body,
+html {
+  @apply bg-black;
+}
+</style>

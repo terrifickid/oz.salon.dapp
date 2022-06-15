@@ -1,8 +1,18 @@
 <template>
   <div>
-    <AppHeader :background="'bg-canary'" :text="'text-black'" />
-    <slot></slot>
-    <AppFooter :background="'bg-canary'" :fill="'fill-black'" />
+    <div v-if="walletAddress">
+      <AppHeader :backgroundClass="backgroundClass" :textClass="textClass" />
+      <slot></slot>
+      <AppFooter :backgroundClass="backgroundClass" :fillClass="fillClass" />
+    </div>
+    <div v-if="!walletAddress">
+      <WalletConnect
+        :textClass="textClass"
+        :backgroundClass="backgroundClass"
+        :fillClass="fillClass"
+        class="fixed h-full"
+      />
+    </div>
   </div>
 </template>
 
@@ -11,9 +21,10 @@
 
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  name: "DappHome",
-  components: { AppFooter, AppHeader },
+  props: ["backgroundClass", "textClass", "fillClass"],
+  components: { AppFooter, AppHeader, WalletConnect },
   computed: {
     profile() {
       return this.$store.state.profile;
@@ -26,6 +37,9 @@ export default {
     },
   },
   methods: {
+    mounted() {
+      console.log(this.background);
+    },
     connect() {
       this.$store.dispatch("connect");
     },

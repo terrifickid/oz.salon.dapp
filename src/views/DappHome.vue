@@ -1,5 +1,9 @@
 <template>
-  <DappShell>
+  <DappShell
+    :backgroundClass="'bg-canary'"
+    :textClass="'text-black'"
+    :fillClass="'fill-black'"
+  >
     <template v-if="isNew"><TypeformKyc /></template>
     <template v-if="!isKycApproved && !isNew"
       ><h1>Your KYC application is being reviewed.</h1></template

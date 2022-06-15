@@ -1,7 +1,11 @@
 <template>
   <div
     class="fixed left-0 right-0 top-0 bg-black app-text z-20 h-12"
-    :class="{ 'text-black': toggle, [background]: true, [text]: !toggle }"
+    :class="{
+      'text-black': toggle,
+      [backgroundClass]: true,
+      [textClass]: !toggle,
+    }"
   >
     <button
       @click="toggle = !toggle"
@@ -30,8 +34,11 @@
         <div class="col-span-8 self-center flex justify-center"></div>
         <div class="col-span-12 text-4xl text-light self-end">
           <ul class="pb-16 px-3">
-            <li>{{ walletAddress }}</li>
-            <li>
+            <li v-if="!walletAddress">
+              <button @click="connect" class="font-light">Connect</button>
+            </li>
+            <li v-if="walletAddress">{{ walletAddress }}</li>
+            <li v-if="walletAddress">
               <a class="cursor-pointer" @click="disconnect">disconnect</a>
             </li>
             <li>
@@ -60,7 +67,7 @@
 // @ is an alias to /src
 
 export default {
-  props: ["background", "text"],
+  props: ["backgroundClass", "textClass"],
   data() {
     return {
       toggle: false,
@@ -72,6 +79,9 @@ export default {
     },
   },
   methods: {
+    connect() {
+      this.$store.dispatch("connect");
+    },
     disconnect() {
       this.$store.dispatch("disconnect");
     },
