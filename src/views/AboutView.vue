@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <AppFooter :backgroundClass="'bg-black'" :fillClass="'fill-white'" />
+    <AppFooter :backgroundClass="'bg-black'" :fillClass="'fill-neon'" />
   </div>
 </template>
 
