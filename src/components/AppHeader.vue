@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed left-0 right-0 top-0 bg-black app-text z-20 h-12"
+    class="fixed left-0 right-0 top-0 bg-black app-text z-50 h-12"
     :class="{
       'text-black': toggle,
       [backgroundClass]: true,
