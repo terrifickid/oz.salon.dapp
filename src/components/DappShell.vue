@@ -7,9 +7,9 @@
     </div>
     <div v-if="!walletAddress">
       <WalletConnect
-        :textClass="'text-tope'"
-        :backgroundClass="'bg-silver'"
-        :fillClass="'fill-tope'"
+        :textClass="'text-black'"
+        :backgroundClass="'bg-tope'"
+        :fillClass="'fill-black'"
         class="fixed h-full"
       />
     </div>

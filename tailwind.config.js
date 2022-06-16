@@ -13,6 +13,7 @@ module.exports = {
         yellow: "#f9da51",
         canary: "#e1fe6a",
         sky: "#295ea8",
+        pink: "#d92f8a",
       },
       spacing: {
         folch: "15vw",

@@ -3,17 +3,14 @@
     class="flex w-full items-center justify-center"
     :class="{ [textClass]: true, [backgroundClass]: true }"
   >
-    <p class="absolute top-0 left-0 text-3xl sm:text-4xl p-3 font-light">
-      Connect wallet<br />
-      to continue
-    </p>
+    <AppHeader :backgroundClass="backgroundClass" :textClass="textClass" />
     <button
-      class="bg-tope text-silver rounded px-8 py-6 text-2xl shadow-sm op flex items-center"
+      class="bg-electric text-silver rounded px-8 py-6 text-2xl shadow-sm op flex items-center"
       @click="connect"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="w-12 h-12"
+        class="w-16 h-16"
         viewBox="0 0 212 189"
       >
         <g fill="none" fill-rule="evenodd">
@@ -147,11 +144,13 @@
   </div>
 </template>
 <script>
+import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 export default {
   props: ["backgroundClass", "textClass", "fillClass"],
   components: {
     AppFooter,
+    AppHeader,
   },
   methods: {
     connect() {
