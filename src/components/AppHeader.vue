@@ -28,7 +28,7 @@
     </button>
     <div
       :class="{ 'h-0': !toggle, 'h-screen': toggle }"
-      class="fixed top-0 z-20 min-w-full bg-electric text-pumpkin transition-all overflow-hidden"
+      class="fixed top-0 z-20 min-w-full bg-electric text-pink transition-all overflow-hidden"
     >
       <div class="grid grid-cols-12 flex min-h-screen">
         <div class="col-span-8 self-center flex justify-center"></div>
