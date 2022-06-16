@@ -10,7 +10,7 @@
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="w-16 h-16"
+        class="w-48 h-48 relative left-20 bottom-20"
         viewBox="0 0 212 189"
       >
         <g fill="none" fill-rule="evenodd">
