@@ -5,11 +5,11 @@ import axios from "axios";
 export default createStore({
   state: {
     connecting: false,
-    userAddress: null,
+    walletAddress: null,
     provider: null,
     signer: null,
     members: [],
-    profile: {},
+    profile: { loading: true },
   },
   getters: {
     getMembers(state) {
@@ -20,11 +20,12 @@ export default createStore({
   mutations: {},
   actions: {
     async disconnect() {
+      this.state.walletAddress = null;
+      this.state.profile = { loading: true };
       this.state.provider = null;
       this.state.signer = null;
-      this.state.walletAddress = null;
-      this.state.profile = {};
-      localStorage.setItem("salon_login", false);
+
+      localStorage.setItem("salon_login", 0);
     },
     async connect() {
       console.log("Connecting!");
@@ -46,7 +47,7 @@ export default createStore({
         );
         console.log("init profile", res.data);
         this.state.profile = res.data;
-        localStorage.setItem("salon_login", true);
+        localStorage.setItem("salon_login", 1);
       } catch (error) {
         console.log("init profile error", error);
       }

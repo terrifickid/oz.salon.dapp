@@ -28,7 +28,7 @@
     </button>
     <div
       :class="{ 'h-0': !toggle, 'h-screen': toggle }"
-      class="fixed top-0 z-20 min-w-full bg-white transition-all overflow-hidden"
+      class="fixed top-0 z-20 min-w-full bg-electric text-pumpkin transition-all overflow-hidden"
     >
       <div class="grid grid-cols-12 flex min-h-screen">
         <div class="col-span-8 self-center flex justify-center"></div>
@@ -39,18 +39,34 @@
             </li>
             <li v-if="walletAddress">{{ walletAddress }}</li>
             <li v-if="walletAddress">
-              <a class="cursor-pointer" @click="disconnect">disconnect</a>
+              <a class="cursor-pointer flex items-center" @click="disconnect"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+                Disconnect</a
+              >
             </li>
-            <li>
+            <li class="mt-3">
               <a href="/#">Home</a>
-              <ul class="mb-3 ml-3">
+              <ul class="mb-3">
                 <li><a href="/#/collection">Collection</a></li>
                 <li><a href="/#/about">About</a></li>
               </ul>
             </li>
-            <li>
+            <li class="mt-3">
               <a href="/#/app">App</a>
-              <ul class="mb-3 ml-3">
+              <ul class="mb-3">
                 <li>Governance</li>
                 <li>Members</li>
                 <li>Profile</li>

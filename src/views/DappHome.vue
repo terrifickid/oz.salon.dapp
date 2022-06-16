@@ -5,10 +5,15 @@
     :fillClass="'fill-black'"
   >
     <template v-if="isNew"><TypeformKyc /></template>
-    <template v-if="!isKycApproved && !isNew"
-      ><h1>Your KYC application is being reviewed.</h1></template
-    >
-    <template v-if="isKycApproved"> <FormApply /> </template
+    <template v-if="!isKycApproved && !isNew">
+      <AppContent>
+        <h1 class="text-4xl text-center font-light">
+          Your KYC application<br />is being reviewed.
+        </h1></AppContent
+      >
+    </template>
+    <template v-if="isKycApproved">
+      <AppContent><FormApply /></AppContent></template
   ></DappShell>
 </template>
 
@@ -17,9 +22,10 @@
 import DappShell from "@/components/DappShell.vue";
 import TypeformKyc from "@/components/TypeformKyc.vue";
 import FormApply from "@/components/FormApply.vue";
+import AppContent from "@/components/AppContent.vue";
 export default {
   name: "DappHome",
-  components: { DappShell, TypeformKyc, FormApply },
+  components: { DappShell, TypeformKyc, FormApply, AppContent },
   computed: {
     isNew() {
       if ("approved" in this.profile) return false;

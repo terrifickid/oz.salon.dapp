@@ -2,7 +2,7 @@
   <div :class="backgroundClass" class="min-h-screen">
     <div v-if="walletAddress">
       <AppHeader :backgroundClass="backgroundClass" :textClass="textClass" />
-      <slot></slot>
+      <slot v-if="ready"></slot>
       <AppFooter :backgroundClass="backgroundClass" :fillClass="fillClass" />
     </div>
     <div v-if="!walletAddress">
@@ -34,6 +34,9 @@ export default {
     },
     connecting() {
       return this.$store.state.connecting;
+    },
+    ready() {
+      return this.walletAddress && !("loading" in this.profile);
     },
   },
   methods: {

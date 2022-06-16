@@ -1,4 +1,6 @@
-<template><div ref="kycform"></div></template>
+<template>
+  <div ref="kycform"></div>
+</template>
 <script>
 import { createWidget } from "@typeform/embed";
 import "@typeform/embed/build/css/widget.css";
@@ -10,6 +12,6 @@ export default {
 </script>
 <style>
 iframe {
-  @apply fixed py-16 sm:py-28;
+  @apply fixed pt-12 pb-20;
 }
 </style>

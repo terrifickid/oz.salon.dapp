@@ -20,7 +20,11 @@ export default {
   components: { GlobalLoader },
   async beforeMount() {
     var connected = localStorage.getItem("salon_login");
-    if (connected) this.$store.dispatch("connect");
+    console.log("connected is:", connected);
+    if (connected == true) {
+      console.log("Reconnecting!");
+      this.$store.dispatch("connect");
+    }
 
     var loading = setInterval(async () => {
       if (document.fonts.check("1rem Manrope")) {
@@ -30,8 +34,9 @@ export default {
       }
     }, 10);
 
-    window.ethereum.on("accountsChanged", () => {
-      this.$store.dispatch("connect");
+    window.ethereum.on("accountsChanged", async () => {
+      await this.$store.dispatch("disconnect");
+      await this.$store.dispatch("connect");
     });
   },
   computed: {
