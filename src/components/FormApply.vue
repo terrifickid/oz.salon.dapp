@@ -12,7 +12,7 @@
               d="M7.586 5L4.293 1.707 5.707.293 10.414 5 5.707 9.707 4.293 8.293z"
             ></path>
             <path d="M8 4v2H0V4z"></path></svg
-          >Apply to Join *</label
+          >Become a Member *</label
         >
         <span class="block text-lg lg:text-xl font-light opacity-75 mb-4"
           >The amount sent will be held in escrow pending a member vote. If the
