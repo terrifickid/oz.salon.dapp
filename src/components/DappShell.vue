@@ -1,8 +1,13 @@
 <template>
-  <div :class="backgroundClass" class="min-h-screen">
+  <div
+    :class="{ [backgroundClass]: true, [textClass]: true }"
+    class="min-h-screen"
+  >
     <div v-if="walletAddress">
       <AppHeader :backgroundClass="backgroundClass" :textClass="textClass" />
+
       <slot v-if="ready"></slot>
+
       <AppFooter :backgroundClass="backgroundClass" :fillClass="fillClass" />
     </div>
     <div v-if="!walletAddress">

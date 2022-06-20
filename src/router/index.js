@@ -28,37 +28,28 @@ const routes = [
     name: "members",
     component: function () {
       return import(
-        /* webpackChunkName: "MembersView" */ "../views/MembersView.vue"
+        /* webpackChunkName: "MembersView" */ "../views/ViewMembers.vue"
       );
     },
   },
   {
-    path: "/app",
+    path: "/join",
     name: "dappHome",
     component: function () {
       return import(/* webpackChunkName: "DappHome" */ "../views/DappHome.vue");
     },
   },
   {
-    path: "/app/governance",
-    name: "dappGovernance",
+    path: "/governance",
+    name: "governance",
     component: function () {
       return import(
-        /* webpackChunkName: "DappHome" */ "../views/DappGovernance.vue"
+        /* webpackChunkName: "DappHome" */ "../views/ViewGovernance.vue"
       );
     },
   },
   {
-    path: "/app/members",
-    name: "dappMembers",
-    component: function () {
-      return import(
-        /* webpackChunkName: "DappHome" */ "../views/DappMembers.vue"
-      );
-    },
-  },
-  {
-    path: "/app/profile",
+    path: "/profile",
     name: "dappProfile",
     component: function () {
       return import(

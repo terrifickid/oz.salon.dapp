@@ -1,10 +1,21 @@
 <template>
   <button
     @click="yes()"
-    :class="{ 'bg-black': voted, 'text-white': voted }"
-    class="border p-2 mr-2"
+    :disabled="processing"
+    class="mx-auto mt-3 bg-lilac text-white rounded px-4 py-3 text-xl shadow-sm op flex items-center w-32 justify-center"
   >
     Yes
+    <svg
+      v-if="voted"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 ml-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
   </button>
 </template>
 <script>
@@ -15,17 +26,15 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-    userAddress() {
-      if ("walletAddress" in this.profile)
-        return this.profile.walletAddress["en-US"];
-      return false;
+    walletAddress() {
+      return this.$store.state.walletAddress;
     },
     voted() {
       if (!this.votes) return false;
       var voted = false;
       if ("en-US" in this.votes) {
         this.votes["en-US"].votes.forEach((vote) => {
-          if (vote.address == this.userAddress && vote.vote) voted = true;
+          if (vote.address == this.walletAddress && vote.vote) voted = true;
         });
       }
       return voted;
@@ -34,7 +43,7 @@ export default {
   methods: {
     async yes() {
       const vote = JSON.stringify({
-        address: this.userAddress,
+        address: this.walletAddress,
         vote: true,
         proposal: this.id,
       });
@@ -46,7 +55,7 @@ export default {
         const res = await axios.post(
           "https://salontest-terrifickid.cloud.okteto.net/vote",
           {
-            address: this.userAddress,
+            address: this.walletAddress,
             vote: vote,
             signature: signature,
           }

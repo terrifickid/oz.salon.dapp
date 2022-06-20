@@ -1,17 +1,8 @@
 <template>
-  <div class="grid grid-cols-12 gap-6">
-    <div class="col-span-12">
-      <h1 class="mb-3">members</h1>
-    </div>
-    <div
-      class="col-span-12 md:col-span-6"
-      v-for="(m, index) in members"
-      :key="index"
-    >
-      <div class="border p-4">
-        {{ m.legalNameOfPerson }}
-      </div>
-    </div>
+  <div class="w-screen text-center">
+    <p v-for="(m, index) in members" :key="index">
+      {{ m.fields.firstName["en-US"] }} {{ m.fields.lastName["en-US"] }}
+    </p>
   </div>
 </template>
 <script>

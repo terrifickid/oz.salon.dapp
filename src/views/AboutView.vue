@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-black min-h-screen text-white relative">
+  <div
+    class="bg-black min-h-screen text-white relative"
+    v-if="'fields' in content"
+  >
     <AppHeader
       :backgroundClass="'bg-black'"
       :textClass="'text-white'"

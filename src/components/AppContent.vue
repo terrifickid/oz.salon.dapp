@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center px-3">
+  <div class="h-screen flex px-3 overflow-scroll">
     <slot></slot>
   </div>
 </template>

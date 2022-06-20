@@ -13,7 +13,7 @@
     </div>
 
     <div class="bottom-0 absolute p-3">
-      <a href="/#/app/" class="text-white text-2xl md:text-3xl">Join</a>
+      <a href="/#/join" class="text-white text-2xl md:text-3xl">Join</a>
     </div>
   </div>
 </template>

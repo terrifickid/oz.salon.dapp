@@ -1,9 +1,9 @@
 <template>
   <div class="grid grid-cols-12">
     <div
-      class="col-span-12 sm:col-span-10 sm:col-start-2 md:col-span-8 md:col-start-3"
+      class="col-span-12 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
     >
-      <form v-on:submit.prevent="submitForm" class="w-full">
+      <form v-on:submit.prevent="createProposal" class="w-full">
         <label
           class="block text-3xl md:text-4xl mb-4 flex items-center -ml-10 justify-center"
           ><span class="text-sm mr-1">1</span>
@@ -22,9 +22,11 @@
         <div class="grid grid-cols-12 gap-6">
           <div class="col-span-12 sm:col-span-6">
             <input
-              type="text"
+              type="number"
               class="text-3xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-black font-light"
               placeholder="$0.00"
+              v-model="usdcAmount"
+              required
             />
             <span
               class="block text-xs md:text-base mt-3 lg:text-md font-light opacity-75 mb-4"
@@ -34,9 +36,11 @@
           </div>
           <div class="col-span-12 sm:col-span-6">
             <input
-              type="text"
+              type="number"
               class="text-3xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-black font-light"
               placeholder="S0"
+              required
+              v-model="sAmount"
             />
             <span
               class="block mt-3 text-xs md:text-base lg:text-md font-light opacity-75 mb-4"
@@ -47,16 +51,11 @@
         </div>
 
         <button
-          @click="
-            payWithMetamask(
-              '0x419af08d5de5de5ed9edca29e345fea58931520b',
-              '0x419af08d5de5de5ed9edca29e345fea58931520b',
-              '1'
-            )
-          "
+          type="submit"
+          :disabled="processing"
           class="mx-auto mt-6 bg-black text-canary rounded px-4 py-3 text-xl shadow-sm op flex items-center w-64 justify-center"
         >
-          Submit
+          {{ btnTxt }}
         </button>
       </form>
     </div>
@@ -69,66 +68,76 @@ export default {
   data() {
     return {
       btnTxt: "Submit",
-      sending: false,
-      send_token_amount: "0",
+      processing: false,
+      usdcAmount: "",
+      sAmount: "",
     };
   },
   methods: {
-    async payWithMetamask(sender, receiver, strEther) {
-      console.log(
-        `payWithMetamask(receiver=${receiver}, sender=${sender}, strEther=${strEther})`
-      );
-
+    async initiate() {
+      this.processing = true;
+      var usdc = {
+        address: "0x07865c6e87b9f70255377e024ace6630c1eaa37f",
+        abi: [
+          {
+            inputs: [
+              { internalType: "address", name: "to", type: "address" },
+              { internalType: "uint256", name: "value", type: "uint256" },
+            ],
+            name: "transfer",
+            outputs: [{ internalType: "bool", name: "", type: "bool" }],
+            stateMutability: "nonpayable",
+            type: "function",
+          },
+        ],
+      };
       let ethereum = window.ethereum;
-
-      // Request account access if needed
-      await ethereum.enable();
-
       let provider = new ethers.providers.Web3Provider(ethereum);
-
-      // Acccounts now exposed
-      const params = [
-        {
-          from: sender,
-          to: receiver,
-          value: ethers.utils.parseUnits(strEther, "ether").toHexString(),
-        },
-      ];
-
-      const transactionHash = await provider.send(
-        "eth_sendTransaction",
-        params
-      );
-      console.log("transactionHash is " + transactionHash);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const usdcContract = new ethers.Contract(usdc.address, usdc.abi, signer);
+      var amt = ethers.utils
+        .parseUnits(Number(this.usdcAmount).toFixed(1), 6)
+        .toNumber();
+      try {
+        this.btnTxt = "Processing...";
+        let transfer = await usdcContract.transfer(this.walletAddress, 1);
+        console.log(transfer.hash, amt);
+        await this.createProposal();
+      } catch (err) {
+        this.btnTxt = "Submit";
+        this.processing = false;
+        console.log(err);
+      }
     },
-    async submitForm() {
-      this.sending = true;
-      this.btnTxt = "Sending...";
-      console.log("Ran Submit!");
+    async createProposal() {
+      this.btnTxt = "Processing...";
+      this.processing = true;
+      console.log("Creating Proposal...");
       try {
         const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/governance",
+          "https://salontest-terrifickid.cloud.okteto.net/onboard",
           {
-            title: "Onboarding Proposal",
-            legalNameOfPerson: "Tk Croft",
+            profile: this.$store.state.profile,
+            usdc: this.usdcAmount,
+            s: this.sAmount,
           }
         );
         if (res.data.result) {
-          console.log("success!");
-          this.btnTxt = "Application Sent!";
+          this.$store.dispatch("connect");
         } else {
-          console.log("success!");
-          this.btnTxt = "ERROR:: " + res.data.message;
+          console.log(res.data);
+          this.btnTxt = "ERROR A1: Contact Support";
         }
       } catch (error) {
-        console.log("error", error);
-        this.btnTxt = "error!";
+        console.log(error);
+        this.btnTxt = "ERROR A2: Contact Support";
       }
     },
   },
   computed: {
-    userAddress() {
-      return this.$store.state.userAddress;
+    walletAddress() {
+      return this.$store.state.walletAddress;
     },
   },
 };

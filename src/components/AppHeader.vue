@@ -65,11 +65,11 @@
               </ul>
             </li>
             <li class="mt-3">
-              <a href="/#/app">App</a>
+              <a href="/#/join">Join</a>
               <ul class="mb-3">
-                <li>Governance</li>
-                <li>Members</li>
-                <li>Profile</li>
+                <li><a href="/#/governance">Governance</a></li>
+                <li><a href="/#/members">Members</a></li>
+                <li><a href="/#/profile">Profile</a></li>
               </ul>
             </li>
           </ul>
