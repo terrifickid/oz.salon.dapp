@@ -21,4 +21,12 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    "bg-orange",
+    "bg-silver",
+    "bg-canary",
+    "bg-black",
+    "text-electric",
+    "text-white",
+  ],
 };

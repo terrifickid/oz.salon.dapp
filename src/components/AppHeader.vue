@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="display"
     class="fixed left-0 right-0 top-0 app-text z-50 h-12"
     :class="{
       ['bg-' + colors[0]]: true,
@@ -41,24 +42,24 @@
         <div class="col-span-8 self-center flex justify-center"></div>
         <div class="col-span-12 text-4xl self-end">
           <ul class="pb-4 px-3">
-            <li><a href="/#">Home</a></li>
-            <li><a href="/#/about">About</a></li>
-            <li><a href="/#/collection">Collection</a></li>
+            <li><a @click="toggleDown" href="/#">Home</a></li>
+            <li><a @click="toggleDown" href="/#/about">About</a></li>
+            <li><a @click="toggleDown" href="/#/collection">Collection</a></li>
           </ul>
           <ul class="pb-4 px-3">
-            <li><a href="/#/invest">Invest</a></li>
-            <li><a href="/#/transfer">Transfer</a></li>
-            <li><a href="/#/treasury">Treasury</a></li>
+            <li><a @click="toggleDown" href="/#/invest">Invest</a></li>
+            <li><a @click="toggleDown" href="/#/transfer">Transfer</a></li>
+            <li><a @click="toggleDown" href="/#/treasury">Treasury</a></li>
           </ul>
           <ul class="pb-4 px-3">
-            <li><a href="/#/propose">Propose</a></li>
-            <li><a href="/#/collection">Collect</a></li>
-            <li><a href="/#/sell">Sell</a></li>
+            <li><a @click="toggleDown" href="/#/propose">Propose</a></li>
+            <li><a @click="toggleDown" href="/#/collection">Collect</a></li>
+            <li><a @click="toggleDown" href="/#/sell">Sell</a></li>
           </ul>
           <ul class="pb-8 px-3">
-            <li><a href="/#/members">Members</a></li>
-            <li><a href="/#/profile">Profile</a></li>
-            <li><a href="/#/join">Join</a></li>
+            <li><a @click="toggleDown" href="/#/members">Members</a></li>
+            <li><a @click="toggleDown" href="/#/profile">Profile</a></li>
+            <li><a @click="toggleDown" href="/#/join">Join</a></li>
           </ul>
         </div>
       </div>
@@ -68,7 +69,6 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
   props: ["colors"],
   data() {
@@ -77,11 +77,17 @@ export default {
     };
   },
   computed: {
+    display() {
+      return this.colors?.length;
+    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
   },
   methods: {
+    toggleDown() {
+      this.toggle = false;
+    },
     connect() {
       this.$store.dispatch("connect");
     },

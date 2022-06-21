@@ -1,13 +1,11 @@
 <template>
-  <div
-    :class="{ ['bg-' + colors[0]]: true, ['text-' + colors[1]]: true }"
-    class="min-h-screen fix"
-  >
+  <div :class="salonClass" class="min-h-screen">
     <div v-if="walletAddress">
       <AppHeader :colors="colors" />
 
-      <slot v-if="ready"></slot>
+      <AppLoader v-if="!ready" />
 
+      <slot v-if="ready"></slot>
       <AppFooter :colors="colors" />
     </div>
     <div v-if="!walletAddress">
@@ -26,11 +24,15 @@
 
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
+import AppLoader from "@/components/AppLoader.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  props: ["colors"],
-  components: { AppFooter, AppHeader, WalletConnect },
+  components: { AppFooter, AppLoader, AppHeader, WalletConnect },
+  props: ["colors", "isLoaded"],
   computed: {
+    salonClass() {
+      return "bg-" + this.colors[0] + " " + "text-" + this.colors[1];
+    },
     profile() {
       return this.$store.state.profile;
     },
@@ -41,7 +43,9 @@ export default {
       return this.$store.state.connecting;
     },
     ready() {
-      return this.walletAddress && !("loading" in this.profile);
+      return (
+        this.walletAddress && !("loading" in this.profile) && this.isLoaded
+      );
     },
   },
   methods: {

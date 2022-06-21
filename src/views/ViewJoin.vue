@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="['canary', 'electric']">
+  <AppShell :colors="['canary', 'electric']" isLoaded="loaded">
     <template v-if="isNew"><FormKyc /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
@@ -40,6 +40,9 @@ export default {
   name: "DappHome",
   components: { AppShell, FormKyc, FormApply, AppContent, FormProposal },
   computed: {
+    loaded() {
+      return this.profile();
+    },
     isNew() {
       if ("approved" in this.profile) return false;
       return true;

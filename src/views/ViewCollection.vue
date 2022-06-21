@@ -1,36 +1,35 @@
 <template>
-  <div class="p-3 bg-black min-h-screen text-white relative">
-    <GlobalHeader :hide="false"></GlobalHeader>
-    <div class="grid grid-cols-12">
-      <div class="col-span-12 sm:col-span-11 md:col-span-11">
-        <div class="grid grid-cols-12 gap-3">
-          <div
-            class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 bg-white text-black"
-            style="height: 25rem"
-            v-for="(item, index) in collection"
-            :key="index"
-          >
-            {{ item.fields.title["en-US"] }}
-          </div>
-        </div>
+  <AppShell :colors="colors" :isLoaded="loaded">
+    <AppContent>
+      <div
+        class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 bg-white text-black"
+        style="height: 25rem"
+        v-for="(item, index) in collection"
+        :key="index"
+      >
+        {{ item.fields.title["en-US"] }}
       </div>
-    </div>
-    <FaderShadow></FaderShadow>
-  </div>
+    </AppContent>
+  </AppShell>
 </template>
-
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import GlobalHeader from "@/components/GlobalHeader";
-import FaderShadow from "@/components/FaderShadow";
+import AppShell from "@/components/AppShell";
+import AppContent from "@/components/AppContent";
 export default {
   name: "CollectionView",
-  components: { GlobalHeader, FaderShadow },
+  components: { AppShell, AppContent },
   data() {
     return {
+      colors: ["white", "black"],
       collection: [],
     };
+  },
+  computed: {
+    loaded() {
+      return this.collection.length;
+    },
   },
   async beforeMount() {
     console.log("collection load!");

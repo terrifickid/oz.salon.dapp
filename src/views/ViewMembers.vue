@@ -1,10 +1,8 @@
 <template>
-  <AppShell
-    :backgroundClass="'bg-silver'"
-    :textClass="'text-white'"
-    :fillClass="'fill-white'"
-  >
-    <AppContent class="items-center justify-center"><ListMembers /></AppContent>
+  <AppShell :colors="['silver', 'white']" :isLoaded="loaded">
+    <AppContent class="items-center justify-center"
+      ><ListMembers :members="members"
+    /></AppContent>
   </AppShell>
 </template>
 
@@ -13,7 +11,29 @@
 import AppShell from "@/components/AppShell";
 import AppContent from "@/components/AppContent";
 import ListMembers from "@/components/ListMembers";
+import axios from "axios";
 export default {
   components: { AppShell, ListMembers, AppContent },
+  data() {
+    return {
+      members: [],
+    };
+  },
+  computed: {
+    loaded() {
+      if (this.members.length) return true;
+      return false;
+    },
+  },
+  async beforeMount() {
+    try {
+      const res = await axios.get(
+        "https://salontest-terrifickid.cloud.okteto.net/members"
+      );
+      this.members = res.data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  },
 };
 </script>

@@ -3,21 +3,18 @@
     <div
       class="min-h-screen min-w-full flex items-center justify-center"
       v-show="!ready"
-    >
-      <GlobalLoader /> &nbsp;
-    </div>
+    ></div>
     <div v-show="ready"><router-view /></div>
   </div>
 </template>
 <script>
-import GlobalLoader from "@/components/GlobalLoader";
 export default {
   data() {
     return {
       fontsLoaded: false,
     };
   },
-  components: { GlobalLoader },
+  components: {},
   async beforeMount() {
     var connected = localStorage.getItem("salon_login");
     console.log("connected is:", connected);
@@ -26,6 +23,7 @@ export default {
       this.$store.dispatch("connect");
     }
 
+    /*
     var loading = setInterval(async () => {
       if (document.fonts.check("1rem Manrope")) {
         this.fontsLoaded = true;
@@ -33,6 +31,7 @@ export default {
         console.log("Fonts Loaded!");
       }
     }, 10);
+*/
 
     window.ethereum.on("accountsChanged", async () => {
       await this.$store.dispatch("disconnect");
@@ -41,8 +40,11 @@ export default {
   },
   computed: {
     ready() {
+      return true;
+      /*
       if (this.fontsLoaded == true) return true;
       return false;
+      */
     },
   },
 };
