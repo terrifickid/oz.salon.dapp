@@ -1,25 +1,23 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <AppContent>
+    <div class="grid grid-cols-12 gap-4 w-full pt-16 pb-16">
       <div
-        class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 bg-white text-black"
-        style="height: 25rem"
+        class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 bg-black text-black"
         v-for="(item, index) in collection"
         :key="index"
       >
         {{ item.fields.title["en-US"] }}
       </div>
-    </AppContent>
+    </div>
   </AppShell>
 </template>
 <script>
 // @ is an alias to /src
 import axios from "axios";
 import AppShell from "@/components/AppShell";
-import AppContent from "@/components/AppContent";
 export default {
   name: "CollectionView",
-  components: { AppShell, AppContent },
+  components: { AppShell },
   data() {
     return {
       colors: ["white", "black"],
@@ -38,6 +36,7 @@ export default {
         "https://salontest-terrifickid.cloud.okteto.net/collection"
       );
       this.collection = res.data;
+      console.log(this.collection);
     } catch (error) {
       console.log("error", error);
     }
