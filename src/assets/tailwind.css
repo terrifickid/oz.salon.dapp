@@ -13,6 +13,9 @@ body {
   font-family: "Manrope";
 }
 
+.fix {
+  @apply bg-canary text-electric;
+}
 .app-text {
   @apply text-xl sm:text-2xl lg:text-3xl font-light;
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed left-0 right-0 top-0 bg-black app-text z-50 h-12"
+    class="fixed left-0 right-0 top-0 app-text z-50 h-12"
     :class="{
       ['bg-' + colors[0]]: true,
       ['text-' + colors[1]]: !toggle,

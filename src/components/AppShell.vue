@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ ['bg-' + colors[0]]: true, ['text-' + colors[1]]: true }"
-    class="min-h-screen"
+    class="min-h-screen fix"
   >
     <div v-if="walletAddress">
       <AppHeader :colors="colors" />
