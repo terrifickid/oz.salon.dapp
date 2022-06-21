@@ -2,9 +2,9 @@
   <div
     class="fixed left-0 right-0 top-0 bg-black app-text z-50 h-12"
     :class="{
-      'text-black': toggle,
-      [backgroundClass]: true,
-      [textClass]: !toggle,
+      ['bg-' + colors[0]]: true,
+      ['text-' + colors[1]]: !toggle,
+      ['text-tope']: toggle,
     }"
   >
     <button
@@ -40,45 +40,25 @@
       >
         <div class="col-span-8 self-center flex justify-center"></div>
         <div class="col-span-12 text-4xl self-end">
-          <ul class="pb-16 px-3">
-            <li v-if="!walletAddress">
-              <button @click="connect" class="font-light">Connect</button>
-            </li>
-            <li v-if="walletAddress">{{ walletAddress }}</li>
-            <li v-if="walletAddress">
-              <a class="cursor-pointer flex items-center" @click="disconnect"
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 mr-3"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-                Disconnect</a
-              >
-            </li>
-            <li class="mt-3">
-              <a href="/#">Home</a>
-              <ul class="mb-3">
-                <li><a href="/#/collection">Collection</a></li>
-                <li><a href="/#/about">About</a></li>
-              </ul>
-            </li>
-            <li class="mt-3">
-              <a href="/#/join">Join</a>
-              <ul class="mb-3">
-                <li><a href="/#/governance">Governance</a></li>
-                <li><a href="/#/members">Members</a></li>
-                <li><a href="/#/profile">Profile</a></li>
-              </ul>
-            </li>
+          <ul class="pb-4 px-3">
+            <li><a href="/#">Home</a></li>
+            <li><a href="/#/about">About</a></li>
+            <li><a href="/#/collection">Collection</a></li>
+          </ul>
+          <ul class="pb-4 px-3">
+            <li><a href="/#/invest">Invest</a></li>
+            <li><a href="/#/transfer">Transfer</a></li>
+            <li><a href="/#/treasury">Treasury</a></li>
+          </ul>
+          <ul class="pb-4 px-3">
+            <li><a href="/#/propose">Propose</a></li>
+            <li><a href="/#/collection">Collect</a></li>
+            <li><a href="/#/sell">Sell</a></li>
+          </ul>
+          <ul class="pb-8 px-3">
+            <li><a href="/#/members">Members</a></li>
+            <li><a href="/#/profile">Profile</a></li>
+            <li><a href="/#/join">Join</a></li>
           </ul>
         </div>
       </div>
@@ -90,7 +70,7 @@
 // @ is an alias to /src
 
 export default {
-  props: ["backgroundClass", "textClass"],
+  props: ["colors"],
   data() {
     return {
       toggle: false,

@@ -1,5 +1,5 @@
 <template>
-  <DappShell
+  <AppShell
     :backgroundClass="'bg-orange'"
     :textClass="'text-white'"
     :fillClass="'fill-white'"
@@ -11,15 +11,15 @@
         <p>{{ profile.lastName["en-US"] }}</p>
       </div>
     </AppContent>
-  </DappShell>
+  </AppShell>
 </template>
 
 <script>
 // @ is an alias to /src
-import DappShell from "@/components/DappShell";
+import AppShell from "@/components/AppShell";
 import AppContent from "@/components/AppContent";
 export default {
-  components: { DappShell, AppContent },
+  components: { AppShell, AppContent },
   computed: {
     profile() {
       return this.$store.state.profile;

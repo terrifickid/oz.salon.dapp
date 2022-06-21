@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import ViewHome from "../views/ViewHome.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: ViewHome,
   },
   {
     path: "/about",
     name: "about",
     component: function () {
-      return import(/* webpackChunkName: "About" */ "../views/AboutView.vue");
+      return import(/* webpackChunkName: "About" */ "../views/ViewAbout.vue");
     },
   },
   {
@@ -19,7 +19,7 @@ const routes = [
     name: "collection",
     component: function () {
       return import(
-        /* webpackChunkName: "CollectionView" */ "../views/CollectionView.vue"
+        /* webpackChunkName: "CollectionView" */ "../views/ViewCollection.vue"
       );
     },
   },
@@ -28,15 +28,15 @@ const routes = [
     name: "members",
     component: function () {
       return import(
-        /* webpackChunkName: "MembersView" */ "../views/ViewMembers.vue"
+        /* webpackChunkName: "ViewMember" */ "../views/ViewMembers.vue"
       );
     },
   },
   {
     path: "/join",
-    name: "dappHome",
+    name: "join",
     component: function () {
-      return import(/* webpackChunkName: "DappHome" */ "../views/DappHome.vue");
+      return import(/* webpackChunkName: "ViewJoin" */ "../views/ViewJoin.vue");
     },
   },
   {
@@ -44,16 +44,16 @@ const routes = [
     name: "governance",
     component: function () {
       return import(
-        /* webpackChunkName: "DappHome" */ "../views/ViewGovernance.vue"
+        /* webpackChunkName: "ViewGovernance" */ "../views/ViewGovernance.vue"
       );
     },
   },
   {
     path: "/profile",
-    name: "dappProfile",
+    name: "profile",
     component: function () {
       return import(
-        /* webpackChunkName: "DappHome" */ "../views/DappProfile.vue"
+        /* webpackChunkName: "ViewProfile" */ "../views/ViewProfile.vue"
       );
     },
   },

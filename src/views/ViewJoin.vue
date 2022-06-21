@@ -1,9 +1,5 @@
 <template>
-  <DappShell
-    :backgroundClass="'bg-canary'"
-    :textClass="'text-electric'"
-    :fillClass="'fill-electric'"
-  >
+  <AppShell :colors="['canary', 'electric']">
     <template v-if="isNew"><TypeformKyc /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
@@ -30,19 +26,19 @@
         </div>
       </AppContent></template
     >
-  </DappShell>
+  </AppShell>
 </template>
 
 <script>
 // @ is an alias to /src
-import DappShell from "@/components/DappShell.vue";
+import AppShell from "@/components/AppShell.vue";
 import TypeformKyc from "@/components/TypeformKyc.vue";
 import FormApply from "@/components/FormApply.vue";
 import FormProposal from "@/components/FormProposal.vue";
 import AppContent from "@/components/AppContent.vue";
 export default {
   name: "DappHome",
-  components: { DappShell, TypeformKyc, FormApply, AppContent, FormProposal },
+  components: { AppShell, TypeformKyc, FormApply, AppContent, FormProposal },
   computed: {
     isNew() {
       if ("approved" in this.profile) return false;

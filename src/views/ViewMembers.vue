@@ -1,19 +1,19 @@
 <template>
-  <DappShell
+  <AppShell
     :backgroundClass="'bg-silver'"
     :textClass="'text-white'"
     :fillClass="'fill-white'"
   >
     <AppContent class="items-center justify-center"><ListMembers /></AppContent>
-  </DappShell>
+  </AppShell>
 </template>
 
 <script>
 // @ is an alias to /src
-import DappShell from "@/components/DappShell";
+import AppShell from "@/components/AppShell";
 import AppContent from "@/components/AppContent";
 import ListMembers from "@/components/ListMembers";
 export default {
-  components: { DappShell, ListMembers, AppContent },
+  components: { AppShell, ListMembers, AppContent },
 };
 </script>

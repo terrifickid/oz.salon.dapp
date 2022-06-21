@@ -4,7 +4,7 @@
       <div
         class="col-start-7 col-span-4 sm:col-start-8 sm:col-span-3 lg:col-start-9 lg:col-span-2"
       >
-        <a href="/#/"><AppLogo :color="fillClass" /></a>
+        <a href="/#/"><AppLogo :color="'fill-' + colors[1]" /></a>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 <script>
 import AppLogo from "@/components/AppLogo.vue";
 export default {
-  props: ["backgroundClass", "fillClass"],
+  props: ["colors"],
   components: {
     AppLogo,
   },

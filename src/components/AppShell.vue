@@ -1,14 +1,14 @@
 <template>
   <div
-    :class="{ [backgroundClass]: true, [textClass]: true }"
+    :class="{ ['bg-' + colors[0]]: true, ['text-' + colors[1]]: true }"
     class="min-h-screen"
   >
     <div v-if="walletAddress">
-      <AppHeader :backgroundClass="backgroundClass" :textClass="textClass" />
+      <AppHeader :colors="colors" />
 
       <slot v-if="ready"></slot>
 
-      <AppFooter :backgroundClass="backgroundClass" :fillClass="fillClass" />
+      <AppFooter :colors="colors" />
     </div>
     <div v-if="!walletAddress">
       <WalletConnect
@@ -28,7 +28,7 @@ import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  props: ["backgroundClass", "textClass", "fillClass"],
+  props: ["colors"],
   components: { AppFooter, AppHeader, WalletConnect },
   computed: {
     profile() {
