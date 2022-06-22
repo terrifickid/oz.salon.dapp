@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="display"
-    class="fixed left-0 right-0 top-0 app-text z-50 h-12"
+    class="fixed left-0 right-0 top-0 z-50 h-12 text-xl"
     :class="{
       ['bg-' + colors[0]]: true,
       ['text-' + colors[1]]: !toggle,
@@ -33,7 +33,7 @@
     >
       <div class="grid grid-cols-12 flex min-h-screen">
         <div class="col-span-8 self-center flex justify-center"></div>
-        <div class="col-span-12 text-4xl self-end">
+        <div class="col-span-12 self-end">
           <ul class="pb-4 px-3">
             <li><a @click="toggleDown" href="/#">Home</a></li>
             <li><a @click="toggleDown" href="/#/about">About</a></li>
