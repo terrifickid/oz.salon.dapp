@@ -1,6 +1,6 @@
 <template>
-  <div class="p-3 absolute w-screen h-20 overflow-scroll bg-white z-50">
-    <div style="width: 200rem; height: 1px">
+  <div class="p-3 fixed w-screen overflow-scroll bg-white z-50">
+    <div style="width: 200rem; height: 34px">
       <AppButton :colors="colors" @click="toggleDown" href="/#">Home</AppButton>
       <AppButton :colors="colors" @click="toggleDown" href="/#/about"
         >About</AppButton

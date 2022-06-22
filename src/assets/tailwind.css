@@ -14,7 +14,7 @@ body {
 }
 
 .app-text {
-  @apply text-lg sm:text-xl lg:text-2xl font-light;
+  @apply text-base sm:text-lg lg:text-xl font-light;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

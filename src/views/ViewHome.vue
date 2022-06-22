@@ -4,7 +4,7 @@
     <div class="min-h-screen flex items-center">
       <div class="px-3 grid grid-cols-12 w-screen">
         <div
-          class="col-span-12 sm:col-span-10 sm:col-start-2 md:col-span-8 md:col-start-3 lg:col-span-6 lg:col-start-4"
+          class="col-span-10 col-start-2 sm:col-span-8 sm:col-start-3 md:col-span-8 md:col-start-3 lg:col-span-6 lg:col-start-4"
         >
           <img src="Salon_Logotype_RGB_3D.jpg" />
         </div>
