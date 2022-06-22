@@ -2,9 +2,7 @@
   <div :class="salonClass" class="min-h-screen">
     <div v-if="walletAddress">
       <AppHeader :colors="colors" />
-
       <AppLoader v-if="!ready" />
-
       <slot v-if="ready"></slot>
       <AppFooter :colors="colors" />
     </div>

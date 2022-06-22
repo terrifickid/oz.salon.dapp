@@ -21,7 +21,7 @@ export default {
   components: { AppShell, AppContent },
   data() {
     return {
-      colors: ["orange", "white"],
+      colors: ["white", "black"],
     };
   },
   computed: {

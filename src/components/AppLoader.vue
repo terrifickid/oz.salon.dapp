@@ -1,47 +1,35 @@
 <template>
-  <div class="min-h-screen flex items-center">
+  <div class="min-h-screen flex items-center justify-center">
     <span class="loader"></span>
   </div>
 </template>
 <script></script>
 <style scoped>
 .loader {
-  width: 8px;
-  height: 40px;
-  border-radius: 4px;
-  display: block;
-  margin: 20px auto;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
   position: relative;
-  background: currentColor;
+  background: #fff;
   box-sizing: border-box;
-  animation: animloader 0.3s 0.3s linear infinite alternate;
-}
-
-.loader::after,
-.loader::before {
-  content: "";
-  width: 8px;
-  height: 40px;
-  border-radius: 4px;
-  background: currentColor;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 20px;
-  box-sizing: border-box;
-  animation: animloader 0.3s 0.45s linear infinite alternate;
-}
-.loader::before {
-  left: -20px;
-  animation-delay: 0s;
+  animation: animloader 2s linear infinite;
 }
 
 @keyframes animloader {
   0% {
-    height: 48px;
+    transform: translate(0, 0) rotateX(0) rotateY(0);
+  }
+  25% {
+    transform: translate(100%, 0) rotateX(0) rotateY(180deg);
+  }
+  50% {
+    transform: translate(100%, 100%) rotateX(-180deg) rotateY(180deg);
+  }
+  75% {
+    transform: translate(0, 100%) rotateX(-180deg) rotateY(360deg);
   }
   100% {
-    height: 4px;
+    transform: translate(0, 0) rotateX(0) rotateY(360deg);
   }
 }
 </style>

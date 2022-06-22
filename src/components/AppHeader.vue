@@ -5,12 +5,12 @@
     :class="{
       ['bg-' + colors[0]]: true,
       ['text-' + colors[1]]: !toggle,
-      ['text-tope']: toggle,
+      ['text-' + colors[0]]: toggle,
     }"
   >
     <button
       @click="toggle = !toggle"
-      class="items-center p-3 z-30 pointer absolute"
+      class="items-center p-3 pointer absolute z-30"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -29,16 +29,9 @@
     </button>
     <div
       :class="{ 'h-0': !toggle, 'h-screen': toggle }"
-      class="fixed top-0 z-20 min-w-full bg-electric text-white transition-all overflow-hidden"
+      class="fixed top-0 z-20 min-w-full bg-black text-white transition-all overflow-hidden"
     >
-      <div
-        class="grid grid-cols-12 flex min-h-screen"
-        style="
-          background: url('swirl.jpg');
-          background-position: center center;
-          background-size: cover;
-        "
-      >
+      <div class="grid grid-cols-12 flex min-h-screen">
         <div class="col-span-8 self-center flex justify-center"></div>
         <div class="col-span-12 text-4xl self-end">
           <ul class="pb-4 px-3">

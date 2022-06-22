@@ -1,6 +1,6 @@
 <template>
   <AppShell :colors="colors" isLoaded="loaded">
-    <div class="grid grid-cols-12 px-3 mt-16 pb-32">
+    <div class="grid grid-cols-12 px-3 pt-12 pb-32">
       <div
         class="col-span-12 col-start-1 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
         v-if="'fields' in content"
@@ -28,7 +28,7 @@ export default {
   components: { AppShell },
   data() {
     return {
-      colors: ["black", "white"],
+      colors: ["white", "black"],
       content: {},
     };
   },

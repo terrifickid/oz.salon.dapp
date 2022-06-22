@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="['silver', 'white']" :isLoaded="loaded">
+  <AppShell :colors="colors" :isLoaded="loaded">
     <AppContent class="items-center justify-center"
       ><ListMembers :members="members"
     /></AppContent>
@@ -16,6 +16,7 @@ export default {
   components: { AppShell, ListMembers, AppContent },
   data() {
     return {
+      colors: ["white", "black"],
       members: [],
     };
   },

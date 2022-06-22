@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="['canary', 'electric']" isLoaded="loaded">
+  <AppShell :colors="['white', 'black']" isLoaded="loaded">
     <template v-if="isNew"><FormKyc /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
