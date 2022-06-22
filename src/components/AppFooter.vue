@@ -8,13 +8,12 @@
       <div
         class="col-start-7 col-span-4 sm:col-start-8 sm:col-span-3 lg:col-start-9 lg:col-span-2"
       >
-        <a href="/#/"><AppLogo :color="'fill-' + colors[1]" /></a>
+        <a href="/#/"> <img src="Salon_Logotype_RGB_3D.jpg" /></a>
       </div>
     </div>
   </div>
 </template>
 <script>
-import AppLogo from "@/components/AppLogo.vue";
 export default {
   props: ["colors"],
   computed: {
@@ -22,8 +21,6 @@ export default {
       return this.colors?.length;
     },
   },
-  components: {
-    AppLogo,
-  },
+  components: {},
 };
 </script>

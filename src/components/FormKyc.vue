@@ -3,7 +3,7 @@
     <div class="section">
       <div class="grid grid-cols-12 px-3">
         <InputText
-          class="col-span-11 md:col-span-6 md:col-start-2"
+          class="col-span-10 md:col-span-6 md:col-start-2"
           :count="1"
           :title="'Form Field Title'"
           :required="true"
@@ -14,7 +14,7 @@
     <div class="section">
       <div class="grid grid-cols-12 px-3">
         <InputText
-          class="col-span-11 md:col-span-6 md:col-start-2"
+          class="col-span-10 md:col-span-6 md:col-start-2"
           :count="2"
           :title="'Form Field Title'"
           :required="true"
@@ -25,7 +25,7 @@
     <div class="section">
       <div class="grid grid-cols-12 px-3">
         <InputText
-          class="col-span-11 md:col-span-6 md:col-start-2"
+          class="col-span-10 md:col-span-6 md:col-start-2"
           :count="3"
           :title="'Form Field Title'"
           :required="true"
@@ -36,7 +36,7 @@
     <div class="section">
       <div class="grid grid-cols-12 px-3">
         <InputText
-          class="col-span-11 md:col-span-6 md:col-start-2"
+          class="col-span-10 md:col-span-6 md:col-start-2"
           :count="4"
           :title="'Form Field Title'"
           :required="true"
