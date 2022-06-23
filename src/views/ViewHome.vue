@@ -4,13 +4,17 @@
       <div class="px-3 grid grid-cols-12 w-screen">
         <div class="app-frame">
           <img src="Salon_Logotype_RGB_3D.jpg" />
+          <p class="text-sm mt-6 mx-6 mr-32">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
         </div>
       </div>
       <div class="bottom-0 right-0 absolute p-3">
-        <AppButton href="/#/join" :colors="colors" class="flex item-center"
+        <AppButton href="/#/join" :colors="colors" class="flex items-center"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 mr-2"
+            class="h-5 w-5 mr-1"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -19,7 +23,7 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"
             />
           </svg>
           Join</AppButton
