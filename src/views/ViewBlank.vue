@@ -1,6 +1,6 @@
 <template>
   <AppShell :colors="colors" :isLoaded="true">
-    <AppContent class="items-center justify-center text-5xl">404</AppContent>
+    <AppContent class="items-center justify-center text-5xl"> 404 </AppContent>
   </AppShell>
 </template>
 

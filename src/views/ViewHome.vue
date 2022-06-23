@@ -7,9 +7,7 @@
         </div>
       </div>
       <div class="bottom-0 right-0 absolute p-3">
-        <AppButton href="/#/join" class="text-2xl" :colors="colors"
-          >Join</AppButton
-        >
+        <AppButton href="/#/join" :colors="colors">Join</AppButton>
       </div>
     </div>
   </div>

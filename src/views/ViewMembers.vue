@@ -1,8 +1,9 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <AppContent class="items-center justify-center"
-      ><ListMembers :members="members"
-    /></AppContent>
+    <AppContent class="items-start justify-center"
+      ><div class="grid grid-cols-12 w-full pt-32">
+        <div class="app-frame"><ListMembers :members="members" /></div></div
+    ></AppContent>
   </AppShell>
 </template>
 

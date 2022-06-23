@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen text-center">
+  <div class="text-left">
     <p v-for="(m, index) in members" :key="index">
       {{ m.fields.firstName["en-US"] }} {{ m.fields.lastName["en-US"] }}
     </p>
