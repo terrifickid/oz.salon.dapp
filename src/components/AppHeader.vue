@@ -2,7 +2,7 @@
   <div
     class="pt-3 px-3 fixed w-screen overflow-scroll bg-white z-50 no-scrollbar"
   >
-    <div style="width: 200rem">
+    <div style="width: 100rem">
       <router-link to="/">
         <AppButton :colors="colors" class="mr-2">Home</AppButton>
       </router-link>
