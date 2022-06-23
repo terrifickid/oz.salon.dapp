@@ -5,7 +5,7 @@
         <p
           v-for="(item, index) in content.fields.content['en-US'].content"
           :key="index"
-          class="app-text mb-8"
+          class="app-text mb-4"
           :class="getType(item.content[0].marks) + ' ' + item.nodeType"
         >
           {{ item.content[0].value }}
