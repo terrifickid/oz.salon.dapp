@@ -18,7 +18,7 @@
             'bg-black text-white': selectedIndex == index,
             'bg-white': selectedIndex != index,
           }"
-          class="flex-none border border-black rounded w-6 h-6 items-center justify-center text-xs sm:text-sm mr-2"
+          class="flex border border-black rounded w-6 h-6 items-center justify-center text-xs sm:text-sm mr-2"
           >{{ getSymbol(index) }}</span
         >
         <span class="text-left text-md">{{ choice }}</span>
