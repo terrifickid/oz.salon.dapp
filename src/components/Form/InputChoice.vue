@@ -4,7 +4,7 @@
     <div class="grid grid-cols-12 gap-2 ml-10 sm:ml-0">
       <button
         :class="{ 'ring-1 ring-black': selectedIndex == index }"
-        class="flex col-span-12 items-center justify-start p-2 border border-black rounded hover:bg-oblack-100"
+        class="group flex col-span-12 items-center justify-start p-2 border border-black rounded hover:bg-black hover:text-white"
         v-for="(choice, index) in choices"
         :key="index"
         @click="
@@ -16,7 +16,7 @@
         <span
           :class="{
             'bg-black text-white': selectedIndex == index,
-            'bg-white': selectedIndex != index,
+            'bg-white text-black ': selectedIndex != index,
           }"
           class="flex border border-black rounded w-6 h-6 items-center justify-center text-xs sm:text-sm mr-2"
           >{{ getSymbol(index) }}</span
