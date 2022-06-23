@@ -2,7 +2,7 @@
   <div class="text-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="w-48 h-48 mx-auto"
+      class="w-24 h-24 sm:h-32 sm:w-32 mx-auto"
       viewBox="0 0 212 189"
     >
       <g fill="none" fill-rule="evenodd">
@@ -126,7 +126,9 @@
       </g>
     </svg>
     <p>
-      <AppButton class="mt-4" @click="connect"> Connect MetaMask </AppButton>
+      <AppButton class="mt-8 sm:mt-4" @click="connect">
+        Connect MetaMask
+      </AppButton>
     </p>
     <p class="sm:hidden mt-4">
       To access SalonDAO on mobile<br />

@@ -3,8 +3,8 @@
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
     <div class="grid grid-cols-12 gap-2 ml-10 sm:ml-0">
       <button
-        :class="{ 'ring-1 ring-black': selectedIndex == index }"
-        class="group flex col-span-12 items-center justify-start p-2 border border-black rounded hover:ring-1 ring-black"
+        :class="{ 'ring-2 ring-black': selectedIndex == index }"
+        class="group flex col-span-12 items-center justify-start p-2 border border-black rounded hover:ring-2 ring-black"
         v-for="(choice, index) in choices"
         :key="index"
         @click="
