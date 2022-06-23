@@ -40,8 +40,6 @@
       <router-link to="/join">
         <AppButton :colors="colors" class="mr-2">Join</AppButton>
       </router-link>
-
-      <AppButton :colors="colors" @click="disconnect">disconnect</AppButton>
     </div>
   </div>
 </template>
