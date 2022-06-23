@@ -1,9 +1,6 @@
 <template>
   <div class="flex mt-4 items-center">
-    <button
-      @click="$emit('ready')"
-      class="flex border border-black hover:bg-black hover:text-white px-5 py-2 rounded-full items-center"
-    >
+    <AppButton @click="$emit('ready')" class="flex items-center">
       Ok
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +16,13 @@
           d="M5 13l4 4L19 7"
         />
       </svg>
-    </button>
+    </AppButton>
     <span class="text-sm ml-4">Press <b class="font-bold">Enter ↵</b></span>
   </div>
 </template>
+<script>
+import AppButton from "@/components/AppButton.vue";
+export default {
+  components: { AppButton },
+};
+</script>

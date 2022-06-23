@@ -4,41 +4,41 @@
   >
     <div style="width: 200rem">
       <router-link to="/">
-        <AppButton :colors="colors">Home</AppButton>
+        <AppButton :colors="colors" class="mr-2">Home</AppButton>
       </router-link>
 
       <router-link to="/about">
-        <AppButton :colors="colors">About</AppButton></router-link
+        <AppButton :colors="colors" class="mr-2">About</AppButton></router-link
       >
       <router-link to="/collection">
-        <AppButton :colors="colors">Collection</AppButton>
+        <AppButton :colors="colors" class="mr-2">Collection</AppButton>
       </router-link>
       <router-link to="/invest">
-        <AppButton :colors="colors" href="/#/invest">Invest</AppButton>
+        <AppButton :colors="colors" class="mr-2">Invest</AppButton>
       </router-link>
       <router-link to="/transfer">
-        <AppButton :colors="colors">Transfer</AppButton>
+        <AppButton :colors="colors" class="mr-2">Transfer</AppButton>
       </router-link>
       <router-link to="/treasury">
-        <AppButton :colors="colors" href="/#/treasury">Treasury</AppButton>
+        <AppButton :colors="colors" class="mr-2">Treasury</AppButton>
       </router-link>
       <router-link to="/propose">
-        <AppButton :colors="colors" href="/#/propose">Propose</AppButton>
+        <AppButton :colors="colors" class="mr-2">Propose</AppButton>
       </router-link>
       <router-link to="/collect">
-        <AppButton :colors="colors" href="/#/collect">Collect</AppButton>
+        <AppButton :colors="colors" class="mr-2">Collect</AppButton>
       </router-link>
       <router-link to="/sell">
-        <AppButton :colors="colors" href="/#/sell">Sell</AppButton>
+        <AppButton :colors="colors" class="mr-2">Sell</AppButton>
       </router-link>
       <router-link to="/members">
-        <AppButton :colors="colors" href="/#/members">Members</AppButton>
+        <AppButton :colors="colors" class="mr-2">Members</AppButton>
       </router-link>
       <router-link to="/profile">
-        <AppButton :colors="colors" href="/#/profile">Profile</AppButton>
+        <AppButton :colors="colors" class="mr-2">Profile</AppButton>
       </router-link>
       <router-link to="/join">
-        <AppButton :colors="colors" href="/#/join">Join</AppButton>
+        <AppButton :colors="colors" class="mr-2">Join</AppButton>
       </router-link>
 
       <AppButton :colors="colors" @click="disconnect">disconnect</AppButton>

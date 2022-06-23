@@ -62,10 +62,10 @@ export default {
 </script>
 <style scoped>
 .bold {
-  @apply font-bold;
+  @apply font-bold mt-10 lg:mt-12;
 }
 
 .heading-3 {
-  @apply text-2xl;
+  @apply text-lg sm:text-2xl;
 }
 </style>
