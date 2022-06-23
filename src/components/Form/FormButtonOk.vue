@@ -2,7 +2,7 @@
   <div class="flex mt-4 items-center">
     <button
       @click="$emit('ready')"
-      class="flex border border-black hover:bg-black hover:text-white px-6 py-2 rounded-full items-center"
+      class="flex border border-black hover:bg-black hover:text-white px-5 py-2 rounded-full items-center"
     >
       Ok
       <svg
