@@ -57,6 +57,14 @@ const routes = [
       );
     },
   },
+  {
+    path: "/:catchAll(.*)",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewProfile" */ "../views/ViewBlank.vue"
+      );
+    },
+  },
 ];
 
 const router = createRouter({

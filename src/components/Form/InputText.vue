@@ -6,12 +6,13 @@
       class="text-2xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb font-light"
       placeholder="Type your Answer here"
       required
-      v-model="sAmount"
-      @keyup.enter="$emit('clicked')"
+      v-model="value"
+      @input="$emit('update', value)"
+      @keyup.enter="$emit('ready')"
     />
     <div class="flex mt-4 items-center">
       <button
-        @click="$emit('clicked')"
+        @click="$emit('ready')"
         class="flex border border-black hover:bg-black hover:text-white px-6 py-2 rounded-full"
       >
         Ok
@@ -41,5 +42,10 @@ export default {
     FormLabel,
   },
   props: ["count", "title", "required", "placeholder"],
+  data() {
+    return {
+      value: "",
+    };
+  },
 };
 </script>

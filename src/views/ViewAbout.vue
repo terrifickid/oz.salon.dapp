@@ -50,12 +50,13 @@ export default {
     },
   },
   async beforeMount() {
-    console.log("members load!");
+    console.log("Loading about...");
     try {
       const res = await axios.get(
         "https://salontest-terrifickid.cloud.okteto.net/entry/7fXKpXp8oIZgrvDdfk4Dd0"
       );
       this.content = res.data;
+      console.log("about loaded!");
     } catch (error) {
       console.log("error", error);
     }

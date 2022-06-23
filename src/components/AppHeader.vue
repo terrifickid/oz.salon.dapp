@@ -1,43 +1,45 @@
 <template>
   <div class="p-3 fixed w-screen overflow-scroll bg-white z-50">
     <div style="width: 200rem; height: 34px">
-      <AppButton :colors="colors" @click="toggleDown" href="/#">Home</AppButton>
-      <AppButton :colors="colors" @click="toggleDown" href="/#/about"
-        >About</AppButton
-      >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/collection"
-        >Collection</AppButton
-      >
+      <router-link to="/">
+        <AppButton :colors="colors">Home</AppButton>
+      </router-link>
 
-      <AppButton :colors="colors" @click="toggleDown" href="/#/invest"
-        >Invest</AppButton
+      <router-link to="/about">
+        <AppButton :colors="colors">About</AppButton></router-link
       >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/transfer"
-        >Transfer</AppButton
-      >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/treasury"
-        >Treasury</AppButton
-      >
+      <router-link to="/collection">
+        <AppButton :colors="colors">Collection</AppButton>
+      </router-link>
+      <router-link to="/invest">
+        <AppButton :colors="colors" href="/#/invest">Invest</AppButton>
+      </router-link>
+      <router-link to="/transfer">
+        <AppButton :colors="colors">Transfer</AppButton>
+      </router-link>
+      <router-link to="/treasury">
+        <AppButton :colors="colors" href="/#/treasury">Treasury</AppButton>
+      </router-link>
+      <router-link to="/propose">
+        <AppButton :colors="colors" href="/#/propose">Propose</AppButton>
+      </router-link>
+      <router-link to="/collect">
+        <AppButton :colors="colors" href="/#/collect">Collect</AppButton>
+      </router-link>
+      <router-link to="/sell">
+        <AppButton :colors="colors" href="/#/sell">Sell</AppButton>
+      </router-link>
+      <router-link to="/members">
+        <AppButton :colors="colors" href="/#/members">Members</AppButton>
+      </router-link>
+      <router-link to="/profile">
+        <AppButton :colors="colors" href="/#/profile">Profile</AppButton>
+      </router-link>
+      <router-link to="/join">
+        <AppButton :colors="colors" href="/#/join">Join</AppButton>
+      </router-link>
 
-      <AppButton :colors="colors" @click="toggleDown" href="/#/propose"
-        >Propose</AppButton
-      >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/collection"
-        >Collect</AppButton
-      >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/sell"
-        >Sell</AppButton
-      >
-
-      <AppButton :colors="colors" @click="toggleDown" href="/#/members"
-        >Members</AppButton
-      >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/profile"
-        >Profile</AppButton
-      >
-      <AppButton :colors="colors" @click="toggleDown" href="/#/join"
-        >Join</AppButton
-      >
+      <AppButton :colors="colors" @click="disconnect">disconnect</AppButton>
     </div>
   </div>
 </template>

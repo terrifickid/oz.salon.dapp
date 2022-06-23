@@ -17,6 +17,9 @@ body {
   @apply text-base sm:text-lg lg:text-xl font-light;
 }
 
+.app-frame {
+  @apply col-span-10 col-start-2 lg:col-span-8 lg:col-start-3;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

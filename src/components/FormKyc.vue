@@ -1,59 +1,38 @@
 <template>
-  <full-page ref="fullpage" :options="options">
-    <div class="section">
-      <div class="grid grid-cols-12 px-3">
-        <InputText
-          class="col-span-9 col-start-2"
-          :count="1"
-          :title="'First Name'"
-          :required="true"
-          @clicked="next"
+  <AppLoader v-show="processing" />
+  <full-page
+    v-show="!processing"
+    v-if="ready"
+    ref="fullpage"
+    :options="options"
+  >
+    <template v-for="(field, index) in kycForm" :key="index">
+      <div class="section">
+        <FormField
+          :field="field"
+          @ready="next"
+          :index="index"
+          v-model="form[field.id]"
         />
       </div>
-    </div>
-    <div class="section">
-      <div class="grid grid-cols-12 px-3">
-        <InputText
-          class="col-span-9 col-start-2"
-          :count="2"
-          :title="'Form Field Title'"
-          :required="true"
-          @clicked="next"
-        />
-      </div>
-    </div>
-    <div class="section">
-      <div class="grid grid-cols-12 px-3">
-        <InputText
-          class="col-span-9 col-start-2"
-          :count="3"
-          :title="'Form Field Title'"
-          :required="true"
-          @clicked="next"
-        />
-      </div>
-    </div>
-    <div class="section">
-      <div class="grid grid-cols-12 px-3">
-        <InputText
-          class="col-span-9 col-start-2"
-          :count="4"
-          :title="'Form Field Title'"
-          :required="true"
-          @clicked="next"
-        />
-      </div>
-    </div>
+    </template>
   </full-page>
 </template>
 <script>
 import axios from "axios";
-import InputText from "@/components/Form/InputText.vue";
+import FormField from "@/components/Form/FormField.vue";
+import AppLoader from "@/components/AppLoader.vue";
 export default {
-  components: { InputText },
+  components: { FormField, AppLoader },
   data() {
     return {
+      ready: false,
+      processing: true,
       btnTxt: "Submit",
+      kycForm: [],
+      form: {
+        walletAddress: "",
+      },
       sending: false,
       options: {
         licenseKey: "K9EP6-N164H-2BKM8-MJLGI-KSURM",
@@ -65,35 +44,83 @@ export default {
       },
     };
   },
+  computed: {
+    walletAddress() {
+      return this.$store.state.walletAddress;
+    },
+  },
   methods: {
-    next() {
-      console.log("next");
-      this.$refs.fullpage.api.moveSectionDown();
+    async next() {
+      if (await this.validate()) {
+        this.submitForm();
+      } else {
+        console.log("next");
+        //this.$refs.fullpage.api.moveSectionDown();
+      }
+    },
+    async validate() {
+      console.log("validate form!");
+      var i = 0;
+      var error = false;
+      for (let field of this.kycForm) {
+        if (this.form[field.id] == "") error = true;
+        if (!([field.id] in this.form)) error = true;
+        if (error) {
+          this.$refs.fullpage.api.moveTo(i + 1);
+          break;
+        }
+        i++;
+      }
+      console.log("error is", error);
+      if (error) return false;
+      return true;
     },
     async submitForm() {
-      this.sending = true;
-      this.btnTxt = "Sending...";
+      this.processing = true;
       console.log("Ran Submit!");
       try {
         const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/onboard",
-          {
-            walletAddress: this.userAddress,
-            legalNameOfPerson: this.legalNameOfPerson,
-          }
+          "https://salontest-terrifickid.cloud.okteto.net/kyc",
+          this.form
         );
-        console.log("success", res.data);
-        this.$store.dispatch("connect");
+        if (res.data.result) {
+          console.log("success", res.data);
+          this.$store.dispatch("connect");
+        } else {
+          alert("Error, Please try again.");
+          this.processing = false;
+          console.log("error", res.data);
+        }
       } catch (error) {
+        this.processing = false;
         console.log("error", error);
-        this.btnTxt = "error!";
       }
     },
   },
-  computed: {
-    userAddress() {
-      return this.$store.state.userAddress;
-    },
+
+  async beforeMount() {
+    try {
+      const res = await axios.get(
+        "https://salontest-terrifickid.cloud.okteto.net/kyc"
+      );
+      this.kycForm = res.data.fields.filter(function (field) {
+        var disabled = [
+          "kycApproved",
+          "units",
+          "walletAddress",
+          "onboardProposal",
+        ];
+        if (disabled.includes(field.id)) return false;
+        return true;
+      });
+
+      this.form.walletAddress = this.walletAddress;
+      this.$emit("ready");
+      this.ready = true;
+      this.processing = false;
+    } catch (error) {
+      console.log("error", error);
+    }
   },
 };
 </script>

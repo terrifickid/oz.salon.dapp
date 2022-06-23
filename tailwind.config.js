@@ -14,7 +14,10 @@ module.exports = {
         canary: "#e1fe6a",
         sky: "#295ea8",
         pink: "#d92f8a",
-        opb: "rgba(0,0,0,0.4)",
+        oblack: {
+          100: "rgba(0,0,0,0.1)",
+          400: "rgba(0,0,0,0.4)",
+        },
       },
       spacing: {
         folch: "15vw",

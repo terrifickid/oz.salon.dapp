@@ -33,10 +33,12 @@ export default {
     }, 10);
 */
 
-    window.ethereum.on("accountsChanged", async () => {
-      await this.$store.dispatch("disconnect");
-      await this.$store.dispatch("connect");
-    });
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", async () => {
+        await this.$store.dispatch("disconnect");
+        await this.$store.dispatch("connect");
+      });
+    }
   },
   computed: {
     ready() {

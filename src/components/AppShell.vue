@@ -1,18 +1,17 @@
 <template>
   <div :class="salonClass" class="min-h-screen">
-    <div v-if="walletAddress">
+    <div v-if="walletCheck">
       <AppHeader :colors="colors" />
       <AppLoader v-if="!ready" />
       <slot v-if="ready"></slot>
       <AppFooter :colors="colors" />
     </div>
-    <div v-if="!walletAddress">
-      <WalletConnect
-        :textClass="'text-black'"
-        :backgroundClass="'bg-tope'"
-        :fillClass="'fill-black'"
-        class="fixed h-full"
-      />
+    <div v-if="!walletCheck">
+      <AppHeader :colors="colors" />
+      <AppContent class="items-center justify-center">
+        <WalletConnect />
+      </AppContent>
+      <AppFooter :colors="colors" />
     </div>
   </div>
 </template>
@@ -23,11 +22,16 @@
 import AppFooter from "@/components/AppFooter.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppLoader from "@/components/AppLoader.vue";
+import AppContent from "@/components/AppContent.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  components: { AppFooter, AppLoader, AppHeader, WalletConnect },
-  props: ["colors", "isLoaded"],
+  components: { AppFooter, AppLoader, AppHeader, WalletConnect, AppContent },
+  props: ["colors", "isLoaded", "protected"],
   computed: {
+    walletCheck() {
+      if (!this.protected) return true;
+      return this.walletAddress;
+    },
     salonClass() {
       return "bg-" + this.colors[0] + " " + "text-" + this.colors[1];
     },
@@ -41,9 +45,7 @@ export default {
       return this.$store.state.connecting;
     },
     ready() {
-      return (
-        this.walletAddress && !("loading" in this.profile) && this.isLoaded
-      );
+      return this.isLoaded;
     },
   },
   methods: {

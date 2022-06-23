@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="loaded">
+  <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <AppContent>
       <div
         class="pt-24 text-2xl text-center w-screen h-screen"

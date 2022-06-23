@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="['white', 'black']" isLoaded="loaded">
+  <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <template v-if="isNew"><FormKyc /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
@@ -39,16 +39,21 @@ import AppContent from "@/components/AppContent.vue";
 export default {
   name: "DappHome",
   components: { AppShell, FormKyc, FormApply, AppContent, FormProposal },
+  data() {
+    return {
+      colors: ["white", "black"],
+    };
+  },
   computed: {
     loaded() {
-      return this.profile();
+      return this.profile;
     },
     isNew() {
-      if ("approved" in this.profile) return false;
+      if ("kycApproved" in this.profile) return false;
       return true;
     },
     isKycApproved() {
-      if (this.profile.approved) return this.profile.approved["en-US"];
+      if (this.profile.kycApproved) return this.profile.kycApproved["en-US"];
       return false;
     },
     isApplied() {
