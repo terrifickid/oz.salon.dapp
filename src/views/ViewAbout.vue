@@ -1,10 +1,7 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
     <div class="grid grid-cols-12 px-3 pt-32 pb-32">
-      <div
-        class="col-span-10 col-start-2 lg:col-span-8 lg:col-start-3"
-        v-if="'fields' in content"
-      >
+      <div class="app-frame" v-if="'fields' in content">
         <p
           v-for="(item, index) in content.fields.content['en-US'].content"
           :key="index"

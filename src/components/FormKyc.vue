@@ -5,6 +5,7 @@
     v-if="ready"
     ref="fullpage"
     :options="options"
+    class="pr-16"
   >
     <template v-for="(field, index) in kycForm" :key="index">
       <div class="section">

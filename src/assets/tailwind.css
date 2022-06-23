@@ -18,7 +18,7 @@ body {
 }
 
 .app-frame {
-  @apply col-span-10 col-start-2 lg:col-span-8 lg:col-start-3;
+  @apply col-span-12 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3;
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
