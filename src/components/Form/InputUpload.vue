@@ -1,13 +1,19 @@
 <template>
-  <div>
+  <div class="">
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
-    <input v-show="!progress" type="file" ref="file" @change="execute" />
+    <input
+      v-show="!progress"
+      type="file"
+      ref="file"
+      @change="execute"
+      class="ml-10 sm:ml-0"
+    />
     <div
       v-show="progress"
-      class="bg-black h-4"
+      class="bg-black h-4 ml-10 sm:ml-0"
       :style="{ width: progress + '%' }"
     ></div>
-    <span v-show="progress != 0">
+    <span v-show="progress != 0" class="ml-10 sm:ml-0">
       {{ progress }}%
       <span v-show="progress != 100">Uploading...</span>
       <span v-show="progress == 100">Complete!</span></span
