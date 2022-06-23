@@ -19,7 +19,7 @@ const routes = [
     name: "collection",
     component: function () {
       return import(
-        /* webpackChunkName: "CollectionView" */ "../views/ViewCollection.vue"
+        /* webpackChunkName: "CollectionView" */ "../views/ViewBlank.vue"
       );
     },
   },

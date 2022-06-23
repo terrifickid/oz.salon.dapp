@@ -61,11 +61,11 @@ export default {
 };
 </script>
 <style scoped>
-.bold {
+.bold.paragraph {
   @apply font-bold mt-10 lg:mt-12;
 }
 
 .heading-3 {
-  @apply text-lg sm:text-2xl;
+  @apply text-xl;
 }
 </style>

@@ -8,7 +8,7 @@
       ['text-' + colors[0]]: hover,
       ['border-' + colors[1]]: true,
     }"
-    class="py-2 px-5 rounded-full border inline-block text-sm"
+    class="py-2 px-5 rounded-full border inline-block text-base"
   >
     <slot></slot>
   </button>
