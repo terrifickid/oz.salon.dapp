@@ -1,6 +1,8 @@
 <template>
-  <div class="p-3 fixed w-screen overflow-scroll bg-white z-50">
-    <div style="width: 200rem; height: 34px">
+  <div
+    class="pt-3 px-3 fixed w-screen overflow-scroll bg-white z-50 no-scrollbar"
+  >
+    <div style="width: 200rem">
       <router-link to="/">
         <AppButton :colors="colors">Home</AppButton>
       </router-link>
