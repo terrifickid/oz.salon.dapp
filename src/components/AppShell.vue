@@ -1,7 +1,6 @@
 <template>
   <div :class="salonClass" class="min-h-screen">
     <div v-if="walletCheck">
-      <AppHeader :colors="colors" class="keyboard-off" />
       <AppLoader v-if="!ready" />
       <slot v-if="ready"></slot>
       <AppFooter :colors="colors" class="keyboard-off" />

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <AppHeader :colors="colors" />
     <div class="min-h-screen flex items-center">
       <div class="px-3 grid grid-cols-12 w-screen">
         <div
@@ -20,12 +19,12 @@
 
 <script>
 // @ is an alias to /src
-import AppHeader from "@/components/AppHeader";
+
 import AppButton from "@/components/AppButton";
 
 export default {
   name: "HomeView",
-  components: { AppHeader, AppButton },
+  components: { AppButton },
   data() {
     return {
       colors: ["white", "black"],

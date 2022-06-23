@@ -4,17 +4,22 @@
       class="min-h-screen min-w-full flex items-center justify-center"
       v-show="!ready"
     ></div>
-    <div v-show="ready"><router-view /></div>
+    <div v-show="ready">
+      <AppHeader :colors="colors" class="keyboard-off" />
+      <router-view />
+    </div>
   </div>
 </template>
 <script>
+import AppHeader from "@/components/AppHeader";
 export default {
   data() {
     return {
+      colors: ["white", "black"],
       fontsLoaded: false,
     };
   },
-  components: {},
+  components: { AppHeader },
   async beforeMount() {
     var connected = localStorage.getItem("salon_login");
     console.log("connected is:", connected);
@@ -51,4 +56,9 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.router-link-active button {
+  background-color: black !important;
+  color: white !important;
+}
+</style>
