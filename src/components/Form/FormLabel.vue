@@ -1,13 +1,21 @@
 <template>
   <label class="block mb-4 flex items-center sm:-ml-10"
-    ><span class="text-sm mr-1">{{ count }}</span>
-    <svg height="10" width="11" class="mr-4">
+    ><span class="text-sm">{{ count }}</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-4 w-4 mr-3"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
       <path
-        d="M7.586 5L4.293 1.707 5.707.293 10.414 5 5.707 9.707 4.293 8.293z"
-      ></path>
-      <path d="M8 4v2H0V4z"></path></svg
-    ><slot></slot><span v-if="required">*</span></label
-  >
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M13 7l5 5m0 0l-5 5m5-5H6"
+      /></svg
+    ><slot></slot
+  ></label>
 </template>
 <script>
 export default {

@@ -23,7 +23,7 @@
             getSymbol(index)
           }}</span></span
         >
-        <span class="text-left text-md">{{ choice }}</span>
+        <span class="text-left text-sm sm:text-md">{{ choice }}</span>
       </button>
     </div>
     <FormButtonOk @ready="$emit('ready')" />
