@@ -1,6 +1,6 @@
 <template>
   <label
-    class="block text-base sm:text-xl md:text-2xl mb-4 flex items-center md:-ml-10 font-light"
+    class="block text-xl md:text-2xl mb-4 flex items-center md:-ml-10 font-light"
     ><span class="text-sm mr-1">{{ count }}</span>
     <svg height="10" width="11" class="mr-4">
       <path

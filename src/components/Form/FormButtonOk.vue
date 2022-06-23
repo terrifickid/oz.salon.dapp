@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mt-4 items-center text-xs sm:text-base">
+  <div class="flex mt-4 items-center">
     <button
       @click="$emit('ready')"
       class="flex border border-black hover:bg-black hover:text-white px-6 py-2 rounded-full items-center"
@@ -7,7 +7,7 @@
       Ok
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-3 w-6 sm:h-6 sm:w-6 ml-1"
+        class="h-6 w-6 ml-1"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
