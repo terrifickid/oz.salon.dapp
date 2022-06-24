@@ -66,8 +66,7 @@ export default {
 }
 
 .heading-3 {
-  font-style: italic;
-  @apply text-lg sm:text-xl lg:text-2xl font-light mt-16;
+  @apply text-sm sm:text-base uppercase mt-16;
   @apply font-mono;
 }
 </style>

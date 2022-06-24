@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mt-4 items-center ml-10 sm:ml-0">
+  <div class="flex mt-4 items-center sm:ml-0">
     <AppButton @click="$emit('ready')" class="flex items-center">
       Ok
       <svg

@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-12 px-3">
     <div class="app-frame">
-      <div class="ml-10 sm:ml-0">
+      <div class="sm:ml-0">
         <p class="app-text mb-2 font-mono">{{ name }}</p>
         <p class="font-ak">{{ description }}</p>
         <FormButtonBegin @ready="$emit('ready')" />

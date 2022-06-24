@@ -1,7 +1,10 @@
 <template>
   <AppShell :colors="colors" :isLoaded="true">
-    <AppContent class="items-center justify-center text-5xl font-mono">
-      404
+    <AppContent class="items-center justify-center font-mono">
+      <div class="text-center">
+        <p class="text-5xl mb-3">404</p>
+        <p>Page not found</p>
+      </div>
     </AppContent>
   </AppShell>
 </template>

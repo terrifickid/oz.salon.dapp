@@ -6,7 +6,7 @@
       type="file"
       ref="file"
       @change="execute"
-      class="ml-10 sm:ml-0 font-akr"
+      class="sm:ml-0 font-akr"
     />
     <div
       v-show="progress"

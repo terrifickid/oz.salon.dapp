@@ -4,9 +4,9 @@
       v-if="imageSrc"
       :src="imageSrc"
       style="max-height: 50vh"
-      class="bg-cover bg-center aspect-square mx-auto"
+      class="bg-cover bg-center aspect-square mx-auto relative"
       :style="{ backgroundImage: 'url(' + imageSrc + ')' }"
-    />
+    ></div>
   </div>
 </template>
 <script>
