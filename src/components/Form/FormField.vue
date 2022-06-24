@@ -14,6 +14,7 @@
       <template
         v-if="
           field.id == 'idScan' ||
+          field.id == 'corporateDocuments' ||
           field.id == 'recentIncomeDocumentation' ||
           field.id == 'previousIncomeDocumentation'
         "
