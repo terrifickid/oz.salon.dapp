@@ -4,7 +4,9 @@
       <div class="px-3 grid grid-cols-12 w-screen">
         <div class="app-frame">
           <img src="Salon_Logotype_RGB_3D.jpg" />
-          <p class="text-xs mx-4 my-3 sm:text-sm sm:mr-32">
+          <p
+            class="text-xs mx-4 mt-3 mr-10 sm:text-sm sm:mr-32 sm:mt-5 sm:ml-5"
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
