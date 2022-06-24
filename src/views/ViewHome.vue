@@ -5,7 +5,7 @@
         <div class="app-frame">
           <img src="Salon_Logotype_RGB_3D.jpg" />
           <p
-            class="text-xs mx-4 mt-3 mr-10 sm:text-sm sm:mr-32 sm:mt-5 sm:ml-5 font-mono"
+            class="text-xs mx-4 mt-3 mr-10 sm:text-sm sm:mr-32 sm:mt-5 sm:ml-5 font-ak"
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
