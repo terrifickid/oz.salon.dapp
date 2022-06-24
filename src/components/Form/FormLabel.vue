@@ -1,5 +1,5 @@
 <template>
-  <label class="block mb-4 flex items-center sm:-ml-10 font-mono"
+  <label class="block mb-4 flex items-center sm:-ml-10 font-haffer font-bold"
     ><span class="text-sm">{{ count }}</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
