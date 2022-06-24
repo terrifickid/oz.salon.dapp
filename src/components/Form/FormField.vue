@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 px-3 mr-24">
+  <div class="grid grid-cols-12 px-3 mr-5 sm:mr-24">
     <template v-if="isChoice(field)">
       <InputChoice
         class="app-frame"

@@ -8,10 +8,10 @@
     {{ profile.walletAddress["en-US"] }}
   </p>
 
-  <p class="border-b border-black p-1 text-right">
+  <p class="border-b border-black p-1 text-right text-xs sm:text-base">
     {{ profile.emailAddress["en-US"] }}
   </p>
-  <p class="border-b border-black p-1 text-left mb-24">
+  <p class="border-b border-black p-1 text-left mb-24 text-xs sm:text-base">
     {{ profile.units["en-US"] }}
   </p>
 </template>

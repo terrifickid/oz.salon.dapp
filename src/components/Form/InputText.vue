@@ -3,7 +3,7 @@
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
     <input
       type="text"
-      class="font-akr text-xl ml-10 sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
+      class="font-akr text-xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
       placeholder="..."
       required
       v-model="value"
