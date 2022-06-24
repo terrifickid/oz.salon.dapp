@@ -2,6 +2,13 @@ module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        haffer: ["Haffer XH"],
+        mono: ["AkkuratMonoLLWebTrial-Regular"],
+        ak: ["AkkuratLLWebTrial-Light"],
+        akr: ["AkkuratLLWebTrial-Regular"],
+        manrope: ["Manrope"],
+      },
       colors: {
         neon: "#82f054",
         tope: "#f7f7f7",

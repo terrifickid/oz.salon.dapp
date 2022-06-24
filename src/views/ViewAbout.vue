@@ -1,6 +1,6 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <div class="grid grid-cols-12 px-3 pt-10 pb-32">
+    <div class="grid grid-cols-12 px-3 pt-10 pb-32 font-ak">
       <div class="app-frame" v-if="'fields' in content">
         <p
           v-for="(item, index) in content.fields.content['en-US'].content"
@@ -62,11 +62,12 @@ export default {
 </script>
 <style scoped>
 .bold.paragraph {
-  @apply mt-10 lg:mt-12 text-lg sm:text-xl lg:text-2xl;
+  @apply mt-10 lg:mt-12 text-lg sm:text-xl lg:text-2xl font-mono;
 }
 
 .heading-3 {
   font-style: italic;
   @apply text-lg sm:text-xl lg:text-2xl font-light mt-16;
+  @apply font-mono;
 }
 </style>
