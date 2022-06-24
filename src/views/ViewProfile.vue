@@ -1,26 +1,12 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
-    <AppContent>
+    <AppContent class="items-center">
       <div
         class="grid grid-cols-12 w-full pt-32 font-ak"
         v-if="'walletAddress' in profile"
       >
         <div class="app-frame">
-          <p class="border-b border-black p-1 text-right">
-            {{ profile.walletAddress["en-US"] }}
-          </p>
-          <p class="border-b border-black p-1">
-            {{ profile.firstName["en-US"] }}
-          </p>
-          <p class="border-b border-black p-1">
-            {{ profile.lastName["en-US"] }}
-          </p>
-          <p class="border-b border-black p-1 text-right">
-            {{ profile.emailAddress["en-US"] }}
-          </p>
-          <p class="border-b border-black p-1 text-left">
-            {{ profile.units["en-US"] }}
-          </p>
+          <AppProfile :profile="profile" />
         </div>
       </div>
     </AppContent>
@@ -31,8 +17,9 @@
 // @ is an alias to /src
 import AppShell from "@/components/AppShell";
 import AppContent from "@/components/AppContent";
+import AppProfile from "@/components/AppProfile";
 export default {
-  components: { AppShell, AppContent },
+  components: { AppShell, AppContent, AppProfile },
   data() {
     return {
       colors: ["white", "black"],

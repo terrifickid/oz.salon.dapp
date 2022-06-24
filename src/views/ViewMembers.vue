@@ -43,7 +43,7 @@
       <div v-for="(profile, index) in members" :key="index" class="section">
         <div class="grid grid-cols-12 w-full pt-32 font-ak px-3">
           <div class="app-frame">
-            <AppProfile :profile="profile" />
+            <AppProfile :profile="profile.fields" />
           </div>
         </div>
       </div>
