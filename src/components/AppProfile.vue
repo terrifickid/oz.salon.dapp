@@ -4,7 +4,7 @@
     {{ profile.firstName["en-US"] }}
   </p>
   <p class="p-1 text-left text-2xl"></p>
-  <p class="p-1 text-left flex font-mono">
+  <p class="p-1 text-left flex font-mono text-xs sm:text-base">
     {{ profile.walletAddress["en-US"] }}
   </p>
 
