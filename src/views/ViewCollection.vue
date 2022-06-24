@@ -1,6 +1,6 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <div class="pt-24 text-left w-full absolute z-40 keyboard-off">
+    <div class="pt-24 text-center w-full absolute z-40 keyboard-off font-ak">
       <select class="text-right alpha p-2">
         <option>A</option>
         <option>B</option>
