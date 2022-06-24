@@ -24,3 +24,8 @@ export default {
   },
 };
 </script>
+<style>
+.fullpage-wrapper {
+  padding-right: 0 !important;
+}
+</style>

@@ -24,6 +24,51 @@ const routes = [
     },
   },
   {
+    path: "/invest",
+    name: "invest",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewInvest" */ "../views/ViewInvest.vue"
+      );
+    },
+  },
+  {
+    path: "/transfer",
+    name: "transfer",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewTransfer" */ "../views/ViewTransfer.vue"
+      );
+    },
+  },
+  {
+    path: "/propose",
+    name: "propose",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewPropose" */ "../views/ViewPropose.vue"
+      );
+    },
+  },
+  {
+    path: "/collect",
+    name: "collect",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewCollect" */ "../views/ViewCollect.vue"
+      );
+    },
+  },
+  {
+    path: "/sell",
+    name: "sell",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewCollect" */ "../views/ViewSell.vue"
+      );
+    },
+  },
+  {
     path: "/members",
     name: "members",
     component: function () {

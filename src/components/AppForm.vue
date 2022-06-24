@@ -10,7 +10,7 @@
     <div class="section">
       <FormIntro :name="name" :description="description" @ready="next" />
     </div>
-    <template v-for="(field, index) in kycForm" :key="index">
+    <template v-for="(field, index) in fields" :key="index">
       <div class="section">
         <FormField
           :field="field"
@@ -29,6 +29,7 @@ import FormIntro from "@/components/Form/FormIntro.vue";
 import AppLoader from "@/components/AppLoader.vue";
 export default {
   components: { FormField, AppLoader, FormIntro },
+  props: ["url"],
   data() {
     return {
       name: "",
@@ -36,10 +37,8 @@ export default {
       ready: false,
       processing: true,
       btnTxt: "Submit",
-      kycForm: [],
-      form: {
-        walletAddress: "",
-      },
+      fields: [],
+      form: {},
       sending: false,
       options: {
         licenseKey: "K9EP6-N164H-2BKM8-MJLGI-KSURM",
@@ -50,11 +49,6 @@ export default {
         navigationPosition: "right",
       },
     };
-  },
-  computed: {
-    walletAddress() {
-      return this.$store.state.walletAddress;
-    },
   },
   methods: {
     async next() {
@@ -69,7 +63,7 @@ export default {
       console.log("validate form!");
       var i = 0;
       var error = false;
-      for (let field of this.kycForm) {
+      for (let field of this.fields) {
         if (this.form[field.id] == "") error = true;
         if (!([field.id] in this.form)) error = true;
         if (error) {
@@ -86,13 +80,10 @@ export default {
       this.processing = true;
       console.log("Ran Submit!");
       try {
-        const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/kyc",
-          this.form
-        );
+        const res = await axios.post(this.url, this.form);
         if (res.data.result) {
           console.log("success", res.data);
-          this.$store.dispatch("connect");
+          this.$emit("success");
         } else {
           alert("Error, Please try again.");
           this.processing = false;
@@ -107,24 +98,16 @@ export default {
 
   async beforeMount() {
     try {
-      const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/kyc"
-      );
-      console.log("kycform", res.data);
+      const res = await axios.get(this.url);
+      console.log("form", res.data);
       this.name = res.data.name;
       this.description = res.data.description;
-      this.kycForm = res.data.fields.filter(function (field) {
-        var disabled = [
-          "kycApproved",
-          "units",
-          "walletAddress",
-          "onboardProposal",
-        ];
+      this.fields = res.data.fields.filter(function (field) {
+        var disabled = [];
         if (disabled.includes(field.id)) return false;
         return true;
       });
 
-      this.form.walletAddress = this.walletAddress;
       this.$emit("ready");
       this.ready = true;
       this.processing = false;
