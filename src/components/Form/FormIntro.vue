@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-12 px-3">
     <div class="app-frame">
-      <p class="app-text mb-2">{{ name }}</p>
-      <p>{{ description }}</p>
+      <p class="app-text mb-2 font-mono">{{ name }}</p>
+      <p class="font-ak">{{ description }}</p>
       <FormButtonBegin @ready="$emit('ready')" />
     </div>
   </div>

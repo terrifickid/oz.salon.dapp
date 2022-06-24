@@ -17,7 +17,9 @@
         />
       </svg>
     </AppButton>
-    <span class="text-xs ml-4">Press <b class="font-bold">Enter ↵</b></span>
+    <span class="text-xs ml-4 font-ak"
+      >Press <b class="font-bold">Enter ↵</b></span
+    >
   </div>
 </template>
 <script>
