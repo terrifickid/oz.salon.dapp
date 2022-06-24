@@ -130,7 +130,7 @@
         Connect MetaMask
       </AppButton>
     </p>
-    <p class="sm:hidden mt-4">
+    <p class="sm:hidden mt-4 font-ak">
       To access SalonDAO on mobile<br />
       use MetaMask App.
     </p>
