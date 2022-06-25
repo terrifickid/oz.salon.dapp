@@ -2,14 +2,46 @@
   <AppShell :colors="colors" :isLoaded="loaded">
     <div class="grid grid-cols-12 px-3 pt-10 pb-32 font-haffer">
       <div class="app-frame" v-if="'fields' in content">
-        <p
-          v-for="(item, index) in content.fields.content['en-US'].content"
-          :key="index"
-          class="mb-4"
-          :class="getType(item.content[0].marks) + ' ' + item.nodeType"
-        >
-          {{ item.content[0].value }}
-        </p>
+        <div class="pt-16">
+          <template
+            v-for="(item, index) in content.fields.content['en-US'].content"
+            :key="index"
+            ><template v-if="item.nodeType == 'heading-3'">
+              <h3>
+                <template v-for="(node, index) in item.content" :key="index">
+                  <template v-if="node.nodeType == 'text'">
+                    <span :class="getType(node.marks) + ' ' + item.nodeType">
+                      {{ node.value }}
+                    </span>
+                  </template>
+                </template>
+              </h3>
+            </template>
+            <template v-if="item.nodeType == 'paragraph'">
+              <p class="pb-4">
+                <template v-for="(node, index) in item.content" :key="index">
+                  <template v-if="node.nodeType == 'text'">
+                    <span :class="getType(node.marks) + ' ' + item.nodeType">
+                      {{ node.value }}
+                    </span>
+                  </template>
+                  <template v-if="node.nodeType == 'hyperlink'">
+                    <a :href="node.data.uri" class="font-bold underline">
+                      {{ node.content[0].value }}
+                    </a>
+                  </template>
+                </template>
+              </p>
+            </template>
+            <template v-else-if="item.nodeType == 'unordered-list'">
+              <ul class="list-disc ml-4 pb-4">
+                <template v-for="(node, index) in item.content" :key="index">
+                  <li>{{ node.content[0].content[0].value }}</li>
+                </template>
+              </ul>
+            </template>
+          </template>
+        </div>
       </div>
     </div>
   </AppShell>
@@ -62,11 +94,14 @@ export default {
 </script>
 <style scoped>
 .bold.paragraph {
-  @apply mt-10 lg:mt-12 text-lg sm:text-xl lg:text-2xl font-haffer;
+  @apply mt-10  mb-1 text-lg sm:text-xl lg:text-2xl font-haffer font-bold inline-block;
 }
 
 .heading-3 {
-  @apply text-base sm:text-lg lg:text-xl mt-16 font-bold;
+  @apply inline-block text-base sm:text-lg lg:text-xl mt-16 font-bold;
   @apply font-haffer;
+}
+
+li {
 }
 </style>

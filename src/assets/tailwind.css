@@ -14,7 +14,7 @@ body {
 }
 
 .app-text {
-  @apply text-lg sm:text-xl lg:text-2xl font-light;
+  @apply text-lg sm:text-xl lg:text-2xl;
 }
 
 .app-frame {

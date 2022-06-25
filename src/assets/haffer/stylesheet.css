@@ -9,8 +9,8 @@
 
 @font-face {
   font-family: "Haffer XH";
-  src: url("HafferXH-Regular.woff2") format("woff2"),
-    url("HafferXH-Regular.woff") format("woff");
+  src: url("HafferXH-Medium.woff2") format("woff2"),
+    url("HafferXH-Medium.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
