@@ -1,73 +1,72 @@
 <template>
   <div
-    class="pt-3 px-3 fixed w-screen overflow-scroll bg-white z-50 no-scrollbar"
+    class="pt-3 px-3 fixed w-screen overflow-scroll bg-white z-50 no-scrollbar transition-all font-haffer"
+    :class="{ 'h-screen': toggle, 'h-12': !toggle }"
   >
     <div style="width: 200rem">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-      <div class="hidden">
-        <router-link to="/">
-          <AppButton :colors="colors" class="mr-2">Home</AppButton>
-        </router-link>
-
-        <router-link to="/about">
-          <AppButton :colors="colors" class="mr-2"
-            >About</AppButton
-          ></router-link
+      <button @click="toggler">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
         >
-        <router-link to="/collection">
-          <AppButton :colors="colors" class="mr-2">Collection</AppButton>
-        </router-link>
-        <router-link to="/invest">
-          <AppButton :colors="colors" class="mr-2">Invest</AppButton>
-        </router-link>
-        <router-link to="/transfer">
-          <AppButton :colors="colors" class="mr-2">Transfer</AppButton>
-        </router-link>
-        <router-link to="/treasury">
-          <AppButton :colors="colors" class="mr-2">Treasury</AppButton>
-        </router-link>
-        <router-link to="/propose">
-          <AppButton :colors="colors" class="mr-2">Propose</AppButton>
-        </router-link>
-        <router-link to="/collect">
-          <AppButton :colors="colors" class="mr-2">Collect</AppButton>
-        </router-link>
-        <router-link to="/sell">
-          <AppButton :colors="colors" class="mr-2">Sell</AppButton>
-        </router-link>
-        <router-link to="/members">
-          <AppButton :colors="colors" class="mr-2">Members</AppButton>
-        </router-link>
-        <router-link to="/profile">
-          <AppButton :colors="colors" class="mr-2">Profile</AppButton>
-        </router-link>
-        <router-link to="/join">
-          <AppButton :colors="colors" class="mr-2">Join</AppButton>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 8h16M4 16h16"
+          />
+        </svg>
+      </button>
+
+      <ul class="text-lg font-light pb-16 pt-16">
+        <router-link to="/" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Home</li>
         </router-link>
 
-        <AppButton :colors="colors" @click="disconnect">disconnect</AppButton>
-      </div>
+        <router-link to="/about" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">About</li></router-link
+        >
+        <router-link to="/collection" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Collection</li>
+        </router-link>
+        <router-link to="/invest" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Invest</li>
+        </router-link>
+        <router-link to="/transfer" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Transfer</li>
+        </router-link>
+        <router-link to="/treasury" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Treasury</li>
+        </router-link>
+        <router-link to="/propose" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Propose</li>
+        </router-link>
+        <router-link to="/collect" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Collect</li>
+        </router-link>
+        <router-link to="/sell" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Sell</li>
+        </router-link>
+        <router-link to="/members" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Members</li>
+        </router-link>
+        <router-link to="/profile" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Profile</li>
+        </router-link>
+        <router-link to="/join" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Join</li>
+        </router-link>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import AppButton from "@/components/AppButton.vue";
 export default {
-  components: { AppButton },
+  components: {},
   props: ["colors"],
   data() {
     return {
@@ -82,7 +81,11 @@ export default {
       return this.$store.state.walletAddress;
     },
   },
+
   methods: {
+    toggler() {
+      this.toggle = !this.toggle;
+    },
     toggleDown() {
       this.toggle = false;
     },
@@ -95,3 +98,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.router-link-active {
+  @apply font-bold;
+}
+</style>

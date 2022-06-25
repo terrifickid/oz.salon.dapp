@@ -6,7 +6,6 @@
       <AppFooter :colors="colors" class="keyboard-off" />
     </div>
     <div v-if="!walletCheck">
-      <AppHeader :colors="colors" />
       <AppContent class="items-center justify-center">
         <WalletConnect />
       </AppContent>
@@ -19,12 +18,11 @@
 // @ is an alias to /src
 
 import AppFooter from "@/components/AppFooter.vue";
-import AppHeader from "@/components/AppHeader.vue";
 import AppLoader from "@/components/AppLoader.vue";
 import AppContent from "@/components/AppContent.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  components: { AppFooter, AppLoader, AppHeader, WalletConnect, AppContent },
+  components: { AppFooter, AppLoader, WalletConnect, AppContent },
   props: ["colors", "isLoaded", "protected"],
   computed: {
     walletCheck() {

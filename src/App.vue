@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import AppHeader from "@/components/AppHeader";
+import AppHeader from "@/components/AppHeaderBurger";
 export default {
   data() {
     return {
