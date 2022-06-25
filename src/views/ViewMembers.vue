@@ -1,7 +1,9 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <div class="pt-24 text-center w-full absolute z-40 keyboard-off font-ak">
-      <select class="text-right alpha p-2">
+    <div
+      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer"
+    >
+      <select class="text-right alpha p-2 font-haffer">
         <option>A</option>
         <option>B</option>
         <option>C</option>
@@ -29,19 +31,19 @@
         <option>Y</option>
         <option>Z</option>
       </select>
-      <select class="text-right p-2">
+      <select class="text-right p-2 font-haffer">
         <option v-for="(m, index) in members" :key="index">
           {{ m.fields.lastName["en-US"] }}
         </option>
       </select>
-      <select class="text-right p-2">
+      <select class="text-right p-2 font-haffer">
         <option>Most Votes</option>
         <option>Newest</option>
       </select>
     </div>
     <AppFullpage>
       <div v-for="(profile, index) in members" :key="index" class="section">
-        <div class="grid grid-cols-12 w-full pt-32 font-ak px-3">
+        <div class="grid grid-cols-12 w-full pt-32 font-haffer px-3">
           <div class="app-frame">
             <AppProfile :profile="profile.fields" />
           </div>

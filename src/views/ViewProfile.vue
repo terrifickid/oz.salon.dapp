@@ -2,7 +2,7 @@
   <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <AppContent class="items-center">
       <div
-        class="grid grid-cols-12 w-full pt-32 font-ak"
+        class="grid grid-cols-12 w-full pt-32 font-haffer"
         v-if="'walletAddress' in profile"
       >
         <div class="app-frame">
