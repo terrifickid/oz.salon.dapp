@@ -36,7 +36,7 @@
             <template v-else-if="item.nodeType == 'unordered-list'">
               <ul class="list-disc ml-4 pb-4">
                 <template v-for="(node, index) in item.content" :key="index">
-                  <li>{{ node.content[0].content[0].value }}</li>
+                  <li class="pb-1">{{ node.content[0].content[0].value }}</li>
                 </template>
               </ul>
             </template>
