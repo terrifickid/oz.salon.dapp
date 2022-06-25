@@ -94,7 +94,7 @@ export default {
 </script>
 <style scoped>
 .bold.paragraph {
-  @apply mt-10  mb-1 text-lg sm:text-xl lg:text-2xl font-haffer font-bold inline-block;
+  @apply mt-10  text-lg sm:text-xl lg:text-2xl font-haffer font-bold inline-block;
 }
 
 .heading-3 {
