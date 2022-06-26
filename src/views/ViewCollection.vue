@@ -44,7 +44,7 @@
     <AppFullpage v-if="collection.length">
       <div v-for="(item, index) in collection" :key="index" class="section">
         <div class="grid grid-cols-12 w-full gap-3 px-3" style="height: 50vh">
-          <div class="col-span-6 sm:col-span-4 text-sm">
+          <div class="col-span-6 sm:col-span-4 lg:col-span-2 text-sm">
             <div class="pr-4">
               <p class="pb-4">{{ item.fields.title["en-US"] }}</p>
               <p>{{ item.fields.artist["en-US"] }}</p>
@@ -53,7 +53,7 @@
               <p>{{ item.fields.description["en-US"] }}</p>
             </div>
           </div>
-          <div class="col-span-6 sm:col-span-8">
+          <div class="col-span-6 sm:col-span-8 lg:col-span-10">
             <div style="height: 50vh; overflow: scroll">
               <div style="height: 50vh; width: 100rem">
                 <ImageAsset
