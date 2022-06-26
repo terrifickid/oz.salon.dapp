@@ -96,7 +96,7 @@ export default {
       const res = await axios.get(
         "https://salontest-terrifickid.cloud.okteto.net/collection"
       );
-      this.collection = res.data.reverse();
+      this.collection = res.data;
       console.log(this.collection);
     } catch (error) {
       console.log("error", error);
