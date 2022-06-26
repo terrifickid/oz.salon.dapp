@@ -4,10 +4,10 @@ module.exports = {
     extend: {
       fontFamily: {
         haffer: ["Haffer XH"],
-        mono: ["AkkuratMonoLLWebTrial-Regular"],
-        ak: ["AkkuratLLWebTrial-Light"],
-        akr: ["AkkuratLLWebTrial-Regular"],
-        manrope: ["Manrope"],
+        //mono: ["AkkuratMonoLLWebTrial-Regular"],
+        //ak: ["AkkuratLLWebTrial-Light"],
+        //akr: ["AkkuratLLWebTrial-Regular"],
+        //manrope: ["Manrope"],
       },
       colors: {
         neon: "#82f054",

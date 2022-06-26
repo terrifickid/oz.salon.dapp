@@ -1,18 +1,10 @@
 <template>
-  <div v-if="item">
-    <div
-      v-if="imageSrc"
-      :src="imageSrc"
-      style="max-height: 50vh"
-      class="bg-contain bg-no-repeat bg-center aspect-square mx-auto relative"
-      :style="{ backgroundImage: 'url(' + imageSrc + ')' }"
-    ></div>
-  </div>
+  <img :src="imageSrc" style="height: 50vh" class="mr-3" />
 </template>
 <script>
 import axios from "axios";
 export default {
-  props: ["item"],
+  props: ["image"],
   data() {
     return {
       imageSrc: null,
@@ -22,7 +14,7 @@ export default {
     try {
       const res = await axios.get(
         "https://salontest-terrifickid.cloud.okteto.net/asset/" +
-          this.item.fields.image["en-US"].sys.id
+          this.image.sys.id
       );
       this.imageSrc = res.data.url;
       console.log("image is", res.data);

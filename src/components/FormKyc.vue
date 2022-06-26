@@ -48,6 +48,7 @@ export default {
         scrollingSpeed: 500,
         navigation: true,
         navigationPosition: "right",
+        responsive: true,
       },
     };
   },

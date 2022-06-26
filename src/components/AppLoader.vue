@@ -10,6 +10,7 @@
   height: 24px;
   display: inline-block;
   position: relative;
+  left: -12px;
   background: #000;
   box-sizing: border-box;
   animation: animloader 2s linear infinite;

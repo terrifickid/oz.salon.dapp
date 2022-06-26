@@ -21,7 +21,7 @@
         </svg>
       </button>
 
-      <ul class="text-lg font-light pb-16 pt-16">
+      <ul class="text-lg font-base pb-16 pt-16">
         <router-link to="/" @click="toggleDown()">
           <li :colors="colors" class="mr-2">Home</li>
         </router-link>

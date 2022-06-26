@@ -1,9 +1,9 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="loaded">
+  <AppShell :colors="colors" :isLoaded="loaded" class="font-haffer">
     <div
       class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer"
     >
-      <select class="text-right alpha p-2">
+      <select class="text-right alpha p-2 font-bold">
         <option>A</option>
         <option>B</option>
         <option>C</option>
@@ -31,19 +31,41 @@
         <option>Y</option>
         <option>Z</option>
       </select>
-      <select class="text-right p-2">
+      <select class="text-right p-2 font-bold">
         <option v-for="(c, index) in collection" :key="index">
           {{ c.fields.title["en-US"] }}
         </option>
       </select>
-      <select class="text-right p-2">
+      <select class="text-right p-2 font-bold">
         <option>Price</option>
         <option>Date</option>
       </select>
     </div>
     <AppFullpage v-if="collection.length">
       <div v-for="(item, index) in collection" :key="index" class="section">
-        <ImageAsset :item="item" />
+        <div class="grid grid-cols-12 w-full gap-3 px-3" style="height: 50vh">
+          <div class="col-span-6 sm:col-span-4 text-sm">
+            <div class="pr-4">
+              <p class="pb-4">{{ item.fields.title["en-US"] }}</p>
+              <p>{{ item.fields.artist["en-US"] }}</p>
+
+              <p class="pb-2">{{ item.fields.year["en-US"] }}</p>
+              <p>{{ item.fields.description["en-US"] }}</p>
+            </div>
+          </div>
+          <div class="col-span-6 sm:col-span-8">
+            <div style="height: 50vh; overflow: scroll">
+              <div style="height: 50vh; width: 100rem">
+                <ImageAsset
+                  v-for="(image, i) in item.fields.images['en-US']"
+                  :key="i"
+                  :image="image"
+                  class="inline-block"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </AppFullpage>
   </AppShell>
@@ -74,7 +96,7 @@ export default {
       const res = await axios.get(
         "https://salontest-terrifickid.cloud.okteto.net/collection"
       );
-      this.collection = res.data;
+      this.collection = res.data.reverse();
       console.log(this.collection);
     } catch (error) {
       console.log("error", error);

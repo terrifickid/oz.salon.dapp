@@ -1,10 +1,10 @@
 <template>
-  <p class="p-1 text-left text-xl font-haffer">
+  <p class="p-1 text-left text-xl font-haffer font-bold">
     {{ profile.lastName["en-US"] }},
     {{ profile.firstName["en-US"] }}
   </p>
   <p class="p-1 text-left text-2xl"></p>
-  <p class="p-1 text-left flex font-haffer text-xs sm:text-base">
+  <p class="p-1 text-left flex font-haffer text-xs sm:text-base font-bold">
     {{ profile.walletAddress["en-US"] }}
   </p>
 
