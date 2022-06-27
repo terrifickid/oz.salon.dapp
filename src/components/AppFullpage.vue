@@ -24,6 +24,7 @@ export default {
     async resize() {
       console.log("resize!");
       this.$refs.fullpage.api.fitToSection();
+      this.$refs.fullpage.api.reBuild();
     },
   },
   mounted() {
