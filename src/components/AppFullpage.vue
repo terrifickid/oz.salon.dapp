@@ -21,6 +21,16 @@ export default {
     async next() {
       this.$refs.fullpage.api.moveSectionDown();
     },
+    async resize() {
+      console.log("resize!");
+      this.$refs.fullpage.api.fitToSection();
+    },
+  },
+  mounted() {
+    window.addEventListener("resize", this.resize);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.resize);
   },
 };
 </script>
