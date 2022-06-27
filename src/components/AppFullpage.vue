@@ -28,7 +28,13 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener("resize", this.resize);
+    console.log("mounted!");
+    setInterval(
+      function () {
+        this.resize();
+      }.bind(this),
+      500
+    );
   },
   unmounted() {
     window.removeEventListener("resize", this.resize);

@@ -94,8 +94,15 @@ export default {
         console.log("error", error);
       }
     },
+    async resize() {
+      console.log("resize!");
+      this.$refs.fullpage.api.fitToSection();
+    },
   },
-
+  mounted() {
+    console.log("mounted!");
+    setInterval(this.resize, 500);
+  },
   async beforeMount() {
     try {
       const res = await axios.get(this.url);
