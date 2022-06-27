@@ -96,12 +96,12 @@ export default {
     },
     async resize() {
       console.log("resize!");
-      this.$refs.fullpage.api.fitToSection();
+      this.$refs.fullpage.api.reBuild();
     },
   },
   mounted() {
     console.log("mounted!");
-    setInterval(this.resize, 500);
+    setInterval(this.resize, 100);
   },
   async beforeMount() {
     try {
