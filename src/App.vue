@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="min-h-screen min-w-full flex items-center justify-center"
-      v-show="!ready"
-    ></div>
+    <div v-show="!ready"></div>
     <div v-show="ready">
       <AppHeader :colors="colors" class="keyboard-off" />
       <router-view />

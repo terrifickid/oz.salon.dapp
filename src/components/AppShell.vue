@@ -1,5 +1,5 @@
 <template>
-  <div :class="salonClass" class="min-h-screen">
+  <div :class="salonClass">
     <div v-if="walletCheck">
       <AppLoader v-if="!ready" />
       <slot v-if="ready"></slot>
