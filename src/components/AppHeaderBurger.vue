@@ -1,12 +1,12 @@
 <template>
   <div
-    class="px-3 pt-3 fixed w-screen overflow-scroll z-50 transition-all font-haffer"
+    class="px-3 pt-3 fixed w-screen overflow-hidden z-50 transition-all font-haffer"
     :class="{
       'h-screen bg-black text-white': toggle,
       'h-12 bg-white text-black': !toggle,
     }"
   >
-    <button @click="toggler">
+    <button @click="toggler" class="relative z-20">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-6 w-6"
@@ -23,7 +23,7 @@
       </svg>
     </button>
 
-    <ul class="text-xl pb-16 pt-16">
+    <ul class="text-xl pb-16 pt-16 fixed bottom-0" v-show="toggle">
       <router-link to="/" @click="toggleDown()">
         <li :colors="colors">Home</li>
       </router-link>
