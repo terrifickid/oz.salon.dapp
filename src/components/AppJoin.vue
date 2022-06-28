@@ -3,7 +3,7 @@
   <template v-if="!isKycApproved && !isNew">
     <AppContent class="items-center justify-center">
       <h1 class="app-text text-center font-haffer">
-        Your KYC application is under review.
+        Your application is under review.
       </h1>
     </AppContent>
   </template>
