@@ -1,70 +1,74 @@
 <template>
-  <div class="grid grid-cols-12">
-    <div
-      class="col-span-12 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
-    >
-      <form v-on:submit.prevent="createProposal" class="w-full">
-        <label
-          class="block text-3xl md:text-4xl mb-4 flex items-center -ml-10 justify-center"
-          ><span class="text-sm mr-1">1</span>
-          <svg height="10" width="11" class="mr-4">
-            <path
-              d="M7.586 5L4.293 1.707 5.707.293 10.414 5 5.707 9.707 4.293 8.293z"
-            ></path>
-            <path d="M8 4v2H0V4z"></path></svg
-          >Become a Member *</label
-        >
-        <span class="block text-lg lg:text-xl font-light opacity-75 mb-4"
-          >The amount sent will be held in escrow pending a member vote. If the
-          proposal passes, the funds will be sent to the DAO. If the proposal
-          fails, the funds will be refunded to you.</span
-        >
-        <div class="grid grid-cols-12 gap-6">
-          <div class="col-span-12 sm:col-span-6">
-            <input
-              type="number"
-              class="text-3xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-black font-light"
-              placeholder="$0.00"
-              v-model="usdcAmount"
-              required
-            />
-            <span
-              class="block text-xs md:text-base mt-3 lg:text-md font-light opacity-75 mb-4"
-              >This is the amount of USDC tokens you are putting into escrow
-              pending a governance vote for membership.</span
-            >
+  <AppContent class="items-center justify-center">
+    <div class="grid grid-cols-12">
+      <div
+        class="col-span-12 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
+      >
+        <form v-on:submit.prevent="createProposal" class="w-full">
+          <label
+            class="block text-3xl md:text-4xl mb-4 flex items-center -ml-10 justify-center"
+            ><span class="text-sm mr-1">1</span>
+            <svg height="10" width="11" class="mr-4">
+              <path
+                d="M7.586 5L4.293 1.707 5.707.293 10.414 5 5.707 9.707 4.293 8.293z"
+              ></path>
+              <path d="M8 4v2H0V4z"></path></svg
+            >Become a Member *</label
+          >
+          <span class="block text-lg lg:text-xl font-light opacity-75 mb-4"
+            >The amount sent will be held in escrow pending a member vote. If
+            the proposal passes, the funds will be sent to the DAO. If the
+            proposal fails, the funds will be refunded to you.</span
+          >
+          <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-12 sm:col-span-6">
+              <input
+                type="number"
+                class="text-3xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-black font-light"
+                placeholder="$0.00"
+                v-model="usdcAmount"
+                required
+              />
+              <span
+                class="block text-xs md:text-base mt-3 lg:text-md font-light opacity-75 mb-4"
+                >This is the amount of USDC tokens you are putting into escrow
+                pending a governance vote for membership.</span
+              >
+            </div>
+            <div class="col-span-12 sm:col-span-6">
+              <input
+                type="number"
+                class="text-3xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-black font-light"
+                placeholder="S0"
+                required
+                v-model="sAmount"
+              />
+              <span
+                class="block mt-3 text-xs md:text-base lg:text-md font-light opacity-75 mb-4"
+                >This is the amount of DAO membership units you are requesting
+                to be authorized in exchange.</span
+              >
+            </div>
           </div>
-          <div class="col-span-12 sm:col-span-6">
-            <input
-              type="number"
-              class="text-3xl bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-black font-light"
-              placeholder="S0"
-              required
-              v-model="sAmount"
-            />
-            <span
-              class="block mt-3 text-xs md:text-base lg:text-md font-light opacity-75 mb-4"
-              >This is the amount of DAO membership units you are requesting to
-              be authorized in exchange.</span
-            >
-          </div>
-        </div>
 
-        <button
-          type="submit"
-          :disabled="processing"
-          class="mx-auto mt-6 bg-black text-canary rounded px-4 py-3 text-xl shadow-sm op flex items-center w-64 justify-center"
-        >
-          {{ btnTxt }}
-        </button>
-      </form>
+          <button
+            type="submit"
+            :disabled="processing"
+            class="mx-auto mt-6 bg-black text-canary rounded px-4 py-3 text-xl shadow-sm op flex items-center w-64 justify-center"
+          >
+            {{ btnTxt }}
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
+  </AppContent>
 </template>
 <script>
 import axios from "axios";
+import AppContent from "@/components/AppContent.vue";
 import { ethers } from "ethers";
 export default {
+  components: { AppContent },
   data() {
     return {
       btnTxt: "Submit",

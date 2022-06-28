@@ -42,6 +42,15 @@ const routes = [
     },
   },
   {
+    path: "/treasury",
+    name: "treasury",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewTransfer" */ "../views/ViewTreasury.vue"
+      );
+    },
+  },
+  {
     path: "/propose",
     name: "propose",
     component: function () {

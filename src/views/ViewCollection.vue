@@ -1,5 +1,10 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="loaded" class="font-haffer">
+  <AppShell
+    :colors="colors"
+    :isLoaded="loaded"
+    :protected="true"
+    class="font-haffer"
+  >
     <div
       class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer"
     >

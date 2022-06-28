@@ -1,14 +1,13 @@
 <template>
   <div :class="salonClass">
-    <div v-if="walletCheck">
+    <div v-if="check">
       <AppLoader v-if="!ready" />
       <slot v-if="ready"></slot>
       <AppFooter :colors="colors" class="keyboard-off" />
     </div>
-    <div v-if="!walletCheck">
-      <AppContent class="items-center justify-center">
-        <WalletConnect />
-      </AppContent>
+    <div v-if="!check">
+      <WalletConnect v-if="!this.walletAddress" />
+      <AppJoin v-if="this.walletAddress" />
       <AppFooter :colors="colors" />
     </div>
   </div>
@@ -19,15 +18,18 @@
 
 import AppFooter from "@/components/AppFooter.vue";
 import AppLoader from "@/components/AppLoader.vue";
-import AppContent from "@/components/AppContent.vue";
+import AppJoin from "@/components/AppJoin.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  components: { AppFooter, AppLoader, WalletConnect, AppContent },
+  components: { AppFooter, AppLoader, WalletConnect, AppJoin },
   props: ["colors", "isLoaded", "protected"],
   computed: {
-    walletCheck() {
+    check() {
       if (!this.protected) return true;
-      return this.walletAddress;
+      if ("salonUnits" in this.profile) {
+        return this.profile.salonUnits["en-US"];
+      }
+      return false;
     },
     salonClass() {
       return "bg-" + this.colors[0] + " " + "text-" + this.colors[1];

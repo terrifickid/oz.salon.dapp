@@ -2,14 +2,10 @@
   <div>
     <div class="min-h-screen flex items-center">
       <div class="px-3 grid grid-cols-12 w-screen">
-        <div class="app-frame">
+        <div
+          class="col-span-10 col-start-2 md:col-span-8 md:col-start-3 lg:col-span-6 lg:col-start-4"
+        >
           <img src="Salon_Logotype_RGB_3D.jpg" />
-          <p
-            class="text-xs mx-4 mt-3 mr-10 sm:text-sm sm:mr-32 sm:mt-5 sm:ml-5 font-haffer"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
         </div>
       </div>
       <div class="bottom-0 right-0 absolute p-3">
@@ -29,7 +25,7 @@
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </svg>
-            Join</AppButton
+            Connect</AppButton
           ></router-link
         >
       </div>
