@@ -75,9 +75,9 @@ export default {
     console.log("members load!");
     try {
       const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/type/members"
+        "https://salontest-terrifickid.cloud.okteto.net/members"
       );
-      this.members = res.data.message.items;
+      this.members = res.data;
       console.log(this.members);
     } catch (error) {
       console.log("error", error);

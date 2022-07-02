@@ -35,7 +35,7 @@
                 :choice="false"
                 :label="'No'"
               />
-              <CounterVote :votes="item.votes" />
+              <CounterVote :votes="item.votes" :weights="this.weights" />
             </p>
           </div>
           <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
@@ -73,15 +73,23 @@ export default {
     return {
       colors: ["white", "black"],
       proposals: [],
+      weights: [],
       types: ["collect", "invest", "propose", "sell", "transfer"],
+      loaded: false,
     };
   },
-  computed: {
-    loaded() {
-      return this.proposals.length;
-    },
-  },
+  computed: {},
   methods: {
+    async getWeights() {
+      try {
+        const res = await axios.get(
+          "https://salontest-terrifickid.cloud.okteto.net/members"
+        );
+        this.weights = res.data;
+      } catch (error) {
+        console.log("error", error);
+      }
+    },
     getFieldLabel(fields, id) {
       for (let field of fields) {
         if (field.id == id) return field.name;
@@ -135,8 +143,9 @@ export default {
     var data = await Promise.all(
       this.types.map((type) => this.assembleProposalType(type))
     );
-
     this.proposals = data.flat();
+    await this.getWeights();
+    this.loaded = true;
     console.log("loaded!");
     console.log(this.proposals);
   },
