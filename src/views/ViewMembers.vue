@@ -33,7 +33,7 @@
       </select>
       <select class="text-right p-2 font-bold">
         <option v-for="(m, index) in members" :key="index">
-          {{ m.fields.lastName["en-US"] }}
+          {{ m.fields.lastName }}
         </option>
       </select>
       <select class="text-right p-2 font-bold">
@@ -75,10 +75,10 @@ export default {
     console.log("members load!");
     try {
       const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/members"
+        "https://salontest-terrifickid.cloud.okteto.net/type/members"
       );
-      this.members = res.data;
-      console.log(this.collection);
+      this.members = res.data.message.items;
+      console.log(this.members);
     } catch (error) {
       console.log("error", error);
     }

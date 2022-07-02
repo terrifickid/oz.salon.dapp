@@ -72,7 +72,7 @@ export default {
     console.log("GLOad!");
     try {
       const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/governance"
+        "https://salontest-terrifickid.cloud.okteto.net/type/governance"
       );
       this.proposals = res.data;
     } catch (error) {

@@ -7,6 +7,7 @@
     </div>
     <div v-if="!check">
       <WalletConnect v-if="!this.walletAddress" />
+
       <AppJoin v-if="this.walletAddress" />
       <AppFooter :colors="colors" />
     </div>
@@ -26,8 +27,8 @@ export default {
   computed: {
     check() {
       if (!this.protected) return true;
-      if ("salonUnits" in this.profile) {
-        return this.profile.salonUnits["en-US"];
+      if ("units" in this.profile) {
+        return this.profile.units;
       }
       return false;
     },

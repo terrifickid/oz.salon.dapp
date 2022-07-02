@@ -101,7 +101,6 @@ export default {
   },
   mounted() {
     console.log("mounted!");
-    setInterval(this.resize, 100);
   },
   async beforeMount() {
     try {
@@ -110,7 +109,7 @@ export default {
       this.name = res.data.name;
       this.description = res.data.description;
       this.fields = res.data.fields.filter(function (field) {
-        var disabled = [];
+        var disabled = ["votes"];
         if (disabled.includes(field.id)) return false;
         return true;
       });

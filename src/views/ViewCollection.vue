@@ -38,7 +38,7 @@
       </select>
       <select class="text-right p-2 font-bold">
         <option v-for="(c, index) in collection" :key="index">
-          {{ c.fields.title["en-US"] }}
+          {{ c.fields.title }}
         </option>
       </select>
       <select class="text-right p-2 font-bold">
@@ -53,18 +53,18 @@
             class="col-span-6 sm:col-span-4 lg:col-span-3 xl:col-span-2 text-sm"
           >
             <div class="pr-4">
-              <p class="pb-4">{{ item.fields.title["en-US"] }}</p>
-              <p>{{ item.fields.artist["en-US"] }}</p>
+              <p class="pb-4">{{ item.fields.title }}</p>
+              <p>{{ item.fields.artist }}</p>
 
-              <p class="pb-2">{{ item.fields.year["en-US"] }}</p>
-              <p>{{ item.fields.description["en-US"] }}</p>
+              <p class="pb-2">{{ item.fields.year }}</p>
+              <p>{{ item.fields.description }}</p>
             </div>
           </div>
           <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
             <div style="height: 50vh; overflow: scroll">
               <div style="height: 50vh; width: 100rem">
                 <ImageAsset
-                  v-for="(image, i) in item.fields.images['en-US']"
+                  v-for="(image, i) in item.fields.images"
                   :key="i"
                   :image="image"
                   class="inline-block"
@@ -101,9 +101,9 @@ export default {
     console.log("collection load!");
     try {
       const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/collection"
+        "https://salontest-terrifickid.cloud.okteto.net/type/collection"
       );
-      this.collection = res.data;
+      this.collection = res.data.message.items;
       console.log(this.collection);
     } catch (error) {
       console.log("error", error);

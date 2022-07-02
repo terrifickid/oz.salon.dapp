@@ -48,6 +48,7 @@ export default {
   props: ["modelValue", "field", "index"],
   methods: {
     isChoice(field) {
+      console.log(field);
       return field.validations.length && "in" in field.validations[0];
     },
     updateValue(val) {

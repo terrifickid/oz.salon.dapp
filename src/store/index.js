@@ -39,7 +39,7 @@ export default createStore({
           "https://salontest-terrifickid.cloud.okteto.net/profile",
           { walletAddress: this.state.walletAddress }
         );
-        console.log("init profile", res.data);
+        console.log("init profile", res.data, this.state.walletAddress);
         this.state.profile = res.data;
         localStorage.setItem("salon_login", 1);
       } catch (error) {

@@ -59,8 +59,11 @@
       <router-link to="/profile" @click="toggleDown()">
         <li :colors="colors" class="mr-2">Profile</li>
       </router-link>
-      <router-link to="/join" @click="toggleDown()">
+      <router-link v-if="!isMember" to="/join" @click="toggleDown()">
         <li :colors="colors" class="mr-2">Join</li>
+      </router-link>
+      <router-link v-if="isMember" to="/governance" @click="toggleDown()">
+        <li :colors="colors" class="mr-2">Governance</li>
       </router-link>
     </ul>
   </div>
@@ -81,6 +84,15 @@ export default {
     },
     walletAddress() {
       return this.$store.state.walletAddress;
+    },
+    profile() {
+      return this.$store.state.profile;
+    },
+    isMember() {
+      if ("units" in this.profile) {
+        return this.profile.units;
+      }
+      return false;
     },
   },
 

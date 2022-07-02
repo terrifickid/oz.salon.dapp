@@ -17,7 +17,7 @@ export default {
           this.image.sys.id
       );
       this.imageSrc = res.data.url;
-      console.log("image is", res.data);
+      console.log("image is", this.image.sys.id, res.data);
     } catch (error) {
       console.log("error", error);
     }

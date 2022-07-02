@@ -10,16 +10,18 @@ export default {
   props: ["votes"],
   computed: {
     total() {
-      return this.votes["en-US"].votes.length;
+      return this.votes.votes.length;
     },
     yesTotal() {
-      return this.votes["en-US"].votes.filter((vote) => {
-        if (vote.vote) return true;
+      return this.votes.votes.filter((vote) => {
+        var v = JSON.parse(vote.vote);
+        if (v.vote) return true;
       }).length;
     },
     noTotal() {
-      return this.votes["en-US"].votes.filter((vote) => {
-        if (!vote.vote) return true;
+      return this.votes.votes.filter((vote) => {
+        var v = JSON.parse(vote.vote);
+        if (!v.vote) return true;
       }).length;
     },
   },

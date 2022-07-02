@@ -138,8 +138,8 @@
         </AppButton>
       </p>
       <p class="sm:hidden mt-4 font-haffer">
-        To access SalonDAO on mobile<br />
-        use MetaMask App.
+        To access Salon on your mobile device, please connect to Salon through
+        the browser on your Metamask iOS or Android app.
       </p>
     </div>
   </AppContent>

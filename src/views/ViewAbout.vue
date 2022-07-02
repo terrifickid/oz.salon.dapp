@@ -4,7 +4,7 @@
       <div class="app-frame" v-if="'fields' in content">
         <div class="pt-3">
           <template
-            v-for="(item, index) in content.fields.content['en-US'].content"
+            v-for="(item, index) in content.fields.content.content"
             :key="index"
             ><template v-if="item.nodeType == 'heading-3'">
               <h3>
@@ -85,6 +85,7 @@ export default {
         "https://salontest-terrifickid.cloud.okteto.net/entry/7fXKpXp8oIZgrvDdfk4Dd0"
       );
       this.content = res.data;
+      console.log(this.content);
       console.log("about loaded!");
     } catch (error) {
       console.log("error", error);

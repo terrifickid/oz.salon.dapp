@@ -8,10 +8,10 @@
     </AppContent>
   </template>
 
-  <template v-if="isKycApproved && !isApplied"><FormApply /></template>
-  <template v-if="isApplied && !isMember"
-    ><FormProposal :id="profile.onboard['en-US'].sys.id" />></template
-  >
+  <template v-if="isKycApproved && !isApplied"> <FormApply /></template>
+  <template v-if="isApplied && !isMember">
+    <FormProposal :id="profile.onboardProposal.sys.id"
+  /></template>
 </template>
 <script>
 import AppContent from "@/components/AppContent";
@@ -27,21 +27,22 @@ export default {
     },
     isNew() {
       if ("kycApproved" in this.profile) return false;
+      if ("loading" in this.profile) return false;
       return true;
     },
     isKycApproved() {
-      if (this.profile.kycApproved) return this.profile.kycApproved["en-US"];
+      if (this.profile.kycApproved) return this.profile.kycApproved;
       return false;
     },
     isApplied() {
-      if ("onboard" in this.profile) {
-        if (this.profile.onboard["en-US"]) return true;
+      if ("onboardProposal" in this.profile) {
+        if (this.profile.onboardProposal) return true;
       }
       return false;
     },
     isMember() {
       if ("salonUnits" in this.profile) {
-        return this.profile.salonUnits["en-US"];
+        return this.profile.salonUnits;
       }
       return false;
     },

@@ -1,6 +1,6 @@
 <template>
-  <AppButton @click="yes()" :disabled="processing">
-    Yes
+  <AppButton @click="vote()" :disabled="processing">
+    {{ label }}
     <svg
       v-if="voted"
       xmlns="http://www.w3.org/2000/svg"
@@ -19,16 +19,13 @@ import axios from "axios";
 import AppButton from "@/components/AppButton.vue";
 export default {
   components: { AppButton },
-  props: ["id", "votes"],
+  props: ["id", "votes", "choice", "label"],
   data() {
     return {
       processing: false,
     };
   },
   computed: {
-    profile() {
-      return this.$store.state.profile;
-    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
@@ -44,10 +41,10 @@ export default {
     },
   },
   methods: {
-    async yes() {
+    async vote() {
       const vote = JSON.stringify({
         address: this.walletAddress,
-        vote: true,
+        vote: this.choice,
         proposal: this.id,
       });
 
@@ -56,7 +53,7 @@ export default {
         const signature = await this.$store.state.signer.signMessage(vote);
         console.log("Sending Vote!");
         const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/vote",
+          "https://salontest-terrifickid.cloud.okteto.net/vote/" + this.id,
           {
             address: this.walletAddress,
             vote: vote,
