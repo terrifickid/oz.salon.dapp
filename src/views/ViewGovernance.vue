@@ -73,7 +73,7 @@ export default {
     return {
       colors: ["white", "black"],
       proposals: [],
-      types: ["invest"],
+      types: ["collect", "invest", "propose", "sell", "transfer"],
     };
   },
   computed: {
