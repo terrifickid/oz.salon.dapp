@@ -133,7 +133,7 @@ export default {
   async beforeMount() {
     console.log("proposals load!");
     var data = await Promise.all(
-      this.types.map(async (type) => await this.assembleProposalType(type))
+      this.types.map((type) => this.assembleProposalType(type))
     );
 
     this.proposals = data.flat();
