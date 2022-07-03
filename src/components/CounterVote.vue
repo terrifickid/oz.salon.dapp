@@ -82,11 +82,11 @@ export default {
     },
     percentageYes() {
       if (!this.totalUnits || !this.yesWeight) return 0;
-      return Math.round(this.totalUnits / this.yesWeight);
+      return Math.round((this.yesWeight / this.totalUnits) * 100);
     },
     percentageNo() {
       if (!this.totalUnits || !this.noWeight) return 0;
-      return Math.round(this.totalUnits / this.noWeight);
+      return Math.round((this.noWeight / this.totalUnits) * 100);
     },
   },
 };

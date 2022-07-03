@@ -21,7 +21,11 @@
             ><br />
             {{ item.id }}
 
-            <p class="mt-3">
+            <CounterVote :votes="item.votes" :weights="this.weights" />
+
+            <AppCountdown :start="item.createdAt" class="mt-2" />
+
+            <div class="mt-3 flex">
               <AppButtonVote
                 :id="item.id"
                 :votes="item.votes"
@@ -35,8 +39,7 @@
                 :choice="false"
                 :label="'No'"
               />
-              <CounterVote :votes="item.votes" :weights="this.weights" />
-            </p>
+            </div>
           </div>
           <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
             <div style="height: 50vh; overflow: scroll">
@@ -64,11 +67,18 @@
 import axios from "axios";
 import AppButtonVote from "@/components/AppButtonVote";
 import CounterVote from "@/components/CounterVote";
+import AppCountdown from "@/components/AppCountdown";
 import AppShell from "@/components/AppShell";
 import AppFullpage from "@/components/AppFullpage";
 
 export default {
-  components: { AppFullpage, AppShell, AppButtonVote, CounterVote },
+  components: {
+    AppFullpage,
+    AppShell,
+    AppButtonVote,
+    CounterVote,
+    AppCountdown,
+  },
   data() {
     return {
       colors: ["white", "black"],

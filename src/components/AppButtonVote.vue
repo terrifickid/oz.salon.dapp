@@ -1,10 +1,15 @@
 <template>
-  <AppButton @click="vote()" :disabled="processing">
+  <AppButton
+    @click="vote()"
+    :disabled="processing"
+    class="flex items-center"
+    :class="{ active: voted }"
+  >
     {{ label }}
     <svg
       v-if="voted"
       xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6 ml-1"
+      class="h-5 w-5 ml-1"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -32,11 +37,12 @@ export default {
     voted() {
       if (!this.votes) return false;
       var voted = false;
-      if ("en-US" in this.votes) {
-        this.votes["en-US"].votes.forEach((vote) => {
-          if (vote.address == this.walletAddress && vote.vote) voted = true;
-        });
-      }
+      this.votes.votes.forEach((vote) => {
+        var v = JSON.parse(vote.vote);
+        if (v.address == this.walletAddress && v.vote == this.choice)
+          voted = true;
+      });
+
       return voted;
     },
   },
@@ -69,3 +75,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.active {
+  background: black !important;
+  color: white !important;
+}
+</style>

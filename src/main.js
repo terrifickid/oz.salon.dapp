@@ -9,5 +9,10 @@ import "./assets/mono/stylesheet.css";
 import "./assets/manrope.css";
 import "vue-fullpage.js/dist/style.css";
 import VueFullPage from "vue-fullpage.js";
-
-createApp(App).use(store).use(router).use(VueFullPage).mount("#app");
+import VueCountdown from "@chenfengyuan/vue-countdown";
+createApp(App)
+  .use(store)
+  .use(router)
+  .use(VueFullPage)
+  .component(VueCountdown.name, VueCountdown)
+  .mount("#app");
