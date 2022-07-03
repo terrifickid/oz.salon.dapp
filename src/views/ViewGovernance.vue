@@ -42,20 +42,16 @@
             </div>
           </div>
           <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
-            <div style="height: 50vh; overflow: scroll">
-              <div style="height: 50vh; width: 100rem">
-                <ul>
-                  <li
-                    v-for="(field, index) in item.fields"
-                    :key="index"
-                    class="inline-block mr-5 mb-5 text-sm"
-                  >
-                    <b>{{ field.label }}</b
-                    ><br />{{ field.value }}
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <ul>
+              <li
+                v-for="(field, index) in item.fields"
+                :key="index"
+                class="mr-5 mb-5 text-sm text-right"
+              >
+                <b>{{ field.label }}</b
+                ><br />{{ field.value }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -84,7 +80,7 @@ export default {
       colors: ["white", "black"],
       proposals: [],
       weights: [],
-      types: ["collect", "invest", "propose", "sell", "transfer"],
+      types: ["collect", "invest", "propose", "sell", "transfer", "onboard"],
       loaded: false,
     };
   },
