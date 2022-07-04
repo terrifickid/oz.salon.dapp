@@ -95,7 +95,7 @@ export default {
       }
     },
     async resize() {
-      console.log("resize!");
+      alert("resize!");
       this.$refs.fullpage.api.reBuild();
     },
   },
