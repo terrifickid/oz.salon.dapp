@@ -1,7 +1,6 @@
 <template>
   <div
-    v-if="display"
-    class="fixed left-0 right-0 bottom-0 p-3 z-10"
+    class="fixed left-0 right-0 bottom-0 p-3 z-10 keyboard-off"
     :class="{ ['bg-' + colors[0]]: true }"
   >
     <div class="grid grid-cols-10">
@@ -16,11 +15,6 @@
 <script>
 export default {
   props: ["colors"],
-  computed: {
-    display() {
-      return this.colors?.length;
-    },
-  },
   components: {},
 };
 </script>

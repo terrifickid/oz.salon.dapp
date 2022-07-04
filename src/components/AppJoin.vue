@@ -1,6 +1,9 @@
 <template>
   <div v-if="ready">
-    <template v-if="isNew"><FormKyc /></template>
+    <template v-if="isNew">
+      <AppForm
+        url="https://salontest-terrifickid.cloud.okteto.net/form/members"
+    /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
         <h1 class="app-text text-center font-haffer">
@@ -17,12 +20,12 @@
 </template>
 <script>
 import AppContent from "@/components/AppContent";
-import FormKyc from "@/components/FormKyc";
+import AppForm from "@/components/AppForm";
 import FormApply from "@/components/FormApply.vue";
 import FormProposal from "@/components/FormProposal.vue";
 
 export default {
-  components: { AppContent, FormKyc, FormApply, FormProposal },
+  components: { AppContent, AppForm, FormApply, FormProposal },
   computed: {
     loaded() {
       return this.profile;

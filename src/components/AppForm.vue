@@ -109,7 +109,7 @@ export default {
       this.name = res.data.name;
       this.description = res.data.description;
       this.fields = res.data.fields.filter(function (field) {
-        var disabled = ["votes"];
+        var disabled = ["votes", "kycApproved", "units", "onboardProposal"];
         if (disabled.includes(field.id)) return false;
         return true;
       });

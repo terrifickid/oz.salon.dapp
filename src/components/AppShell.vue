@@ -8,7 +8,7 @@
     <div v-if="!check">
       <WalletConnect v-if="!this.walletAddress" />
       <AppJoin v-if="this.walletAddress" />
-      <AppFooter :colors="colors" />
+      <AppFooter :colors="colors" class="keyboard-off" />
     </div>
   </div>
 </template>

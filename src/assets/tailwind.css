@@ -78,7 +78,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @media (max-width: 640px) and (orientation: landscape) {
   .keyboard-off {
-    display: none;
+    display: none !important;
   }
 }
 /*media query to detect orientation change*/
