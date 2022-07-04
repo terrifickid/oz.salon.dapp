@@ -96,11 +96,14 @@ export default {
     },
     async resize() {
       console.log("resize!");
-      //this.$refs.fullpage.api.reBuild();
+      this.$refs.fullpage.api.reBuild();
     },
   },
   mounted() {
     console.log("mounted!");
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.resize);
   },
   async beforeMount() {
     try {
@@ -117,6 +120,7 @@ export default {
       this.$emit("ready");
       this.ready = true;
       this.processing = false;
+      window.addEventListener("resize", this.resize);
     } catch (error) {
       console.log("error", error);
     }
