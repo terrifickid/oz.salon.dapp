@@ -7,7 +7,7 @@
       <div
         class="col-start-7 col-span-4 sm:col-start-8 sm:col-span-3 lg:col-start-9 lg:col-span-2"
       >
-        <a href="/#/"> <img src="Salon_Logotype_RGB_3D.jpg" /></a>
+        <a href="/#/"> toast<img src="Salon_Logotype_RGB_3D.jpg" /></a>
       </div>
     </div>
   </div>
