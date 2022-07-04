@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
-            <carousel :items-to-show="2.5" :wrap-around="true">
+            <carousel :settings="settings" :breakpoints="breakpoints">
               <slide v-for="(image, i) in item.fields.images" :key="i">
                 <ImageAsset :image="image" />
               </slide>
@@ -93,6 +93,20 @@ export default {
     return {
       colors: ["white", "black"],
       collection: [],
+      settings: {
+        itemsToShow: 1,
+        wrapAround: true,
+      },
+      breakpoints: {
+        // 700px and up
+        768: {
+          itemsToShow: 1.5,
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 2.5,
+        },
+      },
     };
   },
   computed: {
