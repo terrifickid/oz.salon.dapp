@@ -1,5 +1,5 @@
 <template>
-  <AppContent class="items-center justify-center">
+  <AppContent class="items-center justify-center" v-if="connected != 1">
     <div class="text-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +137,7 @@
           Connect MetaMask
         </AppButton>
       </p>
-      <p class="sm:hidden mt-4 font-haffer">
+      <p class="sm:hidden mt-4 font-haffer text-xs">
         To access Salon on your mobile device, please connect to Salon through
         the browser on your Metamask iOS or Android app.
       </p>
@@ -149,10 +149,40 @@ import AppContent from "@/components/AppContent.vue";
 import AppButton from "@/components/AppButton.vue";
 export default {
   components: { AppButton, AppContent },
+  computed: {
+    connected() {
+      return localStorage.getItem("salon_login");
+    },
+  },
   methods: {
     connect() {
       this.$store.dispatch("connect");
     },
+  },
+  async beforeMount() {
+    var connected = localStorage.getItem("salon_login");
+    console.log("connected is:", connected);
+    if (connected == true) {
+      console.log("Reconnecting!");
+      this.$store.dispatch("connect");
+    }
+
+    /*
+    var loading = setInterval(async () => {
+      if (document.fonts.check("1rem Manrope")) {
+        this.fontsLoaded = true;
+        clearInterval(loading);
+        console.log("Fonts Loaded!");
+      }
+    }, 10);
+*/
+
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", async () => {
+        await this.$store.dispatch("disconnect");
+        await this.$store.dispatch("connect");
+      });
+    }
   },
 };
 </script>

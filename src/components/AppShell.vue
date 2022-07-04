@@ -7,7 +7,6 @@
     </div>
     <div v-if="!check">
       <WalletConnect v-if="!this.walletAddress" />
-
       <AppJoin v-if="this.walletAddress" />
       <AppFooter :colors="colors" />
     </div>

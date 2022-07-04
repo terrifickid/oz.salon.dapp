@@ -17,31 +17,6 @@ export default {
     };
   },
   components: { AppHeader },
-  async beforeMount() {
-    var connected = localStorage.getItem("salon_login");
-    console.log("connected is:", connected);
-    if (connected == true) {
-      console.log("Reconnecting!");
-      this.$store.dispatch("connect");
-    }
-
-    /*
-    var loading = setInterval(async () => {
-      if (document.fonts.check("1rem Manrope")) {
-        this.fontsLoaded = true;
-        clearInterval(loading);
-        console.log("Fonts Loaded!");
-      }
-    }, 10);
-*/
-
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async () => {
-        await this.$store.dispatch("disconnect");
-        await this.$store.dispatch("connect");
-      });
-    }
-  },
   computed: {
     ready() {
       return true;

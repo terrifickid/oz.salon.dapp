@@ -24,47 +24,71 @@
     </button>
 
     <ul class="text-xl pb-16 pt-16 fixed bottom-0" v-show="toggle">
-      <router-link to="/" @click="toggleDown()">
-        <li :colors="colors">Home</li>
-      </router-link>
-
-      <router-link to="/about" @click="toggleDown()">
-        <li :colors="colors">About</li></router-link
-      >
-      <router-link to="/collection" @click="toggleDown()">
-        <li :colors="colors" class="mb-2">Collection</li>
-      </router-link>
-
-      <router-link to="/invest" @click="toggleDown()">
-        <li :colors="colors">Invest</li>
-      </router-link>
-      <router-link to="/transfer" @click="toggleDown()">
-        <li :colors="colors">Transfer</li>
-      </router-link>
-      <router-link to="/treasury" @click="toggleDown()">
-        <li :colors="colors" class="mb-2">Treasury</li>
-      </router-link>
-      <router-link to="/propose" @click="toggleDown()">
-        <li :colors="colors">Propose</li>
-      </router-link>
-      <router-link to="/collect" @click="toggleDown()">
-        <li :colors="colors">Collect</li>
-      </router-link>
-      <router-link to="/sell" @click="toggleDown()">
-        <li :colors="colors" class="mb-2">Sell</li>
-      </router-link>
-      <router-link to="/members" @click="toggleDown()">
-        <li :colors="colors" class="mr-2">Members</li>
-      </router-link>
-      <router-link to="/profile" @click="toggleDown()">
-        <li :colors="colors" class="mr-2">Profile</li>
-      </router-link>
-      <router-link v-if="!isMember" to="/join" @click="toggleDown()">
-        <li :colors="colors" class="mr-2">Join</li>
-      </router-link>
-      <router-link v-if="isMember" to="/governance" @click="toggleDown()">
-        <li :colors="colors" class="mr-2">Governance</li>
-      </router-link>
+      <a href="/#/">
+        <router-link to="/" @click="toggleDown()">
+          <li :colors="colors">Home</li>
+        </router-link>
+      </a>
+      <a href="/#/about">
+        <router-link to="/about" @click="toggleDown()">
+          <li :colors="colors">About</li></router-link
+        >
+      </a>
+      <a href="/#/collection">
+        <router-link to="/collection" @click="toggleDown()">
+          <li :colors="colors" class="mb-2">Collection</li>
+        </router-link>
+      </a>
+      <a href="/#/invest">
+        <router-link to="/invest" @click="toggleDown()">
+          <li :colors="colors">Invest</li>
+        </router-link>
+      </a>
+      <a href="/#/transfer">
+        <router-link to="/transfer" @click="toggleDown()">
+          <li :colors="colors">Transfer</li>
+        </router-link>
+      </a>
+      <a href="/#/treasury">
+        <router-link to="/treasury" @click="toggleDown()">
+          <li :colors="colors" class="mb-2">Treasury</li>
+        </router-link>
+      </a>
+      <a href="/#/propose">
+        <router-link to="/propose" @click="toggleDown()">
+          <li :colors="colors">Propose</li>
+        </router-link>
+      </a>
+      <a href="/#/collect">
+        <router-link to="/collect" @click="toggleDown()">
+          <li :colors="colors">Collect</li>
+        </router-link>
+      </a>
+      <a href="/#/sell">
+        <router-link to="/sell" @click="toggleDown()">
+          <li :colors="colors" class="mb-2">Sell</li>
+        </router-link>
+      </a>
+      <a href="/#/members">
+        <router-link to="/members" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Members</li>
+        </router-link>
+      </a>
+      <a href="/#/profile">
+        <router-link to="/profile" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Profile</li>
+        </router-link>
+      </a>
+      <a href="/#/join">
+        <router-link v-if="!isMember" to="/join" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Join</li>
+        </router-link>
+      </a>
+      <a href="/#/governance">
+        <router-link v-if="isMember" to="/governance" @click="toggleDown()">
+          <li :colors="colors" class="mr-2">Governance</li>
+        </router-link>
+      </a>
     </ul>
   </div>
 </template>

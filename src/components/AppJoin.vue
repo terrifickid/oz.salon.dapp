@@ -1,17 +1,19 @@
 <template>
-  <template v-if="isNew"><FormKyc /></template>
-  <template v-if="!isKycApproved && !isNew">
-    <AppContent class="items-center justify-center">
-      <h1 class="app-text text-center font-haffer">
-        Your application is under review.
-      </h1>
-    </AppContent>
-  </template>
+  <div v-if="ready">
+    <template v-if="isNew"><FormKyc /></template>
+    <template v-if="!isKycApproved && !isNew">
+      <AppContent class="items-center justify-center">
+        <h1 class="app-text text-center font-haffer">
+          Your application is under review.
+        </h1>
+      </AppContent>
+    </template>
 
-  <template v-if="isKycApproved && !isApplied"> <FormApply /></template>
-  <template v-if="isApplied && !isMember">
-    <FormProposal :id="profile.onboardProposal.sys.id"
-  /></template>
+    <template v-if="isKycApproved && !isApplied"> <FormApply /></template>
+    <template v-if="isApplied && !isMember">
+      <FormProposal :id="profile.onboardProposal.sys.id"
+    /></template>
+  </div>
 </template>
 <script>
 import AppContent from "@/components/AppContent";
@@ -48,6 +50,10 @@ export default {
     },
     profile() {
       return this.$store.state.profile;
+    },
+    ready() {
+      if (!("loading" in this.profile)) return true;
+      return false;
     },
   },
 };
