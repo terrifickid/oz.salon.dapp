@@ -9,6 +9,7 @@
       v-model="value"
       @input="$emit('update', value)"
       @keyup.enter="$emit('ready')"
+      autocomplete="off"
     />
     <FormButtonOk @ready="$emit('ready')" />
   </div>
