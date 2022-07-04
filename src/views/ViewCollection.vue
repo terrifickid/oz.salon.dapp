@@ -61,16 +61,11 @@
             </div>
           </div>
           <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
-            <div style="height: 50vh; overflow: scroll">
-              <div style="height: 50vh; width: 100rem">
-                <ImageAsset
-                  v-for="(image, i) in item.fields.images"
-                  :key="i"
-                  :image="image"
-                  class="inline-block"
-                />
-              </div>
-            </div>
+            <carousel :items-to-show="2.5" :wrap-around="true">
+              <slide v-for="(image, i) in item.fields.images" :key="i">
+                <ImageAsset :image="image" />
+              </slide>
+            </carousel>
           </div>
         </div>
       </div>
@@ -83,9 +78,17 @@ import axios from "axios";
 import AppShell from "@/components/AppShell";
 import AppFullpage from "@/components/AppFullpage";
 import ImageAsset from "@/components/ImageAsset";
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide } from "vue3-carousel";
 export default {
   name: "CollectionView",
-  components: { AppFullpage, AppShell, ImageAsset },
+  components: {
+    AppFullpage,
+    AppShell,
+    ImageAsset,
+    Carousel,
+    Slide,
+  },
   data() {
     return {
       colors: ["white", "black"],
