@@ -2,13 +2,15 @@
   <div>
     <div v-show="!ready"></div>
     <div v-show="ready">
-      <AppHeader :colors="colors" class="keyboard-off" />
+      <AppHeader :colors="colors" />
       <router-view />
+      <AppFooter :colors="colors" />
     </div>
   </div>
 </template>
 <script>
 import AppHeader from "@/components/AppHeaderBurger";
+import AppFooter from "@/components/AppFooter";
 export default {
   data() {
     return {
@@ -16,15 +18,16 @@ export default {
       fontsLoaded: false,
     };
   },
-  components: { AppHeader },
+  components: { AppHeader, AppFooter },
   computed: {
     ready() {
       return true;
-      /*
-      if (this.fontsLoaded == true) return true;
-      return false;
-      */
     },
+  },
+  beforeMount() {
+    window.addEventListener("resize", function () {
+      alert("resize!");
+    });
   },
 };
 </script>
