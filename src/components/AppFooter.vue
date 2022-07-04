@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed left-0 right-0 bottom-0 p-3 z-10 keyboard-off"
+    class="fixed overflow-hidden left-0 right-0 bottom-0 p-3 z-10"
     :class="{ ['bg-' + colors[0]]: true }"
   >
     <div class="grid grid-cols-10">
