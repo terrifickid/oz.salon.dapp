@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="ui"
     class="px-3 pt-3 fixed w-screen overflow-hidden z-50 transition-all font-haffer"
     :class="{
       'h-screen bg-black text-white': toggle,
@@ -117,6 +118,9 @@ export default {
         return this.profile.units;
       }
       return false;
+    },
+    ui() {
+      return this.$store.state.ui;
     },
   },
 

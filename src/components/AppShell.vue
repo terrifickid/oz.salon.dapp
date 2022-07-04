@@ -3,22 +3,24 @@
     <div v-if="check">
       <AppLoader v-if="!ready" />
       <slot v-if="ready"></slot>
+      <AppFooter :colors="colors" />
     </div>
     <div v-if="!check">
       <WalletConnect v-if="!this.walletAddress" />
       <AppJoin v-if="this.walletAddress" />
+      <AppFooter :colors="colors" />
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import AppFooter from "@/components/AppFooter.vue";
 import AppLoader from "@/components/AppLoader.vue";
 import AppJoin from "@/components/AppJoin.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  components: { AppLoader, WalletConnect, AppJoin },
+  components: { AppLoader, AppFooter, WalletConnect, AppJoin },
   props: ["colors", "isLoaded", "protected"],
   computed: {
     check() {

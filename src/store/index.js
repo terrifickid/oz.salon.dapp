@@ -10,6 +10,7 @@ export default createStore({
     signer: null,
     members: [],
     profile: { loading: true },
+    ui: true,
   },
   getters: {
     getMembers(state) {
@@ -17,7 +18,14 @@ export default createStore({
       return JSON.parse(a);
     },
   },
-  mutations: {},
+  mutations: {
+    hideUI(state) {
+      state.ui = false;
+    },
+    showUI(state) {
+      state.ui = true;
+    },
+  },
   actions: {
     async disconnect() {
       this.state.walletAddress = null;

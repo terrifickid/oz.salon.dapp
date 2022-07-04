@@ -4,13 +4,12 @@
     <div v-show="ready">
       <AppHeader :colors="colors" />
       <router-view />
-      <AppFooter :colors="colors" />
     </div>
   </div>
 </template>
 <script>
 import AppHeader from "@/components/AppHeaderBurger";
-import AppFooter from "@/components/AppFooter";
+
 export default {
   data() {
     return {
@@ -18,16 +17,23 @@ export default {
       fontsLoaded: false,
     };
   },
-  components: { AppHeader, AppFooter },
+  components: { AppHeader },
   computed: {
     ready() {
       return true;
     },
   },
+  methods: {
+    hideUI() {
+      if (window.innerHeight < 500) this.$store.commit("hideUI");
+      if (window.innerHeight > 500) this.$store.commit("showUI");
+    },
+  },
   beforeMount() {
-    window.addEventListener("resize", function () {
-      alert("resize!");
-    });
+    window.addEventListener("resize", this.hideUI);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.hideUI);
   },
 };
 </script>
