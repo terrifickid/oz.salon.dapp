@@ -8,8 +8,8 @@
           <img src="Salon_Logotype_RGB_3D.jpg" />
         </div>
       </div>
-      <div class="bottom-0 right-0 absolute p-3">
-        <router-link to="/join">
+      <div class="bottom-0 right-0 fixed p-3">
+        <a href="/#/governance" v-if="!walletAddress">
           <AppButton :colors="colors" class="flex items-center"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,11 @@
               />
             </svg>
             Connect</AppButton
-          ></router-link
+          ></a
+        ><a v-else
+          ><AppButton :colors="colors" class="flex items-center"
+            >Connected</AppButton
+          ></a
         >
       </div>
     </div>
@@ -45,6 +49,16 @@ export default {
     return {
       colors: ["white", "black"],
     };
+  },
+  computed: {
+    walletAddress() {
+      return this.$store.state.walletAddress;
+    },
+  },
+  methods: {
+    async disconnect() {
+      await this.$store.dispatch("disconnect");
+    },
   },
 };
 </script>

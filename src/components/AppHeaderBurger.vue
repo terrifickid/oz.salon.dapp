@@ -80,7 +80,7 @@
         </router-link>
       </a>
       <a href="/#/join">
-        <router-link v-if="!isMember" to="/join" @click="toggleDown()">
+        <router-link v-if="!isMember" to="/governance" @click="toggleDown()">
           <li :colors="colors" class="mr-2">Join</li>
         </router-link>
       </a>
