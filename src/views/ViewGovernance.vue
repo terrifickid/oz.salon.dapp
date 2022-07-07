@@ -89,7 +89,7 @@ export default {
     async getWeights() {
       try {
         const res = await axios.get(
-          "https://salontest-terrifickid.cloud.okteto.net/members"
+          process.env.VUE_APP_URI + "/members?cache=true"
         );
         this.weights = res.data;
       } catch (error) {
@@ -104,7 +104,7 @@ export default {
     async assembleProposalType(type) {
       var endpoints = [
         "https://salontest-terrifickid.cloud.okteto.net/type/" + type,
-        "https://salontest-terrifickid.cloud.okteto.net/form/" + type,
+        process.env.VUE_APP_URI + "/form/" + type + "?cache=true",
       ];
       var scope = this;
       try {
