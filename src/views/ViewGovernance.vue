@@ -103,7 +103,7 @@ export default {
     },
     async assembleProposalType(type) {
       var endpoints = [
-        "https://salontest-terrifickid.cloud.okteto.net/type/" + type,
+        process.env.VUE_APP_URI + "/type/" + type + "?cache=true",
         process.env.VUE_APP_URI + "/form/" + type + "?cache=true",
       ];
       var scope = this;
