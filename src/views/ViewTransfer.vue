@@ -1,10 +1,7 @@
 <template>
   <AppShell :colors="colors" :isLoaded="true" :protected="true">
     <div v-if="!isDone">
-      <AppForm
-        url="https://salontest-terrifickid.cloud.okteto.net/form/transfer"
-        @success="isDone = true"
-      />
+      <AppForm :url="uri" @success="isDone = true" />
     </div>
     <div class="pt-32 px-3" v-show="isDone">
       <p>Thank You</p>
@@ -25,6 +22,10 @@ export default {
       isDone: false,
     };
   },
-  computed: {},
+  computed: {
+    uri() {
+      return process.env.VUE_APP_URI + "/form/transfer?cache=true";
+    },
+  },
 };
 </script>

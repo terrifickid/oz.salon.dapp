@@ -23,6 +23,7 @@ export default {
     FormButtonOk,
   },
   props: ["count", "title", "required", "placeholder"],
+  emits: ["ready"],
   data() {
     return {
       value: "",

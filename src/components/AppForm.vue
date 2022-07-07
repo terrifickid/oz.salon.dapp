@@ -30,6 +30,7 @@ import AppLoader from "@/components/AppLoader.vue";
 export default {
   components: { FormField, AppLoader, FormIntro },
   props: ["url"],
+  emits: ["success", "ready"],
   data() {
     return {
       name: "",
@@ -84,6 +85,7 @@ export default {
         if (res.data.result) {
           console.log("success", res.data);
           this.$emit("success");
+          this.$store.dispatch("connect");
         } else {
           alert("Error, Please try again.");
           this.processing = false;

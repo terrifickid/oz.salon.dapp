@@ -82,7 +82,7 @@ export default {
     console.log("Loading about...");
     try {
       const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/entry/7fXKpXp8oIZgrvDdfk4Dd0"
+        process.env.VUE_APP_URI + "/entry/7fXKpXp8oIZgrvDdfk4Dd0?cache=true"
       );
       this.content = res.data;
       console.log(this.content);

@@ -38,6 +38,7 @@ export default {
     FormButtonOk,
   },
   props: ["count", "title", "required", "choices"],
+  emits: ["ready"],
   data() {
     return {
       selectedIndex: null,

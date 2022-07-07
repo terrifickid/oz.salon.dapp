@@ -75,7 +75,7 @@ export default {
     console.log("members load!");
     try {
       const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/members"
+        process.env.VUE_APP_URI + "/members?cache=true"
       );
       this.members = res.data;
       console.log(this.members);

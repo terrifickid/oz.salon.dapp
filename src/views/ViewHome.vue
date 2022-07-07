@@ -28,7 +28,14 @@
             Connect</AppButton
           ></a
         ><a v-else
-          ><AppButton :colors="colors" class="flex items-center"
+          ><AppButton
+            :colors="colors"
+            class="flex items-center"
+            style="
+              background: white !important;
+              color: black !important;
+              cursor: auto !important;
+            "
             >Connected</AppButton
           ></a
         >

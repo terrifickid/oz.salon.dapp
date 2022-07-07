@@ -31,6 +31,7 @@ export default {
     FormButtonOk,
   },
   props: ["count", "title", "required"],
+  emits: ["ready"],
   data() {
     return {
       upload: {},

@@ -43,9 +43,11 @@ export default createStore({
       this.state.signer = this.state.provider.getSigner();
       this.state.walletAddress = await this.state.signer.getAddress();
       try {
-        const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/profile",
-          { walletAddress: this.state.walletAddress }
+        const res = await axios.get(
+          process.env.VUE_APP_URI +
+            "/profile/" +
+            this.state.walletAddress +
+            "?cache=true"
         );
         console.log("init profile", res.data, this.state.walletAddress);
         this.state.profile = res.data;
