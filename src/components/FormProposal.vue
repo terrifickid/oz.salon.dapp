@@ -1,75 +1,146 @@
 <template>
-  <div class="grid grid-cols-12" v-if="'fields' in proposal">
-    <div class="col-span-12">
-      <form class="flex items-center">
-        <div class="w-screen">
-          <label
-            class="flex block text-3xl md:text-4xl mb-4 items-center justify-left"
-            ><span class="text-sm mr-1">1</span>
-            <svg height="10" width="11" class="mr-4">
-              <path
-                class="fill-electric"
-                d="M7.586 5L4.293 1.707 5.707.293 10.414 5 5.707 9.707 4.293 8.293z"
-              ></path>
-              <path d="M8 4v2H0V4z"></path></svg
-            >{{ proposal.fields.proposalType["en-US"][0] }}<br />#{{
-              id
-            }}*</label
-          >
-          <ul class="flex">
-            <li class="mr-4">
-              <span class="text-xs">vote start: </span
-              >{{ proposal.fields.startDate["en-US"] }}
-            </li>
-            <li>
-              <span class="text-xs">vote end: </span
-              >{{ proposal.fields.endDate["en-US"] }}
-            </li>
-          </ul>
-          <div class="grid grid-cols-12">
-            <div class="col-span-6">
-              <p class="text-2xl my-4">
-                {{ proposal.fields.meta["en-US"].usdc }} for
-                {{ proposal.fields.meta["en-US"].s }} Salon units
-              </p>
+  <AppLoader v-if="!loaded" />
+  <div class="pt-32 font-haffer px-3" v-if="loaded">
+    <div class="grid grid-cols-12">
+      <div class="app-frame">
+        <b class="capitalize text-xl">{{ proposalFormat.contentType }}</b
+        ><br />
+        {{ proposalFormat.id }}
 
-              <p class="text-2xl my-4">
-                {{ proposal.fields.meta["en-US"].profile.firstName["en-US"]
-                }}<br />
-                {{ proposal.fields.meta["en-US"].profile.lastName["en-US"]
-                }}<br />
-              </p>
-              <p class="text-sm mt-12">
-                {{ proposal.fields.meta["en-US"].profile.walletAddress["en-US"]
-                }}<br />
-                {{
-                  proposal.fields.meta["en-US"].profile.emailAddress["en-US"]
-                }}
-              </p>
-            </div>
-          </div>
+        <CounterVote :votes="proposalFormat.votes" :weights="weights" />
+        <AppCountdown :start="proposalFormat.createdAt" class="mt-2" />
+        <div class="mt-3 flex" v-if="canVote">
+          <AppButtonVote
+            :id="proposalFormat.id"
+            :votes="proposalFormat.votes"
+            :choice="true"
+            :label="'Yes'"
+            class="mr-2"
+          />
+          <AppButtonVote
+            :id="proposalFormat.id"
+            :votes="proposalFormat.votes"
+            :choice="false"
+            :label="'No'"
+          />
         </div>
-      </form>
+
+        <ul class="mt-5 pb-24">
+          <li
+            v-for="(field, index) in proposalFormat.fields"
+            :key="index"
+            class="mr-5 mb-5"
+          >
+            <b>{{ field.label }}</b
+            ><br />{{ field.value }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import AppLoader from "@/components/AppLoader";
+import CounterVote from "@/components/CounterVote";
+import AppCountdown from "@/components/AppCountdown";
+import AppButtonVote from "@/components/AppButtonVote";
 export default {
-  components: {},
+  components: {
+    CounterVote,
+    AppCountdown,
+    AppButtonVote,
+    AppLoader,
+  },
   props: ["id"],
+  emits: ["ready"],
   data() {
     return {
       proposal: {},
+      proposalFormat: {},
+      weights: [],
+      loaded: false,
     };
   },
-  async beforeMount() {
+  computed: {
+    canVote() {
+      if ("units" in this.profile && this.profile.units > 0) return true;
+      return false;
+    },
+    profile() {
+      return this.$store.state.profile;
+    },
+    uri() {
+      return process.env.VUE_APP_URI + "/entry/" + this.id;
+    },
+  },
+  methods: {
+    async getWeights() {
+      try {
+        const res = await axios.get(
+          process.env.VUE_APP_URI + "/members?cache=true"
+        );
+        this.weights = res.data;
+      } catch (error) {
+        console.log("error", error);
+      }
+    },
+    getFieldLabel(fields, id) {
+      for (let field of fields) {
+        if (field.id == id) return field.name;
+      }
+    },
+    async assembleProposalType(type) {
+      var scope = this;
+      try {
+        var e = await axios.get(
+          process.env.VUE_APP_URI + "/form/" + type + "?cache=true"
+        );
+
+        var votes = { votes: [] };
+        if ("votes" in this.proposal.fields) {
+          votes = this.proposal.fields.votes;
+          delete this.proposal.fields.votes;
+        }
+
+        var fields = await Object.entries(this.proposal.fields).map(function (
+          field
+        ) {
+          var label = scope.getFieldLabel(e.data.fields, field[0]);
+          return {
+            label: label,
+            value: field[1],
+          };
+        });
+
+        var item = {
+          id: this.proposal.sys.id,
+          createdAt: this.proposal.sys.createdAt,
+          contentType: this.proposal.sys.contentType.sys.id,
+          votes: votes,
+          fields: fields,
+        };
+        return item;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    },
+  },
+  async mounted() {
     console.log("loading proposal!");
+    await this.getWeights();
     try {
-      const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/entry/" + this.id
-      );
+      const res = await axios.get(this.uri);
       this.proposal = res.data;
+
+      var r = await this.assembleProposalType(
+        this.proposal.sys.contentType.sys.id
+      );
+
+      this.proposalFormat = r;
+      this.loaded = true;
+      this.$emit("ready");
     } catch (error) {
       console.log("error", error);
     }

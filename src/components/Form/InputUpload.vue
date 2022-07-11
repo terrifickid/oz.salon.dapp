@@ -1,6 +1,7 @@
 <template>
   <div class="">
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
+    <FormHelp :help="help" v-if="help" />
     <input
       v-show="!progress"
       type="file"
@@ -24,13 +25,15 @@
 <script>
 import { Upload } from "upload-js";
 import FormLabel from "@/components/Form/FormLabel.vue";
+import FormHelp from "@/components/Form/FormHelp.vue";
 import FormButtonOk from "@/components/Form/FormButtonOk.vue";
 export default {
   components: {
     FormLabel,
     FormButtonOk,
+    FormHelp,
   },
-  props: ["count", "title", "required"],
+  props: ["count", "title", "required", "help"],
   emits: ["ready"],
   data() {
     return {

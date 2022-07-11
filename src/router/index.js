@@ -103,6 +103,15 @@ const routes = [
     },
   },
   {
+    path: "/governance/:id",
+    name: "proposal",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewGovernance" */ "../views/ViewProposal.vue"
+      );
+    },
+  },
+  {
     path: "/profile",
     name: "profile",
     component: function () {

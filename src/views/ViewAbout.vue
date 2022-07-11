@@ -1,6 +1,6 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <div class="grid grid-cols-12 px-3 pb-32 font-haffer">
+    <div class="grid grid-cols-12 px-3 pb-32 pt-32 font-haffer">
       <div class="app-frame" v-if="'fields' in content">
         <div class="pt-3">
           <template
@@ -82,7 +82,7 @@ export default {
     console.log("Loading about...");
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/7fXKpXp8oIZgrvDdfk4Dd0?cache=true"
+        process.env.VUE_APP_URI + "/entry/hPgciuapvygaec22xEagO?cache=true"
       );
       this.content = res.data;
       console.log(this.content);

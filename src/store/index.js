@@ -44,10 +44,7 @@ export default createStore({
       this.state.walletAddress = await this.state.signer.getAddress();
       try {
         const res = await axios.get(
-          process.env.VUE_APP_URI +
-            "/profile/" +
-            this.state.walletAddress +
-            "?cache=true"
+          process.env.VUE_APP_URI + "/profile/" + this.state.walletAddress
         );
         console.log("init profile", res.data, this.state.walletAddress);
         this.state.profile = res.data;

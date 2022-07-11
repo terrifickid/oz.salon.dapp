@@ -1,9 +1,6 @@
 <template>
   <div v-if="ready">
-    <template v-if="isNew">
-      <AppForm
-        url="https://salontest-terrifickid.cloud.okteto.net/form/members"
-    /></template>
+    <template v-if="isNew"> <AppForm :url="uri" /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
         <h1 class="app-text text-center font-haffer">
@@ -14,14 +11,14 @@
 
     <template v-if="isKycApproved && !isApplied"> <FormApply /></template>
     <template v-if="isApplied && !isMember">
-      <FormProposal :id="profile.onboardProposal.sys.id"
+      <FormProposal :id="profile.onboardProposal"
     /></template>
   </div>
 </template>
 <script>
 import AppContent from "@/components/AppContent";
 import AppForm from "@/components/AppForm";
-import FormApply from "@/components/FormApply.vue";
+import FormApply from "@/components/FormApplySimple.vue";
 import FormProposal from "@/components/FormProposal.vue";
 
 export default {
@@ -57,6 +54,9 @@ export default {
     ready() {
       if (!("loading" in this.profile)) return true;
       return false;
+    },
+    uri() {
+      return process.env.VUE_APP_URI + "/form/members";
     },
   },
 };

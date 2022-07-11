@@ -1,6 +1,7 @@
 <template>
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
+    <FormHelp :help="help" v-if="help" />
     <div class="grid grid-cols-12 gap-2 sm:ml-0 font-haffer">
       <button
         :class="{ 'ring-1 ring-black': selectedIndex == index }"
@@ -30,14 +31,16 @@
   </div>
 </template>
 <script>
+import FormHelp from "@/components/Form/FormHelp.vue";
 import FormLabel from "@/components/Form/FormLabel.vue";
 import FormButtonOk from "@/components/Form/FormButtonOk.vue";
 export default {
   components: {
     FormLabel,
     FormButtonOk,
+    FormHelp,
   },
-  props: ["count", "title", "required", "choices"],
+  props: ["count", "title", "required", "choices", "help"],
   emits: ["ready"],
   data() {
     return {

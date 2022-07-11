@@ -7,22 +7,18 @@
         :title="field.name"
         :choices="field.validations[0].in"
         :required="true"
+        :help="helpText(field.id)"
         @update="updateValue"
         @ready="$emit('ready')"
     /></template>
     <template v-else>
-      <template
-        v-if="
-          field.id == 'idScan' ||
-          field.id == 'corporateDocuments' ||
-          field.id == 'recentIncomeDocumentation' ||
-          field.id == 'previousIncomeDocumentation'
-        "
+      <template v-if="isUpload(field.id)"
         ><InputUpload
           class="app-frame"
           :count="index + 1"
           :title="field.name"
           :required="true"
+          :help="helpText(field.id)"
           @update="updateValue"
           @ready="$emit('ready')"
       /></template>
@@ -32,6 +28,7 @@
           :count="index + 1"
           :title="field.name"
           :required="true"
+          :help="helpText(field.id)"
           @update="updateValue"
           @ready="$emit('ready')"
         />
@@ -53,6 +50,24 @@ export default {
     },
     updateValue(val) {
       this.$emit("update:modelValue", val);
+    },
+    isUpload(id) {
+      var check = id.split("0");
+      return check.includes("upload");
+    },
+    helpText(id) {
+      var msg = null;
+      switch (id) {
+        case "uploadTaxForms0upload":
+          msg =
+            'Forms can be downloaded <a class="underline" href="#">here</a>. Please use the W9 form if you are a US investor, or the appropriate W8 form if you are a foreign investor.';
+          break;
+        case "downloadAndReviewSalonsOperatingAgreement":
+          msg =
+            "Download Salon's Operating Agreement <a class='underline' href='#'>here</a>";
+          break;
+      }
+      return msg;
     },
   },
 };

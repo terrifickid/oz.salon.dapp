@@ -51,6 +51,11 @@ export default {
       },
     };
   },
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+  },
   methods: {
     async next() {
       if (await this.validate()) {
@@ -81,6 +86,7 @@ export default {
       this.processing = true;
       console.log("Ran Submit!");
       try {
+        this.form.profile = this.profile;
         const res = await axios.post(this.url, this.form);
         if (res.data.result) {
           console.log("success", res.data);
@@ -114,7 +120,13 @@ export default {
       this.name = res.data.name;
       this.description = res.data.description;
       this.fields = res.data.fields.filter(function (field) {
-        var disabled = ["votes", "kycApproved", "units", "onboardProposal"];
+        var disabled = [
+          "votes",
+          "kycApproved",
+          "units",
+          "onboardProposal",
+          "profile",
+        ];
         if (disabled.includes(field.id)) return false;
         return true;
       });
