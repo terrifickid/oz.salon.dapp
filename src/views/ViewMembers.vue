@@ -1,7 +1,7 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <div
-      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer"
+      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer hidden"
     >
       <select class="text-right alpha p-2 font-bold">
         <option>A</option>

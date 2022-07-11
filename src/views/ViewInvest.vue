@@ -2,9 +2,7 @@
   <AppShell :colors="colors" :isLoaded="isReady" :protected="true">
     <AppContent class="items-center justify-center">
       <div class="grid grid-cols-12">
-        <div
-          class="col-span-12 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
-        >
+        <div class="app-frame">
           <form
             v-on:submit.prevent="createProposal"
             class="w-full"

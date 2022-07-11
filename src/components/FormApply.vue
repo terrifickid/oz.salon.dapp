@@ -1,24 +1,23 @@
 <template>
   <AppContent class="items-center justify-center">
     <div class="grid grid-cols-12">
-      <div
-        class="col-span-12 sm:col-span-10 sm:col-start-2 lg:col-span-8 lg:col-start-3"
-      >
+      <div class="app-frame">
         <form v-on:submit.prevent="createProposal" class="w-full">
           <div
             class="block text-3xl md:text-4xl mb-4 flex items-center -ml-10 justify-center"
-            ><span class="text-sm mr-1">1</span>
+          >
+            <span class="text-sm mr-1">1</span>
             <svg height="10" width="11" class="mr-4">
               <path
                 d="M7.586 5L4.293 1.707 5.707.293 10.414 5 5.707 9.707 4.293 8.293z"
               ></path>
               <path d="M8 4v2H0V4z"></path></svg
-            >Become a Membder *</label
-          >
-          <span class="block text-lg lg:text-xl font-light opacity-75 mb-4"
-            >How much capital are you committing to the DAO, in exchange for how
-            many Units</span
-          >
+            >Become a Membder *
+            <span class="block text-lg lg:text-xl font-light opacity-75 mb-4"
+              >How much capital are you committing to the DAO, in exchange for
+              how many Units</span
+            >
+          </div>
           <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12 sm:col-span-6">
               <input

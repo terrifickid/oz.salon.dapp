@@ -66,6 +66,10 @@ export default {
           msg =
             "Download Salon's Operating Agreement <a class='underline' href='#'>here</a>";
           break;
+        case "executeAndUploadSalonsSubscriptionAgreement0upload":
+          msg =
+            'Download the Subscription Agreement <a class="underline" href="#">here</a>';
+          break;
       }
       return msg;
     },

@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="true">
+  <AppShell :colors="colors" :isLoaded="true" :protected="true">
     <FormProposal :id="$route.params.id" @ready="ready" />
   </AppShell>
 </template>

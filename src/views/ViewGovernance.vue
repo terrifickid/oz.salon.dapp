@@ -5,7 +5,7 @@
     :protected="true"
     class="font-haffer"
   >
-    <AppContent class="items-center">
+    <div class="pt-32 pb-64">
       <div class="grid grid-cols-12 w-full">
         <div class="app-frame">
           <div class="px-3">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-    </AppContent>
+    </div>
   </AppShell>
 </template>
 <script>
@@ -45,13 +45,13 @@ import axios from "axios";
 
 import AppCountdown from "@/components/AppCountdown";
 import AppShell from "@/components/AppShell";
-import AppContent from "@/components/AppContent";
+
 import AppButton from "@/components/AppButton";
 
 export default {
   components: {
     AppShell,
-    AppContent,
+
     AppCountdown,
     AppButton,
   },
@@ -64,7 +64,11 @@ export default {
       loaded: false,
     };
   },
-  computed: {},
+  computed: {
+    walletAddress() {
+      return this.$store.state.walletAddress;
+    },
+  },
   methods: {
     async getWeights() {
       try {

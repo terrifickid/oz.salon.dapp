@@ -14,14 +14,41 @@
     </div>
 
     <div>Total Votes: {{ total }}</div>
-    <div>Yes: {{ yesTotal }}</div>
-    <div>No: {{ noTotal }}</div>
+    <div>Yes: {{ yesPercentageTally }}%</div>
+    <div>No: {{ noPercentageTally }}%</div>
+
+    <div class="pt-2">
+      <div v-if="!passed">This did not pass.</div>
+      <div v-else class="flex items-center" v-html="passType"></div>
+    </div>
   </div>
 </template>
 <script>
 export default {
   props: ["votes", "weights"],
   computed: {
+    totalUnits() {
+      var totalUnits = this.weights
+        .map((item) => item.fields.units)
+        .reduce((partialSum, a) => partialSum + a, 0);
+      return totalUnits;
+    },
+    maxUnits() {
+      return Math.round(this.totalUnits * 0.1);
+    },
+    totalValidUnits() {
+      var scope = this;
+      var weights = this.weights.map(function (member) {
+        var obj = {};
+        obj.walletAddress = member.fields.walletAddress;
+        obj.units = member.fields.units;
+        if (obj.units > scope.maxUnits) obj.units = scope.maxUnits;
+        return obj;
+      });
+      return weights
+        .map((item) => item.units)
+        .reduce((partialSum, a) => partialSum + a, 0);
+    },
     total() {
       return this.votes.votes.length;
     },
@@ -43,13 +70,6 @@ export default {
         weight[w.fields.walletAddress] = w.fields.units;
       }
       return weight;
-    },
-    totalUnits() {
-      var total = 0;
-      Object.values(this.w).forEach(
-        (e) => (total = parseInt(total) + parseInt(e))
-      );
-      return total;
     },
     wNormal() {
       var max = this.totalUnits * 0.1;
@@ -80,13 +100,39 @@ export default {
       });
       return weight;
     },
+    yesPercentageTally() {
+      if (!this.total) return 0;
+      return Math.round(
+        (this.yesWeight / (this.yesWeight + this.noWeight)) * 100
+      );
+    },
+    noPercentageTally() {
+      if (!this.total) return 0;
+      return Math.round(
+        (this.noWeight / (this.yesWeight + this.noWeight)) * 100
+      );
+    },
     percentageYes() {
       if (!this.totalUnits || !this.yesWeight) return 0;
-      return Math.round((this.yesWeight / this.totalUnits) * 100);
+      return Math.round((this.yesWeight / this.totalValidUnits) * 100);
     },
     percentageNo() {
       if (!this.totalUnits || !this.noWeight) return 0;
-      return Math.round((this.noWeight / this.totalUnits) * 100);
+      return Math.round((this.noWeight / this.totalValidUnits) * 100);
+    },
+    passed() {
+      return this.yesPercentageTally > this.noPercentageTally;
+    },
+    passType() {
+      var type =
+        '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>This passed with majority.';
+      if (this.percentageYes > 50)
+        type =
+          '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>This passed with true majority.';
+      if (this.percentageYes > 75)
+        type =
+          '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>This passed with supermajority.';
+      return type;
     },
   },
 };
