@@ -9,7 +9,7 @@
       <div class="grid grid-cols-12 w-full">
         <div class="app-frame">
           <div class="px-3">
-            <p class="text-xl">My Prodposals</p>
+            <p class="text-xl">My Proposals</p>
             <p class="text-sm mt-3">No proposals currently submitted.</p>
 
             <p class="mt-24 text-xl">All Proposals</p>
