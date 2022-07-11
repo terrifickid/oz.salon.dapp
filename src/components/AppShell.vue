@@ -1,5 +1,5 @@
 <template>
-  <div :class="salonClass">
+  <div :class="salonClass" class="font-haffer">
     <div v-if="check">
       <AppLoader v-if="!ready" />
       <slot v-if="ready"></slot>

@@ -1,24 +1,24 @@
 <template>
   <div class="grid grid-cols-12 px-3 mr-5 sm:mr-24">
-    <template v-if="isChoice(field)">
+    <template v-if="getChoice">
       <InputChoice
         class="app-frame"
         :count="index + 1"
-        :title="field.name"
-        :choices="field.validations[0].in"
+        :title="getTitle"
+        :choices="getChoice"
         :required="true"
-        :help="helpText(field.id)"
+        :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
     /></template>
     <template v-else>
-      <template v-if="isUpload(field.id)"
+      <template v-if="isUpload"
         ><InputUpload
           class="app-frame"
           :count="index + 1"
-          :title="field.name"
+          :title="getTitle"
           :required="true"
-          :help="helpText(field.id)"
+          :help="getHelpText"
           @update="updateValue"
           @ready="$emit('ready')"
       /></template>
@@ -26,9 +26,9 @@
         <InputText
           class="app-frame"
           :count="index + 1"
-          :title="field.name"
+          :title="getTitle"
           :required="true"
-          :help="helpText(field.id)"
+          :help="getHelpText"
           @update="updateValue"
           @ready="$emit('ready')"
         />
@@ -43,17 +43,36 @@ import InputUpload from "@/components/Form/InputUpload.vue";
 export default {
   components: { InputText, InputChoice, InputUpload },
   props: ["modelValue", "field", "index"],
-  methods: {
-    isChoice(field) {
-      console.log(field);
-      return field.validations.length && "in" in field.validations[0];
+  computed: {
+    getChoice() {
+      var choice = this.field.validations.filter(function (v) {
+        return "in" in v;
+      });
+      if (choice.length) return choice[0].in;
+      return false;
     },
+    getTitle() {
+      var title = this.field.validations.filter(function (v) {
+        return "prohibitRegexp" in v;
+      });
+      if (title.length) return title[0].prohibitRegexp.pattern;
+      return "No Title";
+    },
+    getHelpText() {
+      var helpText = this.field.validations.filter(function (v) {
+        return "prohibitRegexp" in v;
+      });
+      if (helpText.length) return helpText[0].message;
+      return false;
+    },
+    isUpload() {
+      var check = this.field.id.split("0");
+      return check.includes("upload");
+    },
+  },
+  methods: {
     updateValue(val) {
       this.$emit("update:modelValue", val);
-    },
-    isUpload(id) {
-      var check = id.split("0");
-      return check.includes("upload");
     },
     helpText(id) {
       var msg = null;
