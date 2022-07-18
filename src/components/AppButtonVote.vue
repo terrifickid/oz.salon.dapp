@@ -4,6 +4,7 @@
     :disabled="processing"
     class="flex items-center"
     :class="{ active: voted }"
+    v-if="!hasEnded"
   >
     {{ label }}
     <svg
@@ -20,6 +21,7 @@
   </AppButton>
 </template>
 <script>
+import _ from "lodash";
 import axios from "axios";
 import AppButton from "@/components/AppButton.vue";
 export default {
@@ -31,6 +33,9 @@ export default {
     };
   },
   computed: {
+    hasEnded() {
+      return typeof _.get(this.votes, "passed") == "boolean";
+    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },

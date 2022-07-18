@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs">
+  <div class="text-xs" v-if="this.time">
     <vue-countdown :time="this.time" v-slot="{ days, hours, minutes, seconds }">
       Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes,
       {{ seconds }} seconds.
@@ -20,7 +20,9 @@ export default {
     },
     time() {
       var now = new Date();
-      return this.endDate.getTime() - now.getTime();
+      var r = this.endDate.getTime() - now.getTime();
+      if (r < 0) return 0;
+      return r;
     },
   },
 };

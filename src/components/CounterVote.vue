@@ -17,16 +17,20 @@
     <div>Yes: {{ yesPercentageTally }}%</div>
     <div>No: {{ noPercentageTally }}%</div>
 
-    <div class="pt-2">
+    <div class="pt-2" v-if="hasEnded">
       <div v-if="!passed">This did not pass.</div>
       <div v-else class="flex items-center" v-html="passType"></div>
     </div>
   </div>
 </template>
 <script>
+import _ from "lodash";
 export default {
   props: ["votes", "weights"],
   computed: {
+    hasEnded() {
+      return typeof _.get(this.votes, "passed") == "boolean";
+    },
     totalUnits() {
       var totalUnits = this.weights
         .map((item) => item.fields.units)

@@ -1,7 +1,7 @@
 <template>
   <AppLoader v-if="!loaded" />
   <template v-if="loaded">
-    <template v-if="isProposer">
+    <template v-if="isProposer && !isMember && !passed">
       <AppContent class="items-center justify-center app-text">
         <div class="p-3">
           Thank you for submitting your application and making a financial
@@ -19,7 +19,6 @@
             <b class="capitalize text-xl">{{ proposalFormat.contentType }}</b
             ><br />
             {{ proposalFormat.id }}
-
             <CounterVote :votes="proposalFormat.votes" :weights="weights" />
             <AppCountdown :start="proposalFormat.createdAt" class="mt-2" />
             <div class="mt-3 flex" v-if="canVote">
@@ -38,7 +37,7 @@
               />
             </div>
 
-            <ul class="mt-5 pb-24">
+            <ul class="mt-5 pb-5">
               <li
                 v-for="(field, index) in proposalFormat.fields"
                 :key="index"
@@ -57,6 +56,8 @@
                 >
               </li>
             </ul>
+
+            <ExecuteProposal :proposal="proposalFormat" />
           </div>
         </div>
       </div>
@@ -64,12 +65,14 @@
   </template>
 </template>
 <script>
+import _ from "lodash";
 import axios from "axios";
 import AppLoader from "@/components/AppLoader";
 import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
 import AppContent from "@/components/AppContent";
+import ExecuteProposal from "@/components/ExecuteProposal";
 export default {
   components: {
     CounterVote,
@@ -77,6 +80,7 @@ export default {
     AppButtonVote,
     AppLoader,
     AppContent,
+    ExecuteProposal,
   },
   props: ["id"],
   emits: ["ready"],
@@ -92,6 +96,9 @@ export default {
     isProposer() {
       return true;
     },
+    isMember() {
+      return this.profile.units;
+    },
     canVote() {
       if ("units" in this.profile && this.profile.units > 0) return true;
       return false;
@@ -101,6 +108,9 @@ export default {
     },
     uri() {
       return process.env.VUE_APP_URI + "/entry/" + this.id;
+    },
+    passed() {
+      return _.get(this.proposalFormat, "votes.passed") === true;
     },
   },
   methods: {

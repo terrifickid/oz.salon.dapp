@@ -14,6 +14,9 @@
 
             <p class="mt-24 text-xl">All Proposals</p>
             <div class="mt-3">
+              <p class="text-sm mt-3" v-if="!proposals.length">
+                No proposals currently submitted.
+              </p>
               <div
                 v-for="(item, index) in proposals"
                 :key="index"
