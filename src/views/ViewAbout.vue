@@ -1,6 +1,6 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded">
-    <div class="grid grid-cols-12 px-3 pb-32 pt-32 font-haffer">
+    <div class="grid grid-cols-12 px-3 pb-32 font-haffer">
       <div class="app-frame" v-if="'fields' in content">
         <div class="pt-3">
           <template

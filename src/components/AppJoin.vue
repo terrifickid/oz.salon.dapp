@@ -1,28 +1,38 @@
 <template>
   <div v-if="ready">
-    <template v-if="isNew"> <AppForm :url="uri" /></template>
+    <template v-if="isNew"> <AppForm :url="membersURI" /></template>
     <template v-if="!isKycApproved && !isNew">
       <AppContent class="items-center justify-center">
-        <h1 class="app-text text-center font-haffer">
-          Your application is under review.
-        </h1>
+        <div class="p-12 text-center">
+          <h1 class="app-text text-center font-haffer">
+            Thank you for providing us with information to verify your status as
+            an accredited investor. You will be notified when you have been
+            approved to submit an onboarding application to join Salon. Please
+            reach out to
+            <a class="bold underline" href="mailto:hello@salondao.xyz"
+              >hello@salondao.xyz</a
+            >
+            with any questions.
+          </h1>
+        </div>
       </AppContent>
     </template>
 
-    <template v-if="isKycApproved && !isApplied"> <FormApply /></template>
+    <template v-if="isKycApproved && !isApplied">
+      <AppForm :url="onboardURI" />
+    </template>
     <template v-if="isApplied && !isMember">
-      <FormProposal :id="profile.onboardProposal"
+      <FormProposal :id="profile.onboardId"
     /></template>
   </div>
 </template>
 <script>
 import AppContent from "@/components/AppContent";
 import AppForm from "@/components/AppForm";
-import FormApply from "@/components/FormApplySimple.vue";
 import FormProposal from "@/components/FormProposal.vue";
 
 export default {
-  components: { AppContent, AppForm, FormApply, FormProposal },
+  components: { AppContent, AppForm, FormProposal },
   computed: {
     loaded() {
       return this.profile;
@@ -37,9 +47,7 @@ export default {
       return false;
     },
     isApplied() {
-      if ("onboardProposal" in this.profile) {
-        if (this.profile.onboardProposal) return true;
-      }
+      if ("onboardId" in this.profile) return true;
       return false;
     },
     isMember() {
@@ -55,8 +63,11 @@ export default {
       if (!("loading" in this.profile)) return true;
       return false;
     },
-    uri() {
+    membersURI() {
       return process.env.VUE_APP_URI + "/form/members";
+    },
+    onboardURI() {
+      return process.env.VUE_APP_URI + "/form/onboard";
     },
   },
 };

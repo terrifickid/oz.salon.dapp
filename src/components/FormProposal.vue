@@ -1,43 +1,67 @@
 <template>
   <AppLoader v-if="!loaded" />
-  <div class="pt-32 font-haffer px-3" v-if="loaded">
-    <div class="grid grid-cols-12">
-      <div class="app-frame">
-        <b class="capitalize text-xl">{{ proposalFormat.contentType }}</b
-        ><br />
-        {{ proposalFormat.id }}
-
-        <CounterVote :votes="proposalFormat.votes" :weights="weights" />
-        <AppCountdown :start="proposalFormat.createdAt" class="mt-2" />
-        <div class="mt-3 flex" v-if="canVote">
-          <AppButtonVote
-            :id="proposalFormat.id"
-            :votes="proposalFormat.votes"
-            :choice="true"
-            :label="'Yes'"
-            class="mr-2"
-          />
-          <AppButtonVote
-            :id="proposalFormat.id"
-            :votes="proposalFormat.votes"
-            :choice="false"
-            :label="'No'"
-          />
+  <template v-if="loaded">
+    <template v-if="isProposer">
+      <AppContent class="items-center justify-center app-text">
+        <div class="p-3">
+          Thank you for submitting your application and making a financial
+          commitment to Salon. Salon’s Members will now vote to approve or deny
+          your application. If you are approved, you will have seven days to
+          finalize your membership by sending your investment by digital wallet
+          or bank wire.
         </div>
+      </AppContent>
+    </template>
+    <template v-else>
+      <div class="pt-32 font-haffer px-3">
+        <div class="grid grid-cols-12">
+          <div class="app-frame">
+            <b class="capitalize text-xl">{{ proposalFormat.contentType }}</b
+            ><br />
+            {{ proposalFormat.id }}
 
-        <ul class="mt-5 pb-24">
-          <li
-            v-for="(field, index) in proposalFormat.fields"
-            :key="index"
-            class="mr-5 mb-5"
-          >
-            <b>{{ field.label }}</b
-            ><br />{{ field.value }}
-          </li>
-        </ul>
+            <CounterVote :votes="proposalFormat.votes" :weights="weights" />
+            <AppCountdown :start="proposalFormat.createdAt" class="mt-2" />
+            <div class="mt-3 flex" v-if="canVote">
+              <AppButtonVote
+                :id="proposalFormat.id"
+                :votes="proposalFormat.votes"
+                :choice="true"
+                :label="'Yes'"
+                class="mr-2"
+              />
+              <AppButtonVote
+                :id="proposalFormat.id"
+                :votes="proposalFormat.votes"
+                :choice="false"
+                :label="'No'"
+              />
+            </div>
+
+            <ul class="mt-5 pb-24">
+              <li
+                v-for="(field, index) in proposalFormat.fields"
+                :key="index"
+                class="mr-5 mb-5"
+              >
+                <template v-if="field.label == 'User Profile'">
+                  {{ field.value.firstName }} {{ field.value.lastName }}<br />
+                  {{ field.value.walletAddress }}<br />
+                  {{ field.value.emailAddress }}
+
+                  <pre></pre>
+                </template>
+                <template v-else>
+                  <b>{{ field.label }}</b
+                  ><br />{{ field.value }}</template
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </template>
 </template>
 <script>
 import axios from "axios";
@@ -45,12 +69,14 @@ import AppLoader from "@/components/AppLoader";
 import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
+import AppContent from "@/components/AppContent";
 export default {
   components: {
     CounterVote,
     AppCountdown,
     AppButtonVote,
     AppLoader,
+    AppContent,
   },
   props: ["id"],
   emits: ["ready"],
@@ -63,6 +89,9 @@ export default {
     };
   },
   computed: {
+    isProposer() {
+      return true;
+    },
     canVote() {
       if ("units" in this.profile && this.profile.units > 0) return true;
       return false;

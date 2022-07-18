@@ -107,16 +107,14 @@ export default {
       this.$refs.fullpage.api.reBuild();
     },
   },
-  mounted() {
-    console.log("mounted!");
-  },
+  mounted() {},
   beforeUnmount() {
     window.removeEventListener("resize", this.resize);
   },
   async beforeMount() {
     try {
       const res = await axios.get(this.url);
-      console.log("form", res.data);
+
       this.name = res.data.name;
       this.description = res.data.description;
       this.fields = res.data.fields.filter(function (field) {
