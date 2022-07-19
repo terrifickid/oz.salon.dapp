@@ -16,9 +16,29 @@
       <div class="pt-32 font-haffer px-3">
         <div class="grid grid-cols-12">
           <div class="app-frame">
+            <a class="pb-2 flex items-center" href="/#/governance">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M7 16l-4-4m0 0l4-4m-4 4h18"
+                />
+              </svg>
+              Back
+            </a>
             <b class="capitalize text-xl">{{ proposalFormat.contentType }}</b
             ><br />
-            {{ proposalFormat.id }}
+            Submitted by
+            {{ proposalFormat.profile.firstName }}
+            {{ proposalFormat.profile.lastName }}
+
             <CounterVote :votes="proposalFormat.votes" :weights="weights" />
             <AppCountdown :start="proposalFormat.createdAt" class="mt-2" />
             <div class="mt-3 flex" v-if="canVote">
@@ -43,13 +63,7 @@
                 :key="index"
                 class="mr-5 mb-5"
               >
-                <template v-if="field.label == 'User Profile'">
-                  {{ field.value.firstName }} {{ field.value.lastName }}<br />
-                  {{ field.value.walletAddress }}<br />
-                  {{ field.value.emailAddress }}
-
-                  <pre></pre>
-                </template>
+                <template v-if="field.label == 'User Profile'"> </template>
                 <template v-else>
                   <b>{{ field.label }}</b
                   ><br />{{ field.value }}</template
@@ -119,7 +133,12 @@ export default {
         const res = await axios.get(
           process.env.VUE_APP_URI + "/members?cache=true"
         );
-        this.weights = res.data;
+        this.weights = res.data.map(function (item) {
+          return {
+            walletAddress: item.fields.walletAddress,
+            units: item.fields.units,
+          };
+        });
       } catch (error) {
         console.log("error", error);
       }
@@ -158,6 +177,7 @@ export default {
           contentType: this.proposal.sys.contentType.sys.id,
           votes: votes,
           fields: fields,
+          profile: this.proposal.fields.profile,
         };
         return item;
       } catch (error) {
@@ -168,16 +188,20 @@ export default {
   },
   async mounted() {
     console.log("loading proposal!");
-    await this.getWeights();
+
     try {
       const res = await axios.get(this.uri);
       this.proposal = res.data;
-
       var r = await this.assembleProposalType(
         this.proposal.sys.contentType.sys.id
       );
-
       this.proposalFormat = r;
+      if (_.get(this.proposalFormat, "votes.weights.length")) {
+        this.weights = _.get(this.proposalFormat, "votes.weights");
+      } else {
+        await this.getWeights();
+      }
+
       this.loaded = true;
       this.$emit("ready");
     } catch (error) {

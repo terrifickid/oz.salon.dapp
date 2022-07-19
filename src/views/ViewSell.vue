@@ -3,10 +3,9 @@
     <div v-if="!isDone">
       <AppForm :url="uri" @success="isDone = true" />
     </div>
-    <div class="pt-32 px-3" v-show="isDone">
-      <p>Thank You</p>
-      <p>Invest proposal has been submitted.</p>
-    </div>
+    <AppContent v-show="isDone" class="items-center justify-center">
+      <p class="app-text p-3">Your proposal has been submitted.</p>
+    </AppContent>
   </AppShell>
 </template>
 
@@ -14,8 +13,9 @@
 // @ is an alias to /src
 import AppShell from "@/components/AppShell.vue";
 import AppForm from "@/components/AppForm";
+import AppContent from "@/components/AppContent";
 export default {
-  components: { AppShell, AppForm },
+  components: { AppShell, AppForm, AppContent },
   data() {
     return {
       colors: ["white", "black"],

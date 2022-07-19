@@ -33,7 +33,7 @@ export default {
     },
     totalUnits() {
       var totalUnits = this.weights
-        .map((item) => item.fields.units)
+        .map((item) => item.units)
         .reduce((partialSum, a) => partialSum + a, 0);
       return totalUnits;
     },
@@ -44,8 +44,8 @@ export default {
       var scope = this;
       var weights = this.weights.map(function (member) {
         var obj = {};
-        obj.walletAddress = member.fields.walletAddress;
-        obj.units = member.fields.units;
+        obj.walletAddress = member.walletAddress;
+        obj.units = member.units;
         if (obj.units > scope.maxUnits) obj.units = scope.maxUnits;
         return obj;
       });
@@ -79,8 +79,8 @@ export default {
       var max = this.totalUnits * 0.1;
       var weight = {};
       for (let w of this.weights) {
-        weight[w.fields.walletAddress] = w.fields.units;
-        if (w.fields.units > max) weight[w.fields.walletAddress] = max;
+        weight[w.walletAddress] = w.units;
+        if (w.units > max) weight[w.walletAddress] = max;
       }
       return weight;
     },

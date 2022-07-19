@@ -10,31 +10,21 @@
         <div class="app-frame">
           <div class="px-3">
             <p class="text-xl">My Proposals</p>
-            <p class="text-sm mt-3">No proposals currently submitted.</p>
+            <p class="text-sm mt-3" v-if="!myProposals.length">No proposals.</p>
+            <ListProposalItem
+              v-for="(item, index) in myProposals"
+              :key="index"
+              :item="item"
+            />
 
             <p class="mt-24 text-xl">All Proposals</p>
             <div class="mt-3">
-              <p class="text-sm mt-3" v-if="!proposals.length">
-                No proposals currently submitted.
-              </p>
-              <div
+              <p class="text-sm mt-3" v-if="!proposals.length">No proposals.</p>
+              <ListProposalItem
                 v-for="(item, index) in proposals"
                 :key="index"
-                class="border-b border-black py-3 grid grid-cols-12"
-              >
-                <div class="col-span-8">
-                  <b class="capitalize">{{ item.contentType }}</b>
-                  {{ item.id }}
-                  <AppCountdown :start="item.createdAt" />
-                </div>
-                <div class="col-span-4 flex items-center justify-end text-sm">
-                  <router-link :to="'/governance/' + item.id"
-                    ><AppButton class="flex items-center"
-                      >View Proposal
-                    </AppButton></router-link
-                  >
-                </div>
-              </div>
+                :item="item"
+              />
             </div>
           </div>
         </div>
@@ -46,17 +36,14 @@
 // @ is an alias to /src
 import axios from "axios";
 
-import AppCountdown from "@/components/AppCountdown";
 import AppShell from "@/components/AppShell";
 
-import AppButton from "@/components/AppButton";
+import ListProposalItem from "@/components/ListProposalItem";
 
 export default {
   components: {
     AppShell,
-
-    AppCountdown,
-    AppButton,
+    ListProposalItem,
   },
   data() {
     return {
@@ -70,6 +57,11 @@ export default {
   computed: {
     walletAddress() {
       return this.$store.state.walletAddress;
+    },
+    myProposals() {
+      return this.proposals.filter(
+        (item) => item.profile.walletAddress == this.walletAddress
+      );
     },
   },
   methods: {
@@ -116,6 +108,7 @@ export default {
 
           var item = {
             id: value.sys.id,
+            profile: value.fields.profile,
             createdAt: value.sys.createdAt,
             contentType: value.sys.contentType.sys.id,
             votes: votes,
@@ -140,7 +133,6 @@ export default {
     await this.getWeights();
     this.loaded = true;
     console.log("loaded!");
-    console.log(this.proposals);
   },
 };
 </script>
