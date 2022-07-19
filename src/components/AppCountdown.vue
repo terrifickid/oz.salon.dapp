@@ -13,14 +13,11 @@ export default {
     startDate() {
       return new Date(this.start);
     },
-    endDate() {
-      const end = new Date();
-      end.setDate(this.startDate.getDate() + 4);
-      return end;
-    },
     time() {
       var now = new Date();
-      var r = this.endDate.getTime() - now.getTime();
+      var timePassedMs = now.getTime() - this.startDate.getTime();
+      var fourDaysMs = 86400000 * 4;
+      var r = fourDaysMs - timePassedMs;
       if (r < 0) return 0;
       return r;
     },
