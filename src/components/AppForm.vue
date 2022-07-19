@@ -107,11 +107,11 @@ export default {
       this.$refs.fullpage.api.reBuild();
     },
   },
-  mounted() {},
+
   beforeUnmount() {
     window.removeEventListener("resize", this.resize);
   },
-  async beforeMount() {
+  async mounted() {
     try {
       const res = await axios.get(this.url);
 

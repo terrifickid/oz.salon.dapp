@@ -17,11 +17,25 @@
               :item="item"
             />
 
-            <p class="mt-24 text-xl">All Proposals</p>
+            <p class="mt-24 text-xl">Active Proposals</p>
             <div class="mt-3">
-              <p class="text-sm mt-3" v-if="!proposals.length">No proposals.</p>
+              <p class="text-sm mt-3" v-if="!activeProposals.length">
+                No proposals.
+              </p>
               <ListProposalItem
-                v-for="(item, index) in proposals"
+                v-for="(item, index) in activeProposals"
+                :key="index"
+                :item="item"
+              />
+            </div>
+
+            <p class="mt-24 text-xl">Closed Proposals</p>
+            <div class="mt-3">
+              <p class="text-sm mt-3" v-if="!closedProposals.length">
+                No proposals.
+              </p>
+              <ListProposalItem
+                v-for="(item, index) in closedProposals"
                 :key="index"
                 :item="item"
               />
@@ -34,6 +48,7 @@
 </template>
 <script>
 // @ is an alias to /src
+//import _ from "lodash";
 import axios from "axios";
 
 import AppShell from "@/components/AppShell";
@@ -50,7 +65,15 @@ export default {
       colors: ["white", "black"],
       proposals: [],
       weights: [],
-      types: ["collect", "invest", "propose", "sell", "transfer", "onboard"],
+      types: [
+        "collect",
+        "invest",
+        "propose",
+        "sell",
+        "transfer",
+        "onboard",
+        "kick",
+      ],
       loaded: false,
     };
   },
@@ -62,6 +85,12 @@ export default {
       return this.proposals.filter(
         (item) => item.profile.walletAddress == this.walletAddress
       );
+    },
+    activeProposals() {
+      return this.proposals.filter((item) => !("passed" in item.votes));
+    },
+    closedProposals() {
+      return this.proposals.filter((item) => "passed" in item.votes);
     },
   },
   methods: {

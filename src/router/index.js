@@ -72,9 +72,14 @@ const routes = [
     path: "/sell",
     name: "sell",
     component: function () {
-      return import(
-        /* webpackChunkName: "ViewCollect" */ "../views/ViewSell.vue"
-      );
+      return import(/* webpackChunkName: "ViewSell" */ "../views/ViewSell.vue");
+    },
+  },
+  {
+    path: "/kick",
+    name: "kick",
+    component: function () {
+      return import(/* webpackChunkName: "ViewKick" */ "../views/ViewKick.vue");
     },
   },
   {

@@ -87,7 +87,13 @@
       </a>
       <a href="/#/governance">
         <router-link v-if="isMember" to="/governance" @click="toggleDown()">
-          <li :colors="colors" class="mr-2">Governance</li>
+          <li :colors="colors" class="mr-2 mb-2">Governance</li>
+        </router-link>
+      </a>
+
+      <a href="/#/kick" v-if="isAdmin">
+        <router-link to="/kick" @click="toggleDown()">
+          <li :colors="colors" class="mr-2 mb-2">Kick</li>
         </router-link>
       </a>
     </ul>
@@ -95,6 +101,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 export default {
   components: {},
   props: ["colors"],
@@ -117,6 +124,11 @@ export default {
       if ("units" in this.profile) {
         return this.profile.units;
       }
+      return false;
+    },
+    isAdmin() {
+      var role = _.get(this.profile, "role");
+      if (role == "Admin") return true;
       return false;
     },
     ui() {
