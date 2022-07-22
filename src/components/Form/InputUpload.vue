@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
-    <FormHelp :help="help" v-if="help" />
+    <FormHelp :help="helpText" v-if="help" />
     <input
       v-show="!progress"
       type="file"
@@ -38,6 +38,7 @@ export default {
   data() {
     return {
       upload: {},
+      helpText: '',
       progress: 0,
     };
   },
@@ -62,6 +63,7 @@ export default {
   },
   mounted() {
     this.upload = new Upload({ apiKey: "public_12a1xmB3sgHFxd1HZqjm5Kh2y1zd" });
+    this.helpText = this.help + "<p class='mt-2'>We have a 50mb file size upload limit, or it will be rejected by <a href='https://upload.io'><u><strong>upload.io</strong></u></a></p>";
   },
 };
 </script>
