@@ -94,12 +94,12 @@ export default {
 };
 </script>
 <style scoped>
-.bold.paragraph {
+.heading-3 {
   @apply mt-10  text-lg sm:text-xl lg:text-2xl font-haffer font-bold inline-block;
 }
 
-.heading-3 {
-  @apply inline-block text-base sm:text-lg lg:text-xl mt-16 font-bold;
+.bold.paragraph {
+  @apply inline-block text-base mt-16 font-bold;
   @apply font-haffer;
 }
 

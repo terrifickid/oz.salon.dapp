@@ -53,10 +53,13 @@
             class="col-span-6 sm:col-span-4 lg:col-span-3 xl:col-span-2 text-sm"
           >
             <div class="pr-4">
-              <p class="pb-4">{{ item.fields.title }}</p>
               <p>{{ item.fields.artist }}</p>
-
+              <p><i>{{ item.fields.title }}</i></p>
               <p class="pb-2">{{ item.fields.year }}</p>
+
+              <p>Acquired {{ item.fields.purchaseDate }} from {{ item.fields.seller }}</p>
+              <p class="pb-2">Appraised Value: {{ format.format(item.fields.mostRecentAppraisalPrice) }}</p>
+
               <p>{{ item.fields.description }}</p>
             </div>
           </div>
@@ -107,6 +110,10 @@ export default {
           itemsToShow: 2.5,
         },
       },
+      format: new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }),
     };
   },
   computed: {

@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getSymbol(i) {
-      var symbols = ["A", "B", "C"];
+      var symbols = ["A", "B", "C", "D", "E", "F"];
       return symbols[i];
     },
   },
