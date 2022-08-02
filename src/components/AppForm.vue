@@ -120,6 +120,7 @@ export default {
         var disabled = [
           "votes",
           "kycApproved",
+          "kycNotified",
           "units",
           "onboardProposal",
           "profile",
