@@ -54,11 +54,19 @@
           >
             <div class="pr-4">
               <p>{{ item.fields.artist }}</p>
-              <p><i>{{ item.fields.title }}</i></p>
+              <p>
+                <i>{{ item.fields.title }}</i>
+              </p>
               <p class="pb-2">{{ item.fields.year }}</p>
 
-              <p>Acquired {{ item.fields.purchaseDate }} from {{ item.fields.seller }}</p>
-              <p class="pb-2">Appraised Value: {{ format.format(item.fields.mostRecentAppraisalPrice) }}</p>
+              <p>
+                Acquired {{ item.fields.purchaseDate }} from
+                {{ item.fields.seller }}
+              </p>
+              <p class="pb-2">
+                Appraised Value:
+                {{ format.format(item.fields.mostRecentAppraisalPrice) }}
+              </p>
 
               <p>{{ item.fields.description }}</p>
             </div>

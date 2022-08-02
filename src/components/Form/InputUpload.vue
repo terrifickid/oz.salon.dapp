@@ -39,7 +39,7 @@ export default {
     return {
       upload: {},
       progress: 0,
-      helpText: '',
+      helpText: "",
     };
   },
   methods: {
@@ -63,7 +63,9 @@ export default {
   },
   mounted() {
     this.upload = new Upload({ apiKey: "public_12a1xmB3sgHFxd1HZqjm5Kh2y1zd" });
-    this.helpText = this.help + "<p class='mt-2'>We have a 50mb file size upload limit, or it will be rejected by <a href='https://upload.io'><u><strong>upload.io</strong></u></a></p>";
+    this.helpText =
+      this.help +
+      "<p class='mt-2'>We have a 50mb file size upload limit, or it will be rejected by <a href='https://upload.io'><u><strong>upload.io</strong></u></a></p>";
   },
 };
 </script>
