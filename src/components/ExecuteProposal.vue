@@ -1,5 +1,10 @@
 <template>
-  <div class="mb-32" v-if="hasEnded && passed && ownsProposal">
+  <div v-if="proposal.contentType == 'kick' && isAdmin">
+    <div class="mb-32">
+      <AppButton @click="sendKick">Execute Kick</AppButton>
+    </div>
+  </div>
+  <div class="mb-32" v-else-if="hasEnded && passed && ownsProposal">
     <div
       class="border border-black p-3 mb-2 flex items-start cursor-pointer"
       @click="method = 'usdc'"
@@ -58,6 +63,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import _ from "lodash";
 import { ethers } from "ethers";
@@ -73,6 +79,9 @@ export default {
   },
   props: ["proposal"],
   computed: {
+    isAdmin() {
+      return _.get(this.profile, "role") == "Admin";
+    },
     profile() {
       return this.$store.state.profile;
     },
@@ -116,6 +125,15 @@ export default {
       console.log("Sending Ex");
       const res = await axios.post(this.uri, { data: obj, proposal: id });
       return res.data;
+    },
+    async sendKick() {
+      var res = await this.submitExecution(this.proposal.id, {
+        type: "kick",
+        proposal: this.proposal,
+        sourceType: "wire",
+        source: this.wireCode,
+      });
+      console.log(res);
     },
     async sendWire() {
       //executions

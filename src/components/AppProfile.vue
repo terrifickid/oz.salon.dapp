@@ -14,9 +14,14 @@
   <p class="border-b border-black p-1 text-left mb-24 text-xs sm:text-base">
     {{ profile.units }}
   </p>
+  <p>
+    <AppDelegateSelect />
+  </p>
 </template>
 <script>
+import AppDelegateSelect from "@/components/AppDelegateSelect";
 export default {
+  components: { AppDelegateSelect },
   props: ["profile"],
 };
 </script>

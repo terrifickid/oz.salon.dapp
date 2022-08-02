@@ -133,15 +133,27 @@ export default {
         const res = await axios.get(
           process.env.VUE_APP_URI + "/members?cache=true"
         );
+        console.log(res.data);
+        var scope = this;
         this.weights = res.data.map(function (item) {
           return {
             walletAddress: item.fields.walletAddress,
-            units: item.fields.units,
+            units: scope.getDelegatedUnits(res.data, item.fields.walletAddress),
           };
         });
       } catch (error) {
         console.log("error", error);
       }
+    },
+    getDelegatedUnits(members, address) {
+      var units = 0;
+      members.forEach(function (item) {
+        if (address == _.get(item, "fields.delegate"))
+          units = units + _.get(item, "fields.units");
+        if (address == _.get(item, "fields.walletAddress"))
+          units = units + _.get(item, "fields.units");
+      });
+      return units;
     },
     getFieldLabel(fields, id) {
       for (let field of fields) {

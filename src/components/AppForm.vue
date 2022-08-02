@@ -114,7 +114,6 @@ export default {
   async mounted() {
     try {
       const res = await axios.get(this.url);
-
       this.name = res.data.name;
       this.description = res.data.description;
       this.fields = res.data.fields.filter(function (field) {
@@ -124,6 +123,7 @@ export default {
           "units",
           "onboardProposal",
           "profile",
+          "role",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

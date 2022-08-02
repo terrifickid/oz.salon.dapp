@@ -1,5 +1,8 @@
 <template>
-  <AppContent class="items-center justify-center" v-if="connected != 1">
+  <AppContent
+    class="items-center justify-center"
+    v-if="!isConnected || !isMetamask"
+  >
     <div class="text-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -132,15 +135,26 @@
           </g>
         </g>
       </svg>
-      <p>
-        <AppButton class="mt-8 sm:mt-4" @click="connect">
-          Connect MetaMask
-        </AppButton>
-      </p>
-      <p class="sm:hidden mt-4 font-haffer text-xs">
-        To access Salon on your mobile device, please connect to Salon through
-        the browser on your Metamask iOS or Android app.
-      </p>
+      <div v-if="isMetamask">
+        <p>
+          <AppButton class="mt-8 sm:mt-4" @click="connect">
+            Connect MetaMask
+          </AppButton>
+        </p>
+        <p class="sm:hidden mt-4 font-haffer text-xs">
+          To access Salon on your mobile device, please connect to Salon through
+          the browser on your Metamask iOS or Android app.
+        </p>
+      </div>
+      <div v-else>
+        <p class="mt-4">
+          Download the
+          <a class="underline" href="https://metamask.io/download/"
+            >Metamask browser extension</a
+          >
+          to securely connect your digital wallet.
+        </p>
+      </div>
     </div>
   </AppContent>
 </template>
@@ -150,8 +164,11 @@ import AppButton from "@/components/AppButton.vue";
 export default {
   components: { AppButton, AppContent },
   computed: {
-    connected() {
-      return localStorage.getItem("salon_login");
+    isConnected() {
+      return localStorage.getItem("salon_login") == 1;
+    },
+    isMetamask() {
+      return typeof window.ethereum !== "undefined";
     },
   },
   methods: {

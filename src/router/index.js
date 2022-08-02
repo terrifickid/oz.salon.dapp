@@ -42,6 +42,15 @@ const routes = [
     },
   },
   {
+    path: "/create-transfer",
+    name: "transfer-form",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewTransfer" */ "../views/ViewTransferForm.vue"
+      );
+    },
+  },
+  {
     path: "/treasury",
     name: "treasury",
     component: function () {

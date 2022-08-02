@@ -37,6 +37,7 @@ export default createStore({
     },
     async connect() {
       console.log("Connecting!");
+      if (typeof window.ethereum == "undefined") return;
       this.state.connecting = true;
       this.state.provider = new ethers.providers.Web3Provider(window.ethereum);
       await this.state.provider.send("eth_requestAccounts", []);

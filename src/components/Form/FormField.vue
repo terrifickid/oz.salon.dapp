@@ -10,40 +10,95 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
-    /></template>
+      />
+    </template>
+    <template v-else-if="isUpload">
+      <InputUpload
+        class="app-frame"
+        :count="index + 1"
+        :title="getTitle"
+        :required="true"
+        :help="getHelpText"
+        @update="updateValue"
+        @ready="$emit('ready')"
+      />
+    </template>
+    <template v-else-if="isLongText">
+      <InputLongText
+        class="app-frame"
+        :count="index + 1"
+        :title="getTitle"
+        :required="true"
+        :help="getHelpText"
+        @update="updateValue"
+        @ready="$emit('ready')"
+      />
+    </template>
+    <template v-else-if="isUnits">
+      <InputUnits
+        class="app-frame"
+        :count="index + 1"
+        :title="getTitle"
+        :required="true"
+        :help="getHelpText"
+        @update="updateValue"
+        @ready="$emit('ready')"
+      />
+    </template>
+    <template v-else-if="isMember">
+      <InputMember
+        class="app-frame"
+        :count="index + 1"
+        :title="getTitle"
+        :required="true"
+        :help="getHelpText"
+        @update="updateValue"
+        @ready="$emit('ready')"
+      />
+    </template>
     <template v-else>
-      <template v-if="isUpload"
-        ><InputUpload
-          class="app-frame"
-          :count="index + 1"
-          :title="getTitle"
-          :required="true"
-          :help="getHelpText"
-          @update="updateValue"
-          @ready="$emit('ready')"
-      /></template>
-      <template v-else>
-        <InputText
-          class="app-frame"
-          :count="index + 1"
-          :title="getTitle"
-          :required="true"
-          :help="getHelpText"
-          @update="updateValue"
-          @ready="$emit('ready')"
-        />
-      </template>
+      <InputText
+        class="app-frame"
+        :count="index + 1"
+        :title="getTitle"
+        :required="true"
+        :help="getHelpText"
+        @update="updateValue"
+        @ready="$emit('ready')"
+      />
     </template>
   </div>
 </template>
 <script>
 import InputText from "@/components/Form/InputText.vue";
+import InputLongText from "@/components/Form/InputLongText.vue";
 import InputChoice from "@/components/Form/InputChoice.vue";
 import InputUpload from "@/components/Form/InputUpload.vue";
+import InputUnits from "@/components/Form/InputUnits.vue";
+import InputMember from "@/components/Form/InputMember.vue";
 export default {
-  components: { InputText, InputChoice, InputUpload },
+  components: {
+    InputText,
+    InputLongText,
+    InputChoice,
+    InputUpload,
+    InputUnits,
+    InputMember,
+  },
   props: ["modelValue", "field", "index"],
   computed: {
+    isMember() {
+      var check = this.field.id.split("0");
+      return check.includes("member");
+    },
+    isUnits() {
+      var check = this.field.id.split("0");
+      return check.includes("units");
+    },
+    isLongText() {
+      var check = this.field.id.split("0");
+      return check.includes("long");
+    },
     getChoice() {
       var choice = this.field.validations.filter(function (v) {
         return "in" in v;
@@ -73,24 +128,6 @@ export default {
   methods: {
     updateValue(val) {
       this.$emit("update:modelValue", val);
-    },
-    helpText(id) {
-      var msg = null;
-      switch (id) {
-        case "uploadTaxForms0upload":
-          msg =
-            'Forms can be downloaded <a class="underline" href="#">here</a>. Please use the W9 form if you are a US investor, or the appropriate W8 form if you are a foreign investor.';
-          break;
-        case "downloadAndReviewSalonsOperatingAgreement":
-          msg =
-            "Download Salon's Operating Agreement <a class='underline' href='#'>here</a>";
-          break;
-        case "executeAndUploadSalonsSubscriptionAgreement0upload":
-          msg =
-            'Download the Subscription Agreement <a class="underline" href="#">here</a>';
-          break;
-      }
-      return msg;
     },
   },
 };
