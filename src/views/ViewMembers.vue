@@ -1,44 +1,27 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <div
-      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer hidden"
+      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer"
     >
-      <select class="text-right alpha p-2 font-bold">
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
-        <option>D</option>
-        <option>E</option>
-        <option>F</option>
-        <option>G</option>
-        <option>H</option>
-        <option>I</option>
-        <option>J</option>
-        <option>K</option>
-        <option>L</option>
-        <option>M</option>
-        <option>N</option>
-        <option>O</option>
-        <option>P</option>
-        <option>Q</option>
-        <option>R</option>
-        <option>S</option>
-        <option>T</option>
-        <option>U</option>
-        <option>V</option>
-        <option>W</option>
-        <option>X</option>
-        <option>Y</option>
-        <option>Z</option>
-      </select>
-      <select class="text-right p-2 font-bold">
-        <option v-for="(m, index) in members" :key="index">
+      <select
+        class="text-right p-2 font-bold"
+        v-model="filters.lastname"
+        v-on:change="filterMembers"
+      >
+        <option value="">Members</option>
+        <option v-for="(m, index) in allMembers" :key="index">
           {{ m.fields.lastName }}
         </option>
       </select>
-      <select class="text-right p-2 font-bold">
-        <option>Most Votes</option>
-        <option>Newest</option>
+      <select
+        class="text-right p-2 font-bold"
+        v-model="filters.orderby"
+        v-on:change="filterMembers"
+      >
+        <option value="">Sort by</option>
+        <option>Alphabetical</option>
+        <option>Date joined</option>
+        <option>Units owned</option>
       </select>
     </div>
     <AppFullpage>
@@ -64,6 +47,11 @@ export default {
     return {
       colors: ["white", "black"],
       members: [],
+      allMembers: [],
+      filters: {
+        lastname: "",
+        orderby: "",
+      },
     };
   },
   computed: {
@@ -71,12 +59,77 @@ export default {
       return this.members.length;
     },
   },
+  methods: {
+    filterMembers() {
+      this.members = this.allMembers.slice();
+
+      if (this.filters.lastname !== "") {
+        this.members = this.members.filter(
+          (member) => member.fields.lastName === this.filters.lastname
+        );
+      }
+
+      if (this.filters.orderby !== "") {
+        switch (this.filters.orderby) {
+          case "Alphabetical":
+            this.members = this.members.sort((a, b) => {
+              const name1 = a.fields.lastName.toUpperCase();
+              const name2 = b.fields.lastName.toUpperCase();
+
+              if (name1 < name2) {
+                return -1;
+              }
+
+              if (name1 > name2) {
+                return 1;
+              }
+
+              return 0;
+            });
+            break;
+
+          case "Date joined":
+            this.members = this.members.sort((a, b) => {
+              const date1 = Date.parse(a.sys.createdAt);
+              const date2 = Date.parse(b.sys.createdAt);
+
+              if (date1 > date2) {
+                return -1;
+              }
+
+              if (date1 < date2) {
+                return 1;
+              }
+
+              return 0;
+            });
+            break;
+
+          case "Units owned":
+            this.members = this.members.sort((a, b) => {
+              if (a.fields.units > b.fields.units) {
+                return -1;
+              }
+
+              if (a.fields.units < b.fields.units) {
+                return 1;
+              }
+
+              return 0;
+            });
+            break;
+        }
+      }
+    },
+  },
+
   async beforeMount() {
     console.log("members load!");
     try {
       const res = await axios.get(
         process.env.VUE_APP_URI + "/members?cache=true"
       );
+      this.allMembers = res.data;
       this.members = res.data;
       console.log(this.members);
     } catch (error) {
