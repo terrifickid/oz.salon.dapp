@@ -21,10 +21,13 @@ import AppJoin from "@/components/AppJoin.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
   components: { AppLoader, AppFooter, WalletConnect, AppJoin },
-  props: ["colors", "isLoaded", "protected"],
+  props: ["colors", "isLoaded", "protected", "kycAllowed"],
   computed: {
     check() {
       if (!this.protected) return true;
+
+      if (this.kycAllowed && this.profile.KycApproved) return true;
+
       if ("units" in this.profile) {
         return this.profile.units;
       }

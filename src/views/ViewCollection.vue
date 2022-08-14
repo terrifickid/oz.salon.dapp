@@ -3,6 +3,7 @@
     :colors="colors"
     :isLoaded="loaded"
     :protected="true"
+    :kycAllowed="true"
     class="font-haffer"
   >
     <div
