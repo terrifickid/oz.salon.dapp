@@ -125,6 +125,7 @@ export default {
           "onboardProposal",
           "profile",
           "role",
+          "delegate",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

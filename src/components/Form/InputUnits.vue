@@ -3,7 +3,8 @@
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
     <FormHelp :help="help" v-if="help" />
     <div class="grid grid-cols-2 gap-6">
-      <div class="col">
+      <div class="col flex items-center">
+        <span class="text-xl mr-2 -ml-5">$</span>
         <input
           type="number"
           class="font-haffer text-xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
@@ -12,6 +13,7 @@
           v-model="amount"
           @input="update"
           autocomplete="off"
+          @change="formatAmount"
         />
       </div>
       <div class="col">
@@ -65,6 +67,10 @@ export default {
   methods: {
     update() {
       if (this.units && this.amount) this.$emit("update", this.value);
+    },
+    formatAmount() {
+      console.log(this.amount);
+      this.amount = parseFloat(this.amount).toFixed(2);
     },
   },
 };

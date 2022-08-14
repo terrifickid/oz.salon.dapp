@@ -15,7 +15,7 @@
     {{ profile.units }}
   </p>
   <p>
-    <AppDelegateSelect />
+    <AppDelegateSelect v-if="profile.walletAddress == this.walletAddress" />
   </p>
 </template>
 <script>
@@ -23,5 +23,10 @@ import AppDelegateSelect from "@/components/AppDelegateSelect";
 export default {
   components: { AppDelegateSelect },
   props: ["profile"],
+  computed: {
+    walletAddress() {
+      return this.$store.state.walletAddress;
+    },
+  },
 };
 </script>

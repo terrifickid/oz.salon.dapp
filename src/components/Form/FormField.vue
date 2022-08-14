@@ -1,6 +1,18 @@
 <template>
   <div class="grid grid-cols-12 px-3 mr-5 sm:mr-24">
-    <template v-if="getChoice">
+    <template v-if="isSubmit">
+      <InputSubmit
+        class="app-frame"
+        :count="index + 1"
+        :title="getTitle"
+        :choices="getChoice"
+        :required="true"
+        :help="getHelpText"
+        @update="updateValue"
+        @ready="$emit('ready')"
+      />
+    </template>
+    <template v-else-if="getChoice">
       <InputChoice
         class="app-frame"
         :count="index + 1"
@@ -76,6 +88,7 @@ import InputChoice from "@/components/Form/InputChoice.vue";
 import InputUpload from "@/components/Form/InputUpload.vue";
 import InputUnits from "@/components/Form/InputUnits.vue";
 import InputMember from "@/components/Form/InputMember.vue";
+import InputSubmit from "@/components/Form/InputSubmit.vue";
 export default {
   components: {
     InputText,
@@ -84,12 +97,17 @@ export default {
     InputUpload,
     InputUnits,
     InputMember,
+    InputSubmit,
   },
   props: ["modelValue", "field", "index"],
   computed: {
     isMember() {
       var check = this.field.id.split("0");
       return check.includes("member");
+    },
+    isSubmit() {
+      var check = this.field.id.split("0");
+      return check.includes("submit");
     },
     isUnits() {
       var check = this.field.id.split("0");

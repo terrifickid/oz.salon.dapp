@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
-    <FormHelp :help="helpText" v-if="help" />
+    <FormHelp :help="help" v-if="help" />
     <input
       v-show="!progress"
       type="file"
@@ -47,6 +47,10 @@ export default {
       console.log("Begin upload!");
       this.uploading = true;
       var file = this.$refs.file.files[0];
+      if (file.size > 5000000) {
+        this.$refs.file.value = null;
+        return alert("Limit file size to 5mb.");
+      }
       const { fileUrl, fileId } = await this.upload.uploadFile({
         file: file,
         onProgress: ({ bytesSent, bytesTotal }) => {
@@ -63,9 +67,6 @@ export default {
   },
   mounted() {
     this.upload = new Upload({ apiKey: "public_12a1xmB3sgHFxd1HZqjm5Kh2y1zd" });
-    this.helpText =
-      this.help +
-      "<p class='mt-2'>We have a 50mb file size upload limit, or it will be rejected by <a href='https://upload.io'><u><strong>upload.io</strong></u></a></p>";
   },
 };
 </script>
