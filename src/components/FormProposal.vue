@@ -150,7 +150,10 @@ export default {
       members.forEach(function (item) {
         if (address == _.get(item, "fields.delegate"))
           units = units + _.get(item, "fields.units");
-        if (address == _.get(item, "fields.walletAddress"))
+        if (
+          address == _.get(item, "fields.walletAddress") &&
+          !_.get(item, "fields.delegate")
+        )
           units = units + _.get(item, "fields.units");
       });
       return units;

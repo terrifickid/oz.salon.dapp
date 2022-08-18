@@ -106,15 +106,19 @@ export default {
     },
     yesPercentageTally() {
       if (!this.total) return 0;
-      return Math.round(
+      var p = Math.round(
         (this.yesWeight / (this.yesWeight + this.noWeight)) * 100
       );
+      if (Number.isNaN(p)) return 0;
+      return p;
     },
     noPercentageTally() {
       if (!this.total) return 0;
-      return Math.round(
+      var p = Math.round(
         (this.noWeight / (this.yesWeight + this.noWeight)) * 100
       );
+      if (Number.isNaN(p)) return 0;
+      return p;
     },
     percentageYes() {
       if (!this.totalUnits || !this.yesWeight) return 0;
