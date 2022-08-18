@@ -4,7 +4,7 @@
       <AppButton @click="sendKick">Execute Kick</AppButton>
     </div>
   </div>
-  <div class="mb-32" v-else-if="(hasEnded && passed && ownsProposal) || 1">
+  <div class="mb-32" v-else-if="hasEnded && passed && ownsProposal">
     <div
       class="border border-black p-3 mb-2 flex items-start cursor-pointer"
       @click="method = 'usdc'"

@@ -54,7 +54,7 @@ import axios from "axios";
 import AppShell from "@/components/AppShell";
 
 import ListProposalItem from "@/components/ListProposalItem";
-
+import _ from "lodash";
 export default {
   components: {
     AppShell,
@@ -83,14 +83,22 @@ export default {
     },
     myProposals() {
       return this.proposals.filter(
-        (item) => item.profile.walletAddress == this.walletAddress
+        (item) =>
+          _.get(item, "fields.profile.walletAddress") == this.walletAddress
       );
     },
     activeProposals() {
-      return this.proposals.filter((item) => !("passed" in item.votes));
+      return this.proposals.filter(
+        (item) => !_.get(item, "fields.votes.passed")
+      );
     },
     closedProposals() {
-      return this.proposals.filter((item) => "passed" in item.votes);
+      return this.proposals.filter((item) =>
+        _.get(item, "fields.votes.passed")
+      );
+    },
+    uri() {
+      return process.env.VUE_APP_URI + "/types/";
     },
   },
   methods: {
@@ -104,61 +112,15 @@ export default {
         console.log("error", error);
       }
     },
-    getFieldLabel(fields, id) {
-      for (let field of fields) {
-        if (field.id == id) return field.name;
-      }
-    },
-    async assembleProposalType(type) {
-      var endpoints = [
-        process.env.VUE_APP_URI + "/type/" + type + "?cache=true",
-        process.env.VUE_APP_URI + "/form/" + type + "?cache=true",
-      ];
-      var scope = this;
-      try {
-        var items = [];
-        var e = await Promise.all(
-          endpoints.map((endpoint) => axios.get(endpoint))
-        );
-        for (const value of Object.values(e[0].data.message.items)) {
-          var votes = { votes: [] };
-          if ("votes" in value.fields) {
-            votes = value.fields.votes;
-            delete value.fields.votes;
-          }
-
-          var fields = await Object.entries(value.fields).map(function (field) {
-            var label = scope.getFieldLabel(e[1].data.fields, field[0]);
-            return {
-              label: label,
-              value: field[1],
-            };
-          });
-
-          var item = {
-            id: value.sys.id,
-            profile: value.fields.profile,
-            createdAt: value.sys.createdAt,
-            contentType: value.sys.contentType.sys.id,
-            votes: votes,
-            fields: fields,
-          };
-          items.push(item);
-        }
-
-        return items;
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    },
   },
   async beforeMount() {
     console.log("proposals load!");
-    var data = await Promise.all(
-      this.types.map((type) => this.assembleProposalType(type))
-    );
-    this.proposals = data.flat();
+    const res = await axios.post(this.uri, {
+      types: "collect,invest,propose,sell,transfer,onboard,kick",
+    });
+    this.proposals = _.get(res, "data.message");
+    console.log(this.proposals);
+
     await this.getWeights();
     this.loaded = true;
     console.log("loaded!");

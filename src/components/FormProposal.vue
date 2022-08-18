@@ -13,7 +13,7 @@
       </AppContent>
     </template>
     <template v-else>
-      <div class="pt-32 font-haffer px-3">
+      <div class="pt-32 font-haffer px-3 pb-32">
         <div class="grid grid-cols-12">
           <div class="app-frame">
             <a class="pb-2 flex items-center" href="/#/governance">
