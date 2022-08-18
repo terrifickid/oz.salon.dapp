@@ -39,10 +39,10 @@ export default createStore({
       console.log("Connecting!");
       if (typeof window.ethereum == "undefined") return;
       this.state.connecting = true;
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      this.state.walletAddress = await signer.getAddress();
+      this.state.provider = new ethers.providers.Web3Provider(window.ethereum);
+      await this.state.provider.send("eth_requestAccounts", []);
+      this.state.signer = this.state.provider.getSigner();
+      this.state.walletAddress = await this.state.signer.getAddress();
       try {
         const res = await axios.get(
           process.env.VUE_APP_URI + "/profile/" + this.state.walletAddress
