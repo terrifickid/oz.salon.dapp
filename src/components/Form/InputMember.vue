@@ -4,7 +4,7 @@
     <FormHelp :help="help" v-if="help" />
     <select
       v-model="value"
-      @change="$emit('update', value)"
+      @change="$emit('update', JSON.stringify(value))"
       class="font-haffer text-xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
     >
       <option v-for="(m, index) in members" :key="index" :value="m.fields">

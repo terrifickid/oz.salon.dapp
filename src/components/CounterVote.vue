@@ -14,8 +14,8 @@
     </div>
 
     <div>Total Votes: {{ total }}</div>
-    <div>Yes: {{ yesPercentageTally }}%</div>
-    <div>No: {{ noPercentageTally }}%</div>
+    <div>Yes: {{ yesPercentageTally }}% ({{ yesWeight }} votes)</div>
+    <div>No: {{ noPercentageTally }}% ({{ noWeight }} votes)</div>
 
     <div class="pt-2" v-if="hasEnded">
       <div v-if="!passed">This did not pass.</div>
