@@ -26,7 +26,7 @@ export default {
     check() {
       if (!this.protected) return true;
 
-      if (this.kycAllowed && this.profile.KycApproved) return true;
+      if (this.kycAllowed && this.profile.kycApproved) return true;
 
       if ("units" in this.profile) {
         return this.profile.units;

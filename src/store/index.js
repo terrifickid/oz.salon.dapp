@@ -39,10 +39,10 @@ export default createStore({
       console.log("Connecting!");
       if (typeof window.ethereum == "undefined") return;
       this.state.connecting = true;
-      this.state.provider = new ethers.providers.Web3Provider(window.ethereum);
-      await this.state.provider.send("eth_requestAccounts", []);
-      this.state.signer = this.state.provider.getSigner();
-      this.state.walletAddress = await this.state.signer.getAddress();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      this.state.walletAddress = await signer.getAddress();
       try {
         const res = await axios.get(
           process.env.VUE_APP_URI + "/profile/" + this.state.walletAddress
@@ -53,6 +53,19 @@ export default createStore({
       } catch (error) {
         console.log("init profile error", error);
       }
+      // The "any" network will allow spontaneous network changes
+      const switcher = new ethers.providers.Web3Provider(
+        window.ethereum,
+        "any"
+      );
+      switcher.on("network", (newNetwork, oldNetwork) => {
+        // When a Provider makes its initial connection, it emits a "network"
+        // event with a null oldNetwork along with the newNetwork. So, if the
+        // oldNetwork exists, it represents a changing network
+        if (oldNetwork) {
+          window.location.reload();
+        }
+      });
       this.state.connecting = false;
     },
   },

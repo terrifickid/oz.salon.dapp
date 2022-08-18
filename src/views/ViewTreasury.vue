@@ -1,5 +1,10 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="isDone" :protected="true">
+  <AppShell
+    :colors="colors"
+    :isLoaded="isDone"
+    :protected="true"
+    :kycAllowed="true"
+  >
     <AppContent class="items-center justify-center font-haffer">
       <div class="grid grid-cols-12 w-full font-haffer">
         <div class="app-frame">
