@@ -61,7 +61,7 @@ export default {
       return this.format.format(val);
     },
     value() {
-      return { units: this.units, amount: this.amount };
+      return JSON.stringify({ units: this.units, amount: this.amount });
     },
   },
   methods: {
