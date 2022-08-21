@@ -1,5 +1,5 @@
 <template>
-  <div v-if="proposal.contentType == 'kick' && isAdmin">
+  <div v-if="proposal.contentType == 'kick' && isAdmin && passed && hasEnded">
     <div class="mb-32">
       <AppButton @click="sendKick">Execute Kick</AppButton>
     </div>

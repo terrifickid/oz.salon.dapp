@@ -63,7 +63,25 @@
                 :key="index"
                 class="mr-5 mb-5"
               >
-                <template v-if="field.label == 'User Profile'"> </template>
+                <template
+                  v-if="disabledFields.includes(field.label)"
+                ></template>
+                <template
+                  v-else-if="
+                    String(field.label).toLowerCase().includes('units')
+                  "
+                >
+                  <b>{{ field.label }}</b
+                  ><br />
+                  {{ format.format(getJSON(field.value).amount) }} for
+                  {{ getJSON(field.value).units }}
+                </template>
+                <template v-else-if="field.label == 'Member'">
+                  <b>{{ field.label }}</b
+                  ><br />{{ getJSON(field.value).firstName }}
+                  {{ getJSON(field.value).lastName }}<br />
+                  {{ getJSON(field.value).walletAddress }}</template
+                >
                 <template v-else>
                   <b>{{ field.label }}</b
                   ><br />{{ field.value }}</template
@@ -104,6 +122,15 @@ export default {
       proposalFormat: {},
       weights: [],
       loaded: false,
+      format: new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }),
+      disabledFields: [
+        "User Profile",
+        "Submit Proposal",
+        "Subscription Booklet",
+      ],
     };
   },
   computed: {
@@ -128,6 +155,9 @@ export default {
     },
   },
   methods: {
+    getJSON(v) {
+      return JSON.parse(v);
+    },
     async getWeights() {
       try {
         const res = await axios.get(
