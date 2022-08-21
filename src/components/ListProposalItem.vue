@@ -1,7 +1,7 @@
 <template>
   <div class="border-b border-black py-3 grid grid-cols-12">
     <div class="col-span-8">
-      <b class="capitalize">{{ item.sys.type }}</b>
+      <b class="capitalize">{{ item.sys.contentType.sys.id }} </b>
       {{ item.fields.profile.firstName }}
       {{ item.fields.profile.lastName }}
       <AppCountdown :start="item.sys.createdAt" />
@@ -21,5 +21,8 @@ import AppCountdown from "@/components/AppCountdown";
 export default {
   components: { AppButton, AppCountdown },
   props: ["item"],
+  mounted() {
+    console.log();
+  },
 };
 </script>

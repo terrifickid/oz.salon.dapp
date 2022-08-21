@@ -65,15 +65,6 @@ export default {
       colors: ["white", "black"],
       proposals: [],
       weights: [],
-      types: [
-        "collect",
-        "invest",
-        "propose",
-        "sell",
-        "transfer",
-        "onboard",
-        "kick",
-      ],
       loaded: false,
     };
   },
@@ -116,7 +107,7 @@ export default {
   async beforeMount() {
     console.log("proposals load!");
     const res = await axios.post(this.uri, {
-      types: "collect,invest,propose,sell,transfer,onboard,kick",
+      types: "collect,invest,propose,sell,onboard,kick",
     });
     this.proposals = _.get(res, "data.message");
     console.log(this.proposals);

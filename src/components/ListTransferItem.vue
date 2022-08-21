@@ -2,8 +2,8 @@
   <div class="border-b border-black py-3 grid grid-cols-12 flex items-center">
     <div class="col-span-8">
       {{ item.id }}
-      {{ item.fields.units0units.units }} units offered @
-      {{ format.format(item.fields.units0units.amount) }}
+      {{ item.fields.units0units }} units offered @
+      {{ format.format(item.fields.units0units) }}
       <p class="text-xs">
         {{ item.fields.profile.walletAddress }}
       </p>
