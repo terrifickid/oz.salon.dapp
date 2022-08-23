@@ -182,7 +182,7 @@ export default {
           units = units + _.get(item, "fields.units");
         if (
           address == _.get(item, "fields.walletAddress") &&
-          !_.get(item, "fields.delegate")
+          _.get(item, "fields.delegate") == 0
         )
           units = units + _.get(item, "fields.units");
       });
