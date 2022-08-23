@@ -39,7 +39,9 @@ export default {
       const res = await axios.get(
         process.env.VUE_APP_URI + "/members?cache=true"
       );
-      this.members = res.data;
+      this.members = res.data.filter(function (item) {
+        return item.fields.units > 0;
+      });
       console.log(this.members);
     } catch (error) {
       console.log("error", error);
