@@ -13,7 +13,7 @@
 // @ is an alias to /src
 import AppShell from "@/components/AppShell.vue";
 import AppForm from "@/components/AppForm";
-import AppContent from "@/components/AppForm";
+import AppContent from "@/components/AppContent";
 export default {
   components: { AppShell, AppForm, AppContent },
   data() {

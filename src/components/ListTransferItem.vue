@@ -1,12 +1,11 @@
 <template>
   <div class="border-b border-black py-3 grid grid-cols-12 flex items-center">
     <div class="col-span-8">
-      {{ item.id }}
-      {{ item.fields.units0units }} units offered @
-      {{ format.format(item.fields.units0units) }}
-      <p class="text-xs">
-        {{ item.fields.profile.walletAddress }}
-      </p>
+      <b>
+        {{ item.fields.profile.firstName }} {{ item.fields.profile.lastName }}
+      </b>
+      {{ JSON.parse(item.fields.units0units).units }} units offered @
+      {{ format.format(JSON.parse(item.fields.units0units).amount) }}
     </div>
     <div class="col-span-4">
       <AppButton class="float-right" @click="sendUSDC(1)"
