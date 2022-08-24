@@ -56,17 +56,18 @@ export default {
       const signer = provider.getSigner();
       const usdcContract = new ethers.Contract(usdc.address, usdc.abi, signer);
       var amt = ethers.utils.parseUnits(value.toString(), 6).toNumber();
+
+      console.log("est");
+
       try {
-        console.log(amt);
         let transfer = await usdcContract.transfer(
           this.item.fields.profile.walletAddress,
           amt,
-          { gasLimit: 28500000 }
+          { gasLimit: 700000 }
         );
-
         var res = await this.submitExecution(this.item.id, {
           type: "units",
-          proposal: this.item,
+          pid: this.item.id,
           to: this.walletAddress,
           sourceType: "usdc",
           source: transfer.hash,

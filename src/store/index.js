@@ -42,6 +42,7 @@ export default createStore({
       this.state.connecting = true;
       var provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       provider.on("network", (newNetwork, oldNetwork) => {
+        console.log("switch!");
         // When a Provider makes its initial connection, it emits a "network"
         // event with a null oldNetwork along with the newNetwork. So, if the
         // oldNetwork exists, it represents a changing network
