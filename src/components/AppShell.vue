@@ -1,14 +1,22 @@
 <template>
   <div :class="salonClass" class="font-haffer">
-    <div v-if="check">
-      <AppLoader v-if="!ready" />
-      <slot v-if="ready"></slot>
-      <AppFooter :colors="colors" />
+    <div
+      v-if="networkError"
+      class="flex min-h-screen items-center justify-center w-screen"
+    >
+      {{ networkError }}
     </div>
-    <div v-if="!check">
-      <WalletConnect v-if="!this.walletAddress" />
-      <AppJoin v-if="this.walletAddress" />
-      <AppFooter :colors="colors" />
+    <div v-else>
+      <div v-if="check">
+        <AppLoader v-if="!ready" />
+        <slot v-if="ready"></slot>
+        <AppFooter :colors="colors" />
+      </div>
+      <div v-if="!check">
+        <WalletConnect v-if="!this.walletAddress" />
+        <AppJoin v-if="this.walletAddress" />
+        <AppFooter :colors="colors" />
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +49,9 @@ export default {
     },
     walletAddress() {
       return this.$store.state.walletAddress;
+    },
+    networkError() {
+      return this.$store.state.networkError;
     },
     connecting() {
       return this.$store.state.connecting;

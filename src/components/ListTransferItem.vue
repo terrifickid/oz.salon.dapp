@@ -4,11 +4,13 @@
       <b>
         {{ item.fields.profile.firstName }} {{ item.fields.profile.lastName }}
       </b>
-      {{ JSON.parse(item.fields.units0units).units }} units offered @
+      {{ JSON.parse(item.fields.units0units).units }} units offered for
       {{ format.format(JSON.parse(item.fields.units0units).amount) }}
     </div>
     <div class="col-span-4">
-      <AppButton class="float-right" @click="sendUSDC(1)"
+      <AppButton
+        class="float-right"
+        @click="sendUSDC(JSON.parse(item.fields.units0units).amount)"
         >Accept Offer</AppButton
       >
     </div>
@@ -30,10 +32,11 @@ export default {
     };
   },
   methods: {
-    async sendUSDC(value = 0.001) {
+    async sendUSDC(value) {
       this.processing = true;
       var usdc = {
-        address: "0x07865c6e87b9f70255377e024ace6630c1eaa37f",
+        gasLimit: 50000,
+        address: this.usdcContractAddress,
         abi: [
           {
             inputs: [
@@ -52,12 +55,15 @@ export default {
       await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
       const usdcContract = new ethers.Contract(usdc.address, usdc.abi, signer);
-      //var amt = ethers.utils.parseUnits(Number(value).toFixed(1), 6).toNumber();
+      var amt = ethers.utils.parseUnits(value.toString(), 6).toNumber();
       try {
+        console.log(amt);
         let transfer = await usdcContract.transfer(
-          "0x0617A6771F16F12b39217aC017c15E036A01761A",
-          value
+          this.item.fields.profile.walletAddress,
+          amt,
+          { gasLimit: 28500000 }
         );
+
         var res = await this.submitExecution(this.item.id, {
           type: "units",
           proposal: this.item,
@@ -83,6 +89,9 @@ export default {
     },
     uri() {
       return process.env.VUE_APP_URI + "/form/executions";
+    },
+    usdcContractAddress() {
+      return process.env.VUE_APP_USDC_CONTRACT;
     },
   },
 };

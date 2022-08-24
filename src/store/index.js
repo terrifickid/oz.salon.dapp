@@ -11,6 +11,7 @@ export default createStore({
     members: [],
     profile: { loading: true },
     ui: true,
+    networkError: "",
   },
   getters: {
     getMembers(state) {
@@ -39,10 +40,19 @@ export default createStore({
       console.log("Connecting!");
       if (typeof window.ethereum == "undefined") return;
       this.state.connecting = true;
-      this.state.provider = new ethers.providers.Web3Provider(window.ethereum);
-      await this.state.provider.send("eth_requestAccounts", []);
-      this.state.signer = this.state.provider.getSigner();
-      this.state.walletAddress = await this.state.signer.getAddress();
+      var provider = new ethers.providers.Web3Provider(window.ethereum);
+      var id = await provider.getNetwork();
+      console.log("ID", id);
+      if (process.env.VUE_APP_CHAIN_NAME != id.name) {
+        this.state.networkError =
+          "Please connect to " +
+          process.env.VUE_APP_CHAIN_NAME.toUpperCase() +
+          " network.";
+        return;
+      }
+      await provider.send("eth_requestAccounts", []);
+      var signer = provider.getSigner();
+      this.state.walletAddress = await signer.getAddress();
       try {
         const res = await axios.get(
           process.env.VUE_APP_URI + "/profile/" + this.state.walletAddress
