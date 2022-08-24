@@ -72,11 +72,6 @@ export default createStore({
       } catch (error) {
         console.log("init profile error", error);
       }
-      // The "any" network will allow spontaneous network changes
-      const switcher = new ethers.providers.Web3Provider(
-        window.ethereum,
-        "any"
-      );
 
       this.state.connecting = false;
     },
