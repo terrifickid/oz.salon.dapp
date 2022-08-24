@@ -40,7 +40,16 @@ export default createStore({
       console.log("Connecting!");
       if (typeof window.ethereum == "undefined") return;
       this.state.connecting = true;
-      var provider = new ethers.providers.Web3Provider(window.ethereum);
+      var provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      provider.on("network", (newNetwork, oldNetwork) => {
+        // When a Provider makes its initial connection, it emits a "network"
+        // event with a null oldNetwork along with the newNetwork. So, if the
+        // oldNetwork exists, it represents a changing network
+        if (oldNetwork) {
+          window.location.reload();
+        }
+      });
+
       var id = await provider.getNetwork();
       console.log("ID", id);
       if (process.env.VUE_APP_CHAIN_NAME != id.name) {
@@ -68,14 +77,7 @@ export default createStore({
         window.ethereum,
         "any"
       );
-      switcher.on("network", (newNetwork, oldNetwork) => {
-        // When a Provider makes its initial connection, it emits a "network"
-        // event with a null oldNetwork along with the newNetwork. So, if the
-        // oldNetwork exists, it represents a changing network
-        if (oldNetwork) {
-          window.location.reload();
-        }
-      });
+
       this.state.connecting = false;
     },
   },
