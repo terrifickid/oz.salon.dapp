@@ -1,8 +1,11 @@
 <template>
   <div class="border-b border-black py-3 grid grid-cols-12 flex items-center">
     <div class="col-span-8">
-      <b>
-        {{ item.fields.profile.firstName }} {{ item.fields.profile.lastName }}
+      <b
+        v-html="
+          item.fields.profile.firstName + ' ' + item.fields.profile.lastName
+        "
+      >
       </b>
       {{ JSON.parse(item.fields.units0units).units }} units offered for
       {{ format.format(JSON.parse(item.fields.units0units).amount) }}
