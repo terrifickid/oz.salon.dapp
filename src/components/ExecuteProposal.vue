@@ -313,7 +313,7 @@ export default {
     },
     async sendKick() {
       try {
-        var res = await this.submitExecution(this.proposal.id, {});
+        var res = await this.submitExecution(this.id, {});
         if (res.result === false) {
           var e = JSON.parse(res.message);
           alert("Error: " + _.get(e, "details.errors[0].details"));
@@ -325,7 +325,7 @@ export default {
     },
     async sendWire() {
       //executions
-      var res = await this.submitExecution(this.proposal.id, {
+      var res = await this.submitExecution(this.id, {
         sourceType: "wire",
         source: this.wireCode,
       });
