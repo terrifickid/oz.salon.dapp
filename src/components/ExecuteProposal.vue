@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="mb-32" v-else-if="hasEnded && passed && ownsProposal">
-      <div v-if="exec">
+      <div v-if="exec" class="text-xs">
         <hr class="mb-2" />
         <p class="mb-2">Your investment is complete.</p>
         <p class="mb-2">
