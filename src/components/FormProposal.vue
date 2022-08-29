@@ -40,7 +40,11 @@
             {{ proposalFormat.profile.lastName }}
 
             <CounterVote :votes="proposalFormat.votes" :weights="weights" />
-            <AppCountdown :start="proposalFormat.createdAt" class="mt-2" />
+            <AppCountdown
+              v-if="!hasEnded"
+              :start="proposalFormat.createdAt"
+              class="mt-2"
+            />
             <div class="mt-3 flex" v-if="canVote">
               <AppButtonVote
                 :id="proposalFormat.id"
@@ -134,6 +138,9 @@ export default {
     };
   },
   computed: {
+    hasEnded() {
+      return typeof _.get(this.proposalFormat, "votes.passed") == "boolean";
+    },
     isProposer() {
       return true;
     },

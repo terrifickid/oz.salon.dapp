@@ -80,12 +80,12 @@ export default {
     },
     activeProposals() {
       return this.proposals.filter(
-        (item) => !_.get(item, "fields.votes.passed")
+        (item) => typeof _.get(item, "fields.votes.passed") != "boolean"
       );
     },
     closedProposals() {
-      return this.proposals.filter((item) =>
-        _.get(item, "fields.votes.passed")
+      return this.proposals.filter(
+        (item) => typeof _.get(item, "fields.votes.passed") == "boolean"
       );
     },
     uri() {
