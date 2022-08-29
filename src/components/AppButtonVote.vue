@@ -24,6 +24,7 @@
 import _ from "lodash";
 import axios from "axios";
 import AppButton from "@/components/AppButton.vue";
+import { ethers } from "ethers";
 export default {
   components: { AppButton },
   props: ["id", "votes", "choice", "label"],
@@ -50,6 +51,9 @@ export default {
 
       return voted;
     },
+    uri() {
+      return process.env.VUE_APP_URI + "/vote/" + this.id;
+    },
   },
   methods: {
     async vote() {
@@ -61,16 +65,18 @@ export default {
 
       //Sign Message and Vote
       try {
-        const signature = await this.$store.state.signer.signMessage(vote);
-        console.log("Sending Vote!");
-        const res = await axios.post(
-          "https://salontest-terrifickid.cloud.okteto.net/vote/" + this.id,
-          {
-            address: this.walletAddress,
-            vote: vote,
-            signature: signature,
-          }
+        var provider = new ethers.providers.Web3Provider(
+          window.ethereum,
+          "any"
         );
+        var signer = provider.getSigner();
+        const signature = await signer.signMessage(vote);
+        console.log("Sending Vote!");
+        const res = await axios.post(this.uri, {
+          address: this.walletAddress,
+          vote: vote,
+          signature: signature,
+        });
         console.log(res.data);
         location.reload();
       } catch (err) {

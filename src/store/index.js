@@ -31,8 +31,6 @@ export default createStore({
     async disconnect() {
       this.state.walletAddress = null;
       this.state.profile = { loading: true };
-      this.state.provider = null;
-      this.state.signer = null;
 
       localStorage.setItem("salon_login", 0);
     },
