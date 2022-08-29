@@ -1,3 +1,4 @@
+l
 <template>
   <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <div
@@ -129,8 +130,8 @@ export default {
       const res = await axios.get(
         process.env.VUE_APP_URI + "/members?cache=true"
       );
-      this.allMembers = res.data;
-      this.members = res.data;
+      this.allMembers = res.data.filter((member) => member.fields.units > 0);
+      this.members = res.data.filter((member) => member.fields.units > 0);
       console.log(this.members);
     } catch (error) {
       console.log("error", error);
