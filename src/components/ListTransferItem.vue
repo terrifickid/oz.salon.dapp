@@ -38,7 +38,6 @@ export default {
     async sendUSDC(value) {
       this.processing = true;
       var usdc = {
-        gasLimit: 50000,
         address: this.usdcContractAddress,
         abi: [
           {

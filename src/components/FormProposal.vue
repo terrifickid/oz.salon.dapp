@@ -93,7 +93,7 @@
               </li>
             </ul>
 
-            <ExecuteProposal :proposal="proposalFormat" />
+            <ExecuteProposal :proposal="proposal" />
           </div>
         </div>
       </div>
@@ -134,6 +134,7 @@ export default {
         "User Profile",
         "Submit Proposal",
         "Subscription Booklet",
+        "votes",
       ],
     };
   },
@@ -167,9 +168,7 @@ export default {
     },
     async getWeights() {
       try {
-        const res = await axios.get(
-          process.env.VUE_APP_URI + "/members?cache=true"
-        );
+        const res = await axios.get(process.env.VUE_APP_URI + "/members");
         console.log(res.data);
         var scope = this;
         this.weights = res.data.map(function (item) {
@@ -203,14 +202,11 @@ export default {
     async assembleProposalType(type) {
       var scope = this;
       try {
-        var e = await axios.get(
-          process.env.VUE_APP_URI + "/form/" + type + "?cache=true"
-        );
+        var e = await axios.get(process.env.VUE_APP_URI + "/form/" + type);
 
         var votes = { votes: [] };
         if ("votes" in this.proposal.fields) {
           votes = this.proposal.fields.votes;
-          delete this.proposal.fields.votes;
         }
 
         var fields = await Object.entries(this.proposal.fields).map(function (
@@ -243,11 +239,14 @@ export default {
 
     try {
       const res = await axios.get(this.uri);
+
       this.proposal = res.data;
+
       var r = await this.assembleProposalType(
         this.proposal.sys.contentType.sys.id
       );
       this.proposalFormat = r;
+
       if (_.get(this.proposalFormat, "votes.weights.length")) {
         this.weights = _.get(this.proposalFormat, "votes.weights");
       } else {
