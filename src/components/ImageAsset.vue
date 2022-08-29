@@ -27,12 +27,14 @@ export default {
       imageSrc: null,
     };
   },
+  computed: {
+    uri() {
+      return process.env.VUE_APP_URI + "/asset/" + this.image.sys.id;
+    },
+  },
   async mounted() {
     try {
-      const res = await axios.get(
-        "https://salontest-terrifickid.cloud.okteto.net/asset/" +
-          this.image.sys.id
-      );
+      const res = await axios.get(this.uri);
       this.imageSrc = res.data.url;
       console.log("image is", this.image.sys.id, res.data);
     } catch (error) {
