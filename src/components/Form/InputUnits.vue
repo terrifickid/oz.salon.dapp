@@ -28,11 +28,15 @@
         />
       </div>
     </div>
-    <div class="text-sm mt-3">Per unit price: {{ perUnitPrice }}</div>
-    <FormButtonOk @ready="$emit('ready')" />
+    <div class="text-sm mt-3">
+      Per unit price: {{ format.format(perUnitPrice) }}
+    </div>
+    <FormButtonOk @ready="next" />
   </div>
 </template>
 <script>
+import _ from "lodash";
+import axios from "axios";
 import FormLabel from "@/components/Form/FormLabel.vue";
 import FormHelp from "@/components/Form/FormHelp.vue";
 import FormButtonOk from "@/components/Form/FormButtonOk.vue";
@@ -52,19 +56,44 @@ export default {
         style: "currency",
         currency: "USD",
       }),
+      treasury: {},
     };
   },
   computed: {
+    bookValue() {
+      return (
+        _.get(this.treasury, "balance") +
+        _.get(this.treasury, "balanceInUsdc") +
+        _.get(this.treasury, "collectionValue")
+      );
+    },
+    suggestedTradingPrice() {
+      var c = this.bookValue / _.get(this.treasury, "totalUnits");
+      return c.toFixed(2);
+    },
     perUnitPrice() {
       var val = this.amount / this.units;
-      if (!Number.isFinite(val)) return this.format.format(0);
-      return this.format.format(val);
+      if (!Number.isFinite(val)) return 0;
+      return val;
     },
     value() {
       return JSON.stringify({ units: this.units, amount: this.amount });
     },
   },
   methods: {
+    next() {
+      if (this.amount < 30000) {
+        alert("Proposal below the minimum buy-in price of $30,000.");
+        return;
+      }
+      if (this.perUnitPrice < this.suggestedTradingPrice) {
+        alert(
+          "Your offer is below the appraised value of Salon's assets and can not be accepted. Please try again with an offer at or above book value."
+        );
+        return;
+      }
+      this.$emit("ready");
+    },
     update() {
       if (this.units && this.amount) this.$emit("update", this.value);
     },
@@ -72,6 +101,11 @@ export default {
       console.log(this.amount);
       this.amount = parseFloat(this.amount).toFixed(2);
     },
+  },
+  async mounted() {
+    var res = await axios.get(process.env.VUE_APP_URI + "/treasury/");
+    this.treasury = res.data.message;
+    console.log(this.treasury);
   },
 };
 </script>
