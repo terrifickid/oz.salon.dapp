@@ -60,7 +60,7 @@
                 :label="'No'"
               />
             </div>
-
+            <h3 class="mt-10">Details</h3>
             <ul class="mt-5 pb-5">
               <li
                 v-for="(field, index) in proposalFormat.fields"
@@ -75,20 +75,23 @@
                     String(field.label).toLowerCase().includes('units')
                   "
                 >
-                  <b>{{ field.label }}</b
-                  ><br />
-                  {{ format.format(getJSON(field.value).amount) }} for
-                  {{ getJSON(field.value).units }}
+                  {{ field.label }}<br />
+                  The member would like to buy
+                  {{ getJSON(field.value).units }} units for
+                  {{ format.format(getJSON(field.value).amount) }}.
+                  <p>
+                    For reference, the book value of Salon units now is
+                    {{ format.format(bookValue) }} and the suggested trading
+                    price is {{ format.format(suggestedTradingPrice) }}.
+                  </p>
                 </template>
                 <template v-else-if="field.label == 'Member'">
-                  <b>{{ field.label }}</b
-                  ><br />{{ getJSON(field.value).firstName }}
+                  {{ field.label }}<br />{{ getJSON(field.value).firstName }}
                   {{ getJSON(field.value).lastName }}<br />
                   {{ getJSON(field.value).walletAddress }}</template
                 >
                 <template v-else>
-                  <b>{{ field.label }}</b
-                  ><br />{{ field.value }}</template
+                  {{ field.label }}<br />{{ field.value }}</template
                 >
               </li>
             </ul>
@@ -136,9 +139,21 @@ export default {
         "Subscription Booklet",
         "votes",
       ],
+      treasury: {},
     };
   },
   computed: {
+    bookValue() {
+      return (
+        _.get(this.treasury, "balance") +
+        _.get(this.treasury, "balanceInUsdc") +
+        _.get(this.treasury, "collectionValue")
+      );
+    },
+    suggestedTradingPrice() {
+      var c = this.bookValue / _.get(this.treasury, "totalUnits");
+      return c.toFixed(2);
+    },
     hasEnded() {
       return typeof _.get(this.proposalFormat, "votes.passed") == "boolean";
     },
@@ -238,9 +253,14 @@ export default {
     console.log("loading proposal!");
 
     try {
-      const res = await axios.get(this.uri);
+      var res = await Promise.all([
+        axios.get(process.env.VUE_APP_URI + "/treasury/"),
+        axios.get(this.uri),
+      ]);
+      this.treasury = res[0].data.message;
+      this.proposal = res[1].data;
 
-      this.proposal = res.data;
+      console.log(this.treasury);
 
       var r = await this.assembleProposalType(
         this.proposal.sys.contentType.sys.id
