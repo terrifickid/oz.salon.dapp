@@ -58,9 +58,6 @@ export default {
       const signer = provider.getSigner();
       const usdcContract = new ethers.Contract(usdc.address, usdc.abi, signer);
       var amt = ethers.utils.parseUnits(value.toString(), 6).toNumber();
-
-      console.log("est");
-
       try {
         let transfer = await usdcContract.transfer(
           this.item.fields.profile.walletAddress,

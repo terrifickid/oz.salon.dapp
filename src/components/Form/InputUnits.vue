@@ -60,6 +60,13 @@ export default {
     };
   },
   computed: {
+    minimumInvestment() {
+      if (this.profileUnits > 0) return 0;
+      return 0.003;
+    },
+    profileUnits() {
+      return _.get(this.$store, "state.profile.units");
+    },
     bookValue() {
       return (
         _.get(this.treasury, "balance") +
@@ -82,7 +89,7 @@ export default {
   },
   methods: {
     next() {
-      if (this.amount < 0.003) {
+      if (this.amount < this.minimumInvestment) {
         alert("Proposal below the minimum buy-in price of $30,000.");
         return;
       }
@@ -105,7 +112,6 @@ export default {
   async mounted() {
     var res = await axios.get(process.env.VUE_APP_URI + "/treasury/");
     this.treasury = res.data.message;
-    console.log(this.treasury);
   },
 };
 </script>

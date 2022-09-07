@@ -1,6 +1,7 @@
 <template>
   <AppShell :colors="colors" :isLoaded="true" :protected="true">
-    <div v-if="isDone" class="pt-32 pb-32">
+    <AppContent v-if="name">test!</AppContent>
+    <div v-if="isDone && !complete.length" class="pt-32 pb-32">
       <div class="grid grid-cols-12 w-full">
         <div class="app-frame">
           <div class="px-3">
@@ -23,22 +24,28 @@
 
 <script>
 // @ is an alias to /src
+import _ from "lodash";
 import axios from "axios";
 import AppButton from "@/components/AppButton";
+import AppContent from "@/components/AppContent";
 import AppShell from "@/components/AppShell.vue";
 import ListTransferItem from "@/components/ListTransferItem.vue";
 export default {
-  components: { AppShell, AppButton, ListTransferItem },
+  components: { AppShell, AppButton, ListTransferItem, AppContent },
   data() {
     return {
       colors: ["white", "black"],
       isDone: false,
       transfers: [],
+      complete: {},
     };
   },
   computed: {
     uri() {
-      return process.env.VUE_APP_URI + "/type/transfer?cache=true";
+      return process.env.VUE_APP_URI + "/type/transfer";
+    },
+    name() {
+      return _.get(this.complete, "name");
     },
   },
   async beforeMount() {
