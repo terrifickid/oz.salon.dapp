@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     next() {
-      if (this.amount < 30000) {
+      if (this.amount < 0.003) {
         alert("Proposal below the minimum buy-in price of $30,000.");
         return;
       }

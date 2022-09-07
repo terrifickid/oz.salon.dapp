@@ -76,9 +76,17 @@
                   "
                 >
                   {{ field.label }}<br />
-                  The member would like to buy
-                  {{ getJSON(field.value).units }} units for
+
+                  {{ name }} would like to purchase
+                  {{ getJSON(field.value).units }} units at a price of
+                  {{
+                    format.format(
+                      getJSON(field.value).amount / getJSON(field.value).units
+                    )
+                  }}
+                  per unit for a total of
                   {{ format.format(getJSON(field.value).amount) }}.
+
                   <p>
                     For reference, the book value of Salon units now is
                     {{ format.format(bookValue) }} and the suggested trading
@@ -143,6 +151,13 @@ export default {
     };
   },
   computed: {
+    name() {
+      return (
+        this.proposalFormat.profile.firstName +
+        " " +
+        this.proposalFormat.profile.lastName
+      );
+    },
     bookValue() {
       return (
         _.get(this.treasury, "balance") +
