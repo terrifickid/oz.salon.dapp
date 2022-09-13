@@ -9,7 +9,7 @@
     <div v-else>
       <div v-if="check">
         <AppLoader v-if="!ready" />
-        <slot v-if="ready"></slot>
+        <div v-show="ready"><slot></slot></div>
         <AppFooter :colors="colors" />
       </div>
       <div v-if="!check">
