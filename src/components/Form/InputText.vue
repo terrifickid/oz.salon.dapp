@@ -1,17 +1,18 @@
 <template>
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
-    <FormHelp :help="help" v-if="help" />
+
     <input
       type="text"
-      class="font-haffer text-xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
-      placeholder="..."
+      class="font-haffer text-2xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
+      placeholder=""
       required
       v-model="value"
       @input="$emit('update', value)"
       @keyup.enter="$emit('ready')"
       autocomplete="off"
     />
+    <FormHelp :help="help" v-if="help" />
     <FormButtonOk @ready="$emit('ready')" />
   </div>
 </template>

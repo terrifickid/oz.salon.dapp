@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 px-3 mr-5 sm:mr-24">
+  <div>
     <template v-if="isSubmit">
       <InputSubmit
         class="app-frame"

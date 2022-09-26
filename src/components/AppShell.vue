@@ -29,7 +29,12 @@ import AppJoin from "@/components/AppJoin.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
   components: { AppLoader, AppFooter, WalletConnect, AppJoin },
-  props: ["colors", "isLoaded", "protected", "kycAllowed"],
+  data() {
+    return {
+      colors: ["white", "black"],
+    };
+  },
+  props: ["isLoaded", "protected", "kycAllowed"],
   computed: {
     check() {
       if (!this.protected) return true;
@@ -61,9 +66,7 @@ export default {
     },
   },
   methods: {
-    mounted() {
-      console.log(this.background);
-    },
+    mounted() {},
     connect() {
       this.$store.dispatch("connect");
     },

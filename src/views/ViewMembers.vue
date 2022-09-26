@@ -1,58 +1,87 @@
-l
 <template>
-  <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
-    <div
-      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer"
-    >
-      <select
-        class="text-right p-2 font-bold"
-        v-model="filters.lastname"
-        v-on:change="filterMembers"
-      >
-        <option value="">Members</option>
-        <option v-for="(m, index) in allMembers" :key="index">
-          {{ m.fields.lastName }}
-        </option>
-      </select>
-      <select
-        class="text-right p-2 font-bold"
-        v-model="filters.orderby"
-        v-on:change="filterMembers"
-      >
-        <option value="">Sort by</option>
-        <option>Alphabetical</option>
-        <option>Date joined</option>
-        <option>Units owned</option>
-      </select>
-    </div>
-    <AppFullpage>
-      <div v-for="(profile, index) in members" :key="index" class="section">
-        <div class="grid grid-cols-12 w-full pt-32 font-haffer px-3">
-          <div class="app-frame">
-            <AppProfile :profile="profile.fields" />
-          </div>
-        </div>
+  <AppShell
+    :colors="colors"
+    :isLoaded="loaded"
+    :protected="false"
+    class="pb-64"
+  >
+    <div class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
+      <div class="col-span-12 md:col-span-6">
+        <p class="text-2xl mb-8">Members</p>
+        <p class="text-2xl opacity-50">
+          We are a distributed online community of collectors, artists,
+          investors, and art professionals exploring new ways to build and
+          manage an institutional-grade art collection.
+        </p>
       </div>
-    </AppFullpage>
+      <div class="hidden md:block md:col-span-3"></div>
+      <div class="hidden md:block md:col-span-3">
+        <p class="pb-8">Contact</p>
+        <p class="opacity-50 pb-4">Jordan Huelskamp<br /><i>Founder</i></p>
+        <p class="opacity-50">hello@salondao.xyz</p>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-12 w-full fot-haffer px-5 pt-12"
+      stye="font-size: 16px;"
+    >
+      <div
+        class="col-span-6 md:col-span-3 pb-4"
+        v-for="(profile, index) in members"
+        :key="index"
+      >
+        <b>{{ profile.fields.firstName }} {{ profile.fields.lastName }}</b>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 pt-12 w-full font-haffer px-5 pt-24 gap-5">
+      <div class="col-span-12 md:col-span-6">
+        <p class="text-2xl opacity-50">
+          Together, our members command unique insights into artists across
+          regions, periods, and mediums. Our personal collections include works
+          by a diverse set of leading artists.
+        </p>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-12 w-full fot-haffer px-5 pt-12 gap-5"
+      stye="font-size: 16px;"
+    >
+      <div
+        class="col-span-6 md:col-span-3 pb-4"
+        v-for="(artist, index) in artists"
+        :key="index"
+      >
+        <b>{{ artist }}</b>
+      </div>
+    </div>
   </AppShell>
 </template>
 <script>
 // @ is an alias to /src
 import axios from "axios";
 import AppShell from "@/components/AppShell";
-import AppFullpage from "@/components/AppFullpage";
-import AppProfile from "@/components/AppProfile";
+
 export default {
-  components: { AppFullpage, AppShell, AppProfile },
+  components: { AppShell },
   data() {
     return {
       colors: ["white", "black"],
       members: [],
       allMembers: [],
-      filters: {
-        lastname: "",
-        orderby: "",
-      },
+      artists: [
+        "Kennedy Yanko",
+        "José Davila",
+        "Jean-Baptiste Bernadet",
+        "Günther Förg",
+        "Mika Tajima",
+        "Yoko Ono",
+        "Kennedy Yanko",
+        "José Davila",
+        "Jean-Baptiste Bernadet",
+        "Günther Förg",
+        "Mika Tajima",
+        "Yoko Ono",
+      ],
     };
   },
   computed: {

@@ -101,6 +101,40 @@ const routes = [
     },
   },
   {
+    path: "/mission",
+    name: "mission",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewMission" */ "../views/ViewMission.vue"
+      );
+    },
+  },
+  {
+    path: "/faq",
+    name: "faq",
+    component: function () {
+      return import(/* webpackChunkName: "ViewFaq" */ "../views/ViewFaq.vue");
+    },
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewContact" */ "../views/ViewContact.vue"
+      );
+    },
+  },
+  {
+    path: "/apply",
+    name: "apply",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewApply" */ "../views/ViewApply.vue"
+      );
+    },
+  },
+  {
     path: "/join",
     name: "join",
     component: function () {

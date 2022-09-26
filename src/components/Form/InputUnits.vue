@@ -1,13 +1,13 @@
 <template>
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
-    <FormHelp :help="help" v-if="help" />
-    <div class="grid grid-cols-2 gap-6">
-      <div class="col flex items-center">
-        <span class="text-xl mr-2 -ml-5">$</span>
+
+    <div class="grid grid-cols-2 gap-40 text-2xl">
+      <div class="col flex items-center border-b border-black">
+        <span class="mr-2">$</span>
         <input
           type="number"
-          class="font-haffer text-xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
+          class="font-haffer sm:ml-0 bg-transparent block w-full text-black py-3 outline-none placeholder-opb"
           placeholder="Amount"
           required
           v-model="amount"
@@ -19,7 +19,7 @@
       <div class="col">
         <input
           type="number"
-          class="font-haffer text-xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
+          class="font-haffer sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
           placeholder="Units"
           @input="update"
           required
@@ -28,9 +28,11 @@
         />
       </div>
     </div>
-    <div class="text-sm mt-3">
+    <div class="text-2xl mt-8 opacity-50">
       Per unit price: {{ format.format(perUnitPrice) }}
     </div>
+
+    <FormHelp :help="help" v-if="help" />
     <FormButtonOk @ready="next" />
   </div>
 </template>

@@ -1,26 +1,56 @@
 <template>
   <AppLoader v-show="processing" />
-  <full-page
+  <div
     v-show="!processing"
     v-if="ready"
     ref="fullpage"
-    :options="options"
-    class="pr-16"
+    class="pt-20 px-5 container pb-64"
   >
-    <div class="section">
-      <FormIntro :name="name" :description="description" @ready="next" />
-    </div>
-    <template v-for="(field, index) in fields" :key="index">
-      <div class="section">
-        <FormField
-          :field="field"
-          @ready="next"
-          :index="index"
-          v-model="form[field.id]"
-        />
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 lg:col-span-8">
+        <div class="text-2xl mb-6">{{ name }}</div>
+        <ul class="text-2xl mb-12" v-show="selectedIndex > -1">
+          <li
+            v-for="(field, index) in fields"
+            :key="index"
+            class="inline-block items-center mr-2"
+            :class="{ 'opacity-50': selectedIndex < index }"
+          >
+            <span class="flex items-center">
+              {{ field.name }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 ml-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                />
+              </svg>
+            </span>
+          </li>
+        </ul>
+        <div v-show="selectedIndex == -1">
+          <FormIntro :name="name" :description="description" @ready="next" />
+        </div>
+        <template v-for="(field, index) in fields" :key="index">
+          <div v-show="selectedIndex == index">
+            <FormField
+              :field="field"
+              @ready="next"
+              :index="index"
+              v-model="form[field.id]"
+            />
+          </div>
+        </template>
       </div>
-    </template>
-  </full-page>
+    </div>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -41,14 +71,7 @@ export default {
       fields: [],
       form: {},
       sending: false,
-      options: {
-        licenseKey: "K9EP6-N164H-2BKM8-MJLGI-KSURM",
-        controlArrows: true,
-        scrollBar: false,
-        scrollingSpeed: 500,
-        navigation: true,
-        navigationPosition: "right",
-      },
+      selectedIndex: -1,
     };
   },
   computed: {
@@ -62,6 +85,7 @@ export default {
         this.submitForm();
       } else {
         console.log("next");
+        //this.selectedIndex++;
         //this.$refs.fullpage.api.moveSectionDown();
       }
     },
@@ -73,7 +97,7 @@ export default {
         if (this.form[field.id] == "") error = true;
         if (!([field.id] in this.form)) error = true;
         if (error) {
-          this.$refs.fullpage.api.moveTo(i + 2);
+          this.selectedIndex = i;
           break;
         }
         i++;
@@ -104,7 +128,7 @@ export default {
     },
     async resize() {
       //alert("resize!");
-      this.$refs.fullpage.api.reBuild();
+      //  this.$refs.fullpage.api.reBuild();
     },
   },
 

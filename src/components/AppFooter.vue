@@ -1,26 +1,62 @@
 <template>
   <div
-    v-show="ui"
-    class="fixed overflow-hidden left-0 right-0 bottom-0 p-3 z-10"
+    class="fixed overflow-hidden left-0 right-0 bottom-0 p-5 z-10"
     :class="{ ['bg-' + colors[0]]: true }"
   >
-    <div class="grid grid-cols-10">
+    <div class="grid grid-cols-12">
+      <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2">
+        <a href="/#/" class="opacity-100"
+          ><img src="Salon_Logotype_RGB_Negative.svg"
+        /></a>
+      </div>
       <div
-        class="col-start-7 col-span-4 sm:col-start-8 sm:col-span-3 lg:col-start-9 lg:col-span-2"
+        id="links"
+        class="hidden md:flex col-span-8 sm:col-span-9 lg:col-span-10 flex items-end justify-end"
       >
-        <a href="/#/"><img src="Salon_Logotype_RGB_3D.jpg" /></a>
+        <router-link v-if="!isMember" class="mr-2" to="/members"
+          >Members</router-link
+        >
+        <router-link class="mr-2" to="/mission">Mission</router-link>
+        <router-link class="mr-2" to="/faq">Faq</router-link>
+        <router-link class="mr-2" to="/contact">Contact</router-link>
+        <router-link v-if="isMember" class="mr-2" to="/resources"
+          >Resources</router-link
+        >
+        <router-link v-if="!isMember" class="mr-2" to="/apply"
+          >Apply</router-link
+        >
       </div>
     </div>
   </div>
 </template>
 <script>
+import _ from "lodash";
 export default {
   props: ["colors"],
   components: {},
   computed: {
-    ui() {
-      return this.$store.state.ui;
+    walletAddress() {
+      return this.$store.state.walletAddress;
+    },
+    profile() {
+      return this.$store.state.profile;
+    },
+    isMember() {
+      return _.get(this.profile, "units");
+    },
+    isAdmin() {
+      var role = _.get(this.profile, "role");
+      if (role == "Admin") return true;
+      return false;
     },
   },
 };
 </script>
+<style scoped>
+#links a {
+  @apply opacity-50;
+}
+#links a.router-link-active {
+  @apply opacity-100;
+}
+</style>

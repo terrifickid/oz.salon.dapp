@@ -2,15 +2,20 @@
   <AppLoader v-if="!loaded" />
   <template v-if="loaded">
     <template v-if="isProposer && !isMember && !passed">
-      <AppContent class="items-center justify-center app-text">
-        <div class="p-3">
-          Thank you for submitting your application and making a financial
-          commitment to Salon. Salon’s Members will now vote to approve or deny
-          your application. If you are approved, you will have seven days to
-          finalize your membership by sending your investment by digital wallet
-          or bank wire.
+      <div class="pt-20 px-5 container">
+        <div class="grid grid-cols-12">
+          <div class="col-span-10">
+            <p class="text-2xl mb-8 text-green-500">Onboard Recieved</p>
+            <h1 class="text-2xl opacity-50 font-haffer">
+              Thank you for submitting your application and making a financial
+              commitment to Salon. Salon’s Members will now vote to approve or
+              deny your application. If you are approved, you will have seven
+              days to finalize your membership by sending your investment by
+              digital wallet or bank wire.
+            </h1>
+          </div>
         </div>
-      </AppContent>
+      </div>
     </template>
     <template v-else>
       <div class="pt-32 font-haffer px-3 pb-32">
@@ -118,7 +123,7 @@ import AppLoader from "@/components/AppLoader";
 import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
-import AppContent from "@/components/AppContent";
+
 import ExecuteProposal from "@/components/ExecuteProposal";
 export default {
   components: {
@@ -126,7 +131,7 @@ export default {
     AppCountdown,
     AppButtonVote,
     AppLoader,
-    AppContent,
+
     ExecuteProposal,
   },
   props: ["id"],

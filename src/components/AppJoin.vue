@@ -2,20 +2,23 @@
   <div v-if="ready">
     <template v-if="isNew"> <AppForm :url="membersURI" /></template>
     <template v-if="!isKycApproved && !isNew">
-      <AppContent class="items-center justify-center">
-        <div class="p-12 text-center">
-          <h1 class="app-text text-center font-haffer">
-            Thank you for providing us with information to verify your status as
-            an accredited investor. You will be notified when you have been
-            approved to submit an onboarding application to join Salon. Please
-            reach out to
-            <a class="bold underline" href="mailto:hello@salondao.xyz"
-              >hello@salondao.xyz</a
-            >
-            with any questions.
-          </h1>
+      <div class="pt-20 px-5 container">
+        <div class="grid grid-cols-12">
+          <div class="col-span-10">
+            <p class="text-2xl mb-8 text-green-500">Application Recieved</p>
+            <h1 class="text-2xl opacity-50 font-haffer">
+              Thank you for providing us with information to verify your status
+              as an accredited investor. You will be notified when you have been
+              approved to submit an onboarding application to join Salon. Please
+              reach out to
+              <a class="bold underline" href="mailto:hello@salondao.xyz"
+                >hello@salondao.xyz</a
+              >
+              with any questions.
+            </h1>
+          </div>
         </div>
-      </AppContent>
+      </div>
     </template>
 
     <template v-if="isKycApproved && !isApplied">
@@ -27,12 +30,11 @@
   </div>
 </template>
 <script>
-import AppContent from "@/components/AppContent";
 import AppForm from "@/components/AppForm";
 import FormProposal from "@/components/FormProposal.vue";
 
 export default {
-  components: { AppContent, AppForm, FormProposal },
+  components: { AppForm, FormProposal },
   computed: {
     loaded() {
       return this.profile;

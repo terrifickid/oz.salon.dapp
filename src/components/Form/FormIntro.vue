@@ -1,12 +1,7 @@
 <template>
-  <div class="grid grid-cols-12 px-3">
-    <div class="app-frame">
-      <div class="sm:ml-0">
-        <p class="app-text mb-2 font-haffer font-bold">{{ name }}</p>
-        <p class="font-haffer">{{ description }}</p>
-        <FormButtonBegin @ready="$emit('ready')" />
-      </div>
-    </div>
+  <div class="text-2xl">
+    <p class="font-haffer opacity-50">{{ description }}</p>
+    <FormButtonBegin @ready="$emit('ready')" />
   </div>
 </template>
 <script>

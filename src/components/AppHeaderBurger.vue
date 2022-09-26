@@ -1,14 +1,32 @@
 <template>
   <div
-    v-show="ui"
-    class="px-3 pt-3 fixed w-screen overflow-hidden z-50 transition-all font-haffer"
+    class="px-5 py-5 fixed w-screen overflow-hidden z-50 font-haffer"
     :class="{
-      'h-screen bg-black text-white': toggle,
-      'h-12 bg-white text-black': !toggle,
+      'h-screen bg-white text-black': toggle,
+      'bg-white text-black': !toggle,
     }"
   >
-    <button @click="toggler" class="relative z-20">
+    <div class="hidden md:block text-right text-2xl">
+      <router-link class="inline-block mr-4" to="/collection"
+        >Our Collection</router-link
+      >
+      <router-link v-if="isMember" class="inline-block mr-4" to="/manage"
+        >Manage</router-link
+      >
+      <router-link v-if="isMember" class="inline-block mr-4" to="/account"
+        >Account</router-link
+      >
+      <router-link
+        v-if="!walletAddress"
+        class="inline-block"
+        to="/apply"
+        @click="connect()"
+        >Login</router-link
+      >
+    </div>
+    <button @click="toggler" class="md:hidden absolute right-3 z-20">
       <svg
+        v-if="!toggle"
         xmlns="http://www.w3.org/2000/svg"
         class="h-6 w-6"
         fill="none"
@@ -22,81 +40,54 @@
           d="M4 8h16M4 16h16"
         />
       </svg>
+      <svg
+        v-else
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
     </button>
 
-    <ul class="text-xl pb-16 pt-16 fixed bottom-0" v-show="toggle">
-      <a href="/#/">
-        <router-link to="/" @click="toggleDown()">
-          <li :colors="colors">Home</li>
-        </router-link>
-      </a>
-      <a href="/#/about">
-        <router-link to="/about" @click="toggleDown()">
-          <li :colors="colors">About</li></router-link
+    <div
+      id="links"
+      class="text-xl pb-16 pt-16 fixed top-0 text-3xl"
+      v-show="toggle"
+    >
+      <div class="pb-10">
+        <router-link class="block" to="/" @click="toggleDown()"
+          >Our Collection</router-link
         >
-      </a>
-      <a href="/#/collection">
-        <router-link to="/collection" @click="toggleDown()">
-          <li :colors="colors" class="mb-2">Collection</li>
-        </router-link>
-      </a>
-      <a href="/#/invest">
-        <router-link to="/invest" @click="toggleDown()">
-          <li :colors="colors">Invest</li>
-        </router-link>
-      </a>
-      <a href="/#/transfer">
-        <router-link to="/transfer" @click="toggleDown()">
-          <li :colors="colors">Transfer</li>
-        </router-link>
-      </a>
-      <a href="/#/treasury">
-        <router-link to="/treasury" @click="toggleDown()">
-          <li :colors="colors" class="mb-2">Treasury</li>
-        </router-link>
-      </a>
-      <a href="/#/propose">
-        <router-link to="/propose" @click="toggleDown()">
-          <li :colors="colors">Propose</li>
-        </router-link>
-      </a>
-      <a href="/#/collect">
-        <router-link to="/collect" @click="toggleDown()">
-          <li :colors="colors">Collect</li>
-        </router-link>
-      </a>
-      <a href="/#/sell">
-        <router-link to="/sell" @click="toggleDown()">
-          <li :colors="colors" class="mb-2">Sell</li>
-        </router-link>
-      </a>
-      <a href="/#/members">
-        <router-link to="/members" @click="toggleDown()">
-          <li :colors="colors" class="mr-2">Members</li>
-        </router-link>
-      </a>
-      <a href="/#/profile">
-        <router-link to="/profile" @click="toggleDown()">
-          <li :colors="colors" class="mr-2">Profile</li>
-        </router-link>
-      </a>
-      <a href="/#/join">
-        <router-link v-if="!isMember" to="/governance" @click="toggleDown()">
-          <li :colors="colors" class="mr-2">Join</li>
-        </router-link>
-      </a>
-      <a href="/#/governance">
-        <router-link v-if="isMember" to="/governance" @click="toggleDown()">
-          <li :colors="colors" class="mr-2 mb-2">Governance</li>
-        </router-link>
-      </a>
-
-      <a href="/#/kick" v-if="isAdmin">
-        <router-link to="/kick" @click="toggleDown()">
-          <li :colors="colors" class="mr-2 mb-2">Kick</li>
-        </router-link>
-      </a>
-    </ul>
+        <router-link class="block" to="/" @click="toggleDown()"
+          >Manage</router-link
+        >
+        <router-link class="block" to="/" @click="toggleDown()"
+          >Account</router-link
+        >
+      </div>
+      <div class="pb-10">
+        <router-link class="block" to="/" @click="toggleDown()"
+          >FAQ</router-link
+        >
+        <router-link class="block" to="/" @click="toggleDown()"
+          >Mission</router-link
+        >
+        <router-link class="block" to="/" @click="toggleDown()"
+          >Contact</router-link
+        >
+        <router-link class="block" to="/" @click="toggleDown()"
+          >Resources</router-link
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -104,16 +95,12 @@
 import _ from "lodash";
 export default {
   components: {},
-  props: ["colors"],
   data() {
     return {
       toggle: false,
     };
   },
   computed: {
-    display() {
-      return this.colors?.length;
-    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
@@ -121,18 +108,12 @@ export default {
       return this.$store.state.profile;
     },
     isMember() {
-      if ("units" in this.profile) {
-        return this.profile.units;
-      }
-      return false;
+      return _.get(this.profile, "units");
     },
     isAdmin() {
       var role = _.get(this.profile, "role");
       if (role == "Admin") return true;
       return false;
-    },
-    ui() {
-      return this.$store.state.ui;
     },
   },
 
@@ -153,7 +134,10 @@ export default {
 };
 </script>
 <style scoped>
-.router-link-active {
-  @apply font-bold;
+#links a {
+  @apply opacity-50;
+}
+a.router-link-active {
+  @apply opacity-100;
 }
 </style>
