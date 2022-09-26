@@ -7,18 +7,18 @@
     }"
   >
     <div class="hidden md:block text-right text-2xl">
-      <router-link class="inline-block mr-4" to="/collection"
+      <router-link class="inline-block ml-4" to="/collection"
         >Our Collection</router-link
       >
-      <router-link v-if="isMember" class="inline-block mr-4" to="/manage"
+      <router-link v-if="isMember" class="inline-block ml-4" to="/manage"
         >Manage</router-link
       >
-      <router-link v-if="isMember" class="inline-block mr-4" to="/account"
+      <router-link v-if="isMember" class="inline-block ml-4" to="/account"
         >Account</router-link
       >
       <router-link
         v-if="!walletAddress"
-        class="inline-block"
+        class="inline-block ml-4"
         to="/apply"
         @click="connect()"
         >Login</router-link
