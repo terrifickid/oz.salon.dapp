@@ -2,10 +2,9 @@
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
     <FormHelp :help="help" v-if="help" />
-    <div class="grid grid-cols-12 gap-2 sm:ml-0 font-haffer">
+    <div class="font-haffer">
       <button
-        :class="{ 'ring-1 ring-black': selectedIndex == index }"
-        class="group flex col-span-12 items-center justify-start p-2 border border-black rounded hover:ring-1 ring-black"
+        class="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block text-xl mb-2"
         v-for="(choice, index) in choices"
         :key="index"
         @click="
@@ -14,7 +13,7 @@
           $emit('ready');
         "
       >
-        <span class="text-left text-sm sm:text-md ml-2">{{ choice }}</span>
+        <span>{{ choice }}</span>
       </button>
     </div>
     <FormButtonOk @ready="$emit('ready')" v-if="0" />
