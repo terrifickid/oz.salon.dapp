@@ -3,7 +3,7 @@
     <div v-show="!ready"></div>
     <div v-show="ready">
       <AppHeader :colors="colors" />
-      <div class="container"><router-view /></div>
+      <router-view />
     </div>
   </div>
 </template>
@@ -30,11 +30,13 @@ export default {
     },
   },
   beforeMount() {
+    if (localStorage.getItem("salon_login")) this.$store.dispatch("connect");
     window.addEventListener("resize", this.hideUI);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.hideUI);
   },
+  mounted() {},
 };
 </script>
 <style lang="scss">

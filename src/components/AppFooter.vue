@@ -13,16 +13,16 @@
         id="links"
         class="hidden md:flex col-span-8 sm:col-span-9 lg:col-span-10 flex items-end justify-end"
       >
-        <router-link v-if="!isMember" class="mr-2" to="/members"
+        <router-link v-if="!isMember" class="ml-5" to="/members"
           >Members</router-link
         >
-        <router-link class="mr-2" to="/mission">Mission</router-link>
-        <router-link class="mr-2" to="/faq">Faq</router-link>
-        <router-link class="mr-2" to="/contact">Contact</router-link>
-        <router-link v-if="isMember" class="mr-2" to="/resources"
+        <router-link class="ml-5" to="/mission">Mission</router-link>
+        <router-link class="ml-5" to="/faq">Faq</router-link>
+        <router-link class="ml-5" to="/contact">Contact</router-link>
+        <router-link v-if="isMember" class="ml-5" to="/resources"
           >Resources</router-link
         >
-        <router-link v-if="!isMember" class="mr-2" to="/apply"
+        <router-link v-if="!isMember" class="ml-5" to="/apply"
           >Apply</router-link
         >
       </div>

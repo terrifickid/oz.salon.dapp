@@ -1,0 +1,51 @@
+<template>
+  <ul>
+    <li class="mb-5">
+      <router-link to="/manage/invest">
+        <p>Invest</p>
+        <p class="opacity-50">-> Add to your existing investment</p>
+      </router-link>
+    </li>
+    <li class="mb-5">
+      <router-link to="/manage/exchange">
+        <p>Exchange</p>
+        <p class="opacity-50">-> Cash out some or all of your units</p>
+      </router-link>
+    </li>
+    <li class="mb-5">
+      <router-link to="/manage/propose">
+        <p>Propose</p>
+        <p class="opacity-50">-> Initiate a vote on a proposal</p>
+      </router-link>
+    </li>
+    <li class="mb-5">
+      <router-link to="/manage/acquire">
+        <p>Acquire</p>
+        <p class="opacity-50">-> Propose a work for Salon to collect</p>
+      </router-link>
+    </li>
+    <li class="mb-5">
+      <router-link to="/manage/sell">
+        <p>Sell</p>
+        <p class="opacity-50">
+          -> Initiate a vote to sell a work from our collection
+        </p>
+      </router-link>
+    </li>
+    <li class="mb-5">
+      <router-link to="/manage/proposals">
+        <p class="opacity-50">-> View Proposals</p>
+      </router-link>
+    </li>
+  </ul>
+</template>
+
+<script>
+// @ is an alias to /src
+export default {
+  components: {},
+  data() {
+    return {};
+  },
+};
+</script>

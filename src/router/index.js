@@ -51,7 +51,7 @@ const routes = [
     },
   },
   {
-    path: "/treasury",
+    path: "/manage/treasury",
     name: "treasury",
     component: function () {
       return import(
@@ -135,21 +135,41 @@ const routes = [
     },
   },
   {
+    path: "/manage",
+    name: "manage",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewApply" */ "../views/ViewManage.vue"
+      );
+    },
+    children: [
+      {
+        path: "start",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewJoin" */ "../views/manage/ViewStart.vue"
+          );
+        },
+      },
+      {
+        path: "proposals",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewProposals" */ "../views/manage/ViewProposals.vue"
+          );
+        },
+      },
+    ],
+  },
+
+  {
     path: "/join",
     name: "join",
     component: function () {
       return import(/* webpackChunkName: "ViewJoin" */ "../views/ViewJoin.vue");
     },
   },
-  {
-    path: "/governance",
-    name: "governance",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewGovernance" */ "../views/ViewGovernance.vue"
-      );
-    },
-  },
+
   {
     path: "/governance/:id",
     name: "proposal",

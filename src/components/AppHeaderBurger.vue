@@ -6,19 +6,19 @@
       'bg-white text-black': !toggle,
     }"
   >
-    <div class="hidden md:block text-right text-2xl">
+    <div class="hidden md:block text-right text-2xl links">
       <router-link class="inline-block ml-4" to="/collection"
         >Our Collection</router-link
       >
-      <router-link v-if="isMember" class="inline-block ml-4" to="/manage"
+      <router-link v-if="isMember" class="inline-block ml-5" to="/manage/start"
         >Manage</router-link
       >
-      <router-link v-if="isMember" class="inline-block ml-4" to="/account"
+      <router-link v-if="isMember" class="inline-block ml-5" to="/account"
         >Account</router-link
       >
       <router-link
         v-if="!walletAddress"
-        class="inline-block ml-4"
+        class="inline-block ml-5"
         to="/apply"
         @click="connect()"
         >Login</router-link
@@ -57,11 +57,7 @@
       </svg>
     </button>
 
-    <div
-      id="links"
-      class="text-xl pb-16 pt-16 fixed top-0 text-3xl"
-      v-show="toggle"
-    >
+    <div class="links text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
       <div class="pb-10">
         <router-link class="block" to="/" @click="toggleDown()"
           >Our Collection</router-link
@@ -134,10 +130,15 @@ export default {
 };
 </script>
 <style scoped>
-#links a {
+.links a {
   @apply opacity-50;
 }
 a.router-link-active {
-  @apply opacity-100;
+  @apply opacity-100 relative;
+}
+
+a.router-link-active::after {
+  content: "";
+  @apply bg-green-500 absolute top-1 -right-2 w-2 h-2 rounded-full;
 }
 </style>
