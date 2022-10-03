@@ -39,9 +39,4 @@ export default {
   mounted() {},
 };
 </script>
-<style lang="scss">
-.router-link-active button {
-  background-color: black !important;
-  color: white !important;
-}
-</style>
+<style lang="scss"></style>

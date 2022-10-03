@@ -1,124 +1,145 @@
 <template>
-  <AppShell
-    :colors="colors"
-    :isLoaded="loaded"
-    :protected="true"
-    :kycAllowed="true"
-    class="font-haffer"
-  >
+  <AppShell :isLoaded="loaded" :protected="true" :kycAllowed="true">
     <div
-      class="pt-24 text-center w-full absolute z-40 keyboard-off font-haffer hidden"
+      class="bg-gray-100 pt-24 px-5 relative pb-6 flex"
+      style="min-height: 84vh"
+      v-for="(artwork, index) in collection"
+      :key="index"
+      v-show="hkey == index"
     >
-      <select class="text-right alpha p-2 font-bold">
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
-        <option>D</option>
-        <option>E</option>
-        <option>F</option>
-        <option>G</option>
-        <option>H</option>
-        <option>I</option>
-        <option>J</option>
-        <option>K</option>
-        <option>L</option>
-        <option>M</option>
-        <option>N</option>
-        <option>O</option>
-        <option>P</option>
-        <option>Q</option>
-        <option>R</option>
-        <option>S</option>
-        <option>T</option>
-        <option>U</option>
-        <option>V</option>
-        <option>W</option>
-        <option>X</option>
-        <option>Y</option>
-        <option>Z</option>
-      </select>
-      <select class="text-right p-2 font-bold">
-        <option v-for="(c, index) in collection" :key="index">
-          {{ c.fields.title }}
-        </option>
-      </select>
-      <select class="text-right p-2 font-bold">
-        <option>Price</option>
-        <option>Date</option>
-      </select>
-    </div>
-    <AppFullpage v-if="collection.length">
-      <div v-for="(item, index) in collection" :key="index" class="section">
-        <div class="grid grid-cols-12 w-full gap-3 px-3" style="height: 50vh">
-          <div
-            class="col-span-6 sm:col-span-4 lg:col-span-3 xl:col-span-2 text-sm"
+      <div class="absolute top-0 right-5 pt-24 flex">
+        <button @click="prevArtwork()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 mr-4"
           >
-            <div class="pr-4">
-              <p>{{ item.fields.artist }}</p>
-              <p>
-                <i>{{ item.fields.title }}</i>
-              </p>
-              <p class="pb-2">{{ item.fields.year }}</p>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            />
+          </svg>
+        </button>
+        <button @click="nextArtwork()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="absolute bottom-5 right-5 opacity-50">
+        {{ hikey + 1 }} of {{ artwork.fields.images.length }} images
+      </div>
+      <div class="absolute bottom-5 left-5">
+        <button
+          class="flex items-center"
+          v-show="!information"
+          @click="information = true"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 mr-2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v12m6-6H6"
+            />
+          </svg>
+          Information
+        </button>
+        <button
+          class="flex items-center"
+          v-show="information"
+          @click="information = false"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4 mr-2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
 
-              <p>
-                Acquired {{ item.fields.purchaseDate }} from
-                {{ item.fields.seller }}
-              </p>
-              <p class="pb-2">
-                Appraised Value:
-                {{ format.format(item.fields.mostRecentAppraisalPrice) }}
-              </p>
+          Close
+        </button>
+      </div>
+      <div class="grid grid-cols-12 gap-5 w-full">
+        <div class="col-span-4">
+          <p class="font-bold">
+            {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
+            {{ artwork.fields.year }}
+          </p>
+          <div class="pt-4" v-if="information">
+            <p>
+              <span class="opacity-50">Acquired</span><br />
+              {{ artwork.fields.purchaseDate }} from
+              {{ artwork.fields.seller }}
+            </p>
+            <p class="pt-4">
+              <span class="opacity-50">Appraised Value</span><br />
+              {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
+            </p>
 
-              <p>{{ item.fields.description }}</p>
-            </div>
-          </div>
-          <div class="col-span-6 sm:col-span-8 lg:col-span-9 xl:col-span-10">
-            <carousel :settings="settings" :breakpoints="breakpoints">
-              <slide v-for="(image, i) in item.fields.images" :key="i">
-                <ImageAsset :image="image" />
-              </slide>
-            </carousel>
+            <p class="pt-8">{{ artwork.fields.description }}</p>
           </div>
         </div>
+        <div class="col-span-4 self-center place-self-center">
+          <img
+            v-for="(image, index) in artwork.fields.images"
+            :src="image.fields.file.url"
+            :key="index"
+            v-show="index == this.hikey"
+          />
+        </div>
       </div>
-    </AppFullpage>
+    </div>
   </AppShell>
 </template>
 <script>
 // @ is an alias to /src
 import axios from "axios";
 import AppShell from "@/components/AppShell";
-import AppFullpage from "@/components/AppFullpage";
-import ImageAsset from "@/components/ImageAsset";
-import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide } from "vue3-carousel";
+
+//import ImageAsset from "@/components/ImageAsset";
+
 export default {
   name: "CollectionView",
   components: {
-    AppFullpage,
     AppShell,
-    ImageAsset,
-    Carousel,
-    Slide,
+    //ImageAsset,
   },
   data() {
     return {
-      colors: ["white", "black"],
+      hkey: 0,
+      hikey: 0,
+      information: false,
       collection: [],
-      settings: {
-        itemsToShow: 1,
-        wrapAround: true,
-      },
-      breakpoints: {
-        // 700px and up
-        768: {
-          itemsToShow: 1.5,
-        },
-        // 1024 and up
-        1024: {
-          itemsToShow: 2.5,
-        },
-      },
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -128,6 +149,20 @@ export default {
   computed: {
     loaded() {
       return this.collection.length;
+    },
+  },
+  methods: {
+    nextArtwork() {
+      this.information = false;
+      this.hkey++;
+      if (this.hkey > this.collection.length - 1) this.hkey = 0;
+      console.log("key", this.hkey);
+    },
+    prevArtwork() {
+      this.information = false;
+      this.hkey--;
+      if (this.hkey < 0) this.hkey = this.collection.length - 1;
+      console.log("key", this.hkey);
     },
   },
   async beforeMount() {

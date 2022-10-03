@@ -5,6 +5,10 @@
       <li><router-link to="/manage/treasury">Treasury</router-link></li>
       <li><router-link to="/manage/proposals">Proposals</router-link></li>
     </ul>
+    <ul class="mb-10">
+      <li><router-link to="/manage/profile">Profile</router-link></li>
+      <li><router-link to="/manage/members">Members</router-link></li>
+    </ul>
   </div>
 </template>
 <style scoped>

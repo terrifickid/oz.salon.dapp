@@ -18,100 +18,109 @@
       </div>
     </template>
     <template v-else>
-      <div class="pt-32 font-haffer px-3 pb-32">
-        <div class="grid grid-cols-12">
-          <div class="app-frame">
-            <a class="pb-2 flex items-center" href="/#/governance">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 mr-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M7 16l-4-4m0 0l4-4m-4 4h18"
-                />
-              </svg>
-              Back
-            </a>
-            <b class="capitalize text-xl">{{ proposalFormat.contentType }}</b
-            ><br />
-            Submitted by
+      <div class="pt-24 mt-4">
+        <div class="grid grid-cols-12 mb-4">
+          <div class="col-span-3">
+            <span class="pr-3">000</span
+            ><span class="capitalize">{{ proposalFormat.contentType }}</span>
+          </div>
+          <div class="col-span-6">
+            <AppCountdown v-if="!hasEnded" :start="proposalFormat.createdAt" />
+          </div>
+          <div class="col-span-3">
             {{ proposalFormat.profile.firstName }}
             {{ proposalFormat.profile.lastName }}
-
-            <CounterVote :votes="proposalFormat.votes" :weights="weights" />
-            <AppCountdown
-              v-if="!hasEnded"
-              :start="proposalFormat.createdAt"
-              class="mt-2"
-            />
-            <div class="mt-3 flex" v-if="canVote">
-              <AppButtonVote
-                :id="proposalFormat.id"
-                :votes="proposalFormat.votes"
-                :choice="true"
-                :label="'Yes'"
-                class="mr-2"
-              />
-              <AppButtonVote
-                :id="proposalFormat.id"
-                :votes="proposalFormat.votes"
-                :choice="false"
-                :label="'No'"
-              />
-            </div>
-            <h3 class="mt-10">Details</h3>
-            <ul class="mt-5 pb-5">
-              <li
-                v-for="(field, index) in proposalFormat.fields"
-                :key="index"
-                class="mr-5 mb-5"
-              >
-                <template
-                  v-if="disabledFields.includes(field.label)"
-                ></template>
-                <template
-                  v-else-if="
-                    String(field.label).toLowerCase().includes('units')
-                  "
-                >
-                  {{ field.label }}<br />
-
-                  {{ name }} would like to purchase
-                  {{ getJSON(field.value).units }} units at a price of
-                  {{
-                    format.format(
-                      getJSON(field.value).amount / getJSON(field.value).units
-                    )
-                  }}
-                  per unit for a total of
-                  {{ format.format(getJSON(field.value).amount) }}.
-
-                  <p>
-                    For reference, the book value of Salon units now is
-                    {{ format.format(bookValue) }} and the suggested trading
-                    price is {{ format.format(suggestedTradingPrice) }}.
-                  </p>
-                </template>
-                <template v-else-if="field.label == 'Member'">
-                  {{ field.label }}<br />{{ getJSON(field.value).firstName }}
-                  {{ getJSON(field.value).lastName }}<br />
-                  {{ getJSON(field.value).walletAddress }}</template
-                >
-                <template v-else>
-                  {{ field.label }}<br />{{ field.value }}</template
-                >
-              </li>
-            </ul>
-
-            <ExecuteProposal :proposal="proposal" />
           </div>
         </div>
+
+        <CounterVote :votes="proposalFormat.votes" :weights="weights" />
+
+        <div
+          class="grid grid-cols-12 flex items-center pt-5 pb-8"
+          v-if="canVote"
+        >
+          <div class="col-span-2">Your Vote</div>
+          <div class="col-span-6 flex">
+            <AppButtonVote
+              :id="proposalFormat.id"
+              :votes="proposalFormat.votes"
+              :choice="true"
+              :label="'Yes'"
+              class="mr-2"
+            />
+            <AppButtonVote
+              :id="proposalFormat.id"
+              :votes="proposalFormat.votes"
+              :choice="false"
+              :label="'No'"
+            />
+          </div>
+        </div>
+
+        <ul>
+          <li
+            v-for="(field, index) in proposalFormat.fields"
+            :key="index"
+            class="mr-5 mb-5"
+          >
+            <template v-if="disabledFields.includes(field.label)"></template>
+            <template
+              v-else-if="String(field.label).toLowerCase().includes('units')"
+            >
+              <span class="opacity-50">{{ field.label }}</span
+              ><br />
+
+              {{ name }} would like to purchase
+              {{ getJSON(field.value).units }} units at a price of
+              {{
+                format.format(
+                  getJSON(field.value).amount / getJSON(field.value).units
+                )
+              }}
+              per unit for a total of
+              {{ format.format(getJSON(field.value).amount) }}.
+
+              <p>
+                For reference, the book value of Salon units now is
+                {{ format.format(bookValue) }} and the suggested trading price
+                is {{ format.format(suggestedTradingPrice) }}.
+              </p>
+            </template>
+            <template v-else-if="field.label == 'Member'">
+              <span class="opacity-50">{{ field.label }}</span
+              ><br />{{ getJSON(field.value).firstName }}
+              {{ getJSON(field.value).lastName }}<br />
+              <!--  {{ getJSON(field.value).walletAddress }} -->
+            </template>
+            <template v-else>
+              <span class="opacity-50">{{ field.label }}</span
+              ><br />{{ field.value }}</template
+            >
+          </li>
+        </ul>
+
+        <ExecuteProposal :proposal="proposal" />
+
+        <router-link to="/manage/proposals">
+          <button class="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4 mr-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+
+            Close
+          </button>
+        </router-link>
       </div>
     </template>
   </template>

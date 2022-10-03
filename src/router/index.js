@@ -15,6 +15,15 @@ const routes = [
     },
   },
   {
+    path: "/resources",
+    name: "resources",
+    component: function () {
+      return import(
+        /* webpackChunkName: "Resources" */ "../views/ViewResources.vue"
+      );
+    },
+  },
+  {
     path: "/collection",
     name: "collection",
     component: function () {
@@ -23,67 +32,7 @@ const routes = [
       );
     },
   },
-  {
-    path: "/invest",
-    name: "invest",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewInvest" */ "../views/ViewInvest.vue"
-      );
-    },
-  },
-  {
-    path: "/transfer",
-    name: "transfer",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewTransfer" */ "../views/ViewTransfer.vue"
-      );
-    },
-  },
-  {
-    path: "/create-transfer",
-    name: "transfer-form",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewTransfer" */ "../views/ViewTransferForm.vue"
-      );
-    },
-  },
-  {
-    path: "/manage/treasury",
-    name: "treasury",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewTransfer" */ "../views/ViewTreasury.vue"
-      );
-    },
-  },
-  {
-    path: "/propose",
-    name: "propose",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewPropose" */ "../views/ViewPropose.vue"
-      );
-    },
-  },
-  {
-    path: "/collect",
-    name: "collect",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewCollect" */ "../views/ViewCollect.vue"
-      );
-    },
-  },
-  {
-    path: "/sell",
-    name: "sell",
-    component: function () {
-      return import(/* webpackChunkName: "ViewSell" */ "../views/ViewSell.vue");
-    },
-  },
+
   {
     path: "/kick",
     name: "kick",
@@ -152,10 +101,89 @@ const routes = [
         },
       },
       {
+        path: "treasury",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewTreasury" */ "../views/manage/ViewTreasury.vue"
+          );
+        },
+      },
+      {
         path: "proposals",
         component: function () {
           return import(
             /* webpackChunkName: "ViewProposals" */ "../views/manage/ViewProposals.vue"
+          );
+        },
+      },
+      {
+        path: "invest",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewInvest" */ "../views/manage/ViewInvest.vue"
+          );
+        },
+      },
+      {
+        path: "exchange",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewTransfer" */ "../views/manage/ViewExchangeForm.vue"
+          );
+        },
+      },
+      {
+        path: "propose",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewPropose" */ "../views/manage/ViewPropose.vue"
+          );
+        },
+      },
+      {
+        path: "acquire",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewCollect" */ "../views/manage/ViewCollect.vue"
+          );
+        },
+      },
+      {
+        path: "sell",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewSell" */ "../views/manage/ViewSell.vue"
+          );
+        },
+      },
+      {
+        path: "profile",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewSell" */ "../views/manage/ViewProfile.vue"
+          );
+        },
+      },
+      {
+        path: "members",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewMembers" */ "../views/manage/ViewMembers.vue"
+          );
+        },
+      },
+      {
+        path: ":id",
+
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewProposal" */ "../views/manage/ViewProposal.vue"
           );
         },
       },
@@ -164,21 +192,12 @@ const routes = [
 
   {
     path: "/join",
-    name: "join",
+
     component: function () {
       return import(/* webpackChunkName: "ViewJoin" */ "../views/ViewJoin.vue");
     },
   },
 
-  {
-    path: "/governance/:id",
-    name: "proposal",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewGovernance" */ "../views/ViewProposal.vue"
-      );
-    },
-  },
   {
     path: "/profile",
     name: "profile",

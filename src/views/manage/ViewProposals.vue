@@ -1,32 +1,35 @@
 <template>
-  <div class="grid grid-cols-12 gap-5 mb-32">
-    <div class="hidden md:block md:col-span-3">
-      <span class="opacity-50">Filters</span>
-      <ul>
-        <router-link to="/manage/proposals">
-          <li>All</li>
-        </router-link>
-        <router-link to="/manage/proposals">
-          <li class="opacity-50">Pending</li>
-        </router-link>
-        <router-link to="/manage/proposals">
-          <li class="opacity-50">Voted</li>
-        </router-link>
-        <router-link to="/manage/proposals">
-          <li class="opacity-50">Closed</li>
-        </router-link>
-        <router-link to="/manage/proposals">
-          <li class="opacity-50">My Proposals</li>
-        </router-link>
-      </ul>
-    </div>
-    <div class="col-span-12 md:col-span-9">
-      <p v-if="!myProposals.length">No proposals.</p>
-      <ListProposalItem
-        v-for="(item, index) in proposals"
-        :key="index"
-        :item="item"
-      />
+  <div class="container-fluid px-5">
+    <div class="grid grid-cols-12">
+      <div class="col-span-3">
+        <ManageNav />
+        <span class="opacity-50">Filters</span>
+        <ul>
+          <router-link to="/manage/proposals">
+            <li>All</li>
+          </router-link>
+          <router-link to="/manage/proposals">
+            <li class="opacity-50">Pending</li>
+          </router-link>
+          <router-link to="/manage/proposals">
+            <li class="opacity-50">Voted</li>
+          </router-link>
+          <router-link to="/manage/proposals">
+            <li class="opacity-50">Closed</li>
+          </router-link>
+          <router-link to="/manage/proposals">
+            <li class="opacity-50">My Proposals</li>
+          </router-link>
+        </ul>
+      </div>
+      <div class="col-span-9">
+        <p v-if="!myProposals.length">No proposals.</p>
+        <ListProposalItem
+          v-for="(item, index) in proposals"
+          :key="index"
+          :item="item"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -34,11 +37,12 @@
 // @ is an alias to /src
 //import _ from "lodash";
 import axios from "axios";
-
+import ManageNav from "@/components/ManageNav";
 import ListProposalItem from "@/components/ListProposalItem";
 import _ from "lodash";
 export default {
   components: {
+    ManageNav,
     ListProposalItem,
   },
   data() {

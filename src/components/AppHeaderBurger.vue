@@ -10,10 +10,17 @@
       <router-link class="inline-block ml-4" to="/collection"
         >Our Collection</router-link
       >
-      <router-link v-if="isMember" class="inline-block ml-5" to="/manage/start"
+      <router-link
+        v-if="isMember"
+        id="manage"
+        class="inline-block ml-5"
+        to="/manage/start"
         >Manage</router-link
       >
-      <router-link v-if="isMember" class="inline-block ml-5" to="/account"
+      <router-link
+        v-if="isMember"
+        class="inline-block ml-5"
+        to="/manage/profile"
         >Account</router-link
       >
       <router-link
@@ -137,7 +144,7 @@ a.router-link-active {
   @apply opacity-100 relative;
 }
 
-a.router-link-active::after {
+a.router-link-active#manage::after {
   content: "";
   @apply bg-green-500 absolute top-1 -right-2 w-2 h-2 rounded-full;
 }

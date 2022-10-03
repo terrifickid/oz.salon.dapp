@@ -2,13 +2,7 @@
   <button
     @mouseover="hover = true"
     @mouseleave="hover = false"
-    :class="{
-      ['bg-' + colors[1]]: hover,
-      ['text-' + colors[1]]: !hover,
-      ['text-' + colors[0]]: hover,
-      ['border-' + colors[1]]: true,
-    }"
-    class="py-2 px-5 rounded-full border inline-block text-xs sm:text-sm font-haffer"
+    class="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block"
   >
     <slot></slot>
   </button>

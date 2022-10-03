@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="'/governance/' + item.sys.id"
+    :to="'/manage/' + item.sys.id"
     class="opacity-50 hover:opacity-100"
   >
     <div

@@ -1,21 +1,19 @@
 <template>
-  <div class="text-xs">
-    <div class="bg-black w-full relative my-3" style="height: 2px">
-      <div
-        class="bg-green-400 absolute z-20"
-        style="height: 2px"
-        :style="{ width: percentageYes + '%' }"
-      ></div>
-      <div
-        class="bg-red-400 absolute z-10"
-        style="height: 2px"
-        :style="{ width: percentageYes + percentageNo + '%' }"
-      ></div>
+  <div>
+    <div class="grid grid-cols-12 py-4">
+      <div class="col-span-2">Votes</div>
+      <div class="col-span-1">{{ total }}</div>
     </div>
-
-    <div>Total Votes: {{ total }}</div>
-    <div>Yes: {{ yesPercentageTally }}% ({{ yesWeight }} votes)</div>
-    <div>No: {{ noPercentageTally }}% ({{ noWeight }} votes)</div>
+    <div class="grid grid-cols-12">
+      <div class="col-span-2">Yes</div>
+      <div class="col-span-1">{{ yesPercentageTally }}%</div>
+      <div class="col-span-1">{{ yesWeight }} units</div>
+    </div>
+    <div class="grid grid-cols-12">
+      <div class="col-span-2">No</div>
+      <div class="col-span-1">{{ noPercentageTally }}%</div>
+      <div class="col-span-1">{{ noWeight }} units</div>
+    </div>
 
     <div class="pt-2" v-if="hasEnded">
       <div v-if="!passed">This did not pass.</div>
