@@ -1,7 +1,8 @@
 <template>
   <vue-countdown :time="this.time" v-slot="{ days, hours, minutes, seconds }">
-    <span class="opacity-50">Time Remaining:</span> {{ days }} days,
-    {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+    <span class="opacity-50">Time Remaining:</span><br class="md:hidden" />
+    {{ days }} days, {{ hours }} hours, {{ minutes }} minutes,
+    {{ seconds }} seconds.
   </vue-countdown>
 </template>
 <script>

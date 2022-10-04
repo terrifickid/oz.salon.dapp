@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="grid grid-cols-12 py-4">
-      <div class="col-span-2">Votes</div>
-      <div class="col-span-1">{{ total }}</div>
+      <div class="col-span-4 md:col-span-2">Votes</div>
+      <div class="col-span-4 md:col-span-1">{{ total }}</div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-2">Yes</div>
-      <div class="col-span-1">{{ yesPercentageTally }}%</div>
-      <div class="col-span-1">{{ yesWeight }} units</div>
+      <div class="col-span-4 md:col-span-2">Yes</div>
+      <div class="col-span-4 md:col-span-1">{{ yesPercentageTally }}%</div>
+      <div class="col-span-4 md:col-span-1">{{ yesWeight }} units</div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-2">No</div>
-      <div class="col-span-1">{{ noPercentageTally }}%</div>
-      <div class="col-span-1">{{ noWeight }} units</div>
+      <div class="col-span-4 md:col-span-2">No</div>
+      <div class="col-span-4 md:col-span-1">{{ noPercentageTally }}%</div>
+      <div class="col-span-4 md:col-span-1">{{ noWeight }} units</div>
     </div>
 
     <div class="pt-2" v-if="hasEnded">

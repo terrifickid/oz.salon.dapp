@@ -18,16 +18,16 @@
       </div>
     </template>
     <template v-else>
-      <div>
+      <div class="pb-64">
         <div class="grid grid-cols-12 mb-4">
-          <div class="col-span-3">
+          <div class="col-span-12 lgcol-span-3">
             <span class="pr-3">000</span
             ><span class="capitalize">{{ proposalFormat.contentType }}</span>
           </div>
-          <div class="col-span-6">
+          <div class="col-span-12 lg:col-span-6 py-5 lg:py-0">
             <AppCountdown v-if="!hasEnded" :start="proposalFormat.createdAt" />
           </div>
-          <div class="col-span-3">
+          <div class="col-span-12 lg:col-span-3">
             {{ proposalFormat.profile.firstName }}
             {{ proposalFormat.profile.lastName }}
           </div>
@@ -39,8 +39,8 @@
           class="grid grid-cols-12 flex items-center pt-5 pb-8"
           v-if="canVote"
         >
-          <div class="col-span-2">Your Vote</div>
-          <div class="col-span-6 flex">
+          <div class="col-span-4 lg:col-span-2">Your Vote</div>
+          <div class="col-span-4 lg:col-span-6 flex">
             <AppButtonVote
               :id="proposalFormat.id"
               :votes="proposalFormat.votes"
