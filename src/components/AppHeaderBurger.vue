@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-5 py-5 fixed w-screen overflow-hidden z-50 font-haffer"
+    class="px-5 py-4 fixed w-screen overflow-hidden z-50 font-haffer"
     :class="{
       'h-screen bg-white text-black': toggle,
       'bg-white text-black': !toggle,
@@ -31,7 +31,8 @@
         >Login</router-link
       >
     </div>
-    <button @click="toggler" class="md:hidden absolute right-3 z-20">
+    <span class="md:hidden">{{ pageTitle }}</span>
+    <button @click="toggler" class="md:hidden z-20 float-right">
       <svg
         v-if="!toggle"
         xmlns="http://www.w3.org/2000/svg"
@@ -66,27 +67,27 @@
 
     <div class="links text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
       <div class="pb-10">
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link @click="toggleDown()" class="block" to="/collection"
           >Our Collection</router-link
         >
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link @click="toggleDown()" class="block" to="/manage/start"
           >Manage</router-link
         >
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link @click="toggleDown()" class="block" to="/manage/profile"
           >Account</router-link
         >
       </div>
       <div class="pb-10">
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link @click="toggleDown()" class="block" to="/faq"
           >FAQ</router-link
         >
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link @click="toggleDown()" class="block" to="/mission"
           >Mission</router-link
         >
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link class="block" to="/contact" @click="toggleDown()"
           >Contact</router-link
         >
-        <router-link class="block" to="/" @click="toggleDown()"
+        <router-link class="block" to="/resources" @click="toggleDown()"
           >Resources</router-link
         >
       </div>
@@ -117,6 +118,9 @@ export default {
       var role = _.get(this.profile, "role");
       if (role == "Admin") return true;
       return false;
+    },
+    pageTitle() {
+      return this.$route.name;
     },
   },
 

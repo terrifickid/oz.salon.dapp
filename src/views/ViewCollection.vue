@@ -1,8 +1,12 @@
 <template>
-  <AppShell :isLoaded="loaded" :protected="true" :kycAllowed="true">
+  <AppShell
+    :isLoaded="loaded"
+    :protected="true"
+    :kycAllowed="true"
+    class="pb-64"
+  >
     <div
       class="bg-gray-100 pt-24 px-5 relative pb-6 flex"
-      style="min-height: 84vh"
       v-for="(artwork, index) in collection"
       :key="index"
       v-show="hkey == index"
@@ -90,7 +94,7 @@
         </button>
       </div>
       <div class="grid grid-cols-12 gap-5 w-full">
-        <div class="col-span-4">
+        <div class="col-span-12 md:col-span-4">
           <p class="font-bold">
             {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
             {{ artwork.fields.year }}
@@ -109,12 +113,13 @@
             <p class="pt-8">{{ artwork.fields.description }}</p>
           </div>
         </div>
-        <div class="col-span-4 self-center place-self-center">
+        <div class="col-span-12 md:col-span-4">
           <img
             v-for="(image, index) in artwork.fields.images"
             :src="image.fields.file.url"
             :key="index"
             v-show="index == this.hikey"
+            class="w-full py-12"
           />
         </div>
       </div>

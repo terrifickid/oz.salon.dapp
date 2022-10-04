@@ -1,26 +1,30 @@
 <template>
   <div class="container-fluid px-5">
     <div class="grid grid-cols-12">
-      <div class="col-span-3">
+      <div class="col-span-12 md:col-span-3">
         <ManageNav />
       </div>
-      <div class="col-span-9">
+      <div class="col-span-12 md:col-span-9">
         <div
           v-for="(member, index) in members"
           :key="index"
           class="pb-5 text-left block w-full"
         >
           <div
-            class="opacity-50 grid grid-cols-12 gap-5 w-full text-left hover:opacity-100 cursor-pointer"
+            class="opacity-50 grid grid-cols-12 gap-x-5 w-full text-left hover:opacity-100 cursor-pointer"
             :class="{ 'opacity-100': selectedIndex == index }"
             @click="selectedIndex = index"
           >
-            <div class="col-span-3">
+            <div class="col-span-12 md:col-span-3">
               {{ member.fields.firstName }} {{ member.fields.lastName }}
             </div>
-            <div class="col-span-3">Since {{ member.sys.createdAt }}</div>
-            <div class="col-span-3">00 proposals</div>
-            <div class="col-span-3">{{ member.fields.emailAddress }}</div>
+            <div class="col-span-12 md:col-span-3">
+              Since {{ member.sys.createdAt }}
+            </div>
+            <div class="hidden md:block col-span-3">00 proposals</div>
+            <div class="hidden md:block col-span-3">
+              {{ member.fields.emailAddress }}
+            </div>
           </div>
           <div
             class="grid grid-cols-12 gap-5 w-full pt-10 pb-10"

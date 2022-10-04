@@ -3,10 +3,10 @@
     <div
       v-for="(slide, key) in slides"
       :key="key"
-      class="col-span-12 fade-in"
+      class="fade-in"
       :class="[cols[key], align[key], pad[key]]"
     >
-      <ImageAsset :image="slide.fields.images[0]" />
+      <ImageAsset style="max-height: 50vh" :image="slide.fields.images[0]" />
     </div>
   </div>
 </template>
@@ -21,12 +21,12 @@ export default {
   data() {
     return {
       cols: [
-        "sm:col-span-6 delay-one",
-        "sm:col-span-3 delay-two",
-        "sm:col-span-3 delay-three",
+        "col-span-6 delay-one",
+        "col-span-3 delay-two",
+        "col-span-3 delay-three",
       ],
-      align: ["sm:self-start", "sm:self-center", "sm:self-end"],
-      pad: ["sm:py-5", "sm:py-10", "sm:py-12"],
+      align: ["self-start", "self-center", "self-end"],
+      pad: ["py-5", "py-10", "py-12"],
     };
   },
   mounted() {

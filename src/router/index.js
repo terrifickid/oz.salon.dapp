@@ -16,7 +16,7 @@ const routes = [
   },
   {
     path: "/resources",
-    name: "resources",
+    name: "Resources",
     component: function () {
       return import(
         /* webpackChunkName: "Resources" */ "../views/ViewResources.vue"
@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: "/collection",
-    name: "collection",
+    name: "Collection",
     component: function () {
       return import(
         /* webpackChunkName: "CollectionView" */ "../views/ViewCollection.vue"
@@ -51,7 +51,7 @@ const routes = [
   },
   {
     path: "/mission",
-    name: "mission",
+    name: "Mission",
     component: function () {
       return import(
         /* webpackChunkName: "ViewMission" */ "../views/ViewMission.vue"
@@ -60,14 +60,14 @@ const routes = [
   },
   {
     path: "/faq",
-    name: "faq",
+    name: "FAQ",
     component: function () {
       return import(/* webpackChunkName: "ViewFaq" */ "../views/ViewFaq.vue");
     },
   },
   {
     path: "/contact",
-    name: "contact",
+    name: "Contact",
     component: function () {
       return import(
         /* webpackChunkName: "ViewContact" */ "../views/ViewContact.vue"
@@ -94,6 +94,7 @@ const routes = [
     children: [
       {
         path: "start",
+        name: "Start",
         component: function () {
           return import(
             /* webpackChunkName: "ViewJoin" */ "../views/manage/ViewStart.vue"
@@ -102,6 +103,7 @@ const routes = [
       },
       {
         path: "treasury",
+        name: "Treasury",
         component: function () {
           return import(
             /* webpackChunkName: "ViewTreasury" */ "../views/manage/ViewTreasury.vue"
@@ -110,6 +112,7 @@ const routes = [
       },
       {
         path: "proposals",
+        name: "Proposals",
         component: function () {
           return import(
             /* webpackChunkName: "ViewProposals" */ "../views/manage/ViewProposals.vue"
@@ -118,6 +121,7 @@ const routes = [
       },
       {
         path: "invest",
+        name: "Invest",
         component: function () {
           return import(
             /* webpackChunkName: "ViewInvest" */ "../views/manage/ViewInvest.vue"
@@ -126,7 +130,7 @@ const routes = [
       },
       {
         path: "exchange",
-
+        name: "Exchange",
         component: function () {
           return import(
             /* webpackChunkName: "ViewTransfer" */ "../views/manage/ViewExchangeForm.vue"
@@ -135,7 +139,7 @@ const routes = [
       },
       {
         path: "propose",
-
+        name: "Propose",
         component: function () {
           return import(
             /* webpackChunkName: "ViewPropose" */ "../views/manage/ViewPropose.vue"
@@ -144,7 +148,7 @@ const routes = [
       },
       {
         path: "acquire",
-
+        name: "Acquire",
         component: function () {
           return import(
             /* webpackChunkName: "ViewCollect" */ "../views/manage/ViewCollect.vue"
@@ -153,7 +157,7 @@ const routes = [
       },
       {
         path: "sell",
-
+        name: "Sell",
         component: function () {
           return import(
             /* webpackChunkName: "ViewSell" */ "../views/manage/ViewSell.vue"
@@ -162,7 +166,7 @@ const routes = [
       },
       {
         path: "profile",
-
+        name: "Profile",
         component: function () {
           return import(
             /* webpackChunkName: "ViewSell" */ "../views/manage/ViewProfile.vue"
@@ -171,7 +175,7 @@ const routes = [
       },
       {
         path: "members",
-
+        name: "Members",
         component: function () {
           return import(
             /* webpackChunkName: "ViewMembers" */ "../views/manage/ViewMembers.vue"
@@ -180,7 +184,7 @@ const routes = [
       },
       {
         path: ":id",
-
+        name: "Proposal",
         component: function () {
           return import(
             /* webpackChunkName: "ViewProposal" */ "../views/manage/ViewProposal.vue"

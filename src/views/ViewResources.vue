@@ -1,8 +1,8 @@
 <template>
   <AppShell :isLoaded="true" :protected="true" class="pb-64">
-    <div class="grid grid-cols-12 pt-20 gap-x-20 w-full font-haffer px-5">
+    <div class="grid grid-cols-12 pt-20 gap-x-5 w-full font-haffer px-5">
       <div class="col-span-12"><p class="text-2xl mb-8">Resources</p></div>
-      <div class="col-span-12 md:col-span-6">
+      <div class="col-span-12 lg:col-span-5">
         <p class="text-2xl opacity-50">
           Our resources for a contemporary art fund, owned and managed by a
           distributed online community of collectors, artists, investors, and
@@ -16,7 +16,7 @@
         </p>
       </div>
 
-      <div class="hidden md:block md:col-span-6">
+      <div class="hidden lg:block lg:col-span-5 lg:col-start-7">
         <ul>
           <li class="mb-5">
             Operating Agreement<br />

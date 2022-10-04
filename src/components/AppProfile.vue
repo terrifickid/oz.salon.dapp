@@ -1,45 +1,45 @@
 <template>
-  <div class="font-haffer">
+  <div class="font-haffer pb-64">
     <div class="grid grid-cols-12 pb-8">
-      <div class="col-span-2">Profile</div>
+      <div class="col-span-12">Profile</div>
     </div>
 
     <div class="grid grid-cols-12 pb-4">
-      <div class="col-span-3">Contact</div>
+      <div class="col-span-12">Contact</div>
     </div>
 
     <div class="grid grid-cols-12 pb-4">
-      <div class="col-span-3 opacity-50">Name</div>
-      <div class="col-span-3">
+      <div class="col-span-6 md:col-span-3 opacity-50">Name</div>
+      <div class="col-span-6 md:col-span-3">
         {{ profile.firstName }} {{ profile.lastName }}
       </div>
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-3 opacity-50">Email Address</div>
-      <div class="col-span-3">
+      <div class="col-span-6 md:col-span-3 opacity-50">Email Address</div>
+      <div class="col-span-6 md:col-span-3">
         {{ profile.emailAddress }}
       </div>
     </div>
 
     <p class="pt-16 pb-4">Delegation</p>
     <div class="grid grid-cols-12">
-      <div class="col-span-3 opacity-50">Your Delegate</div>
-      <div class="col-span-3">
+      <div class="col-span-6 md:col-span-3 opacity-50">Your Delegate</div>
+      <div class="col-span-6 md:col-span-3">
         <AppDelegateSelect v-if="profile.walletAddress == this.walletAddress" />
       </div>
     </div>
 
     <p class="pt-16 pb-4">Financial</p>
     <div class="grid grid-cols-12 pb-4">
-      <div class="col-span-3 opacity-50">Wallet Address</div>
-      <div class="col-span-3">
+      <div class="col-span-12 md:col-span-3 opacity-50">Wallet Address</div>
+      <div class="col-span-12 md:col-span-3">
         {{ profile.walletAddress }}
       </div>
     </div>
-    <div class="grid grid-cols-12">
-      <div class="pb-8 col-span-3 opacity-50">Current Units</div>
-      <div class="pb-8 col-span-3">
+    <div class="grid grid-cols-12 pb-8">
+      <div class="col-span-12 md:col-span-3 opacity-50">Current Units</div>
+      <div class="col-span-12 md:col-span-3">
         {{ profile.units }}
       </div>
     </div>

@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid px-5">
     <div class="grid grid-cols-12">
-      <div class="col-span-3">
+      <div class="col-span-12 md:col-span-3">
         <ManageNav />
       </div>
-      <div class="col-span-9">
+      <div class="col-span-12 md:col-span-9">
         <p>
           <b>Treasury</b><br />
           <span class="opacity-50"
