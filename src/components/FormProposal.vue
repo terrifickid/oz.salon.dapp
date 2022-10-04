@@ -18,7 +18,7 @@
       </div>
     </template>
     <template v-else>
-      <div class="pt-24 mt-4">
+      <div>
         <div class="grid grid-cols-12 mb-4">
           <div class="col-span-3">
             <span class="pr-3">000</span
