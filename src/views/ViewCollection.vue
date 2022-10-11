@@ -5,122 +5,105 @@
     :kycAllowed="true"
     class="pb-64"
   >
-    <div
-      class="bg-gray-100 pt-24 px-5 relative pb-6 flex"
-      v-for="(artwork, index) in collection"
-      :key="index"
-      v-show="hkey == index"
-    >
-      <div class="absolute top-0 right-5 pt-24 flex">
-        <button @click="prevArtwork()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-4 h-4 mr-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-            />
-          </svg>
-        </button>
-        <button @click="nextArtwork()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-4 h-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </button>
-      </div>
-      <div class="absolute bottom-5 right-5 opacity-50">
-        {{ hikey + 1 }} of {{ artwork.fields.images.length }} images
-      </div>
-      <div class="absolute bottom-5 left-5">
-        <button
-          class="flex items-center"
-          v-show="!information"
-          @click="information = true"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-4 h-4 mr-2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 6v12m6-6H6"
-            />
-          </svg>
-          Information
-        </button>
-        <button
-          class="flex items-center"
-          v-show="information"
-          @click="information = false"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-4 h-4 mr-2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+    <CollectionHero :collection="collection" />
 
-          Close
-        </button>
-      </div>
-      <div class="grid grid-cols-12 gap-5 w-full">
-        <div class="col-span-12 md:col-span-4">
-          <p class="font-bold">
-            {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
-            {{ artwork.fields.year }}
-          </p>
-          <div class="pt-4" v-if="information">
-            <p>
-              <span class="opacity-50">Acquired</span><br />
-              {{ artwork.fields.purchaseDate }} from
-              {{ artwork.fields.seller }}
-            </p>
-            <p class="pt-4">
-              <span class="opacity-50">Appraised Value</span><br />
-              {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
-            </p>
-
-            <p class="pt-8">{{ artwork.fields.description }}</p>
-          </div>
+    <div ref="nav" class="grid grid-cols-12 px-5 py-10 gap-5">
+      <div class="col-span-12 md:col-span-2">
+        <div class="md:hidden">
+          <ul class="mb-5">
+            <li class="opacity-50">Format</li>
+            <li
+              :class="{
+                'opacity-50': selectedView != 'grid',
+                'opacity-100': selectedView == 'grid',
+              }"
+            >
+              <button @click="selectedView = 'grid'">Grid</button>
+            </li>
+            <li
+              :class="{
+                'opacity-50': selectedView != 'index',
+                'opacity-100': selectedView == 'index',
+              }"
+            >
+              <button @click="selectedView = 'index'">Index</button>
+            </li>
+            <li
+              :class="{
+                'opacity-50': selectedView != 'gallery',
+                'opacity-100': selectedView == 'gallery',
+              }"
+            >
+              <button @click="selectedView = 'gallery'">Gallery</button>
+            </li>
+          </ul>
         </div>
-        <div class="col-span-12 md:col-span-4">
-          <img
-            v-for="(image, index) in artwork.fields.images"
-            :src="image.fields.file.url"
-            :key="index"
-            v-show="index == this.hikey"
-            class="w-full py-12"
-          />
+        <div :class="{ sticky: sticky }" class="hidden md:block">
+          <ul class="mb-5">
+            <li class="opacity-50">Format</li>
+            <li
+              :class="{
+                'opacity-50': selectedView != 'grid',
+                'opacity-100': selectedView == 'grid',
+              }"
+            >
+              <button @click="selectedView = 'grid'">Grid</button>
+            </li>
+            <li
+              :class="{
+                'opacity-50': selectedView != 'index',
+                'opacity-100': selectedView == 'index',
+              }"
+            >
+              <button @click="selectedView = 'index'">Index</button>
+            </li>
+            <li
+              :class="{
+                'opacity-50': selectedView != 'gallery',
+                'opacity-100': selectedView == 'gallery',
+              }"
+            >
+              <button @click="selectedView = 'gallery'">Gallery</button>
+            </li>
+          </ul>
+          <ul class="hidden md:block">
+            <li class="opacity-50">Sort By</li>
+            <li
+              :class="{
+                'opacity-50': selectedSort != 'acquired',
+                'opacity-100': selectedSort == 'acquired',
+              }"
+            >
+              <button @click="selectedSort = 'acquired'">Acquired</button>
+            </li>
+            <li
+              :class="{
+                'opacity-50': selectedSort != 'artist',
+                'opacity-100': selectedSort == 'artist',
+              }"
+            >
+              <button @click="selectedSort = 'artist'">Artist</button>
+            </li>
+            <li
+              :class="{
+                'opacity-50': selectedSort != 'created',
+                'opacity-100': selectedSort == 'created',
+              }"
+            >
+              <button @click="selectedSort = 'created'">Created</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-10">
+        <div v-if="selectedView == 'grid'">
+          <CollectionGrid :collection="collectionSorted" />
+        </div>
+        <div v-if="selectedView == 'index'">
+          <CollectionIndex :collection="collectionSorted" />
+        </div>
+        <div v-if="selectedView == 'gallery'">
+          <CollectionGallery :collection="collectionSorted" />
         </div>
       </div>
     </div>
@@ -128,56 +111,84 @@
 </template>
 <script>
 // @ is an alias to /src
+
 import axios from "axios";
 import AppShell from "@/components/AppShell";
-
+import CollectionHero from "@/components/collection/CollectionHero";
+import CollectionGrid from "@/components/collection/CollectionGrid";
+import CollectionIndex from "@/components/collection/CollectionIndex";
+import CollectionGallery from "@/components/collection/CollectionGallery";
 //import ImageAsset from "@/components/ImageAsset";
 
 export default {
   name: "CollectionView",
   components: {
     AppShell,
-    //ImageAsset,
+    CollectionHero,
+    CollectionGrid,
+    CollectionIndex,
+    CollectionGallery,
   },
   data() {
     return {
-      hkey: 0,
-      hikey: 0,
-      information: false,
+      sticky: false,
       collection: [],
-      format: new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }),
+      selectedView: "grid",
+      selectedSort: "acquired",
     };
   },
   computed: {
     loaded() {
       return this.collection.length;
     },
+    collectionSorted() {
+      var r = Object.values(this.collection);
+      console.log(r);
+      switch (this.selectedSort) {
+        case "acquired":
+          r.sort(function compareFn(a, b) {
+            var dateA = new Date(a.fields.purchaseDate);
+            var dateB = new Date(b.fields.purchaseDate);
+            if (dateA > dateB) return -1;
+            if (dateA < dateB) return 1;
+            return 0;
+          });
+          break;
+        case "artist":
+          r.sort(function compareFn(a, b) {
+            if (a.fields.artist > b.fields.artist) return 1;
+            if (a.fields.artist < b.fields.artist) return -1;
+            return 0;
+          });
+          break;
+        case "created":
+          r.sort(function compareFn(a, b) {
+            if (a.fields.year > b.fields.year) return 1;
+            if (a.fields.year < b.fields.year) return -1;
+            return 0;
+          });
+          break;
+        default:
+          break;
+      }
+      return r;
+    },
   },
   methods: {
-    nextArtwork() {
-      this.information = false;
-      this.hkey++;
-      if (this.hkey > this.collection.length - 1) this.hkey = 0;
-      console.log("key", this.hkey);
-    },
-    prevArtwork() {
-      this.information = false;
-      this.hkey--;
-      if (this.hkey < 0) this.hkey = this.collection.length - 1;
-      console.log("key", this.hkey);
+    navScroll() {
+      console.log(window.pageYOffset > this.$refs.nav.offsetTop);
+      if (window.pageYOffset + 64 > this.$refs.nav.offsetTop)
+        return (this.sticky = true);
+      return (this.sticky = false);
     },
   },
-  async beforeMount() {
+  async mounted() {
+    window.onscroll = this.navScroll;
+
     console.log("collection load!");
     try {
-      const res = await axios.get(
-        process.env.VUE_APP_URI + "/type/collection?cache=true"
-      );
+      const res = await axios.get(process.env.VUE_APP_URI + "/type/collection");
       this.collection = res.data.message.items;
-      console.log(this.collection);
     } catch (error) {
       console.log("error", error);
     }
@@ -188,5 +199,10 @@ export default {
 select {
   border: 0px;
   outline: 0px;
+}
+
+.sticky {
+  @apply fixed;
+  top: 102px;
 }
 </style>
