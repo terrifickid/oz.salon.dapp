@@ -2,6 +2,9 @@ module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      height: {
+        third: "20vh",
+      },
       fontFamily: {
         haffer: ["Haffer XH"],
         //mono: ["AkkuratMonoLLWebTrial-Regular"],

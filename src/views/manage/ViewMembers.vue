@@ -15,14 +15,14 @@
             :class="{ 'opacity-100': selectedIndex == index }"
             @click="selectedIndex = index"
           >
-            <div class="col-span-12 md:col-span-3">
+            <div class="col-span-12 md:col-span-4">
               {{ member.fields.firstName }} {{ member.fields.lastName }}
             </div>
-            <div class="col-span-12 md:col-span-3">
-              Since {{ member.sys.createdAt }}
+            <div class="col-span-12 md:col-span-4">
+              Since {{ dateFormated(member.sys.createdAt) }}
             </div>
-            <div class="hidden md:block col-span-3">00 proposals</div>
-            <div class="hidden md:block col-span-3">
+
+            <div class="hidden md:block col-span-4">
               {{ member.fields.emailAddress }}
             </div>
           </div>
@@ -79,6 +79,12 @@ export default {
       members: [],
       selectedIndex: null,
     };
+  },
+  methods: {
+    dateFormated(date) {
+      var d = new Date(date);
+      return d.toLocaleString("default", { month: "long", year: "numeric" });
+    },
   },
   computed: {},
   async mounted() {

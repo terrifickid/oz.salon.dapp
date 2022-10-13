@@ -11,6 +11,7 @@
         <div v-html="data.fields.code"></div>
       </div>
     </div>
+    <div class="lg:col-span-4"></div>
   </AppShell>
 </template>
 <script>

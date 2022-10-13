@@ -16,8 +16,12 @@
     </div>
 
     <div class="pt-2" v-if="hasEnded">
-      <div v-if="!passed">This did not pass.</div>
-      <div v-else class="flex items-center" v-html="passType"></div>
+      <div v-if="!passed" class="text-red-500">This did not pass.</div>
+      <div
+        v-else
+        class="flex items-center text-green-500"
+        v-html="passType"
+      ></div>
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <AppShell :isLoaded="isLoaded" :protected="false" class="font-haffer pt-32">
-    <HomeFaderSlide :slides="artworks" />
+    <HomeFaderSlide :slides="artworks" :key="test" />
   </AppShell>
 </template>
 
@@ -18,6 +18,7 @@ export default {
       collection: [],
       artworks: [],
       isLoaded: false,
+      test: 0,
     };
   },
   computed: {
@@ -47,6 +48,9 @@ export default {
     } catch (error) {
       console.log("error", error);
     }
+    setInterval(() => {
+      this.test = Math.round(Math.random() * 1000);
+    }, 10000);
   },
 };
 </script>

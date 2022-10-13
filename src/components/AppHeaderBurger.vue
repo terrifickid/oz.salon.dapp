@@ -142,13 +142,13 @@ export default {
 </script>
 <style scoped>
 .links a {
-  @apply opacity-50;
+  @apply opacity-50 relative;
 }
 a.router-link-active {
   @apply opacity-100 relative;
 }
 
-a.router-link-active#manage::after {
+#manage::after {
   content: "";
   @apply bg-green-500 absolute top-1 -right-2 w-2 h-2 rounded-full;
 }

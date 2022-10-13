@@ -14,7 +14,7 @@
           >Members</router-link
         >
         <router-link class="ml-5" to="/mission">Mission</router-link>
-        <router-link class="ml-5" to="/faq">Faq</router-link>
+        <router-link class="ml-5" to="/faq">FAQ</router-link>
         <router-link class="ml-5" to="/contact">Contact</router-link>
         <router-link v-if="isMember" class="ml-5" to="/resources"
           >Resources</router-link

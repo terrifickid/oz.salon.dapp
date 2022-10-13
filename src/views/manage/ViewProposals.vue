@@ -7,27 +7,62 @@
           <span class="opacity-50">Filters</span>
           <ul>
             <router-link to="/manage/proposals">
-              <li>All</li>
+              <li
+                :class="{
+                  'opacity-50': filter != 'all',
+                  'opacity-100': filter == 'all',
+                }"
+              >
+                <button @click="filter = 'all'">All</button>
+              </li>
             </router-link>
             <router-link to="/manage/proposals">
-              <li class="opacity-50">Pending</li>
+              <li
+                :class="{
+                  'opacity-50': filter != 'pending',
+                  'opacity-100': filter == 'pending',
+                }"
+              >
+                <button @click="filter = 'pending'">Pending</button>
+              </li>
             </router-link>
             <router-link to="/manage/proposals">
-              <li class="opacity-50">Voted</li>
+              <li
+                :class="{
+                  'opacity-50': filter != 'voted',
+                  'opacity-100': filter == 'voted',
+                }"
+              >
+                <button @click="filter = 'voted'">Voted</button>
+              </li>
             </router-link>
             <router-link to="/manage/proposals">
-              <li class="opacity-50">Closed</li>
+              <li
+                :class="{
+                  'opacity-50': filter != 'closed',
+                  'opacity-100': filter == 'closed',
+                }"
+              >
+                <button @click="filter = 'closed'">Closed</button>
+              </li>
             </router-link>
             <router-link to="/manage/proposals">
-              <li class="opacity-50">My Proposals</li>
+              <li
+                :class="{
+                  'opacity-50': filter != 'my',
+                  'opacity-100': filter == 'my',
+                }"
+              >
+                <button @click="filter = 'my'">My Proposals</button>
+              </li>
             </router-link>
           </ul>
         </div>
       </div>
       <div class="col-span-12 md:col-span-9">
-        <p v-if="!myProposals.length">No proposals.</p>
+        <p v-if="!filteredProposals.length">No proposals.</p>
         <ListProposalItem
-          v-for="(item, index) in proposals"
+          v-for="(item, index) in filteredProposals"
           :key="index"
           :item="item"
         />
@@ -52,9 +87,31 @@ export default {
       proposals: [],
       weights: [],
       loaded: false,
+      filter: "all",
     };
   },
   computed: {
+    filteredProposals() {
+      var p;
+      switch (this.filter) {
+        case "my":
+          p = this.myProposals;
+          break;
+        case "pending":
+          p = this.activeProposals;
+          break;
+        case "voted":
+          p = this.votedProposals;
+          break;
+        case "closed":
+          p = this.closedProposals;
+          break;
+        default:
+          p = this.proposals;
+      }
+
+      return p;
+    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
@@ -62,6 +119,11 @@ export default {
       return this.proposals.filter(
         (item) =>
           _.get(item, "fields.profile.walletAddress") == this.walletAddress
+      );
+    },
+    votedProposals() {
+      return this.activeProposals.filter(
+        (item) => _.get(item, "fields.votes.votes.length") > 0
       );
     },
     activeProposals() {

@@ -1,17 +1,13 @@
 <template>
-  <div class="container-fluid px-5">
+  <div v-if="loaded" class="container-fluid px-5">
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3">
         <ManageNav />
       </div>
       <div class="col-span-12 md:col-span-9">
-        <p>
-          <b>Treasury</b><br />
-          <span class="opacity-50"
-            >Financial summary cras ac mi id mauris posuere vulputate eget a
-            leo. Suspendisse et consequat neque.</span
-          >
-        </p>
+        <b>Treasury</b><br />
+
+        <div class="opacity-50" v-html="data.code"></div>
 
         <ul class="pt-10">
           <li class="pb-5">
@@ -81,6 +77,8 @@ export default {
   components: { ManageNav },
   data() {
     return {
+      loaded: false,
+      data: {},
       treasury: {},
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -88,18 +86,28 @@ export default {
       }),
     };
   },
-  async beforeMount() {
+  async mounted() {
+    console.log("content load!");
+    try {
+      const res = await axios.get(
+        process.env.VUE_APP_URI + "/entry/5x22MY3IFgYYzSyf9Wq15j"
+      );
+      this.data = res.data.fields;
+      this.loaded = true;
+    } catch (error) {
+      console.log("error", error);
+    }
+
     console.log("treasury load!");
     //Treasury Data
     try {
-      const res = await axios.get(
-        process.env.VUE_APP_URI + "/treasury?cache=true"
-      );
+      const res = await axios.get(process.env.VUE_APP_URI + "/treasury");
       this.treasury = res.data.message;
     } catch (error) {
       console.log("error", error);
     }
-    console.log(this.treasury);
+
+    this.loaded = true;
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <AppShell
     :isLoaded="loaded"
-    :protected="true"
+    :protected="false"
     :kycAllowed="true"
     class="pb-64"
   >

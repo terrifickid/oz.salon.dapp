@@ -1,18 +1,9 @@
 <template>
-  <AppShell
-    :colors="colors"
-    :isLoaded="loaded"
-    :protected="false"
-    class="pb-64"
-  >
-    <div class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
+  <AppShell :isLoaded="loaded" :protected="false" class="pb-64">
+    <div v-if="loaded" class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
       <div class="col-span-12 md:col-span-6">
         <p class="text-2xl mb-8">Members</p>
-        <p class="text-2xl opacity-50">
-          We are a distributed online community of collectors, artists,
-          investors, and art professionals exploring new ways to build and
-          manage an institutional-grade art collection.
-        </p>
+        <p class="text-2xl opacity-50" v-html="data.code"></p>
       </div>
       <div class="hidden md:block md:col-span-3"></div>
       <div class="hidden md:block md:col-span-3">
@@ -35,11 +26,7 @@
     </div>
     <div class="grid grid-cols-12 pt-12 w-full font-haffer px-5 pt-24 gap-5">
       <div class="col-span-12 md:col-span-6">
-        <p class="text-2xl opacity-50">
-          Together, our members command unique insights into artists across
-          regions, periods, and mediums. Our personal collections include works
-          by a diverse set of leading artists.
-        </p>
+        <p class="text-2xl opacity-50" v-html="data.code2"></p>
       </div>
     </div>
     <div
@@ -58,6 +45,7 @@
 </template>
 <script>
 // @ is an alias to /src
+//295KNJLbaMnANC1ea8f2lI
 import axios from "axios";
 import AppShell from "@/components/AppShell";
 
@@ -65,7 +53,8 @@ export default {
   components: { AppShell },
   data() {
     return {
-      colors: ["white", "black"],
+      loaded: false,
+      data: {},
       members: [],
       allMembers: [],
       artists: [
@@ -84,11 +73,7 @@ export default {
       ],
     };
   },
-  computed: {
-    loaded() {
-      return this.members.length;
-    },
-  },
+  computed: {},
   methods: {
     filterMembers() {
       this.members = this.allMembers.slice();
@@ -152,19 +137,27 @@ export default {
       }
     },
   },
-
-  async beforeMount() {
+  async mounted() {
     console.log("members load!");
     try {
-      const res = await axios.get(
-        process.env.VUE_APP_URI + "/members?cache=true"
-      );
+      const res = await axios.get(process.env.VUE_APP_URI + "/members");
       this.allMembers = res.data.filter((member) => member.fields.units > 0);
       this.members = res.data.filter((member) => member.fields.units > 0);
       console.log(this.members);
     } catch (error) {
       console.log("error", error);
     }
+    console.log("content load!");
+    try {
+      const res = await axios.get(
+        process.env.VUE_APP_URI + "/entry/295KNJLbaMnANC1ea8f2lI"
+      );
+      this.data = res.data.fields;
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    this.loaded = true;
   },
 };
 </script>
