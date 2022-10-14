@@ -34,13 +34,6 @@ const routes = [
   },
 
   {
-    path: "/kick",
-    name: "kick",
-    component: function () {
-      return import(/* webpackChunkName: "ViewKick" */ "../views/ViewKick.vue");
-    },
-  },
-  {
     path: "/members",
     name: "members",
     component: function () {
@@ -161,6 +154,15 @@ const routes = [
         component: function () {
           return import(
             /* webpackChunkName: "ViewSell" */ "../views/manage/ViewSell.vue"
+          );
+        },
+      },
+      {
+        path: "kick",
+        name: "Kick",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewKick" */ "../views/manage/ViewKick.vue"
           );
         },
       },

@@ -5,7 +5,7 @@
         <ManageNav />
       </div>
       <div class="col-span-12 md:col-span-9">
-        <AppProfile :profile="profile" />
+        <AppProfile v-if="profile.firstName" :profile="profile" />
       </div>
     </div>
   </div>

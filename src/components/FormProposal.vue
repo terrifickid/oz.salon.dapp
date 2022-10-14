@@ -20,9 +20,9 @@
     <template v-else>
       <div class="pb-64">
         <div class="grid grid-cols-12 mb-4">
-          <div class="col-span-12 lgcol-span-3">
-            <span class="pr-3">000</span
-            ><span class="capitalize">{{ proposalFormat.contentType }}</span>
+          <div class="col-span-12 lgcol-span-3 capitalize">
+            <span class="pr-3">000</span>
+            {{ proposalFormat.contentType }}
           </div>
           <div class="col-span-12 lg:col-span-6 py-5 lg:py-0">
             <AppCountdown v-if="!hasEnded" :start="proposalFormat.createdAt" />
@@ -64,6 +64,13 @@
             class="mr-5 mb-5"
           >
             <template v-if="disabledFields.includes(field.label)"></template>
+            <template v-else-if="String(field.id).split('0').includes('upload')"
+              ><div class="grid grid-cols-12 gap-5">
+                <div class="col-span-4">
+                  <span class="opacity-50">{{ field.label }}</span
+                  ><br /><img :src="field.value" />
+                </div></div
+            ></template>
             <template
               v-else-if="String(field.label).toLowerCase().includes('units')"
             >
@@ -159,7 +166,8 @@ export default {
         "User Profile",
         "Submit Proposal",
         "Subscription Booklet",
-        "votes",
+        "Votes",
+        "Finish",
       ],
       treasury: {},
     };
@@ -259,6 +267,7 @@ export default {
           var label = scope.getFieldLabel(e.data.fields, field[0]);
           return {
             label: label,
+            id: field[0],
             value: field[1],
           };
         });

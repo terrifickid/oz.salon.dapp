@@ -38,6 +38,12 @@
               </p>
             </router-link>
           </li>
+          <li v-if="isAdmin" class="mb-5">
+            <router-link to="/manage/kick">
+              <p>Kick</p>
+              <p class="opacity-50">-> Initiate a vote to kick</p>
+            </router-link>
+          </li>
           <li class="mb-5">
             <router-link to="/manage/proposals">
               <p class="opacity-50">-> View Proposals</p>
@@ -51,11 +57,22 @@
 
 <script>
 // @ is an alias to /src
+import _ from "lodash";
 import ManageNav from "@/components/ManageNav";
 export default {
   components: { ManageNav },
   data() {
     return {};
+  },
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+    isAdmin() {
+      var role = _.get(this.profile, "role");
+      if (role == "Admin") return true;
+      return false;
+    },
   },
 };
 </script>

@@ -38,6 +38,30 @@
         <div v-show="selectedIndex == -1">
           <FormIntro :name="name" :description="description" @ready="next" />
         </div>
+        <div v-show="selectedIndex == 1000" class="text-2xl">
+          <span class="text-green-500"
+            >Your {{ name }} proposal has been successfully submited.</span
+          >
+          <p class="opacity-50 mt-20">
+            <router-link to="/manage/start" class="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 mr-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
+              Return to Overview</router-link
+            >
+          </p>
+        </div>
         <template v-for="(field, index) in fields" :key="index">
           <div v-show="selectedIndex == index">
             <FormField
@@ -114,7 +138,8 @@ export default {
         const res = await axios.post(this.url, this.form);
         if (res.data.result) {
           console.log("success", res.data);
-          this.$emit("success");
+          this.selectedIndex = 1000;
+          this.processing = false;
           this.$store.dispatch("connect");
         } else {
           alert("Error, Please try again.");
