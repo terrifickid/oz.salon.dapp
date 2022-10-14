@@ -18,6 +18,8 @@
         :count="index + 1"
         :title="getTitle"
         :choices="getChoice"
+        :id="field.id"
+        :cached="field.cached"
         :required="true"
         :help="getHelpText"
         @update="updateValue"
@@ -73,6 +75,8 @@
         class="app-frame"
         :count="index + 1"
         :title="getTitle"
+        :id="field.id"
+        :cached="field.cached"
         :required="true"
         :help="getHelpText"
         @update="updateValue"
@@ -99,7 +103,7 @@ export default {
     InputMember,
     InputSubmit,
   },
-  props: ["modelValue", "field", "index"],
+  props: ["modelValue", "field", "index", "cache"],
   computed: {
     isMember() {
       var check = this.field.id.split("0");
@@ -138,6 +142,9 @@ export default {
       if (helpText.length) return helpText[0].message;
       return false;
     },
+    getId() {
+      return this.field.id;
+    },
     isUpload() {
       var check = this.field.id.split("0");
       return check.includes("upload");
@@ -146,7 +153,15 @@ export default {
   methods: {
     updateValue(val) {
       this.$emit("update:modelValue", val);
+      if (this.field.cached === true) {
+        localStorage.setItem(this.field.id, val);
+      }
     },
+  },
+  mounted() {
+    if (this.field.cached && localStorage.getItem(this.field.id) !== null) {
+      this.$emit("update:modelValue", localStorage.getItem(this.id));
+    }
   },
 };
 </script>
