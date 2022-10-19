@@ -20,6 +20,7 @@
             <span class="flex items-center">
               {{ field.name }}
               <svg
+                v-if="fields.length - 1 != index"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
