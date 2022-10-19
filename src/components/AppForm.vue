@@ -175,6 +175,7 @@ export default {
           "profile",
           "role",
           "delegate",
+          "biography",
         ];
         if (disabled.includes(field.id)) return false;
         return true;
