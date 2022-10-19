@@ -1,12 +1,9 @@
 <template>
   <AppShell :colors="colors" :isLoaded="loaded" :protected="true">
     <AppContent class="items-center">
-      <div
-        class="grid grid-cols-12 w-full pt-32 font-haffer"
-        v-if="'walletAddress' in profile"
-      >
+      <div class="grid grid-cols-12 w-full pt-32 font-haffer">
         <div class="app-frame">
-          <AppProfile :profile="profile" />
+          <AppProfile @erp="processing = true" :profile="profile" />
         </div>
       </div>
     </AppContent>
@@ -22,15 +19,20 @@ export default {
   components: { AppShell, AppContent, AppProfile },
   data() {
     return {
-      colors: ["white", "black"],
+      processing: false,
     };
   },
   computed: {
     loaded() {
-      return this.profile;
+      return false;
     },
     profile() {
       return this.$store.state.profile;
+    },
+  },
+  methods: {
+    set() {
+      console.log("update ran!");
     },
   },
 };

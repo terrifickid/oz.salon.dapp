@@ -66,10 +66,7 @@
     <div class="grid grid-cols-12 pb-3">
       <div class="col-span-6 md:col-span-3 opacity-50">Your Delegate</div>
       <div class="col-span-6 md:col-span-3">
-        <AppDelegateSelect
-          v-if="profile.walletAddress == this.walletAddress"
-          :disabled="!editMode"
-        />
+        <AppDelegateSelect @delegate="updateDelegate" :disabled="!editMode" />
       </div>
     </div>
     <div class="grid grid-cols-12">
@@ -131,7 +128,7 @@
     </router-link>
 
     <div v-show="editMode" class="pt-12">
-      <AppButton>Save Changes</AppButton>
+      <AppButton @click="updateProfile">Save Changes</AppButton>
       <button class="px-4 py-2 bg-white" @click="editMode = false">
         Cancel
       </button>
@@ -140,6 +137,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import AppDelegateSelect from "@/components/AppDelegateSelect";
 import AppButton from "@/components/AppButton";
 export default {
@@ -156,11 +154,29 @@ export default {
       return this.$store.state.walletAddress;
     },
   },
+  methods: {
+    async updateProfile() {
+      try {
+        const res = await axios.post(
+          process.env.VUE_APP_URI + "/profile/" + this.profile.id,
+          this.update
+        );
+        console.log(res);
+      } catch (e) {
+        console.error(e);
+      }
+      this.editMode = false;
+    },
+    updateDelegate(d) {
+      this.update.delegate = d;
+    },
+  },
   mounted() {
     this.update.firstName = this.profile.firstName;
     this.update.lastName = this.profile.lastName;
     this.update.emailAddress = this.profile.emailAddress;
     this.update.biography = this.profile.biography;
+    this.update.delegate = this.profile.delegate;
   },
 };
 </script>

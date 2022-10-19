@@ -99,18 +99,22 @@
           {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
           {{ artwork.fields.year }}
         </p>
-        <div class="pt-4" v-if="information">
-          <p>
+        <div class="pt-4 grid grid-cols-12" v-if="information">
+          <p class="col-span-8">
             <span class="opacity-50">Acquired</span><br />
             {{ artwork.fields.purchaseDate }} from
             {{ artwork.fields.seller }}
           </p>
-          <p class="pt-4">
+          <p class="col-span-4">
+            <span class="opacity-50">Medium</span><br />
+            {{ artwork.fields.medium }}
+          </p>
+          <p class="pt-4 hidden">
             <span class="opacity-50">Appraised Value</span><br />
             {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
           </p>
 
-          <p class="pt-8">{{ artwork.fields.description }}</p>
+          <p class="pt-8 col-span-12">{{ artwork.fields.description }}</p>
         </div>
       </div>
       <div

@@ -18,10 +18,10 @@
     >
       <div
         class="col-span-6 md:col-span-3 pb-4"
-        v-for="(profile, index) in members"
+        v-for="(profile, index) in data.list1"
         :key="index"
       >
-        <b>{{ profile.fields.firstName }} {{ profile.fields.lastName }}</b>
+        <b>{{ profile }}</b>
       </div>
     </div>
     <div class="grid grid-cols-12 pt-12 w-full font-haffer px-5 pt-24 gap-5">
@@ -35,7 +35,7 @@
     >
       <div
         class="col-span-6 md:col-span-3 pb-4"
-        v-for="(artist, index) in artists"
+        v-for="(artist, index) in data.list2"
         :key="index"
       >
         <b>{{ artist }}</b>

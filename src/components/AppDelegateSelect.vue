@@ -20,6 +20,7 @@ export default {
       members: [],
     };
   },
+  emits: ["delegate"],
   computed: {
     profile() {
       return this.$store.state.profile;
@@ -27,18 +28,8 @@ export default {
   },
   methods: {
     async onChange() {
-      try {
-        const res = await axios.post(
-          process.env.VUE_APP_URI +
-            "/delegate/" +
-            this.profile.id +
-            "/" +
-            this.selected
-        );
-        console.log(res);
-      } catch (e) {
-        console.error(e);
-      }
+      console.log("change");
+      this.$emit("delegate", this.selected);
     },
   },
   async beforeMount() {

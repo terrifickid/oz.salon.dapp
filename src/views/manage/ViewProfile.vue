@@ -17,7 +17,7 @@ export default {
   components: { AppProfile, ManageNav },
   computed: {
     loaded() {
-      return this.profile;
+      return this.profile.firstName;
     },
     profile() {
       return this.$store.state.profile;
