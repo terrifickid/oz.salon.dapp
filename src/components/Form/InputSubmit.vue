@@ -16,7 +16,7 @@
         <span>{{ choice }}</span>
       </button>
     </div>
-    <FormButtonOk @ready="$emit('ready')" v-if="0" />
+    <FormButtonOk @ready="$emit('ready')" v-if="0" @back="$emit('back')" />
   </div>
 </template>
 <script>

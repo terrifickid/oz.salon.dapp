@@ -33,7 +33,7 @@
     </div>
 
     <FormHelp :help="help" v-if="help" />
-    <FormButtonOk @ready="next" />
+    <FormButtonOk @ready="next" @back="$emit('back')" />
   </div>
 </template>
 <script>

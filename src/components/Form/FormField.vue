@@ -10,6 +10,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
     <template v-else-if="getChoice">
@@ -22,6 +23,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
     <template v-else-if="isUpload">
@@ -33,6 +35,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
     <template v-else-if="isLongText">
@@ -44,6 +47,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
     <template v-else-if="isUnits">
@@ -55,6 +59,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
     <template v-else-if="isMember">
@@ -66,6 +71,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
     <template v-else>
@@ -77,6 +83,7 @@
         :help="getHelpText"
         @update="updateValue"
         @ready="$emit('ready')"
+        @back="$emit('back')"
       />
     </template>
   </div>

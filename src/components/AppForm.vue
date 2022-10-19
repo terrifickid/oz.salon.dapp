@@ -13,8 +13,9 @@
           <li
             v-for="(field, index) in fields"
             :key="index"
-            class="inline-block items-center mr-2"
+            class="inline-block items-center mr-2 cursor-pointer"
             :class="{ 'opacity-50': selectedIndex < index }"
+            @click="selectedIndex = index"
           >
             <span class="flex items-center">
               {{ field.name }}
@@ -67,6 +68,7 @@
             <FormField
               :field="field"
               @ready="next"
+              @back="back"
               :index="index"
               v-model="form[field.id]"
             />
@@ -104,6 +106,10 @@ export default {
     },
   },
   methods: {
+    async back() {
+      console.log("back!");
+      this.selectedIndex--;
+    },
     async next() {
       if (await this.validate()) {
         this.submitForm();

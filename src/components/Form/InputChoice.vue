@@ -17,7 +17,7 @@
       </button>
     </div>
     <FormHelp :help="help" v-if="help" />
-    <FormButtonOk @ready="$emit('ready')" />
+    <FormButtonOk @ready="$emit('ready')" @back="$emit('back')" />
   </div>
 </template>
 <script>
