@@ -5,12 +5,13 @@
       <div class="pt-20 px-5 container">
         <div class="grid grid-cols-12">
           <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">Application Recieved</p>
+            <p class="text-2xl mb-8 text-green-500">
+              We've received your application
+            </p>
             <h1 class="text-2xl opacity-50 font-haffer">
-              Thank you for providing us with information to verify your status
-              as an accredited investor. You will be notified when you have been
-              approved to submit an onboarding application to join Salon. Please
-              reach out to
+              You'll receive an email notification when you are approved to move
+              to the second stage of our application process. Please reach out
+              to
               <a class="bold underline" href="mailto:hello@salondao.xyz"
                 >hello@salondao.xyz</a
               >
