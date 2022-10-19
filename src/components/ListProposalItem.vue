@@ -8,7 +8,7 @@
       :class="{ 'mb-10': !hasPassed, 'mb-5': hasPassed }"
     >
       <div class="col-span-1" :class="{ 'text-green-500': !hasPassed }">
-        000
+        {{ item.sys.id.substr(item.sys.id.length - 3).toUpperCase() }}
       </div>
       <div
         class="col-span-1 col-start-2"
