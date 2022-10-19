@@ -87,10 +87,9 @@
               per unit for a total of
               {{ format.format(getJSON(field.value).amount) }}.
 
-              <p>
-                For reference, the book value of Salon units now is
-                {{ format.format(bookValue) }} and the suggested trading price
-                is {{ format.format(suggestedTradingPrice) }}.
+              <p class="text-green-500">
+                For reference, the current trade price of Salon units is
+                {{ format.format(suggestedTradingPrice) }}.
               </p>
             </template>
             <template v-else-if="field.label == 'Member'">

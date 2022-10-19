@@ -38,10 +38,7 @@
 
             <div class="col-span-3 opacity-50">Biography</div>
             <div class="col-span-9">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {{ member.fields.biography }}
             </div>
             <div class="col-span-12 opacity-50 hover:opacity-100 pt-4">
               <router-link to="/manage/proposals" class="flex items-center">
