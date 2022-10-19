@@ -60,7 +60,7 @@
                   />
                 </svg>
                 View {{ member.fields.firstName }}
-                {{ member.fields.lastName }}'s (00) Proposals
+                {{ member.fields.lastName }}'s Proposals
               </router-link>
             </div>
           </div>
