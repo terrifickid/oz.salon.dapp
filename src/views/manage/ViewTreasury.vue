@@ -33,7 +33,7 @@
           <li class="pb-5">
             <span class="opacity-50">Total Units Issued</span><br /><span
               class="text-2xl"
-              >{{ treasury.totalUnits }}</span
+              >{{ decimal.format(treasury.totalUnits) }}</span
             >
           </li>
         </ul>
@@ -80,6 +80,9 @@ export default {
       loaded: false,
       data: {},
       treasury: {},
+      decimal: new Intl.NumberFormat("en-US", {
+        style: "decimal",
+      }),
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",

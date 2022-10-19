@@ -84,7 +84,7 @@
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3 opacity-50">Current Units</div>
       <div class="col-span-12 md:col-span-3">
-        {{ profile.units }}
+        {{ decimal.format(profile.units) }}
       </div>
     </div>
 
@@ -147,6 +147,9 @@ export default {
     return {
       update: {},
       editMode: false,
+      decimal: new Intl.NumberFormat("en-US", {
+        style: "decimal",
+      }),
     };
   },
   computed: {
