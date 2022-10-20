@@ -96,7 +96,8 @@
         }"
       >
         <p class="font-bold">
-          {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
+          {{ artwork.fields.artist }}
+          <i class="mr-1">{{ artwork.fields.title }} </i>
           {{ artwork.fields.year }}
         </p>
         <div class="pt-4 grid grid-cols-12" v-if="information">
