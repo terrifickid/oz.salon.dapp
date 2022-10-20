@@ -8,7 +8,7 @@
       :class="{ 'mb-10': !hasPassed, 'mb-5': hasPassed }"
     >
       <div class="col-span-1" :class="{ 'text-green-500': !hasPassed }">
-        {{ item.sys.id.substr(item.sys.id.length - 3).toUpperCase() }}
+        {{ lpad }}
       </div>
       <div
         class="col-span-1 col-start-2"
@@ -34,6 +34,10 @@ export default {
   components: { AppCountdown },
   props: ["item"],
   computed: {
+    lpad() {
+      var zeroes = new Array(3 + 1).join("0");
+      return (zeroes + this.item.sys.id.replace(/\D/g, "")).slice(-3);
+    },
     hasPassed() {
       return typeof _.get(this.item, "fields.votes.passed") == "boolean";
     },
