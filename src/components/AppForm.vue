@@ -110,13 +110,8 @@ export default {
       this.selectedIndex--;
     },
     async next() {
-      if (await this.validate()) {
-        this.submitForm();
-      } else {
-        console.log("next");
-        //this.selectedIndex++;
-        //this.$refs.fullpage.api.moveSectionDown();
-      }
+      console.log("next!");
+      if (await this.validate()) this.submitForm();
     },
     async validate() {
       console.log("validate form!");
@@ -125,6 +120,7 @@ export default {
       for (let field of this.fields) {
         if (this.form[field.id] == "") error = true;
         if (!([field.id] in this.form)) error = true;
+        if (field.id.split(0).includes("optional")) error = false;
         if (error) {
           this.selectedIndex = i;
           break;
@@ -156,14 +152,6 @@ export default {
         console.log("error", error);
       }
     },
-    async resize() {
-      //alert("resize!");
-      //  this.$refs.fullpage.api.reBuild();
-    },
-  },
-
-  beforeUnmount() {
-    window.removeEventListener("resize", this.resize);
   },
   async mounted() {
     try {
@@ -189,7 +177,6 @@ export default {
       this.$emit("ready");
       this.ready = true;
       this.processing = false;
-      window.addEventListener("resize", this.resize);
     } catch (error) {
       console.log("error", error);
     }
