@@ -6,7 +6,7 @@
       @close="collectionSingleItem = null"
     />
     <div
-      class="grid grid-cols-12 border-t border-black py-2 gap-x-5"
+      class="grid grid-cols-12 border-t border-black py-2 gap-x-5 cursor-pointer"
       v-for="(item, index) in collection"
       :key="index"
       @click="collectionSingleItem = item"
