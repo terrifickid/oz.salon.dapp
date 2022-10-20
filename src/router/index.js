@@ -144,7 +144,7 @@ const routes = [
         name: "Acquire",
         component: function () {
           return import(
-            /* webpackChunkName: "ViewCollect" */ "../views/manage/ViewCollect.vue"
+            /* webpackChunkName: "ViewAcquire" */ "../views/manage/ViewAcquire.vue"
           );
         },
       },

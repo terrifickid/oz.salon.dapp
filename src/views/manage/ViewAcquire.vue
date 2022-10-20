@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     uri() {
-      return process.env.VUE_APP_URI + "/form/collect?cache=true";
+      return process.env.VUE_APP_URI + "/form/acquire";
     },
   },
 };
