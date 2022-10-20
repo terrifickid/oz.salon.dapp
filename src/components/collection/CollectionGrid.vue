@@ -26,7 +26,8 @@
           class="opacity-50 group-hover:opacity-100 absolute left-5 bottom-0"
         >
           {{ item.fields.artist }}<br />
-          {{ item.fields.title }}<br />
+          <i>{{ item.fields.title }}</i
+          ><br />
           {{ item.fields.year }}
         </div>
       </div>

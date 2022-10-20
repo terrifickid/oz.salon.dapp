@@ -19,7 +19,9 @@
           ></div>
         </div>
       </div>
-      <div class="col-span-2">{{ item.fields.title }}</div>
+      <div class="col-span-2">
+        <i>{{ item.fields.title }}</i>
+      </div>
       <div class="col-span-2">{{ item.fields.artist }}</div>
       <div class="col-span-2">{{ item.fields.year }}</div>
       <div class="col-span-4">{{ item.fields.description }}</div>
