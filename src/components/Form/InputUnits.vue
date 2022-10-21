@@ -2,8 +2,8 @@
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
 
-    <div class="grid grid-cols-2 gap-40 text-2xl">
-      <div class="col flex items-center border-b border-black">
+    <div class="grid grid-cols-2 gap-20 text-2xl">
+      <div class="col-span-1 flex items-center border-b border-black">
         <span class="mr-2">$</span>
         <input
           type="number"
@@ -16,20 +16,27 @@
           @change="formatAmount"
         />
       </div>
-      <div class="col">
+      <div class="col-span-1">
         <input
           type="number"
           class="font-haffer sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
-          placeholder="Units"
+          placeholder="Price per unit"
           @input="update"
           required
-          v-model="units"
+          v-model="pricePerUnit"
           autocomplete="off"
         />
       </div>
-    </div>
-    <div class="text-2xl mt-8 opacity-50">
-      Per unit price: {{ format.format(perUnitPrice) }}
+      <div class="col-span-1">
+        <p class="opacity-50">Number of units</p>
+        <p>{{ numberOfUnits }}</p>
+      </div>
+      <div class="col-span-1">
+        <p class="opacity-50">Current trade price (per unit)</p>
+        <p class="text-green-500">
+          {{ format.format(treasury.currentTradePrice) }}
+        </p>
+      </div>
     </div>
 
     <FormHelp :help="help" v-if="help" />
@@ -49,10 +56,11 @@ export default {
     FormHelp,
   },
   props: ["count", "title", "required", "placeholder", "help"],
-  emits: ["ready"],
+  emits: ["ready", "update"],
   data() {
     return {
       units: "",
+      pricePerUnit: null,
       amount: "",
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -63,8 +71,8 @@ export default {
   },
   computed: {
     minimumInvestment() {
-      if (this.profileUnits > 0) return 0;
-      return 0.003;
+      if (this.profileUnits > 0) return -1;
+      return 3;
     },
     profileUnits() {
       return _.get(this.$store, "state.profile.units");
@@ -76,44 +84,49 @@ export default {
         _.get(this.treasury, "collectionValue")
       );
     },
-    suggestedTradingPrice() {
-      var c = this.bookValue / _.get(this.treasury, "totalUnits");
-      return c.toFixed(2);
-    },
-    perUnitPrice() {
-      var val = this.amount / this.units;
-      if (!Number.isFinite(val)) return 0;
-      return val;
+    numberOfUnits() {
+      var n = Math.round(this.amount / this.pricePerUnit);
+      if (Number.isInteger(n)) return n;
+      return 0;
     },
     value() {
-      return JSON.stringify({ units: this.units, amount: this.amount });
+      return JSON.stringify({
+        units: this.numberOfUnits,
+        amount: this.amount,
+        pricePerUnit: this.pricePerUnit,
+      });
     },
   },
   methods: {
     next() {
-      if (this.amount < this.minimumInvestment) {
+      if (parseFloat(this.amount) < parseFloat(this.minimumInvestment)) {
         alert("Proposal below the minimum buy-in price of $30,000.");
         return;
       }
-      if (this.perUnitPrice < this.suggestedTradingPrice) {
+
+      if (
+        parseFloat(this.pricePerUnit) <
+        parseFloat(this.treasury.currentTradePrice)
+      ) {
         alert(
           "Your offer is below the appraised value of Salon's assets and can not be accepted. Please try again with an offer at or above book value."
         );
         return;
       }
+
       this.$emit("ready");
     },
     update() {
-      if (this.units && this.amount) this.$emit("update", this.value);
+      if (this.numberOfUnits && this.amount) this.$emit("update", this.value);
     },
     formatAmount() {
-      console.log(this.amount);
       this.amount = parseFloat(this.amount).toFixed(2);
     },
   },
   async mounted() {
     var res = await axios.get(process.env.VUE_APP_URI + "/treasury/");
     this.treasury = res.data.message;
+    console.log(this.treasury);
   },
 };
 </script>

@@ -47,20 +47,9 @@
               )
             }}
           </div>
-          <div>
-            <span>Suggested Trading Value (per unit)</span><br /><span>
-              {{
-                format.format(
-                  ((treasury.collectionValue + treasury.balance) /
-                    treasury.totalUnits) *
-                    1.25
-                )
-              }}</span
-            >
-          </div>
         </div>
         <div class="border-t border-black mt-12 pt-1">
-          <span>Most Recent Trade Price (per unit)</span><br />
+          <span>Current Trade Price (per unit)</span><br />
           <span class="text-2xl text-green-500">{{ format.format(0) }}</span>
         </div>
       </div>

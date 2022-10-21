@@ -110,11 +110,11 @@ export default {
       this.selectedIndex--;
     },
     async next() {
-      console.log("next!");
       if (await this.validate()) this.submitForm();
     },
     async validate() {
       console.log("validate form!");
+      console.log("next!", this.form);
       var i = 0;
       var error = false;
       for (let field of this.fields) {

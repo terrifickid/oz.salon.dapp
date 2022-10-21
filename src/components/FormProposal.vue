@@ -90,6 +90,7 @@
 
               <p class="text-green-500">
                 For reference, the current trade price of Salon units is
+
                 {{ format.format(suggestedTradingPrice) }}.
               </p>
             </template>
@@ -166,7 +167,7 @@ export default {
         "User Profile",
         "Submit Proposal",
         "Subscription Booklet",
-        "Votes",
+        "votes",
         "Finish",
       ],
       treasury: {},
@@ -188,8 +189,7 @@ export default {
       );
     },
     suggestedTradingPrice() {
-      var c = this.bookValue / _.get(this.treasury, "totalUnits");
-      return c.toFixed(2);
+      return _.get(this.treasury, "currentTradePrice");
     },
     hasEnded() {
       return typeof _.get(this.proposalFormat, "votes.passed") == "boolean";
