@@ -109,7 +109,7 @@ export default {
         parseFloat(this.treasury.currentTradePrice)
       ) {
         alert(
-          "Your offer is below the appraised value of Salon's assets and can not be accepted. Please try again with an offer at or above book value."
+          "You must invest at or above the current trade price of Salon units, please try again with a higher offer."
         );
         return;
       }
