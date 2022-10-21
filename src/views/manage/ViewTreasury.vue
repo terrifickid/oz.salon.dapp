@@ -50,7 +50,9 @@
         </div>
         <div class="border-t border-black mt-12 pt-1">
           <span>Current Trade Price (per unit)</span><br />
-          <span class="text-2xl text-green-500">{{ format.format(0) }}</span>
+          <span class="text-2xl text-green-500">{{
+            format.format(treasury.currentTradePrice)
+          }}</span>
         </div>
       </div>
     </div>

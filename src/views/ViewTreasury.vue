@@ -51,6 +51,7 @@
           <div class="border-b border-black p-1 text-xs sm:text-base">
             <span>Suggested Trading Value Per Unit</span
             ><span class="float-right">
+              {{ treasury }}
               {{
                 format.format(
                   ((treasury.collectionValue + treasury.balance) /
