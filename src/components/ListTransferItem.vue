@@ -1,21 +1,15 @@
 <template>
-  <div class="border-b border-black py-3 grid grid-cols-12 flex items-center">
-    <div class="col-span-8">
-      <b
-        v-html="
-          item.fields.profile.firstName + ' ' + item.fields.profile.lastName
-        "
-      >
-      </b>
+  <div class="py-3 grid grid-cols-12 flex items-center">
+    <div class="col-span-12">
       {{ JSON.parse(item.fields.units0units).units }} units offered for
       {{ format.format(JSON.parse(item.fields.units0units).amount) }}
     </div>
-    <div class="col-span-4">
-      <AppButton v-if="isSameUser" class="float-right" @click="cancel()"
+    <div class="col-span-12">
+      <AppButton v-if="isSameUser" @click="cancel()" class="my-8"
         >Cancel</AppButton
       >
 
-      <AppButton v-if="!isSameUser" class="float-right" @click="sendUSDC(0.001)"
+      <AppButton v-if="isSameUser" @click="sendUSDC(0.001)"
         >Accept Offer</AppButton
       >
     </div>

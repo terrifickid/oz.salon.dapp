@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import { ethers } from "ethers";
 import axios from "axios";
-
+import _ from "lodash";
 export default createStore({
   state: {
     connecting: false,
@@ -12,11 +12,20 @@ export default createStore({
     profile: { loading: true },
     ui: true,
     networkError: "",
+    proposals: [],
   },
   getters: {
     getMembers(state) {
       const a = JSON.stringify(state.members);
       return JSON.parse(a);
+    },
+    activeProposalsCount(state) {
+      return state.proposals.filter(function (item) {
+        return !_.has(item, "fields.votes.passed");
+      }).length;
+    },
+    membersCount(state) {
+      return state.members.length;
     },
   },
   mutations: {

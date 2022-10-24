@@ -21,7 +21,10 @@
     <template v-else>
       <div class="pb-64">
         <div class="grid grid-cols-12 mb-4">
-          <div class="col-span-12 lgcol-span-3 capitalize">
+          <div
+            class="col-span-12 lg:col-span-3 capitalize"
+            :class="{ 'text-green-500': !hasPassed }"
+          >
             <span class="pr-3">000</span>
             {{ proposalFormat.contentType }}
           </div>
@@ -34,11 +37,15 @@
           </div>
         </div>
 
-        <CounterVote :votes="proposalFormat.votes" :weights="weights" />
+        <CounterVote
+          :votes="proposalFormat.votes"
+          :weights="weights"
+          v-if="isVotable"
+        />
 
         <div
           class="grid grid-cols-12 flex items-center pt-5 pb-8"
-          v-if="canVote"
+          v-if="canVote && isVotable"
         >
           <div class="col-span-4 lg:col-span-2">Your Vote</div>
           <div class="col-span-4 lg:col-span-6 flex">
@@ -58,13 +65,21 @@
           </div>
         </div>
 
-        <ul>
+        <ListTransferItem
+          v-if="proposal.sys.contentType.sys.id == 'exchange' && !hasEnded"
+          :item="proposal"
+          @transfer="transferComplete"
+          @loading="loading"
+          @done="done"
+        />
+
+        <ul v-if="proposal.sys.contentType.sys.id != 'exchange'">
           <li
             v-for="(field, index) in proposalFormat.fields"
             :key="index"
             class="mr-5 mb-5"
           >
-            <template v-if="disabledFields.includes(field.label)"></template>
+            <template v-if="disabledFields.includes(field.id)"></template>
             <template v-else-if="String(field.id).split('0').includes('upload')"
               ><div class="grid grid-cols-12 gap-5">
                 <div class="col-span-4">
@@ -72,9 +87,7 @@
                   ><br /><img :src="field.value" />
                 </div></div
             ></template>
-            <template
-              v-else-if="String(field.label).toLowerCase().includes('units')"
-            >
+            <template v-else-if="String(field.id).split('0').includes('units')">
               <span class="opacity-50">{{ field.label }}</span
               ><br />
 
@@ -94,7 +107,9 @@
                 {{ format.format(suggestedTradingPrice) }}.
               </p>
             </template>
-            <template v-else-if="field.label == 'Member'">
+            <template
+              v-else-if="String(field.id).split('0').includes('member')"
+            >
               <span class="opacity-50">{{ field.label }}</span
               ><br />{{ getJSON(field.value).firstName }}
               {{ getJSON(field.value).lastName }}<br />
@@ -142,13 +157,14 @@ import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
 
 import ExecuteProposal from "@/components/ExecuteProposal";
+import ListTransferItem from "@/components/ListTransferItem.vue";
 export default {
   components: {
     CounterVote,
     AppCountdown,
     AppButtonVote,
     AppLoader,
-
+    ListTransferItem,
     ExecuteProposal,
   },
   props: ["id"],
@@ -164,11 +180,12 @@ export default {
         currency: "USD",
       }),
       disabledFields: [
-        "User Profile",
+        "profile",
         "Submit Proposal",
         "Subscription Booklet",
         "votes",
-        "Finish",
+        "submitProposal0submit",
+        "profile",
       ],
       treasury: {},
     };
@@ -199,6 +216,10 @@ export default {
     },
     isMember() {
       return this.profile.units;
+    },
+    isVotable() {
+      if (this.proposalFormat.contentType == "exchange") return false;
+      return true;
     },
     canVote() {
       if ("units" in this.profile && this.profile.units > 0) return true;

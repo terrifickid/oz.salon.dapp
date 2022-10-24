@@ -73,7 +73,6 @@ export default {
   components: { ManageNav },
   data() {
     return {
-      members: [],
       selectedIndex: null,
     };
   },
@@ -83,13 +82,16 @@ export default {
       return d.toLocaleString("default", { month: "long", year: "numeric" });
     },
   },
-  computed: {},
+  computed: {
+    members() {
+      return this.$store.state.members;
+    },
+  },
   async mounted() {
     console.log("members load!");
     try {
       const res = await axios.get(process.env.VUE_APP_URI + "/members");
-      this.members = res.data;
-      console.log(this.members);
+      this.$store.state.members = res.data;
     } catch (error) {
       console.log("error", error);
     }

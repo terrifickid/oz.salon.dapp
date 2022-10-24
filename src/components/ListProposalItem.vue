@@ -19,7 +19,7 @@
       <div class="col-start-2 col-span-10 xl:col-span-7">
         <AppCountdown :start="item.sys.createdAt" />
       </div>
-      <div class="col-start-2 col-span-10 xl:col-span-2">
+      <div class="col-start-2 col-span-10 xl:col-span-2 truncate">
         {{ item.fields.profile.firstName }}
         {{ item.fields.profile.lastName }}
       </div>

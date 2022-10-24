@@ -84,7 +84,6 @@ export default {
   },
   data() {
     return {
-      proposals: [],
       weights: [],
       loaded: false,
       filter: "all",
@@ -111,6 +110,9 @@ export default {
       }
 
       return p;
+    },
+    proposals() {
+      return this.$store.state.proposals;
     },
     walletAddress() {
       return this.$store.state.walletAddress;
@@ -155,10 +157,9 @@ export default {
   async beforeMount() {
     console.log("proposals load!");
     const res = await axios.post(this.uri, {
-      types: "collect,invest,propose,sell,onboard,kick",
+      types: "exchange,acquire,invest,propose,sell,onboard,kick",
     });
-    this.proposals = _.get(res, "data.message");
-    console.log(this.proposals);
+    this.$store.state.proposals = _.get(res, "data.message");
 
     await this.getWeights();
     this.loaded = true;
