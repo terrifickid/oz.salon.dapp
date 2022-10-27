@@ -1,6 +1,6 @@
 <template>
   <div v-if="loaded" class="container-fluid px-5">
-    <div class="grid grid-cols-12">
+    <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-3">
         <div class="md:fixed">
           <ManageNav />

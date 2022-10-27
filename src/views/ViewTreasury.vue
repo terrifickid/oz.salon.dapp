@@ -6,7 +6,7 @@
     :kycAllowed="true"
   >
     <AppContent class="items-center justify-center font-haffer">
-      <div class="grid grid-cols-12 w-full font-haffer">
+      <div class="grid grid-cols-12 gap-5 w-full font-haffer">
         <div class="app-frame">
           <div class="border-b border-black p-1 text-xs sm:text-base">
             <span>Appraised Collection Value</span

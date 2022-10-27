@@ -1,5 +1,6 @@
 <template>
   <AppLoader v-if="!loaded" />
+  <AppFileModal :file="fileModal" @close="fileModal = false" v-if="fileModal" />
   <template v-if="loaded">
     <template v-if="isProposer && !isMember && !passed">
       <div class="pt-20 px-5 container">
@@ -89,7 +90,11 @@
               ><div class="grid grid-cols-12 gap-5">
                 <div class="col-span-4">
                   <span class="opacity-50">{{ field.label }}</span
-                  ><br /><img :src="field.value" />
+                  ><br /><img
+                    class="cursor-pointer"
+                    @click="fileModal = field.value"
+                    :src="field.value"
+                  />
                 </div></div
             ></template>
             <template v-else-if="String(field.id).split('0').includes('units')">
@@ -160,11 +165,12 @@ import AppLoader from "@/components/AppLoader";
 import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
-
+import AppFileModal from "@/components/AppFileModal";
 import ExecuteProposal from "@/components/execute/ExecuteProposal";
 
 export default {
   components: {
+    AppFileModal,
     CounterVote,
     AppCountdown,
     AppButtonVote,
@@ -175,6 +181,7 @@ export default {
   emits: ["ready"],
   data() {
     return {
+      fileModal: false,
       proposal: {},
       proposalFormat: {},
       weights: [],
