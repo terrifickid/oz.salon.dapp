@@ -1,5 +1,7 @@
 <template>
-  <div class="grid grid-cols-12 gap-5 px-5 flex w-full pb-32">
+  <div
+    class="grid grid-cols-12 gap-5 px-5 flex w-full pb-32 bg-gray-100 relative"
+  >
     <div
       v-for="(slide, key) in slides"
       :key="key"
@@ -16,10 +18,24 @@
         :image="slide.fields.images[0]"
       />
     </div>
-    <div class="fixed bottom-5 w-full text-center">
-      <span v-show="hover" class="opacity-50"
-        >{{ artist }} <i>{{ title }}</i> {{ year }}</span
-      >
+    <div class="absolute w-full text-left bottom-5 left-5">
+      <router-link to="/collection" class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 mr-2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+          />
+        </svg>
+        View Our Collection
+      </router-link>
     </div>
   </div>
 </template>
