@@ -2,7 +2,7 @@
   <div class="container-fluid px-5">
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3">
-        <div class="fixed">
+        <div class="md:fixed">
           <ManageNav />
 
           <div class="hidden md:block">
