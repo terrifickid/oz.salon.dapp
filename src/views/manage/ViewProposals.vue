@@ -2,61 +2,64 @@
   <div class="container-fluid px-5">
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3">
-        <ManageNav />
-        <div class="hidden md:block">
-          <span class="opacity-50">Filters</span>
-          <ul>
-            <router-link to="/manage/proposals">
-              <li
-                :class="{
-                  'opacity-50': filter != 'all',
-                  'opacity-100': filter == 'all',
-                }"
-              >
-                <button @click="filter = 'all'">All</button>
-              </li>
-            </router-link>
-            <router-link to="/manage/proposals">
-              <li
-                :class="{
-                  'opacity-50': filter != 'pending',
-                  'opacity-100': filter == 'pending',
-                }"
-              >
-                <button @click="filter = 'pending'">Pending</button>
-              </li>
-            </router-link>
-            <router-link to="/manage/proposals">
-              <li
-                :class="{
-                  'opacity-50': filter != 'voted',
-                  'opacity-100': filter == 'voted',
-                }"
-              >
-                <button @click="filter = 'voted'">Voted</button>
-              </li>
-            </router-link>
-            <router-link to="/manage/proposals">
-              <li
-                :class="{
-                  'opacity-50': filter != 'closed',
-                  'opacity-100': filter == 'closed',
-                }"
-              >
-                <button @click="filter = 'closed'">Closed</button>
-              </li>
-            </router-link>
-            <router-link to="/manage/proposals">
-              <li
-                :class="{
-                  'opacity-50': filter != 'my',
-                  'opacity-100': filter == 'my',
-                }"
-              >
-                <button @click="filter = 'my'">My Proposals</button>
-              </li>
-            </router-link>
-          </ul>
+        <div class="fixed">
+          <ManageNav />
+
+          <div class="hidden md:block">
+            <span class="opacity-50">Filters</span>
+            <ul>
+              <router-link to="/manage/proposals">
+                <li
+                  :class="{
+                    'opacity-50': filter != 'all',
+                    'opacity-100': filter == 'all',
+                  }"
+                >
+                  <button @click="filter = 'all'">All</button>
+                </li>
+              </router-link>
+              <router-link to="/manage/proposals">
+                <li
+                  :class="{
+                    'opacity-50': filter != 'pending',
+                    'opacity-100': filter == 'pending',
+                  }"
+                >
+                  <button @click="filter = 'pending'">Pending</button>
+                </li>
+              </router-link>
+              <router-link to="/manage/proposals">
+                <li
+                  :class="{
+                    'opacity-50': filter != 'voted',
+                    'opacity-100': filter == 'voted',
+                  }"
+                >
+                  <button @click="filter = 'voted'">Voted</button>
+                </li>
+              </router-link>
+              <router-link to="/manage/proposals">
+                <li
+                  :class="{
+                    'opacity-50': filter != 'closed',
+                    'opacity-100': filter == 'closed',
+                  }"
+                >
+                  <button @click="filter = 'closed'">Closed</button>
+                </li>
+              </router-link>
+              <router-link to="/manage/proposals">
+                <li
+                  :class="{
+                    'opacity-50': filter != 'my',
+                    'opacity-100': filter == 'my',
+                  }"
+                >
+                  <button @click="filter = 'my'">My Proposals</button>
+                </li>
+              </router-link>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="col-span-12 md:col-span-9">

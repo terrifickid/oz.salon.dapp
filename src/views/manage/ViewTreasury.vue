@@ -2,7 +2,9 @@
   <div v-if="loaded" class="container-fluid px-5">
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3">
-        <ManageNav />
+        <div class="md:fixed">
+          <ManageNav />
+        </div>
       </div>
       <div class="col-span-12 md:col-span-9">
         <b>Treasury</b><br />
