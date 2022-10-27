@@ -40,7 +40,7 @@ export default {
     },
     async randomlySelectArtwork() {
       this.collection = _.shuffle(this.collection);
-      this.artworks.push(this.collection.shift());
+      this.artworks.push(this.collection[0]);
     },
   },
   async mounted() {
