@@ -190,6 +190,7 @@ export default {
         "votes",
         "submitProposal0submit",
         "profile",
+        "prettyId",
       ],
       treasury: {},
     };
