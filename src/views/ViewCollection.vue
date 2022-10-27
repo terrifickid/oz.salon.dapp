@@ -74,7 +74,9 @@
                 'opacity-100': selectedSort == 'acquired',
               }"
             >
-              <button @click="selectedSort = 'acquired'">Acquired</button>
+              <button @click="selectedSort = 'acquired'">
+                Acquired ({{ this.collection.length }})
+              </button>
             </li>
             <li
               :class="{
