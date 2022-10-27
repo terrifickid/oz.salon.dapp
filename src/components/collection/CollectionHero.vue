@@ -6,7 +6,7 @@
     v-show="hkey == index"
   >
     <div class="absolute bottom-5 right-5 opacity-50" v-show="!information">
-      {{ hikey + 1 }} of {{ artwork.fields.images.length }} images
+      {{ hikey + 1 }} of {{ artwork.fields.images.length }} Images
     </div>
     <div class="absolute top-0 right-5 pt-24 flex" v-show="!information">
       <button @click="prevArtwork()">
