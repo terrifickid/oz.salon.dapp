@@ -37,7 +37,7 @@
       </button>
     </div>
 
-    <div class="absolute bottom-5 left-5">
+    <div class="absolute top-5 right-5">
       <button
         class="flex items-center"
         v-show="!information"
@@ -89,7 +89,7 @@
           'col-span-12 md:col-span-5': information,
         }"
       >
-        <p class="font-bold">
+        <p>
           {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
           {{ artwork.fields.year }}
         </p>
