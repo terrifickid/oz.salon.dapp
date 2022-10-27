@@ -4,7 +4,7 @@
     v-show="!processing"
     v-if="ready"
     ref="fullpage"
-    class="pt-20 px-5 container pb-64"
+    class="px-5 container pb-64"
   >
     <div class="grid grid-cols-12">
       <div class="col-span-12 lg:col-span-8">
