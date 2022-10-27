@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="true" :isProtected="true" class="pt-20">
+  <AppShell :isLoaded="true" :isProtected="true" class="pt-20">
     <router-view></router-view>
   </AppShell>
 </template>

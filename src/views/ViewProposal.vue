@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="true" :protected="true">
+  <AppShell :isLoaded="true" :protected="true">
     <FormProposal :id="$route.params.id" @ready="ready" />
   </AppShell>
 </template>
@@ -13,7 +13,6 @@ export default {
   components: { AppShell, FormProposal },
   data() {
     return {
-      colors: ["white", "black"],
       isReady: false,
     };
   },

@@ -7,16 +7,25 @@
 </template>
 <script>
 export default {
-  props: ["start"],
+  props: ["start", "type"],
   computed: {
     startDate() {
       return new Date(this.start);
     },
     time() {
+      var days;
+      switch (this.type) {
+        case "exchange":
+          days = 16;
+          break;
+        default:
+          days = 4;
+          break;
+      }
       var now = new Date();
       var timePassedMs = now.getTime() - this.startDate.getTime();
-      var fourDaysMs = 86400000 * 4;
-      var r = fourDaysMs - timePassedMs;
+      var DaysMs = 86400000 * days;
+      var r = DaysMs - timePassedMs;
       if (r < 0) return 0;
       return r;
     },

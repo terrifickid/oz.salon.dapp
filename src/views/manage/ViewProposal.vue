@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="col-span-12 md:col-span-9">
-        <FormProposal :id="$route.params.id" @ready="ready" />
+        <FormProposal :id="$route.params.id" />
       </div>
     </div>
   </div>

@@ -1,19 +1,31 @@
 <template>
-  <div class="py-3 grid grid-cols-12 flex items-center">
-    <div class="col-span-12">
-      {{ JSON.parse(item.fields.units0units).units }} units offered for
-      {{ format.format(JSON.parse(item.fields.units0units).amount) }}
-    </div>
-    <div class="col-span-12">
-      <AppButton v-if="isSameUser" @click="cancel()" class="mt-8"
-        >Cancel</AppButton
-      >
+  <div v-if="loaded">
+    <div
+      class="py-3 grid grid-cols-12 flex items-center"
+      v-if="!executionStatus"
+    >
+      <div class="col-span-12">
+        {{ JSON.parse(item.fields.units0units).units }} units offered for
+        {{ format.format(JSON.parse(item.fields.units0units).amount) }}
+      </div>
+      <div class="col-span-12">
+        <AppButton v-if="isSameUser" @click="cancel()" class="mt-8"
+          >Cancel</AppButton
+        >
 
-      <AppButton @click="sendUSDC(0.001)" class="mt-8">Accept Offer</AppButton>
+        <AppButton @click="sendUSDC(0.001)" class="mt-8"
+          >Accept Offer</AppButton
+        >
+      </div>
+    </div>
+    <div v-else-if="isCancelled">Cancelled</div>
+    <div v-else>
+      {{ executionStatus }}
     </div>
   </div>
 </template>
 <script>
+import _ from "lodash";
 import AppButton from "@/components/AppButton";
 import axios from "axios";
 import { ethers } from "ethers";
@@ -23,6 +35,8 @@ export default {
   emits: ["transfer", "loading", "done"],
   data() {
     return {
+      loaded: false,
+      exec: false,
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -66,7 +80,7 @@ export default {
         });
         console.log(res);
         if (res.result === true) {
-          this.$emit("transfer", this.item);
+          window.location.reload();
         } else {
           alert("Critical Error: Please contact support");
         }
@@ -78,14 +92,15 @@ export default {
     async cancel() {
       this.$emit("loading");
       try {
-        await this.submitExecution(this.item.sys.id, "transfer", {
+        var r = await this.submitExecution(this.item.sys.id, "transfer", {
           cancel: true,
         });
+        console.log(r);
       } catch (e) {
         console.error(e);
         alert("Error");
       }
-      window.location.reload();
+      //window.location.reload();
     },
     async submitExecution(id, type, obj) {
       console.log("Sending Ex");
@@ -98,6 +113,15 @@ export default {
     },
   },
   computed: {
+    executionStatus() {
+      var status = _.get(this, "exec[0].fields.status");
+      if (status) return status;
+      return false;
+    },
+    isCancelled() {
+      var c = _.get(this, "exec[0].fields.data.cancel");
+      return c === true;
+    },
     isSameUser() {
       return this.walletAddress == this.item.fields.profile.walletAddress;
     },
@@ -110,6 +134,18 @@ export default {
     usdcContractAddress() {
       return process.env.VUE_APP_USDC_CONTRACT;
     },
+  },
+  async mounted() {
+    try {
+      console.log("Load Exec!");
+      const res = await axios.get(
+        process.env.VUE_APP_URI + "/execution/" + this.item.sys.id
+      );
+      this.exec = _.get(res, "data");
+      this.loaded = true;
+    } catch (err) {
+      console.error(err);
+    }
   },
 };
 </script>

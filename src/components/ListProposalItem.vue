@@ -17,7 +17,16 @@
         <b class="capitalize">{{ item.sys.contentType.sys.id }} </b>
       </div>
       <div class="col-start-2 col-span-10 xl:col-span-7">
-        <AppCountdown :start="item.sys.createdAt" />
+        <AppCountdown
+          v-if="hasPassed"
+          :start="0"
+          :type="item.sys.contentType.sys.id"
+        />
+        <AppCountdown
+          v-else
+          :start="item.sys.createdAt"
+          :type="item.sys.contentType.sys.id"
+        />
       </div>
       <div class="col-start-2 col-span-10 xl:col-span-2 truncate">
         {{ item.fields.profile.firstName }}

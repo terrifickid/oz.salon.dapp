@@ -29,7 +29,16 @@
             {{ proposalFormat.contentType }}
           </div>
           <div class="col-span-12 lg:col-span-6 py-5 lg:py-0">
-            <AppCountdown v-if="!hasEnded" :start="proposalFormat.createdAt" />
+            <AppCountdown
+              v-if="hasPassed"
+              :start="0"
+              :type="proposal.sys.contentType.sys.id"
+            />
+            <AppCountdown
+              v-else
+              :start="proposalFormat.createdAt"
+              :type="proposal.sys.contentType.sys.id"
+            />
           </div>
           <div class="col-span-12 lg:col-span-3">
             {{ proposalFormat.profile.firstName }}
@@ -47,7 +56,9 @@
           class="grid grid-cols-12 flex items-center pt-5 pb-8"
           v-if="canVote && isVotable"
         >
-          <div class="col-span-4 lg:col-span-2">Your Vote</div>
+          <div class="col-span-4 lg:col-span-2" v-if="!hasPassed">
+            Your Vote
+          </div>
           <div class="col-span-4 lg:col-span-6 flex">
             <AppButtonVote
               :id="proposalFormat.id"
@@ -64,14 +75,6 @@
             />
           </div>
         </div>
-
-        <ListTransferItem
-          v-if="proposal.sys.contentType.sys.id == 'exchange' && !hasEnded"
-          :item="proposal"
-          @transfer="transferComplete"
-          @loading="loading"
-          @done="done"
-        />
 
         <ul v-if="proposal.sys.contentType.sys.id != 'exchange'">
           <li
@@ -125,7 +128,7 @@
         <ExecuteProposal :proposal="proposal" />
 
         <router-link to="/manage/proposals">
-          <button class="flex items-center">
+          <button class="flex items-center mt-12">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -156,15 +159,14 @@ import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
 
-import ExecuteProposal from "@/components/ExecuteProposal";
-import ListTransferItem from "@/components/ListTransferItem.vue";
+import ExecuteProposal from "@/components/execute/ExecuteProposal";
+
 export default {
   components: {
     CounterVote,
     AppCountdown,
     AppButtonVote,
     AppLoader,
-    ListTransferItem,
     ExecuteProposal,
   },
   props: ["id"],
@@ -208,7 +210,7 @@ export default {
     suggestedTradingPrice() {
       return _.get(this.treasury, "currentTradePrice");
     },
-    hasEnded() {
+    hasPassed() {
       return typeof _.get(this.proposalFormat, "votes.passed") == "boolean";
     },
     isProposer() {

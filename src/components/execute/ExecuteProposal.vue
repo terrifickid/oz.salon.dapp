@@ -1,6 +1,10 @@
 <template>
   <div v-if="loaded">
-    <div v-if="type == 'kick' && passed && hasEnded">
+    <!-- Exchange -->
+    <ExecuteExchange :item="proposal" v-if="type == 'exchange'" />
+
+    <!-- Kick -->
+    <div v-else-if="type == 'kick' && passed && hasEnded">
       <div class="mb-32" v-if="!exec && isAdmin">
         <AppButton @click="sendKick">Execute Kick</AppButton>
       </div>
@@ -27,6 +31,7 @@
         <p class="mb-2">NAME'S unit holdings have been eliminated.</p>
       </div>
     </div>
+
     <div class="mb-32" v-else-if="hasEnded && passed && ownsProposal">
       <div v-if="exec" class="text-xs">
         <hr class="mb-2" />
@@ -243,8 +248,9 @@ import _ from "lodash";
 import { ethers } from "ethers";
 import axios from "axios";
 import AppButton from "@/components/AppButton";
+import ExecuteExchange from "@/components/execute/ExecuteExchange";
 export default {
-  components: { AppButton },
+  components: { AppButton, ExecuteExchange },
   data() {
     return {
       method: null,
@@ -381,18 +387,7 @@ export default {
     },
   },
   async mounted() {
-    try {
-      console.log("Load Exec!");
-      const res = await axios.post(
-        process.env.VUE_APP_URI + "/execution/" + this.id
-      );
-      this.exec = _.get(res, "data.total") === 1;
-      this.loaded = true;
-    } catch (err) {
-      console.error(err);
-    }
-
-    console.log(this.proposal);
+    this.loaded = true;
   },
 };
 </script>
