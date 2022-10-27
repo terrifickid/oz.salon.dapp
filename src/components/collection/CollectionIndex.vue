@@ -24,7 +24,10 @@
       </div>
       <div class="col-span-2">{{ item.fields.artist }}</div>
       <div class="col-span-2">{{ item.fields.year }}</div>
-      <div class="col-span-4">{{ item.fields.description }}</div>
+      <div class="col-span-4">
+        <p>{{ item.fields.medium }}</p>
+        <p>{{ item.fields.dimensions }}</p>
+      </div>
     </div>
   </div>
 </template>
