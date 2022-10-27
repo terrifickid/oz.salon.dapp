@@ -62,10 +62,33 @@
       <div class="col-span-12 md:col-span-9">
         <p v-if="!filteredProposals.length">No proposals.</p>
         <ListProposalItem
-          v-for="(item, index) in filteredProposals"
+          v-for="(item, index) in filteredProposals.slice(0, perPage)"
           :key="index"
           :item="item"
         />
+
+        <button
+          class="flex opacity-50 mt-12 mb-32 cursor-pointer"
+          @click="perPage += 10"
+          v-if="perPage <= filteredProposals.length"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 mr-1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v12m6-6H6"
+            />
+          </svg>
+
+          Load More
+        </button>
       </div>
     </div>
   </div>
@@ -87,6 +110,7 @@ export default {
       weights: [],
       loaded: false,
       filter: "all",
+      perPage: 10,
     };
   },
   computed: {

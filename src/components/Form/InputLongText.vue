@@ -3,7 +3,7 @@
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
 
     <textarea
-      class="font-haffer text-2xl sm:ml-0 bg-transparent block border border-black w-full text-black p-5 outline-none placeholder-opb"
+      class="font-haffer sm:ml-0 bg-transparent block border border-black w-full text-black p-5 outline-none placeholder-opb"
       placeholder=""
       required
       rows="3"

@@ -4,7 +4,7 @@
 
     <input
       type="text"
-      class="font-haffer text-2xl sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
+      class="font-haffer sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
       placeholder=""
       required
       v-model="value"

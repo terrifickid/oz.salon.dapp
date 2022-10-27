@@ -1,5 +1,5 @@
 <template>
-  <div class="text-2xl">
+  <div class="">
     <p class="font-haffer opacity-50">{{ description }}</p>
     <FormButtonBegin @ready="$emit('ready')" />
   </div>

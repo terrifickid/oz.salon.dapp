@@ -8,8 +8,8 @@
   >
     <div class="grid grid-cols-12">
       <div class="col-span-12 lg:col-span-8">
-        <div class="text-2xl mb-6">{{ name }}</div>
-        <ul class="text-2xl mb-12" v-show="selectedIndex > -1">
+        <div class="mb-6">{{ name }}</div>
+        <ul class="mb-12" v-show="selectedIndex > -1">
           <li
             v-for="(field, index) in fields"
             :key="index"
@@ -40,7 +40,7 @@
         <div v-show="selectedIndex == -1">
           <FormIntro :name="name" :description="description" @ready="next" />
         </div>
-        <div v-show="selectedIndex == 1000" class="text-2xl">
+        <div v-show="selectedIndex == 1000" class="">
           <span class="text-green-500"> {{ name }} proposal submitted.</span>
           <p class="opacity-50 mt-20">
             <router-link to="/manage/proposals" class="flex items-center">

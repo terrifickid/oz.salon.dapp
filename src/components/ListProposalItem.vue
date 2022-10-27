@@ -8,7 +8,9 @@
       :class="{ 'mb-10': !hasPassed, 'mb-5': hasPassed }"
     >
       <div class="col-span-1" :class="{ 'text-green-500': !hasPassed }">
-        <span :class="{ dot: !hasPassed }">{{ lpad }}</span>
+        <span class="" :class="{ 'text-green-500': !hasPassed }">{{
+          lpad
+        }}</span>
       </div>
       <div
         class="col-span-1 col-start-2"
