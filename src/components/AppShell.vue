@@ -14,7 +14,7 @@
       </div>
       <div v-if="!check">
         <WalletConnect v-if="!this.walletAddress" />
-        <AppJoin v-if="this.walletAddress" />
+        <AppJoin v-if="this.walletAddress" class="pt-16" />
         <AppFooter :colors="colors" />
       </div>
     </div>

@@ -100,6 +100,10 @@
           <i class="mr-1">{{ artwork.fields.title }} </i>
           {{ artwork.fields.year }}
         </p>
+        <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
+          artwork.fields.state
+        }}</span>
+
         <div class="pt-4 grid grid-cols-12" v-if="information">
           <p class="col-span-8">
             <span class="opacity-50">Acquired</span><br />
