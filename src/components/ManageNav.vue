@@ -7,7 +7,7 @@
         <li>
           <router-link class="flex items-center" to="/manage/proposals"
             >Proposals
-            <p class="text-green-500">
+            <p class="text-green-500 dot">
               <span style="margin-right: 1px" class="ml-1">(</span
               >{{ activeProposalsCount }}
               <span style="margin-left: -2px">)</span>

@@ -84,3 +84,11 @@ input[type="number"]::-webkit-outer-spin-button {
 /*media query to detect orientation change*/
 @media screen and (orientation: landscape) {
 }
+
+.dot {
+  @apply relative inline-block;
+}
+.dot::after {
+  content: "";
+  @apply bg-green-500 absolute top-1 -right-3 w-2 h-2 rounded-full;
+}

@@ -25,7 +25,7 @@
             class="col-span-12 lg:col-span-3 capitalize"
             :class="{ 'text-green-500': !hasPassed }"
           >
-            <span class="pr-3">000</span>
+            <span class="mr-8 dot">000</span>
             {{ proposalFormat.contentType }}
           </div>
           <div class="col-span-12 lg:col-span-6 py-5 lg:py-0">
