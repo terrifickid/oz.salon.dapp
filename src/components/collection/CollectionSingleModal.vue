@@ -106,8 +106,12 @@
             <span class="opacity-50">Medium</span><br />
             {{ artwork.fields.medium }}
           </p>
-          <p class="pt-4 hidden">
-            <span class="opacity-50">Appraised Value</span><br />
+          <p class="col-span-8 pt-8" v-show="isMember">
+            <span class="opacity-50">Purchase Price</span><br />
+            {{ format.format(artwork.fields.purchasePrice) }}
+          </p>
+          <p class="col-span-4 pt-8" v-show="isMember">
+            <span class="opacity-50">Fair Market Value</span><br />
             {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
           </p>
 
@@ -155,6 +159,15 @@ export default {
         currency: "USD",
       }),
     };
+  },
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+    isMember() {
+      if ("units" in this.profile) return this.profile.units;
+      return false;
+    },
   },
 };
 </script>
