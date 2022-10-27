@@ -13,7 +13,7 @@
           >Cancel</AppButton
         >
 
-        <AppButton @click="sendUSDC(0.001)" class="mt-8"
+        <AppButton @click="sendUSDC(0.001)" v-if="!isSameUser" class="mt-8"
           >Accept Offer</AppButton
         >
       </div>
