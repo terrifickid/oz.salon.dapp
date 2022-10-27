@@ -169,6 +169,7 @@ export default {
           "role",
           "delegate",
           "biography",
+          "prettyId",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

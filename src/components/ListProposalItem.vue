@@ -9,7 +9,7 @@
     >
       <div class="col-span-1" :class="{ 'text-green-500': !hasPassed }">
         <span class="" :class="{ 'text-green-500': !hasPassed }">{{
-          lpad
+          prettyId
         }}</span>
       </div>
       <div
@@ -45,9 +45,12 @@ export default {
   components: { AppCountdown },
   props: ["item"],
   computed: {
-    lpad() {
+    prettyId() {
+      //return this.item.fields.prettyId;
       var zeroes = new Array(3 + 1).join("0");
-      return (zeroes + this.item.sys.id.replace(/\D/g, "")).slice(-3);
+      return (
+        zeroes + this.item.fields.prettyId.toString().replace(/\D/g, "")
+      ).slice(-3);
     },
     hasPassed() {
       return typeof _.get(this.item, "fields.votes.passed") == "boolean";

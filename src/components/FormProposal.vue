@@ -25,7 +25,9 @@
             class="col-span-12 lg:col-span-3 capitalize"
             :class="{ 'text-green-500': !hasPassed }"
           >
-            <span class="mr-8" :class="{ dot: !hasPassed }">000</span>
+            <span class="mr-8" :class="{ dot: !hasPassed }">{{
+              prettyId
+            }}</span>
             {{ proposalFormat.contentType }}
           </div>
           <div class="col-span-12 lg:col-span-6 py-5 lg:py-0">
@@ -193,6 +195,13 @@ export default {
     };
   },
   computed: {
+    prettyId() {
+      //return this.item.fields.prettyId;
+      var zeroes = new Array(3 + 1).join("0");
+      return (
+        zeroes + this.proposal.fields.prettyId.toString().replace(/\D/g, "")
+      ).slice(-3);
+    },
     name() {
       return (
         this.proposalFormat.profile.firstName +
