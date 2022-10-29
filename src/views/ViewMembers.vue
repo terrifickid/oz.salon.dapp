@@ -150,7 +150,7 @@ export default {
     console.log("content load!");
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/295KNJLbaMnANC1ea8f2lI"
+        process.env.VUE_APP_URI + "/entry/2ztUn0TxjPCyXFuox0TDQr"
       );
       this.data = res.data.fields;
     } catch (error) {
