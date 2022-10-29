@@ -39,6 +39,7 @@ export default {
       );
       this.data = res.data;
       this.loaded = true;
+      console.log(process.env.VUE_APP_URI, "datatk", this.data);
     } catch (error) {
       console.log("error", error);
     }
