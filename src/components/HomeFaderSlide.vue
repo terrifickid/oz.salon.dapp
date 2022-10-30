@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 gap-5 px-5 flex w-full pb-32">
+  <div class="grid grid-cols-12 gap-5 px-5 flex w-full pb-32 h-screen">
     <div
       v-for="(slide, key) in slides"
       :key="key"
@@ -40,8 +40,8 @@ export default {
         "col-span-3 delay-two",
         "col-span-3 delay-three",
       ],
-      align: ["self-start", "self-center", "self-end"],
-      pad: ["py-5", "py-10", "py-12"],
+      align: ["top", "self-center", "self-end"],
+      pad: ["", "", ""],
     };
   },
   mounted() {

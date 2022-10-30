@@ -1,7 +1,6 @@
 <template>
   <AppShell :isLoaded="isLoaded" :protected="false" class="font-haffer pt-16">
-    <HomeFaderSlideLogged :slides="artworks" v-if="isMember" />
-    <HomeFaderSlide :slides="artworks" :key="test" v-else />
+    <HomeFaderSlide :slides="artworks" :key="test" />
   </AppShell>
 </template>
 
@@ -11,10 +10,10 @@ import _ from "lodash";
 import axios from "axios";
 import AppShell from "@/components/AppShell";
 import HomeFaderSlide from "@/components/HomeFaderSlide";
-import HomeFaderSlideLogged from "@/components/HomeFaderSlideLogged";
+
 export default {
   name: "HomeView",
-  components: { AppShell, HomeFaderSlide, HomeFaderSlideLogged },
+  components: { AppShell, HomeFaderSlide },
   data() {
     return {
       collection: [],
