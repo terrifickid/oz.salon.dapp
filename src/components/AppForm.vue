@@ -110,7 +110,9 @@ export default {
       this.selectedIndex--;
     },
     async next() {
-      if (await this.validate()) this.submitForm();
+      if (await this.validate()) {
+        if (this.selectedIndex == this.fields.length - 1) this.submitForm();
+      }
     },
     async validate() {
       console.log("validate form!");
