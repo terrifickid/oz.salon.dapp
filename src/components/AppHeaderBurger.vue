@@ -120,6 +120,7 @@ export default {
       return false;
     },
     pageTitle() {
+      if (this.$route.name == "home") return "";
       return this.$route.name;
     },
   },
