@@ -7,10 +7,9 @@
         <li>
           <router-link class="flex items-center" to="/manage/proposals"
             >Proposals
-            <p class="text-green-500 dot">
-              <span style="margin-right: 1px" class="ml-1">(</span
-              >{{ activeProposalsCount }}
-              <span style="margin-left: -2px">)</span>
+            <p class="text-green-500 dot ml-1 inline-block">
+              <span style="margin-right: 1px">(</span>{{ activeProposalsCount
+              }}<span style="margin-left: 2px">)</span>
             </p></router-link
           >
         </li>
@@ -21,9 +20,11 @@
         <li><router-link to="/manage/profile">Profile</router-link></li>
         <li>
           <router-link to="/manage/members"
-            >Members <span style="margin-right: 1px" class="ml-1">(</span
-            >{{ membersCount
-            }}<span style="margin-left: 1px">)</span></router-link
+            >Members
+            <p class="inline-block">
+              <span style="margin-right: 1px">(</span>{{ membersCount
+              }}<span style="margin-left: 2px">)</span>
+            </p></router-link
           >
         </li>
       </ul>

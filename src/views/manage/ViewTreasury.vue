@@ -86,7 +86,7 @@ export default {
     console.log("content load!");
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/5x22MY3IFgYYzSyf9Wq15j"
+        process.env.VUE_APP_URI + "/entry/2WgcedHH3c0EDpVKALRQnd"
       );
       this.data = res.data.fields;
       this.loaded = true;

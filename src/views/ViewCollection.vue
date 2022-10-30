@@ -75,7 +75,10 @@
               }"
             >
               <button @click="selectedSort = 'acquired'">
-                Acquired ({{ this.collection.length }})
+                Acquired<span style="margin-left: 0.24rem; margin-right: 1px"
+                  >(</span
+                >{{ this.collection.length
+                }}<span style="margin-left: 1px">)</span>
               </button>
             </li>
             <li
