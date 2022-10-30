@@ -46,6 +46,9 @@ export default {
       }
       return false;
     },
+    debug() {
+      return "test";
+    },
     salonClass() {
       return "bg-" + this.colors[0] + " " + "text-" + this.colors[1];
     },

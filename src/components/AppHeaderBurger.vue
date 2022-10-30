@@ -26,7 +26,7 @@
       <router-link
         v-if="!walletAddress"
         class="inline-block ml-5"
-        to="/apply"
+        to="/manage/start"
         @click="connect()"
         >Login</router-link
       >

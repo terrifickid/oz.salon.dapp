@@ -136,8 +136,8 @@
         </g>
       </svg>
       <div v-if="isMetamask">
-        <p>
-          <AppButton class="mt-8 sm:mt-4" @click="connect">
+        <p class="">
+          <AppButton class="mt-8 sm:mt-4 mx-auto" @click="connect">
             Connect MetaMask
           </AppButton>
         </p>
