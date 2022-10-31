@@ -23,7 +23,7 @@
             >Members
             <p class="inline-block">
               <span style="margin-right: 1px">(</span>{{ membersCount
-              }}<span style="margin-left: 2px">)</span>
+              }}<span style="margin-left: 1px">)</span>
             </p></router-link
           >
         </li>
