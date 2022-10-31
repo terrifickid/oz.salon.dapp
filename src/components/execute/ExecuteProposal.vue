@@ -57,7 +57,7 @@
             />
           </div>
           <div>
-            <p class="font-bold">Pay with USDC</p>
+            <p class="font-bold">Fund with USDC (Digital Wallet)</p>
             <div :class="{ active: method == 'usdc' }" class="collapse">
               <div>
                 <p class="mb-2"></p>
@@ -82,7 +82,7 @@
             />
           </div>
           <div>
-            <b>Pay via bank wire</b>
+            <b>Fund with Bank Wire (FIAT)</b>
             <div :class="{ active: method == 'wire' }" class="collapse">
               <div>
                 <p class="text-lg mt-6 font-bold">Domestic Wire Instructions</p>
@@ -135,11 +135,8 @@
                     <tr>
                       <td colspan="2">
                         <p class="mt-4 text-xs border-white border-t pt-2">
-                          *Including '{{ wireCode }}' in the Memo field is
-                          critical to properly receiving funds. Please contact
-                          j@salondao.xyz if you’re having trouble locating the
-                          Proposal ID Number on the Governance page of Salon’s
-                          app.
+                          *Including '{{ wireCode }}' in the Memo Field is
+                          critical to properly receiving funds.
                         </p>
                       </td>
                     </tr>
@@ -216,10 +213,7 @@
                       <td colspan="2" valign="top">
                         <p class="mt-4 text-xs border-white border-t pt-2">
                           *Including '{{ wireCode }}' in Line 70 is critical to
-                          properly receiving funds. Please contact
-                          j@salondao.xyz if you’re having trouble locating the
-                          Proposal ID Number on the Governance page of Salon’s
-                          app.
+                          properly receiving funds. app.
                         </p>
                       </td>
                     </tr>
@@ -231,8 +225,7 @@
                   :disabled="processing"
                   class="my-2 mt-6"
                   >I have sent a wire transfer with code
-                  <span class="uppercase">'{{ wireCode }}'</span> in MEMO
-                  field.</AppButton
+                  <span>'{{ wireCode }}'</span> in MEMO field.</AppButton
                 >
               </div>
             </div>

@@ -99,6 +99,8 @@ export default {
   },
   methods: {
     next() {
+      console.log("route", this.$route.name);
+      if (this.$route.name == "Exchange") return this.$emit("ready");
       if (parseFloat(this.amount) < parseFloat(this.minimumInvestment)) {
         alert("Proposal below the minimum buy-in price of $30,000.");
         return;
