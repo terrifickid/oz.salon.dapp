@@ -26,8 +26,8 @@
       <AppForm :url="onboardURI" />
     </template>
     <template v-if="isApplied && !isMember">
-      <FormProposal :id="profile.onboardId"
-    /></template>
+      <div class="p-6"><FormProposal :id="profile.onboardId" /></div>
+    </template>
   </div>
 </template>
 <script>

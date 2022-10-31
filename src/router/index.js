@@ -69,7 +69,7 @@ const routes = [
   },
   {
     path: "/apply",
-    name: "apply",
+    name: "Apply",
     component: function () {
       return import(
         /* webpackChunkName: "ViewApply" */ "../views/ViewApply.vue"
@@ -78,7 +78,7 @@ const routes = [
   },
   {
     path: "/manage",
-    name: "manage",
+    name: "Manage",
     component: function () {
       return import(
         /* webpackChunkName: "ViewApply" */ "../views/ViewManage.vue"

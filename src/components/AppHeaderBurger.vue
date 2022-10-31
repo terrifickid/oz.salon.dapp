@@ -70,25 +70,52 @@
         <router-link @click="toggleDown()" class="block" to="/collection"
           >Our Collection</router-link
         >
-        <router-link @click="toggleDown()" class="block" to="/manage/start"
+        <router-link
+          v-if="!isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/manage/start"
+          >Login</router-link
+        >
+        <router-link
+          v-if="isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/manage/start"
           >Manage</router-link
         >
-        <router-link @click="toggleDown()" class="block" to="/manage/profile"
+        <router-link
+          v-if="isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/manage/profile"
           >Account</router-link
         >
       </div>
       <div class="pb-10">
-        <router-link @click="toggleDown()" class="block" to="/faq"
-          >FAQ</router-link
+        <router-link
+          v-if="!isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/members"
+          >Members</router-link
         >
         <router-link @click="toggleDown()" class="block" to="/mission"
           >Mission</router-link
         >
+        <router-link @click="toggleDown()" class="block" to="/faq"
+          >FAQ</router-link
+        >
+
         <router-link class="block" to="/contact" @click="toggleDown()"
           >Contact</router-link
         >
-        <router-link class="block" to="/resources" @click="toggleDown()"
-          >Resources</router-link
+        <router-link
+          v-if="!isMember"
+          class="block"
+          to="/apply"
+          @click="toggleDown()"
+          >Apply</router-link
         >
       </div>
     </div>
