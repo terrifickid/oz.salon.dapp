@@ -44,8 +44,21 @@
       </div>
     </div>
     <div v-else-if="isCancelled">Cancelled</div>
+    <div v-else-if="executionStatus == 'Pending'">
+      <p class="mb-6">
+        Your transaction is pending and can be monitored directly in your
+        Metamask wallet. Large transfers may take several minutes to complete.
+      </p>
+      <p>
+        When the transaction is complete, your Salon unit balance will be
+        updated accordingly in your profile. Please note there may be an
+        additional 15-minute delay while the transaction is processed by our app
+        and updated on the front end.
+      </p>
+    </div>
     <div v-else>
       {{ executionStatus }}
+      <pre>{{ exec }}</pre>
     </div>
   </div>
 </template>
