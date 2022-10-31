@@ -10,16 +10,30 @@
         <p class="mb-16">Frequently Asked Questions</p>
 
         <ul v-if="loaded">
-          <li class="mb-8" v-for="(item, index) in data" :key="index">
-            <p class="pb-6" v-html="item.fields.question"></p>
-            <p
-              class="opacity-50"
-              :class="{ truncate: !active.includes(index) }"
-              v-html="item.fields.answer"
-            ></p>
-            <p class="opacity-50" v-show="!active.includes(index)">
-              <button @click="active.push(index)">+ Read more</button>
-            </p>
+          <li
+            class="mb-8"
+            v-for="(section, sindex) in Object.entries(set)"
+            :key="sindex"
+          >
+            <p class="mb-8">{{ section[0] }}</p>
+            <ul>
+              <li v-for="(q, qindex) in section[1]" :key="qindex">
+                <p class="pb-6" v-html="q.fields.question"></p>
+                <p
+                  class="opacity-50"
+                  :class="{ truncate: !active.includes(sindex + '_' + qindex) }"
+                  v-html="q.fields.answer"
+                ></p>
+                <p
+                  class="opacity-50"
+                  v-show="!active.includes(sindex + '_' + qindex)"
+                >
+                  <button @click="active.push(sindex + '_' + qindex)">
+                    + Read more
+                  </button>
+                </p>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -35,6 +49,7 @@
 </template>
 <script>
 // @ is an alias to /src
+import _ from "lodash";
 import axios from "axios";
 import AppShell from "@/components/AppShell";
 
@@ -44,6 +59,7 @@ export default {
     return {
       data: {},
       active: [],
+      set: [],
       loaded: false,
     };
   },
@@ -51,8 +67,25 @@ export default {
     try {
       const res = await axios.get(process.env.VUE_APP_URI + "/type/faq");
       this.data = res.data.message.items;
+      var sorter = await axios.get(process.env.VUE_APP_URI + "/form/faq");
+      sorter = sorter.data.fields[0].validations[0].in;
+      sorter.forEach((s) => {
+        this.data.forEach((d) => {
+          var section = _.get(d, "fields.section");
+          if (section == s) {
+            if (_.isArray(this.set[section])) {
+              this.set[section].push(d);
+            } else {
+              this.set[section] = [d];
+            }
+          }
+        });
+      });
+
+      console.log(Object.entries(this.set));
+
       this.data.sort(function compareFn(a, b) {
-        console.log("test", a.fields.order, b.fields.order);
+        //console.log("test", a.fields.order, b.fields.order);
         if (a.fields.order > b.fields.order) return 1;
         if (a.fields.order < b.fields.order) return -1;
         return 0;
