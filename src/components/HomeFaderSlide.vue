@@ -18,7 +18,9 @@
     </div>
     <div class="fixed bottom-5 w-full text-center">
       <span v-show="hover" class="opacity-50"
-        >{{ artist }} <i>{{ title }}</i> {{ year }}</span
+        >{{ artist }}
+        <i style="padding-right: 2px" class="inline-block">{{ title }}</i>
+        {{ year }}</span
       >
     </div>
   </div>
