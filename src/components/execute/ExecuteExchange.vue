@@ -17,6 +17,9 @@
           {{ format.format(suggestedTradingPrice) }}.
         </p>
 
+        <p class="pb-6">
+          <span class="opacity-50">Note</span><br />{{ item.fields.note0long }}
+        </p>
         <p class="mb-6 border-t pt-6">
           Salon's exchange proposal facilitates the buying and selling of units
           amongst our community, empowering members to transact with one another
