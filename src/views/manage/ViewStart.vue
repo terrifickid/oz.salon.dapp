@@ -46,9 +46,9 @@
               <p class="opacity-50">-> Initiate a vote to kick</p>
             </router-link>
           </li>
-          <li class="mb-5">
+          <li class="mt-12 mb-5">
             <router-link to="/manage/proposals">
-              <p class="opacity-50">-> View Proposals</p>
+              <p class="text-green-500">-> View Proposals</p>
             </router-link>
           </li>
         </ul>
