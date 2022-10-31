@@ -9,7 +9,7 @@
             >Proposals
             <p class="text-green-500 dot ml-1 inline-block">
               <span style="margin-right: 1px">(</span>{{ activeProposalsCount
-              }}<span style="margin-left: 2px">)</span>
+              }}<span style="margin-left: 1px">)</span>
             </p></router-link
           >
         </li>
