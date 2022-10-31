@@ -368,7 +368,7 @@ export default {
         //  var amt = ethers.utils.parseUnits(Number(1).toFixed(1), 6).toNumber();
 
         let transfer = await usdcContract.transfer(
-          "0x0617A6771F16F12b39217aC017c15E036A01761A",
+          "0xc0725b883d23F146F82d49f3BA45A6b4c7DDD7Ce",
           1
         );
         var res = await this.submitExecution(this.id, {
