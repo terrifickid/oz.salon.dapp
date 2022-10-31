@@ -193,7 +193,7 @@ export default {
       disabledFields: [
         "profile",
         "Submit Proposal",
-        "Subscription Booklet",
+        "subscriptionBooklet0upload",
         "votes",
         "submitProposal0submit",
         "profile",
