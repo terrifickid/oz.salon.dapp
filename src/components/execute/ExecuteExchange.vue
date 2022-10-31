@@ -5,8 +5,30 @@
       v-if="!executionStatus"
     >
       <div class="col-span-12">
-        {{ JSON.parse(item.fields.units0units).units }} units offered for
-        {{ format.format(JSON.parse(item.fields.units0units).amount) }}
+        {{ item.fields.profile.firstName }}
+        {{ item.fields.profile.lastName }} is offering to sell
+        {{ JSON.parse(item.fields.units0units).units }} Salon units for a total
+        of {{ format.format(JSON.parse(item.fields.units0units).amount) }}.
+        Their offer represents a per-unit price of
+        {{ format.format(JSON.parse(item.fields.units0units).pricePerUnit) }}.
+        <p class="text-green-500 mb-6">
+          For reference, the current trade price of Salon units is
+
+          {{ format.format(suggestedTradingPrice) }}.
+        </p>
+
+        <p class="mb-6 border-t pt-6">
+          Salon's exchange proposal facilitates the buying and selling of units
+          amongst our community, empowering members to transact with one another
+          safely. All transactions take place using a secure wallet-to-wallet
+          transfer in USDC.
+        </p>
+        <p class="border-b pb-6">
+          If you are the buyer, please ensure you have sufficient USDC in your
+          digital wallet to complete the transaction. USDC can be purchased
+          using a crypto exchange service, such as Coinbase, and then
+          transferred to your Salon Metamask wallet.
+        </p>
       </div>
       <div class="col-span-12">
         <AppButton v-if="isSameUser" @click="cancel()" class="mt-8"
@@ -37,6 +59,7 @@ export default {
     return {
       loaded: false,
       exec: false,
+      treasury: {},
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -113,6 +136,9 @@ export default {
     },
   },
   computed: {
+    suggestedTradingPrice() {
+      return _.get(this.treasury, "currentTradePrice");
+    },
     executionStatus() {
       var status = _.get(this, "exec[0].fields.status");
       if (status) return status;
@@ -138,10 +164,13 @@ export default {
   async mounted() {
     try {
       console.log("Load Exec!");
-      const res = await axios.get(
-        process.env.VUE_APP_URI + "/execution/" + this.item.sys.id
-      );
-      this.exec = _.get(res, "data");
+      var res = await Promise.all([
+        axios.get(process.env.VUE_APP_URI + "/treasury/"),
+        axios.get(process.env.VUE_APP_URI + "/execution/" + this.item.sys.id),
+      ]);
+      this.treasury = res[0].data.message;
+      this.exec = _.get(res[1], "data");
+
       this.loaded = true;
     } catch (err) {
       console.error(err);
