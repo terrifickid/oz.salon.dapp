@@ -101,7 +101,6 @@ export default {
 </script>
 <style>
 .truncate p:nth-child(1) {
-  border: 1px solid red;
   @apply block;
 }
 

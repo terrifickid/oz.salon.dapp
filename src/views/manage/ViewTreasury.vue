@@ -1,12 +1,12 @@
 <template>
-  <div v-if="loaded" class="container-fluid px-5">
+  <div class="container-fluid px-5">
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-3">
         <div class="md:fixed">
           <ManageNav />
         </div>
       </div>
-      <div class="col-span-12 md:col-span-9">
+      <div v-if="loaded" class="col-span-12 md:col-span-9">
         <b>Treasury</b><br />
 
         <div class="opacity-50" v-html="data.code"></div>
@@ -89,7 +89,6 @@ export default {
         process.env.VUE_APP_URI + "/entry/2WgcedHH3c0EDpVKALRQnd"
       );
       this.data = res.data.fields;
-      this.loaded = true;
     } catch (error) {
       console.log("error", error);
     }

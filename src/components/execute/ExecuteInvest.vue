@@ -87,16 +87,8 @@
                     </td>
                   </tr>
                   <tr>
-                    <td valign="top">Memo Field</td>
-                    <td valign="top">'{{ wireCode }}'</td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <p class="mt-4 text-xs border-white border-t pt-2">
-                        *Including '{{ wireCode }}' in the Memo Field is
-                        critical to properly receiving funds.
-                      </p>
-                    </td>
+                    <td valign="top">Memo Field (Line 72 for Foreign Wires)</td>
+                    <td valign="top">{{ wireCode }}</td>
                   </tr>
                 </table>
               </div>
@@ -154,24 +146,27 @@
                   </tr>
 
                   <tr>
-                    <td valign="top">70 Remittance Information</td>
+                    <td valign="top">
+                      <span>70 Remittance Information</span>
+                    </td>
                     <td valign="top">
                       Account 9801010967 for Salon DAO, LLC at Evolve Bank &
-                      Trust (Including this exact memo in Line 72 is critical to
-                      properly receive funds)
+                      Trust
                     </td>
                   </tr>
 
                   <tr>
-                    <td valign="top">72 Sender to Receiver Information</td>
-                    <td valign="top">'{{ wireCode }}'</td>
+                    <td valign="top" class="pr-12">
+                      72 Sender to Receiver Information
+                    </td>
+                    <td valign="top">{{ wireCode }}</td>
                   </tr>
 
                   <tr>
-                    <td colspan="2" valign="top">
+                    <td colspan="2">
                       <p class="mt-4 text-xs border-white border-t pt-2">
-                        *Including '{{ wireCode }}' in Line 70 is critical to
-                        properly receiving funds. app.
+                        *Including the above information for Line 70 and Line 72
+                        is critical to properly receiving your funds.
                       </p>
                     </td>
                   </tr>
@@ -183,7 +178,7 @@
                 :disabled="processing"
                 class="my-2 mt-6"
                 >I have sent a wire transfer with code
-                <span>'{{ wireCode }}'</span> in MEMO field.</AppButton
+                <span>'{{ wireCode }}'</span> in MEMO field</AppButton
               >
             </div>
           </div>
@@ -224,6 +219,12 @@ export default {
     };
   },
   computed: {
+    type() {
+      return _.get(this, "proposal.sys.contentType.sys.id");
+    },
+    uri() {
+      return process.env.VUE_APP_URI + "/form/executions";
+    },
     executionStatus() {
       var status = _.get(this, "exec[0].fields.status");
       if (status) return status;
@@ -246,15 +247,18 @@ export default {
     },
   },
   methods: {
-    async submitExecution(id, obj) {
+    async submitExecution(id, type, obj) {
       console.log("Sending Ex");
-      const res = await axios.post(this.uri, { data: obj, proposal: id });
+      const res = await axios.post(this.uri, {
+        proposal: id,
+        type: type,
+        data: obj,
+      });
       return res.data;
     },
-
     async sendWire() {
       //executions
-      var res = await this.submitExecution(this.id, {
+      var res = await this.submitExecution(this.proposal.sys.id, this.type, {
         sourceType: "wire",
         source: this.wireCode,
       });
@@ -294,7 +298,7 @@ export default {
           "0xc0725b883d23F146F82d49f3BA45A6b4c7DDD7Ce",
           1
         );
-        var res = await this.submitExecution(this.id, {
+        var res = await this.submitExecution(this.proposal.sys.id, this.type, {
           sourceType: "usdc",
           source: transfer.hash,
         });
@@ -316,6 +320,8 @@ export default {
         process.env.VUE_APP_URI + "/execution/" + this.proposal.sys.id
       );
       this.exec = _.get(res, "data");
+      console.log(res);
+      console.log(this.exec, this.proposal.sys.id);
       this.loaded = true;
     } catch (err) {
       console.error(err);
