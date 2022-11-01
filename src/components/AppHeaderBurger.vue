@@ -111,6 +111,13 @@
           >Contact</router-link
         >
         <router-link
+          v-if="isMember"
+          class="block"
+          to="/resources"
+          @click="toggleDown()"
+          >Resources</router-link
+        >
+        <router-link
           v-if="!isMember"
           class="block"
           to="/apply"

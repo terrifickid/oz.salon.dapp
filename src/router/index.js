@@ -32,13 +32,12 @@ const routes = [
       );
     },
   },
-
   {
     path: "/members",
-    name: "Members",
+    name: "Members ",
     component: function () {
       return import(
-        /* webpackChunkName: "ViewMember" */ "../views/ViewMembers.vue"
+        /* webpackChunkName: "ViewMemberPub" */ "../views/ViewMembers.vue"
       );
     },
   },
