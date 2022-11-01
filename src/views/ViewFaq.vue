@@ -20,7 +20,7 @@
               <li v-for="(q, qindex) in section[1]" :key="qindex">
                 <p class="pb-6 mt-8" v-html="q.fields.question"></p>
                 <div
-                  class="opacity-50"
+                  class="opacity-50 faq-question"
                   :class="{ truncate: !active.includes(sindex + '_' + qindex) }"
                   v-html="q.fields.answer"
                 ></div>
@@ -99,9 +99,17 @@ export default {
   },
 };
 </script>
-<style scoped>
-select {
-  border: 0px;
-  outline: 0px;
+<style>
+.truncate p:nth-child(1) {
+  border: 1px solid red;
+  @apply block;
+}
+
+.truncate p {
+  @apply hidden;
+}
+
+.faq-question p {
+  @apply mb-8;
 }
 </style>
