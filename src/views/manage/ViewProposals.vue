@@ -136,7 +136,15 @@ export default {
           p = this.proposals;
       }
 
-      return p;
+      return p.sort(function compareFn(a, b) {
+        console.log("test", a.fields.votes, b.fields.votes);
+
+        var aIsClosed = typeof _.get(a, "fields.votes.passed") == "boolean";
+        var bIsClosed = typeof _.get(b, "fields.votes.passed") == "boolean";
+        if (aIsClosed && !bIsClosed) return 1;
+        if (!aIsClosed && bIsClosed) return -1;
+        return 0;
+      });
     },
     proposals() {
       return this.$store.state.proposals;
