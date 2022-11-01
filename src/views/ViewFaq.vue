@@ -70,6 +70,7 @@ export default {
       var sorter = await axios.get(process.env.VUE_APP_URI + "/form/faq");
       sorter = sorter.data.fields[0].validations[0].in;
       sorter.forEach((s) => {
+        //Enumerate
         this.data.forEach((d) => {
           var section = _.get(d, "fields.section");
           if (section == s) {
@@ -80,16 +81,17 @@ export default {
             }
           }
         });
+        //Sort
+        this.set[s].sort(function compareFn(a, b) {
+          //console.log("test", a.fields.order, b.fields.order);
+          if (a.fields.order > b.fields.order) return 1;
+          if (a.fields.order < b.fields.order) return -1;
+          return 0;
+        });
       });
 
-      console.log(Object.entries(this.set));
+      console.log(this.set);
 
-      this.data.sort(function compareFn(a, b) {
-        //console.log("test", a.fields.order, b.fields.order);
-        if (a.fields.order > b.fields.order) return 1;
-        if (a.fields.order < b.fields.order) return -1;
-        return 0;
-      });
       this.loaded = true;
     } catch (error) {
       console.log("error", error);
