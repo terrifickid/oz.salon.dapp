@@ -56,9 +56,14 @@
         and updated on the front end.
       </p>
     </div>
+    <div v-else-if="executionStatus == 'Completed'">
+      <p class="text-green-500">
+        The exchange offer was accepted and completed on
+        {{ executionCompletedDate }}.
+      </p>
+    </div>
     <div v-else>
       {{ executionStatus }}
-      <pre>{{ exec }}</pre>
     </div>
   </div>
 </template>
@@ -159,6 +164,15 @@ export default {
       var status = _.get(this, "exec[0].fields.status");
       if (status) return status;
       return false;
+    },
+    executionCompletedDate() {
+      var date = _.get(this, "exec[0].sys.updatedAt");
+      var d = new Date(date);
+      return d.toLocaleString("default", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
     },
     isCancelled() {
       var c = _.get(this, "exec[0].fields.data.cancel");
