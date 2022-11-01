@@ -19,11 +19,11 @@
             <ul>
               <li v-for="(q, qindex) in section[1]" :key="qindex">
                 <p class="pb-6 mt-8" v-html="q.fields.question"></p>
-                <p
+                <div
                   class="opacity-50"
                   :class="{ truncate: !active.includes(sindex + '_' + qindex) }"
                   v-html="q.fields.answer"
-                ></p>
+                ></div>
                 <p
                   class="opacity-50"
                   v-show="!active.includes(sindex + '_' + qindex)"
