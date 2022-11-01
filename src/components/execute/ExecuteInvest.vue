@@ -1,14 +1,6 @@
 <template>
   <div v-if="loaded">
-    <div v-if="exec">
-      <p class="mb-2">Your investment is complete.</p>
-      <p class="mb-2">
-        You sent {{ format.format(amount) }} to Salon's treasury in exchange for
-        {{ units }} units.
-      </p>
-      <p>Unit holdings have been updated in your profile.</p>
-    </div>
-    <div v-else>
+    <div v-if="!executionStatus">
       <div
         class="border border-black p-3 mb-2 flex items-start cursor-pointer"
         @click="method = 'usdc'"
@@ -198,6 +190,17 @@
         </div>
       </div>
     </div>
+    <div v-else-if="executionStatus == 'Completed'">
+      <p class="mb-2">Your investment is complete.</p>
+      <p class="mb-2">
+        You sent {{ format.format(amount) }} to Salon's treasury in exchange for
+        {{ units }} units.
+      </p>
+      <p>Unit holdings have been updated in your profile.</p>
+    </div>
+    <div v-else>
+      {{ executionStatus }}
+    </div>
   </div>
 </template>
 <script>
@@ -221,6 +224,11 @@ export default {
     };
   },
   computed: {
+    executionStatus() {
+      var status = _.get(this, "exec[0].fields.status");
+      if (status) return status;
+      return false;
+    },
     usdcContractAddress() {
       return process.env.VUE_APP_USDC_CONTRACT;
     },

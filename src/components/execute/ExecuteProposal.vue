@@ -1,4 +1,5 @@
 <template>
+  test
   <!-- Exchange -->
   <ExecuteExchange :item="proposal" v-if="type == 'exchange'" />
   <!-- Kick -->
