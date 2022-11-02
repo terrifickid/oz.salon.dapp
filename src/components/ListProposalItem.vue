@@ -5,7 +5,7 @@
       :class="{ 'mb-10': !hasPassed, 'mb-5': hasPassed }"
     >
       <div class="col-span-1" :class="{ 'text-green-500': !hasPassed }">
-        <span class="" :class="{ 'text-green-500': !hasPassed }">{{
+        <span class="" :class="{ 'text-green-500 dot': !hasPassed }">{{
           prettyId
         }}</span>
       </div>

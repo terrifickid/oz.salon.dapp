@@ -92,6 +92,16 @@
                   </tr>
                 </table>
               </div>
+
+              <tr>
+                <td colspan="2">
+                  <p class="mt-4 text-xs border-white border-t pt-2">
+                    *Including the above code in the Memo Field is critical to
+                    properly receiving your funds.
+                  </p>
+                </td>
+              </tr>
+
               <p class="text-lg mt-6 font-bold">Foreign Wire Instructions</p>
               <div class="mt-2 mr-8">
                 <p class="font-bold text-sm mb-2">
