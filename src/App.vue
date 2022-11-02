@@ -22,8 +22,14 @@ export default {
     ready() {
       return true;
     },
+    isMetaMaskBrowser() {
+      if (/MetaMaskMobile/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     isMobile() {
-      alert(navigator.userAgent);
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
@@ -50,6 +56,9 @@ export default {
   },
   mounted() {
     console.log("Mobile Check!", this.isMobile);
+    if (this.isMobile) {
+      if (this.isMetaMaskBrowser) alert(navigator.userAgent);
+    }
   },
 };
 </script>
