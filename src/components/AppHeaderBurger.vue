@@ -15,6 +15,7 @@
         id="manage"
         class="inline-block ml-5"
         to="/manage/start"
+        :class="{ routy: isChildRoute }"
         >Manage</router-link
       >
       <router-link
@@ -139,6 +140,13 @@ export default {
     };
   },
   computed: {
+    isChildRoute() {
+      var on = this.$route.path.includes("manage");
+      var off = this.$route.path.includes("profile");
+      if (off) return false;
+      if (on) return true;
+      return false;
+    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
@@ -179,7 +187,8 @@ export default {
 .links a {
   @apply opacity-50 relative;
 }
-a.router-link-active {
+a.router-link-active,
+a.routy {
   @apply opacity-100 relative;
 }
 
