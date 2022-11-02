@@ -177,8 +177,8 @@
                 @click="sendWire"
                 :disabled="processing"
                 class="my-2 mt-6"
-                >I have sent a wire transfer with code
-                <span>'{{ wireCode }}'</span> in MEMO field</AppButton
+                >I have sent the wire with <span>'{{ wireCode }}'</span> in the
+                memo field</AppButton
               >
             </div>
           </div>
