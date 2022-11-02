@@ -22,6 +22,18 @@ export default {
     ready() {
       return true;
     },
+    isMobile() {
+      alert(navigator.userAgent);
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     hideUI() {
@@ -36,7 +48,9 @@ export default {
   beforeUnmount() {
     window.removeEventListener("resize", this.hideUI);
   },
-  mounted() {},
+  mounted() {
+    console.log("Mobile Check!", this.isMobile);
+  },
 };
 </script>
 <style lang="scss"></style>
