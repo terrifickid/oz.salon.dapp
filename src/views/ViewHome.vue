@@ -57,7 +57,7 @@ export default {
     }
     setInterval(() => {
       this.test = Math.round(Math.random() * 1000);
-    }, 10000);
+    }, 12000);
   },
 };
 </script>
