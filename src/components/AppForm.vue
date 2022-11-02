@@ -110,8 +110,12 @@ export default {
       this.selectedIndex--;
     },
     async next() {
-      if (await this.validate()) {
-        if (this.selectedIndex == this.fields.length - 1) this.submitForm();
+      if (this.selectedIndex == this.fields.length - 1) {
+        if (await this.validate()) {
+          this.submitForm();
+        }
+      } else {
+        this.selectedIndex++;
       }
     },
     async validate() {
