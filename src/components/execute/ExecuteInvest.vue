@@ -87,7 +87,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td valign="top">Memo Field (Line 72 for Foreign Wires)</td>
+                    <td valign="top">Memo Field</td>
                     <td valign="top">{{ wireCode }}</td>
                   </tr>
                 </table>
