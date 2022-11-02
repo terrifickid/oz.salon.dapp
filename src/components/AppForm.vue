@@ -1,5 +1,5 @@
 <template>
-  <AppLoader v-show="processing" />
+  <AppLoaderFull v-show="processing" />
   <div
     v-show="!processing"
     v-if="ready"
@@ -81,9 +81,9 @@
 import axios from "axios";
 import FormField from "@/components/Form/FormField.vue";
 import FormIntro from "@/components/Form/FormIntro.vue";
-import AppLoader from "@/components/AppLoader.vue";
+import AppLoaderFull from "@/components/AppLoaderFull.vue";
 export default {
-  components: { FormField, AppLoader, FormIntro },
+  components: { FormField, AppLoaderFull, FormIntro },
   props: ["url"],
   emits: ["success", "ready"],
   data() {

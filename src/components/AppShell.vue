@@ -8,7 +8,7 @@
     </div>
     <div v-else>
       <div v-if="check">
-        <AppLoader v-if="!ready" />
+        <AppLoaderFull v-if="!ready" />
         <div v-show="ready"><slot></slot></div>
         <AppFooter :colors="colors" />
       </div>
@@ -25,11 +25,11 @@
 // @ is an alias to /src
 import _ from "lodash";
 import AppFooter from "@/components/AppFooter.vue";
-import AppLoader from "@/components/AppLoader.vue";
+import AppLoaderFull from "@/components/AppLoaderFull.vue";
 import AppJoin from "@/components/AppJoin.vue";
 import WalletConnect from "@/components/WalletConnect.vue";
 export default {
-  components: { AppLoader, AppFooter, WalletConnect, AppJoin },
+  components: { AppLoaderFull, AppFooter, WalletConnect, AppJoin },
   data() {
     return {
       colors: ["white", "black"],
