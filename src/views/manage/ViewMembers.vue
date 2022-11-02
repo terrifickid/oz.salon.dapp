@@ -58,8 +58,12 @@
                     d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                   />
                 </svg>
-                View {{ member.fields.firstName }}
-                {{ member.fields.lastName }}'s Proposals
+                <router-link
+                  :to="'/manage/proposals/' + member.fields.walletAddress"
+                >
+                  View {{ member.fields.firstName }}
+                  {{ member.fields.lastName }}'s Proposals</router-link
+                >
               </router-link>
             </div>
           </div>

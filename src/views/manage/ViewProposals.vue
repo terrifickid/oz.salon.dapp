@@ -135,10 +135,14 @@ export default {
         default:
           p = this.proposals;
       }
-
+      var addressFilter = _.get(this.$route, "params.address");
+      if (addressFilter) {
+        p = p.filter((item) => {
+          var checkAddress = _.get(item, "fields.profile.walletAddress");
+          return addressFilter == checkAddress;
+        });
+      }
       return p.sort(function compareFn(a, b) {
-        console.log("test", a.fields.votes, b.fields.votes);
-
         var aIsClosed = typeof _.get(a, "fields.votes.passed") == "boolean";
         var bIsClosed = typeof _.get(b, "fields.votes.passed") == "boolean";
         if (aIsClosed && !bIsClosed) return 1;

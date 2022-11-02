@@ -23,6 +23,7 @@
 
 <script>
 // @ is an alias to /src
+import _ from "lodash";
 import AppFooter from "@/components/AppFooter.vue";
 import AppLoader from "@/components/AppLoader.vue";
 import AppJoin from "@/components/AppJoin.vue";
@@ -38,13 +39,7 @@ export default {
   computed: {
     check() {
       if (!this.protected) return true;
-
-      if (this.kycAllowed && this.profile.kycApproved) return true;
-
-      if ("units" in this.profile) {
-        return this.profile.units;
-      }
-      return false;
+      return _.get(this, "profile.units");
     },
     debug() {
       return "test";
@@ -65,7 +60,7 @@ export default {
       return this.$store.state.connecting;
     },
     ready() {
-      return this.isLoaded;
+      return this.isLoaded && !_.get(this, "profile.loading");
     },
   },
   methods: {

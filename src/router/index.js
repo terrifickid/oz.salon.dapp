@@ -112,6 +112,15 @@ const routes = [
         },
       },
       {
+        path: "proposals/:address",
+        name: "Member Proposals",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewProposals" */ "../views/manage/ViewProposals.vue"
+          );
+        },
+      },
+      {
         path: "invest",
         name: "Invest",
         component: function () {
@@ -203,15 +212,6 @@ const routes = [
     },
   },
 
-  {
-    path: "/profile",
-    name: "Profile",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewProfile" */ "../views/ViewProfile.vue"
-      );
-    },
-  },
   {
     path: "/:catchAll(.*)",
     component: function () {

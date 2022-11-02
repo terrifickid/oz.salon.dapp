@@ -1,4 +1,5 @@
 <template>
+  <AppLoaderFull v-if="loading" />
   <div class="font-haffer pb-64">
     <div class="grid grid-cols-12 pb-8">
       <div class="col-span-12">
@@ -64,14 +65,39 @@
 
     <p class="pt-12 pb-3">Delegation</p>
     <div class="grid grid-cols-12 pb-3">
-      <div class="col-span-6 md:col-span-3 opacity-50">Your Delegate</div>
-      <div class="col-span-6 md:col-span-3">
-        <AppDelegateSelect @delegate="updateDelegate" :disabled="!editMode" />
+      <div class="col-span-6 md:col-span-3 opacity-50">
+        <span
+          @mouseover="showYourDelegateMessage = true"
+          @mouseout="showYourDelegateMessage = false"
+          >Your Delegate *</span
+        >
+      </div>
+      <div class="col-span-6 md:col-span-9">
+        <div class="flex w-full">
+          <span class="opacity-50" v-show="showYourDelegateMessage"
+            >Delegate your voting power to another member of Salon.</span
+          >
+          <AppDelegateSelect
+            @delegate="updateDelegate"
+            :disabled="!editMode"
+            :class="{ invisible: showYourDelegateMessage }"
+          />
+        </div>
       </div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-6 md:col-span-3 opacity-50">Delagating For</div>
-      <div class="col-span-6 md:col-span-3"></div>
+      <div class="col-span-6 md:col-span-3 opacity-50">
+        <span
+          @mouseover="showDelegateForMessage = true"
+          @mouseout="showDelegateForMessage = false"
+          >Delagating For *</span
+        >
+      </div>
+      <div class="col-span-6 md:col-span-9">
+        <span class="opacity-50" v-show="showDelegateForMessage"
+          >Salon members who delegated their voting power to you.</span
+        >
+      </div>
     </div>
 
     <p class="pt-12 pb-4">Financial</p>
@@ -140,11 +166,15 @@
 import axios from "axios";
 import AppDelegateSelect from "@/components/AppDelegateSelect";
 import AppButton from "@/components/AppButton";
+import AppLoaderFull from "@/components/AppLoaderFull";
 export default {
-  components: { AppDelegateSelect, AppButton },
+  components: { AppDelegateSelect, AppButton, AppLoaderFull },
   props: ["profile"],
   data() {
     return {
+      showDelegateForMessage: false,
+      showYourDelegateMessage: false,
+      loading: false,
       update: {},
       editMode: false,
       decimal: new Intl.NumberFormat("en-US", {
@@ -159,6 +189,7 @@ export default {
   },
   methods: {
     async updateProfile() {
+      this.loading = true;
       try {
         const res = await axios.post(
           process.env.VUE_APP_URI + "/profile/" + this.profile.id,
@@ -169,6 +200,7 @@ export default {
         console.error(e);
       }
       this.editMode = false;
+      window.location.reload();
     },
     updateDelegate(d) {
       this.update.delegate = d;

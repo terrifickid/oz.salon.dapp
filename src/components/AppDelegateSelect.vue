@@ -1,5 +1,9 @@
 <template>
-  <select class="focus:outline-none" v-model="selected" @change="onChange">
+  <select
+    class="focus:outline-none border-b border-black disabled:border-0 pb-2"
+    v-model="selected"
+    @change="onChange"
+  >
     <option value="0">No Delegate</option>
     <option
       v-for="(m, index) in members"
