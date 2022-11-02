@@ -171,8 +171,8 @@ export default {
           break;
         case "created":
           r.sort(function compareFn(a, b) {
-            if (a.fields.year > b.fields.year) return 1;
-            if (a.fields.year < b.fields.year) return -1;
+            if (a.fields.year > b.fields.year) return -1;
+            if (a.fields.year < b.fields.year) return 1;
             return 0;
           });
           break;
