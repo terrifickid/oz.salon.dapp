@@ -95,11 +95,11 @@
           'col-span-12 md:col-span-5': information,
         }"
       >
-        <p class="font-bold">
-          {{ artwork.fields.artist }}
-          <i class="mr-1">{{ artwork.fields.title }} </i>
-          {{ artwork.fields.year }}
-        </p>
+        <div>
+          <span class="block md:inline">{{ artwork.fields.artist }}</span>
+          <i class="mr-1 block md:inline">{{ artwork.fields.title }} </i>
+          <span class="block md:inline">{{ artwork.fields.year }}</span>
+        </div>
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
           artwork.fields.state
         }}</span>
@@ -131,7 +131,7 @@
           'col-span-12 md:col-span-4': !information,
           'col-span-12 md:col-span-4 md:col-start-8': information,
         }"
-        class="py-20"
+        class="pt-10 pb-24 md:py-20"
       >
         <img
           v-for="(image, index) in artwork.fields.images"

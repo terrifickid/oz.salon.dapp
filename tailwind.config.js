@@ -9,6 +9,9 @@ module.exports = {
       height: {
         third: "20vh",
       },
+      width: {
+        third: "33vw",
+      },
       fontFamily: {
         haffer: ["Haffer XH"],
         //mono: ["AkkuratMonoLLWebTrial-Regular"],
@@ -28,6 +31,7 @@ module.exports = {
         canary: "#e1fe6a",
         sky: "#295ea8",
         pink: "#d92f8a",
+        owhite: "rgba(255,255,255,0.95)",
         oblack: {
           100: "rgba(0,0,0,0.1)",
           400: "rgba(0,0,0,0.4)",

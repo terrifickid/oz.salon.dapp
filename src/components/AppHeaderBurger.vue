@@ -1,8 +1,8 @@
 <template>
   <div
-    class="px-5 py-4 fixed w-screen overflow-hidden z-50 font-haffer"
+    class="px-5 py-4 fixed w-screen overflow-hidden z-40 font-haffer"
     :class="{
-      'h-screen bg-white text-black': toggle,
+      'h-screen bg-owhite text-black': toggle,
       'bg-white text-black': !toggle,
     }"
   >
@@ -66,7 +66,7 @@
       </svg>
     </button>
 
-    <div class="links text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
+    <div class="text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
       <div class="pb-10">
         <router-link @click="toggleDown()" class="block" to="/collection"
           >Our Collection</router-link
