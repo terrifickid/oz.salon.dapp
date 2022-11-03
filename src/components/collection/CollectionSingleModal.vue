@@ -60,7 +60,7 @@
         Information
       </button>
       <button
-        class="flex items-center"
+        class="flex items-center opacity-50"
         v-show="information"
         @click="$emit('close')"
       >
@@ -89,10 +89,11 @@
           'col-span-12 md:col-span-5': information,
         }"
       >
-        <p>
-          {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
-          {{ artwork.fields.year }}
-        </p>
+        <div>
+          <span class="block md:inline">{{ artwork.fields.artist }}</span>
+          <i class="block md:inline px-1">{{ artwork.fields.title }}</i>
+          <span class="block md:inline">{{ artwork.fields.year }}</span>
+        </div>
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
           artwork.fields.state
         }}</span>

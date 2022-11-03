@@ -123,7 +123,9 @@
             {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
           </p>
 
-          <p class="pt-8 col-span-12">{{ artwork.fields.description }}</p>
+          <p class="pt-8 col-span-12 md:pb-16">
+            {{ artwork.fields.description }}
+          </p>
         </div>
       </div>
       <div

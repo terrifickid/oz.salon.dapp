@@ -4,18 +4,20 @@
       class="grid grid-cols-12 flex items-center gap-x-5"
       :class="{ 'mb-10': !hasPassed, 'mb-5': hasPassed }"
     >
-      <div class="col-span-1" :class="{ 'text-green-500': !hasPassed }">
+      <div
+        class="col-span-2 md:col-span-1"
+        :class="{ 'text-green-500': !hasPassed }"
+      >
         <span class="" :class="{ 'text-green-500 dot': !hasPassed }">{{
           prettyId
         }}</span>
       </div>
-      <div
-        class="col-span-1 col-start-2"
-        :class="{ 'text-green-500': !hasPassed }"
-      >
+
+      <div class="col-span-2" :class="{ 'text-green-500': !hasPassed }">
         <b class="capitalize">{{ item.sys.contentType.sys.id }} </b>
       </div>
-      <div class="col-start-2 col-span-10 xl:col-span-7">
+
+      <div class="hidden col-start-2 col-span-10 lg:block xl:col-span-6">
         <AppCountdown
           v-if="hasPassed"
           :start="0"
@@ -27,7 +29,8 @@
           :type="item.sys.contentType.sys.id"
         />
       </div>
-      <div class="col-start-2 col-span-10 xl:col-span-2 truncate">
+
+      <div class="col-start-3 md:col-start-2 col-span-8 xl:col-span-2 truncate">
         {{ item.fields.profile.firstName }}
         {{ item.fields.profile.lastName }}
       </div>
