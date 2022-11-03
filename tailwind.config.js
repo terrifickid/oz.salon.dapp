@@ -2,6 +2,10 @@ module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      maxHeight: {
+        third: "20vh",
+        half: "50vh",
+      },
       height: {
         third: "20vh",
       },

@@ -162,7 +162,10 @@ export default {
       return false;
     },
     pageTitle() {
+      var manage = ["start", "treasury", "members", "proposals"];
       if (this.$route.name == "home") return "";
+      var name = String(this.$route.name).toLowerCase();
+      if (manage.includes(name)) return "Manage";
       return this.$route.name;
     },
   },

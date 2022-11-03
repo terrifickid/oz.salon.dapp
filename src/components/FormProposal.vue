@@ -1,5 +1,5 @@
 <template>
-  <AppLoader v-if="!loaded" />
+  <AppLoaderFull v-if="!loaded" />
   <AppFileModal :file="fileModal" @close="fileModal = false" v-if="fileModal" />
   <template v-if="loaded">
     <template v-if="isProposer && !isMember && !passed">
@@ -161,7 +161,7 @@
 <script>
 import _ from "lodash";
 import axios from "axios";
-import AppLoader from "@/components/AppLoader";
+import AppLoaderFull from "@/components/AppLoaderFull";
 import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
@@ -174,7 +174,7 @@ export default {
     CounterVote,
     AppCountdown,
     AppButtonVote,
-    AppLoader,
+    AppLoaderFull,
     ExecuteProposal,
   },
   props: ["id"],

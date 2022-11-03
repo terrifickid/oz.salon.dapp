@@ -12,7 +12,7 @@
           hover = true;
         "
         @mouseout="hover = false"
-        style="max-height: 50vh"
+        class="max-h-third md:max-h-half"
         :image="slide.fields.images[0]"
       />
     </div>
@@ -38,9 +38,9 @@ export default {
       hover: false,
       selectedKey: 0,
       cols: [
-        "col-span-6 delay-one",
-        "col-span-3 delay-two",
-        "col-span-3 delay-three",
+        "col-span-12 flex justify-end md:block md:col-span-6 delay-one",
+        "col-span-12 flex justify-center md:block md:col-span-3 delay-two",
+        "col-span-12 flex justify-start  md:block md:col-span-3 delay-three",
       ],
       align: ["top", "self-center", "self-end"],
       pad: ["", "", ""],

@@ -2,10 +2,10 @@
   <div v-if="loaded">
     <div v-if="!executionStatus">
       <div
-        class="border border-black p-3 mb-2 flex items-start cursor-pointer"
+        class="border border-black p-3 mb-2 flex items-center cursor-pointer"
         @click="method = 'usdc'"
       >
-        <div class="flex items-start mr-4 mt-1">
+        <div class="flex items-start mr-4">
           <input
             id="default-checkbox"
             type="radio"
@@ -27,15 +27,15 @@
         </div>
       </div>
       <div
-        class="border border-black p-3 mb-2 flex items-start cursor-pointer"
+        class="border border-black p-3 mb-2 flex items-center cursor-pointer"
         @click="method = 'wire'"
       >
-        <div class="flex items-start mr-4 mt-1">
+        <div class="flex items-start mr-4">
           <input
             id="default-checkbox"
             type="radio"
             value="wire"
-            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-4 h-4"
             v-model="method"
           />
         </div>

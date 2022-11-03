@@ -1,4 +1,5 @@
 <template>
+  <AppLoaderFull v-if="!loaded" />
   <div class="container-fluid px-5">
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-3">
@@ -66,8 +67,9 @@
 
 import axios from "axios";
 import ManageNav from "@/components/ManageNav";
+import AppLoaderFull from "@/components/AppLoaderFull";
 export default {
-  components: { ManageNav },
+  components: { ManageNav, AppLoaderFull },
   data() {
     return {
       loaded: false,
