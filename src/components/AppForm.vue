@@ -142,7 +142,7 @@ export default {
           console.log("success", res.data);
           this.selectedIndex = 1000;
           this.processing = false;
-          this.$store.dispatch("connect");
+          //this.$store.dispatch("connect");
         } else {
           alert("Error, Please try again.");
           this.processing = false;

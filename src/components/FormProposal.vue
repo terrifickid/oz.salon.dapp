@@ -3,7 +3,7 @@
   <AppFileModal :file="fileModal" @close="fileModal = false" v-if="fileModal" />
   <template v-if="loaded">
     <template v-if="isProposer && !isMember && !passed">
-      <div class="pt-20 px-5 container">
+      <div class="">
         <div class="grid grid-cols-12">
           <div class="col-span-10">
             <p class="text-2xl mb-8 text-green-500">

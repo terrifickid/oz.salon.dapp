@@ -135,26 +135,15 @@
           </g>
         </g>
       </svg>
-      <div v-if="isMetamask">
-        <p class="">
-          <AppButton class="mt-8 sm:mt-4 mx-auto" @click="connect">
-            Connect MetaMask
-          </AppButton>
-        </p>
-        <p class="sm:hidden mt-4 font-haffer text-xs">
-          To access Salon on your mobile device, please connect to Salon through
-          the browser on your Metamask iOS or Android app.
-        </p>
-      </div>
-      <div v-else>
-        <p class="mt-4">
-          Download the
-          <a class="underline" href="https://metamask.io/download/"
-            >Metamask browser extension</a
-          >
-          to securely connect your digital wallet.
-        </p>
-      </div>
+
+      <p class="">
+        <AppButton class="mt-8 sm:mt-4 mx-auto" @click="connect">
+          Connect MetaMask
+        </AppButton>
+      </p>
+      <p class="mt-4 font-haffer text-xs">
+        Download Metamask to connect your digital wallet
+      </p>
     </div>
   </AppContent>
 </template>

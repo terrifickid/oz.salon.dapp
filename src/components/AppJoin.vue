@@ -1,8 +1,10 @@
 <template>
   <div v-if="ready">
-    <template v-if="isNew"> <AppForm :url="membersURI" /></template>
+    <template v-if="isNew"
+      ><div class="px-6"><AppForm :url="membersURI" /></div
+    ></template>
     <template v-if="!isKycApproved && !isNew">
-      <div class="pt-20 px-5 container">
+      <div class="">
         <div class="grid grid-cols-12">
           <div class="col-span-10">
             <p class="text-2xl mb-8 text-green-500">
@@ -23,7 +25,9 @@
     </template>
 
     <template v-if="isKycApproved && !isApplied">
-      <AppForm :url="onboardURI" />
+      <div class="px-6">
+        <AppForm :url="onboardURI" />
+      </div>
     </template>
     <template v-if="isApplied && !isMember">
       <div class="p-6"><FormProposal :id="profile.onboardId" /></div>

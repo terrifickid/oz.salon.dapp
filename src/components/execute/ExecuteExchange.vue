@@ -139,6 +139,7 @@ export default {
         var r = await this.submitExecution(this.item.sys.id, "transfer", {
           cancel: true,
         });
+        window.location.reload();
         console.log(r);
       } catch (e) {
         console.error(e);
