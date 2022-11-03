@@ -12,8 +12,7 @@
       >
       <router-link
         v-if="isMember"
-        id="manage"
-        class="inline-block ml-5"
+        class="inline-block ml-5 manage"
         to="/manage/start"
         :class="{ routy: isChildRoute }"
         >Manage</router-link
@@ -81,7 +80,7 @@
         <router-link
           v-if="isMember"
           @click="toggleDown()"
-          class="block"
+          class="relative manage"
           to="/manage/start"
           >Manage</router-link
         >
@@ -195,7 +194,7 @@ a.routy {
   @apply opacity-100 relative;
 }
 
-#manage::after {
+.manage::after {
   content: "";
   @apply bg-green-500 absolute top-1 -right-2 w-2 h-2 rounded-full;
 }
