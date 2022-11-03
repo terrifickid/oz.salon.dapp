@@ -2,7 +2,7 @@
   <div v-if="loaded">
     <div v-if="!executionStatus">
       <div
-        class="border border-black p-3 mb-2 flex items-center cursor-pointer"
+        class="border border-oblack px-3 py-4 mb-2 flex items-start cursor-pointer"
         @click="method = 'usdc'"
       >
         <div class="flex items-start mr-4">
@@ -10,8 +10,9 @@
             id="default-checkbox"
             type="radio"
             value="usdc"
-            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-4 h-4 outline-none"
             v-model="method"
+            style="margin-top: 1px"
           />
         </div>
         <div>
@@ -27,7 +28,7 @@
         </div>
       </div>
       <div
-        class="border border-black p-3 mb-2 flex items-center cursor-pointer"
+        class="border border-oblack px-3 py-4 mb-2 flex items-start cursor-pointer"
         @click="method = 'wire'"
       >
         <div class="flex items-start mr-4">
@@ -35,7 +36,8 @@
             id="default-checkbox"
             type="radio"
             value="wire"
-            class="w-4 h-4"
+            class="w-4 h-4 outline-none"
+            style="margin-top: 1px"
             v-model="method"
           />
         </div>
@@ -48,19 +50,19 @@
                 <p class="font-bold text-sm mb-2">Beneficiary</p>
                 <table class="text-sm w-full">
                   <tr>
-                    <td valign="top">Beneficiary Name</td>
+                    <td valign="top" class="opacity-50">Beneficiary Name</td>
                     <td valign="top">Salon DAO, LLC</td>
                   </tr>
                   <tr>
-                    <td valign="top">Account Number</td>
+                    <td valign="top" class="opacity-50">Account Number</td>
                     <td valign="top">9801010967</td>
                   </tr>
                   <tr>
-                    <td valign="top">Type of Account</td>
+                    <td valign="top" class="opacity-50">Type of Account</td>
                     <td valign="top">Checking</td>
                   </tr>
                   <tr>
-                    <td valign="top">Beneficiary Address</td>
+                    <td valign="top" class="opacity-50">Beneficiary Address</td>
                     <td valign="top">
                       228 Park Avenue South, PMB 21512 New York, NY 10003
                     </td>
@@ -73,43 +75,46 @@
                     </td>
                   </tr>
                   <tr>
-                    <td valign="top">ABA Routing Number</td>
+                    <td valign="top" class="opacity-50">ABA Routing Number</td>
                     <td valign="top">084106768</td>
                   </tr>
                   <tr>
-                    <td valign="top">Bank Name</td>
+                    <td valign="top" class="opacity-50">Bank Name</td>
                     <td valign="top">Evolve Bank & Trust</td>
                   </tr>
                   <tr>
-                    <td valign="top">Bank Address</td>
+                    <td valign="top" class="opacity-50">Bank Address</td>
                     <td valign="top">
                       6070 Poplar Ave, Suite 200 Memphis, TN 38119
                     </td>
                   </tr>
                   <tr>
-                    <td valign="top">Memo Field</td>
+                    <td valign="top" class="opacity-50">Memo Field</td>
                     <td valign="top">{{ wireCode }}</td>
                   </tr>
-                </table>
-              </div>
 
-              <tr>
-                <td colspan="2">
-                  <p class="mt-4 text-xs border-white border-t pt-2">
-                    *Including the above code in the Memo Field is critical to
-                    properly receiving your funds.
-                  </p>
-                </td>
-              </tr>
-
-              <p class="text-lg mt-6 font-bold">Foreign Wire Instructions</p>
-              <div class="mt-2 mr-8">
-                <p class="font-bold text-sm mb-2">
-                  Receiving Bank | 57D Account with Institution
-                </p>
-                <table class="text-sm w-full">
                   <tr>
-                    <td valign="top">SWIFT / BIC Code</td>
+                    <td colspan="2">
+                      <p class="mt-4 text-xs border-white border-t pt-2">
+                        *Including the above code in the Memo Field is critical
+                        to properly receiving your funds.
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <p class="text-lg mt-6 font-bold">
+                        Foreign Wire Instructions
+                      </p>
+                      <div class="mt-2 mr-8">
+                        <p class="font-bold text-sm mb-2">
+                          Receiving Bank | 57D Account with Institution
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top" class="opacity-50">SWIFT / BIC Code</td>
                     <td valign="top">
                       FRNAUS44XXX<br /><span class="text-xs"
                         >(Remove the trailing XXX if you are asked for an
@@ -118,11 +123,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td valign="top">Bank Name</td>
+                    <td valign="top" class="opacity-50">Bank Name</td>
                     <td valign="top">First National Bankers Bank</td>
                   </tr>
                   <tr>
-                    <td valign="top">Bank Address</td>
+                    <td valign="top" class="opacity-50">Bank Address</td>
                     <td valign="top">
                       7813 Office Park Blvd, Baton Rouge, LA, 70809 USA
                     </td>
@@ -137,15 +142,17 @@
                   </tr>
 
                   <tr>
-                    <td valign="top">IBAN / Account Number</td>
+                    <td valign="top" class="opacity-50">
+                      IBAN / Account Number
+                    </td>
                     <td valign="top">084106768</td>
                   </tr>
                   <tr>
-                    <td valign="top">Beneficiary Name</td>
+                    <td valign="top" class="opacity-50">Beneficiary Name</td>
                     <td valign="top">Evolve Bank & Trust</td>
                   </tr>
                   <tr>
-                    <td>Beneficiary Address</td>
+                    <td class="opacity-50">Beneficiary Address</td>
                     <td>6070 Poplar Ave, Suite 200, Memphis, TN 38119</td>
                   </tr>
 
@@ -156,7 +163,7 @@
                   </tr>
 
                   <tr>
-                    <td valign="top">
+                    <td valign="top" class="opacity-50">
                       <span>70 Remittance Information</span>
                     </td>
                     <td valign="top">
@@ -166,7 +173,7 @@
                   </tr>
 
                   <tr>
-                    <td valign="top" class="pr-12">
+                    <td valign="top" class="pr-12 opacity-50">
                       72 Sender to Receiver Information
                     </td>
                     <td valign="top">{{ wireCode }}</td>

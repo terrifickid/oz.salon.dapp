@@ -66,7 +66,7 @@
         Information
       </button>
       <button
-        class="flex items-center"
+        class="flex items-center opacity-50"
         v-show="information"
         @click="information = false"
       >

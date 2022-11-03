@@ -31,39 +31,43 @@
         >Login</router-link
       >
     </div>
-    <span class="md:hidden">{{ pageTitle }}</span>
-    <button @click="toggler" class="md:hidden z-20 float-right">
-      <svg
-        v-if="!toggle"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 8h16M4 16h16"
-        />
-      </svg>
-      <svg
-        v-else
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    </button>
+    <div class="grid flex grid-cols-12 items-center w-full">
+      <div class="md:hidden justify-self-start col-span-6">{{ pageTitle }}</div>
+      <div class="md:hidden col-span-6">
+        <button @click="toggler" class="float-right">
+          <svg
+            v-if="!toggle"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 8h16M4 16h16"
+            />
+          </svg>
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
 
     <div class="text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
       <div class="pb-10">

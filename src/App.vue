@@ -56,8 +56,12 @@ export default {
   },
   mounted() {
     console.log("Mobile Check!", this.isMobile);
+    console.log(window.location);
     if (this.isMobile) {
-      if (this.isMetaMaskBrowser) alert(navigator.userAgent);
+      if (this.isMetaMaskBrowser) {
+        window.location.href =
+          "https://metamask.app.link/dapp/salondao.xyz/" + window.location.hash;
+      }
     }
   },
 };
