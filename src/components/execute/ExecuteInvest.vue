@@ -10,7 +10,7 @@
             id="default-checkbox"
             type="radio"
             value="usdc"
-            class="w-4 h-4 outline-none"
+            class="w-4 h-4 outline-none radio"
             v-model="method"
             style="margin-top: 1px"
           />
@@ -36,7 +36,7 @@
             id="default-checkbox"
             type="radio"
             value="wire"
-            class="w-4 h-4 outline-none"
+            class="w-4 h-4 outline-none radio"
             style="margin-top: 1px"
             v-model="method"
           />
@@ -350,5 +350,9 @@ export default {
 }
 .active.collapse {
   max-height: 400vh;
+}
+
+.radio {
+  accent-color: black;
 }
 </style>
