@@ -91,7 +91,7 @@
       >
         <div>
           <span class="block md:inline">{{ artwork.fields.artist }}</span>
-          <i class="block md:inline px-1">{{ artwork.fields.title }}</i>
+          <i class="block md:inline md:px-1">{{ artwork.fields.title }}</i>
           <span class="block md:inline">{{ artwork.fields.year }}</span>
         </div>
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
