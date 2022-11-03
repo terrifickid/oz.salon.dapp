@@ -2,7 +2,7 @@
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
 
-    <div class="grid grid-cols-2 gap-20">
+    <div class="grid grid-cols-2 gap-6">
       <div class="col-span-1 flex items-center border-b border-black">
         <span class="mr-2">$</span>
         <input

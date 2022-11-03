@@ -1,11 +1,6 @@
 <template>
   <AppLoaderFull v-show="processing" />
-  <div
-    v-show="!processing"
-    v-if="ready"
-    ref="fullpage"
-    class="px-5 container pb-64"
-  >
+  <div v-show="!processing" v-if="ready" ref="fullpage" class="pb-32">
     <div class="grid grid-cols-12">
       <div class="col-span-12 lg:col-span-8">
         <div class="mb-6">{{ name }}</div>
