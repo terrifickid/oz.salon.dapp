@@ -2,7 +2,7 @@
   <div v-if="loaded">
     <div v-if="!executionStatus">
       <div
-        class="border border-oblack px-3 py-4 mb-2 flex items-start cursor-pointer"
+        class="bg-gray-100 px-3 py-4 mb-2 flex items-start cursor-pointer"
         @click="method = 'usdc'"
       >
         <div class="flex items-start mr-4">
@@ -16,7 +16,7 @@
           />
         </div>
         <div>
-          <p class="font-bold">Fund with USDC (Digital Wallet)</p>
+          <p>Fund with USDC (Digital Wallet)</p>
           <div :class="{ active: method == 'usdc' }" class="collapse">
             <div>
               <p class="mb-2"></p>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div
-        class="border border-oblack px-3 py-4 mb-2 flex items-start cursor-pointer"
+        class="bg-gray-100 px-3 py-4 mb-2 flex items-start cursor-pointer"
         @click="method = 'wire'"
       >
         <div class="flex items-start mr-4">
@@ -42,12 +42,12 @@
           />
         </div>
         <div>
-          <b>Fund with Bank Wire (FIAT)</b>
+          <span>Fund with Bank Wire (FIAT)</span>
           <div :class="{ active: method == 'wire' }" class="collapse">
             <div>
-              <p class="text-lg mt-6 font-bold">Domestic Wire Instructions</p>
+              <p class="text-lg mt-6">Domestic Wire Instructions</p>
               <div class="mt-2 mr-8">
-                <p class="font-bold text-sm mb-2">Beneficiary</p>
+                <p class="text-sm mb-2">Beneficiary</p>
                 <table class="text-sm w-full">
                   <tr>
                     <td valign="top" class="opacity-50">Beneficiary Name</td>
@@ -69,9 +69,7 @@
                   </tr>
                   <tr>
                     <td colspan="2">
-                      <p class="mt-2 font-bold text-sm mb-2">
-                        Receiving Bank Details
-                      </p>
+                      <p class="mt-2 text-sm mb-2">Receiving Bank Details</p>
                     </td>
                   </tr>
                   <tr>
@@ -95,7 +93,7 @@
 
                   <tr>
                     <td colspan="2">
-                      <p class="mt-4 text-xs border-white border-t pt-2">
+                      <p class="mt-4 text-xs pt-2">
                         *Including the above code in the Memo Field is critical
                         to properly receiving your funds.
                       </p>
@@ -103,11 +101,9 @@
                   </tr>
                   <tr>
                     <td colspan="2">
-                      <p class="text-lg mt-6 font-bold">
-                        Foreign Wire Instructions
-                      </p>
+                      <p class="text-lg mt-12">Foreign Wire Instructions</p>
                       <div class="mt-2 mr-8">
-                        <p class="font-bold text-sm mb-2">
+                        <p class="text-sm mb-2">
                           Receiving Bank | 57D Account with Institution
                         </p>
                       </div>
@@ -135,7 +131,7 @@
 
                   <tr>
                     <td colspan="2" valign="top">
-                      <p class="font-bold text-sm my-2">
+                      <p class="text-sm my-2">
                         Beneficiary | 59 Beneficiary Customer Name & Address
                       </p>
                     </td>
@@ -158,7 +154,7 @@
 
                   <tr>
                     <td colspan="2" valign="top">
-                      <p class="font-bold text-sm my-2">Reference Field</p>
+                      <p class="text-sm my-2">Reference Field</p>
                     </td>
                   </tr>
 
@@ -181,7 +177,7 @@
 
                   <tr>
                     <td colspan="2">
-                      <p class="mt-4 text-xs border-white border-t pt-2">
+                      <p class="mt-4 text-xs pt-2">
                         *Including the above information for Line 70 and Line 72
                         is critical to properly receiving your funds.
                       </p>
