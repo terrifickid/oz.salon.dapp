@@ -60,7 +60,7 @@ export default {
       return this.$store.state.connecting;
     },
     ready() {
-      return this.isLoaded && !_.get(this, "profile.loading");
+      return this.isLoaded;
     },
   },
   methods: {

@@ -58,7 +58,7 @@ export default {
     console.log("Mobile Check!", this.isMobile);
     console.log(window.location);
     if (this.isMobile) {
-      if (this.isMetaMaskBrowser) {
+      if (!this.isMetaMaskBrowser) {
         window.location.href =
           "https://metamask.app.link/dapp/salon-dev.on.fleek.co/" +
           window.location.hash;
