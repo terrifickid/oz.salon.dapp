@@ -135,7 +135,7 @@
         <ExecuteProposal :proposal="proposal" />
 
         <router-link to="/manage/proposals">
-          <button class="flex items-center mt-12">
+          <button class="flex items-center mt-12 opacity-50">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

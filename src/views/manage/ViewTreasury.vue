@@ -8,7 +8,7 @@
         </div>
       </div>
       <div v-if="loaded" class="col-span-12 md:col-span-9">
-        <b>Treasury</b><br />
+        Treasury<br />
 
         <div class="opacity-50" v-html="data.code"></div>
 
