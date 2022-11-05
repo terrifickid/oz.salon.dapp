@@ -1,31 +1,32 @@
 <template>
   <div v-if="ready">
-    <template v-if="isNew"
-      ><div class="px-6"><AppForm :url="membersURI" /></div
-    ></template>
-    <template v-if="!isKycApproved && !isNew">
-      <div class="">
-        <div class="grid grid-cols-12">
-          <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">Apply</p>
-            <h1 class="text-2xl opacity-50 font-haffer">
-              Your application is currently under review. We will notify you
-              when you are approved to move to the second stage of our
-              application process.
-            </h1>
-          </div>
-        </div>
-      </div>
-    </template>
+    <div class="grid grid-cols-12 w-full font-haffer px-6">
+      <div class="col-span-12 md:col-span-9">
+        <template v-if="isNew"><AppForm :url="membersURI" /></template>
+        <template v-if="!isKycApproved && !isNew">
+          <p class="text-2xl mb-8 text-green-500">Apply</p>
+          <h1 class="text-2xl opacity-50 font-haffer">
+            Your application is currently under review. We will notify you when
+            you are approved to move to the second stage of our application
+            process.
+          </h1>
+        </template>
 
-    <template v-if="isKycApproved && !isApplied">
-      <div class="px-6">
-        <AppForm :url="onboardURI" />
+        <template v-if="isKycApproved && !isApplied">
+          <div class="px-6">
+            <AppForm :url="onboardURI" />
+          </div>
+        </template>
+        <template v-if="isApplied && !isMember">
+          <div class="p-6"><FormProposal :id="profile.onboardId" /></div>
+        </template>
       </div>
-    </template>
-    <template v-if="isApplied && !isMember">
-      <div class="p-6"><FormProposal :id="profile.onboardId" /></div>
-    </template>
+      <div class="hidden md:block md:col-span-3">
+        <p class="pb-8">Contact</p>
+        <p class="opacity-50 pb-4">Jordan Huelskamp<br /><i>Founder</i></p>
+        <p class="opacity-50">hello@salondao.xyz</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
