@@ -1,6 +1,11 @@
 <template>
+  <AppLoaderFull v-if="processing" />
   <div v-if="loaded">
-    <div v-if="!executionStatus">
+    <p class="mb-8">
+      <span class="opacity-50">Status</span><br />{{ statusMessage }}
+    </p>
+
+    <div v-if="!executionStatus && ownsProposal">
       <div
         class="bg-gray-100 px-3 py-4 mb-2 flex items-start cursor-pointer"
         @click="method = 'usdc'"
@@ -198,17 +203,6 @@
         </div>
       </div>
     </div>
-    <div v-else-if="executionStatus == 'Completed'">
-      <p class="mb-2">Your investment is complete.</p>
-      <p class="mb-2">
-        You sent {{ format.format(amount) }} to Salon's treasury in exchange for
-        {{ units }} units.
-      </p>
-      <p>Unit holdings have been updated in your profile.</p>
-    </div>
-    <div v-else>
-      {{ executionStatus }}
-    </div>
   </div>
 </template>
 <script>
@@ -216,13 +210,14 @@ import _ from "lodash";
 import axios from "axios";
 import { ethers } from "ethers";
 import AppButton from "@/components/AppButton";
+import AppLoaderFull from "@/components/AppLoaderFull.vue";
 export default {
-  components: { AppButton },
+  components: { AppButton, AppLoaderFull },
   props: ["proposal"],
   data() {
     return {
       method: null,
-      processing: false,
+      processing: true,
       exec: false,
       loaded: false,
       format: new Intl.NumberFormat("en-US", {
@@ -238,10 +233,39 @@ export default {
     uri() {
       return process.env.VUE_APP_URI + "/form/executions";
     },
+    walletAddress() {
+      return this.$store.state.walletAddress;
+    },
+    ownsProposal() {
+      return (
+        _.get(this.proposal, "fields.profile.walletAddress") ==
+        this.walletAddress
+      );
+    },
     executionStatus() {
       var status = _.get(this, "exec[0].fields.status");
       if (status) return status;
       return false;
+    },
+    statusMessage() {
+      var msg;
+      switch (this.executionStatus) {
+        case "Pending":
+          msg = "Funding processing";
+          break;
+        case "Completed":
+          msg = "Funding received";
+          break;
+        case "Expired":
+          msg = this.executionStatus;
+          break;
+        case "Cancelled":
+          msg = this.executionStatus;
+          break;
+        default:
+          msg = "Not yet funded";
+      }
+      return msg;
     },
     usdcContractAddress() {
       return process.env.VUE_APP_USDC_CONTRACT;
@@ -270,12 +294,19 @@ export default {
       return res.data;
     },
     async sendWire() {
+      this.processing = true;
       //executions
-      var res = await this.submitExecution(this.proposal.sys.id, this.type, {
-        sourceType: "wire",
-        source: this.wireCode,
-      });
-      console.log(res);
+      try {
+        await this.submitExecution(this.proposal.sys.id, this.type, {
+          sourceType: "wire",
+          source: this.wireCode,
+        });
+        window.location.reload();
+      } catch (e) {
+        alert("Error!");
+        console.error(e);
+      }
+      this.processing = false;
     },
     async sendUSDC() {
       this.processing = true;
@@ -336,6 +367,7 @@ export default {
       console.log(res);
       console.log(this.exec, this.proposal.sys.id);
       this.loaded = true;
+      this.processing = false;
     } catch (err) {
       console.error(err);
     }

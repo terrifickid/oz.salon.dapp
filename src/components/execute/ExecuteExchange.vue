@@ -1,5 +1,9 @@
 <template>
+  <AppLoaderFull v-if="processing" />
   <div v-if="loaded">
+    <p class="mb-8" v-if="statusMessage">
+      <span class="opacity-50">Status</span><br />{{ statusMessage }}
+    </p>
     <div
       class="py-3 grid grid-cols-12 flex items-center"
       v-if="!executionStatus"
@@ -78,6 +82,7 @@ export default {
   emits: ["transfer", "loading", "done"],
   data() {
     return {
+      processing: true,
       loaded: false,
       exec: false,
       treasury: {},
@@ -129,12 +134,12 @@ export default {
           alert("Critical Error: Please contact support");
         }
       } catch (err) {
-        this.processing = false;
+        alert(err);
         console.error(err);
       }
     },
     async cancel() {
-      this.$emit("loading");
+      this.processing = true;
       try {
         var r = await this.submitExecution(this.item.sys.id, "transfer", {
           cancel: true,
@@ -145,7 +150,6 @@ export default {
         console.error(e);
         alert("Error");
       }
-      //window.location.reload();
     },
     async submitExecution(id, type, obj) {
       console.log("Sending Ex");
@@ -165,6 +169,26 @@ export default {
       var status = _.get(this, "exec[0].fields.status");
       if (status) return status;
       return false;
+    },
+    statusMessage() {
+      var msg;
+      switch (this.executionStatus) {
+        case "Pending":
+          msg = "Exchange accepted, transaction processing";
+          break;
+        case "Completed":
+          msg = "Exchange completed";
+          break;
+        case "Expired":
+          msg = this.executionStatus;
+          break;
+        case "Cancelled":
+          msg = this.executionStatus;
+          break;
+        default:
+          msg = false;
+      }
+      return msg;
     },
     executionCompletedDate() {
       var date = _.get(this, "exec[0].sys.updatedAt");
@@ -203,6 +227,7 @@ export default {
       this.exec = _.get(res[1], "data");
 
       this.loaded = true;
+      this.processing = false;
     } catch (err) {
       console.error(err);
     }
