@@ -38,7 +38,11 @@
         <div v-show="selectedIndex == 1000" class="">
           <span class="text-green-500"> {{ name }} proposal submitted.</span>
           <p class="opacity-50 mt-20">
-            <router-link to="/manage/proposals" class="flex items-center">
+            <router-link
+              to="/manage/proposals"
+              class="flex items-center"
+              v-if="isMember"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -73,6 +77,7 @@
   </div>
 </template>
 <script>
+import _ from "lodash";
 import axios from "axios";
 import FormField from "@/components/Form/FormField.vue";
 import FormIntro from "@/components/Form/FormIntro.vue";
@@ -97,6 +102,9 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    isMember() {
+      return _.get(this.profile, "units");
     },
   },
   methods: {
