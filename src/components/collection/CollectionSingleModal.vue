@@ -90,9 +90,11 @@
         }"
       >
         <div>
-          <span class="block md:inline">{{ artwork.fields.artist }}</span>
-          <i class="block md:inline md:px-1">{{ artwork.fields.title }}</i>
-          <span class="block md:inline">{{ artwork.fields.year }}</span>
+          <span class="block xl:inline">{{ artwork.fields.artist }}</span>
+          <i class="xl:mr-2 xl:ml-1 block xl:inline">{{
+            artwork.fields.title
+          }}</i>
+          <span class="block xl:inline">{{ artwork.fields.year }}</span>
         </div>
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
           artwork.fields.state
@@ -134,7 +136,11 @@
           style="max-height: 60vh"
           class="mx-auto"
         />
-        <div v-show="information" class="flex justify-center items-center">
+        <div
+          v-show="information"
+          class="flex justify-center items-center"
+          v-if="artwork.fields.images.length > 1"
+        >
           <img
             v-for="(image, index) in artwork.fields.images"
             :src="image.fields.file.url"

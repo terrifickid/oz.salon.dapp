@@ -96,9 +96,11 @@
         }"
       >
         <div>
-          <span class="block md:inline">{{ artwork.fields.artist }}</span>
-          <i class="md:mr-1 block md:inline">{{ artwork.fields.title }} </i>
-          <span class="block md:inline">{{ artwork.fields.year }}</span>
+          <span class="block xl:inline">{{ artwork.fields.artist }}</span>
+          <i class="xl:mr-2 xl:ml-1 block xl:inline">{{
+            artwork.fields.title
+          }}</i>
+          <span class="block xl:inline">{{ artwork.fields.year }}</span>
         </div>
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
           artwork.fields.state
