@@ -7,17 +7,11 @@
       <div class="">
         <div class="grid grid-cols-12">
           <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">
-              We've received your application
-            </p>
+            <p class="text-2xl mb-8 text-green-500">Apply</p>
             <h1 class="text-2xl opacity-50 font-haffer">
-              You'll receive an email notification when you are approved to move
-              to the second stage of our application process. Please reach out
-              to
-              <a class="bold underline" href="mailto:hello@salondao.xyz"
-                >hello@salondao.xyz</a
-              >
-              with any questions.
+              Your application is currently under review. We will notify you
+              when you are approved to move to the second stage of our
+              application process.
             </h1>
           </div>
         </div>

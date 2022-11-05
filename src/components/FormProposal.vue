@@ -6,14 +6,9 @@
       <div class="">
         <div class="grid grid-cols-12">
           <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">
-              We've received your onboarding proposal
-            </p>
+            <p class="text-2xl mb-8 text-green-500">Onboard</p>
             <h1 class="text-2xl opacity-50 font-haffer">
-              Our members will now vote on your membership. After you're
-              approved, you'll have seven days to finalize your membership by
-              sending your funds by bank wire or digital wallet. Please reach
-              out to hello@salondao.xyz with any questions.
+              Your application is being voted on by Salon members.
             </h1>
           </div>
         </div>

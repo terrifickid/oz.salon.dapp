@@ -26,8 +26,8 @@
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-6 md:col-span-3 opacity-50">Name</div>
-      <div class="col-span-6 md:col-span-3 flex">
+      <div class="col-span-12 pb-4 md:col-span-3 opacity-50">Name</div>
+      <div class="col-span-12 pb-4 md:col-span-3 flex">
         <template v-if="!editMode">
           <p class="border-b border-transparent pb-1 mb-2">
             {{ profile.firstName }} {{ profile.lastName }}
@@ -47,8 +47,8 @@
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-6 md:col-span-3 opacity-50">Email Address</div>
-      <div class="col-span-6 md:col-span-3">
+      <div class="col-span-12 pb-4 md:col-span-3 opacity-50">Email Address</div>
+      <div class="col-span-12 pb-4 md:col-span-3">
         <template v-if="!editMode">
           <p class="border-b border-transparent pb-1 mb-2">
             {{ profile.emailAddress }}
@@ -65,14 +65,14 @@
 
     <p class="pt-12 pb-3">Delegation</p>
     <div class="grid grid-cols-12 pb-3">
-      <div class="col-span-6 md:col-span-3 opacity-50">
+      <div class="col-span-12 pb-4 md:col-span-3 opacity-50">
         <span
           @mouseover="showYourDelegateMessage = true"
           @mouseout="showYourDelegateMessage = false"
           >Your Delegate *</span
         >
       </div>
-      <div class="col-span-6 md:col-span-9">
+      <div class="col-span-12 pb-4 md:col-span-9">
         <div class="flex w-full">
           <span class="opacity-50" v-show="showYourDelegateMessage"
             >Delegate your voting power to another member of Salon.</span
@@ -86,14 +86,14 @@
       </div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-6 md:col-span-3 opacity-50">
+      <div class="col-span-12 pb-4 md:col-span-3 opacity-50">
         <span
           @mouseover="showDelegateForMessage = true"
           @mouseout="showDelegateForMessage = false"
           >Delagating For *</span
         >
       </div>
-      <div class="col-span-6 md:col-span-9">
+      <div class="col-span-12 pb-4 md:col-span-9">
         <span class="opacity-50" v-show="showDelegateForMessage"
           >Salon members who delegated their voting power to you.</span
         >
