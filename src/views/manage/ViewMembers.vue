@@ -34,7 +34,7 @@
           >
             <div class="col-span-3 opacity-50">Wallet ID</div>
 
-            <div class="col-span-9">
+            <div class="col-span-9 truncate">
               {{ member.fields.walletAddress }}
             </div>
 
