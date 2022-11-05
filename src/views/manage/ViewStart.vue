@@ -9,15 +9,9 @@
       <div class="col-span-12 md:col-span-9">
         <ul>
           <li class="mb-5">
-            <router-link to="/manage/invest">
-              <p>Invest</p>
-              <p class="opacity-50">-> Add to your existing investment</p>
-            </router-link>
-          </li>
-          <li class="mb-5">
-            <router-link to="/manage/exchange">
-              <p>Exchange</p>
-              <p class="opacity-50">-> Cash out some or all of your units</p>
+            <router-link to="/manage/acquire">
+              <p>Acquire</p>
+              <p class="opacity-50">-> Propose a work for Salon to collect</p>
             </router-link>
           </li>
           <li class="mb-5">
@@ -27,9 +21,15 @@
             </router-link>
           </li>
           <li class="mb-5">
-            <router-link to="/manage/acquire">
-              <p>Acquire</p>
-              <p class="opacity-50">-> Propose a work for Salon to collect</p>
+            <router-link to="/manage/invest">
+              <p>Invest</p>
+              <p class="opacity-50">-> Add to your existing investment</p>
+            </router-link>
+          </li>
+          <li class="mb-5">
+            <router-link to="/manage/exchange">
+              <p>Exchange</p>
+              <p class="opacity-50">-> Cash out some or all of your units</p>
             </router-link>
           </li>
           <li class="mb-5">
