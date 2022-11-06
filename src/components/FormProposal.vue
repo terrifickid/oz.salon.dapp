@@ -45,7 +45,7 @@
         />
 
         <div
-          class="grid grid-cols-12 flex items-center pt-5 pb-8"
+          class="grid grid-cols-12 flex items-center"
           v-if="canVote && isVotable"
         >
           <div class="col-span-4 lg:col-span-2" v-if="!hasPassed">

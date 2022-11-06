@@ -16,7 +16,7 @@ export default {
       var days;
       switch (this.type) {
         case "exchange":
-          days = 16;
+          days = 14;
           break;
         default:
           days = 4;

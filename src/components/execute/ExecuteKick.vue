@@ -10,8 +10,9 @@
     <div v-if="executionStatus == 'Completed'">
       <p class="py-4">
         At the time the proposal closed on {{ closedDate }}, {{ name }} had
-        {{ units }} units. At that time, units were valued at
-        {{ usd.format(bookValue) }} and {{ usd.format(currentTradePrice) }}.
+        {{ units.toLocaleString() }} units. At that time, units were valued at
+        {{ usd.format(bookValue) }} (book value) and
+        {{ usd.format(currentTradePrice) }} (trade price).
       </p>
     </div>
   </div>

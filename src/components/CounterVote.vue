@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="pt-2" v-if="hasEnded">
+    <div class="py-6" v-if="hasEnded">
       <div v-if="!passed" class="text-red-500">This did not pass.</div>
       <div
         v-else
