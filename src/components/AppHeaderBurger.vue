@@ -124,7 +124,7 @@
         <router-link
           v-if="!isMember"
           class="block"
-          to="/apply"
+          to="/manage/start"
           @click="toggleDown()"
           >Apply</router-link
         >
