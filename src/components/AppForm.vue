@@ -152,9 +152,9 @@ export default {
           this.processing = false;
           //this.$store.dispatch("connect");
         } else {
-          alert("Error, Please try again.");
+          var error = JSON.parse(res.data.message);
+          alert(JSON.stringify(_.get(error, "details.errors[0]")));
           this.processing = false;
-          console.log("error", res.data);
         }
       } catch (error) {
         this.processing = false;

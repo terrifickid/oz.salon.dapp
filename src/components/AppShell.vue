@@ -1,5 +1,5 @@
 <template>
-  <div :class="salonClass" class="font-haffer">
+  <div class="font-haffer">
     <div
       v-if="networkError"
       class="flex min-h-screen items-center justify-center w-screen"
@@ -10,12 +10,12 @@
       <div v-if="check">
         <AppLoaderFull v-if="!ready" />
         <div v-show="ready"><slot></slot></div>
-        <AppFooter :colors="colors" />
+        <AppFooter />
       </div>
       <div v-if="!check">
         <WalletConnect v-if="!this.walletAddress" />
         <AppJoin v-if="this.walletAddress" class="pt-16" />
-        <AppFooter :colors="colors" />
+        <AppFooter />
       </div>
     </div>
   </div>
@@ -31,9 +31,7 @@ import WalletConnect from "@/components/WalletConnect.vue";
 export default {
   components: { AppLoaderFull, AppFooter, WalletConnect, AppJoin },
   data() {
-    return {
-      colors: ["white", "black"],
-    };
+    return {};
   },
   props: ["isLoaded", "protected", "kycAllowed"],
   computed: {
@@ -44,9 +42,7 @@ export default {
     debug() {
       return "test";
     },
-    salonClass() {
-      return "bg-" + this.colors[0] + " " + "text-" + this.colors[1];
-    },
+
     profile() {
       return this.$store.state.profile;
     },

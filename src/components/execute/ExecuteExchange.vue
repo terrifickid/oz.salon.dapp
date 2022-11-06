@@ -74,10 +74,11 @@
 <script>
 import _ from "lodash";
 import AppButton from "@/components/AppButton";
+import AppLoaderFull from "@/components/AppLoaderFull";
 import axios from "axios";
 import { ethers } from "ethers";
 export default {
-  components: { AppButton },
+  components: { AppButton, AppLoaderFull },
   props: ["item"],
   emits: ["transfer", "loading", "done"],
   data() {

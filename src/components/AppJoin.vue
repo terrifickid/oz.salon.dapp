@@ -4,8 +4,8 @@
       <div class="col-span-12 md:col-span-9">
         <template v-if="isNew"><AppForm :url="membersURI" /></template>
         <template v-if="!isKycApproved && !isNew">
-          <p class="text-2xl mb-8 text-green-500">Apply</p>
-          <h1 class="text-2xl opacity-50 font-haffer">
+          <p class="mb-8 text-green-500">Apply</p>
+          <h1 class="opacity-50 font-haffer">
             Your application is currently under review. We will notify you when
             you are approved to move to the second stage of our application
             process.
@@ -13,12 +13,10 @@
         </template>
 
         <template v-if="isKycApproved && !isApplied">
-          <div class="px-6">
-            <AppForm :url="onboardURI" />
-          </div>
+          <AppForm :url="onboardURI" />
         </template>
         <template v-if="isApplied && !isMember">
-          <div class="p-6"><FormProposal :id="profile.onboardId" /></div>
+          <FormProposal :id="profile.onboardId" />
         </template>
       </div>
       <div class="hidden md:block md:col-span-3">

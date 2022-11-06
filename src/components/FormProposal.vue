@@ -3,16 +3,10 @@
   <AppFileModal :file="fileModal" @close="fileModal = false" v-if="fileModal" />
   <template v-if="loaded">
     <template v-if="isProposer && !isMember && !passed">
-      <div class="">
-        <div class="grid grid-cols-12">
-          <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">Onboard</p>
-            <h1 class="text-2xl opacity-50 font-haffer">
-              Your application is being voted on by Salon members.
-            </h1>
-          </div>
-        </div>
-      </div>
+      <p class="mb-8 text-green-500">Onboard</p>
+      <h1 class="opacity-50 font-haffer">
+        Your application is being voted on by Salon members.
+      </h1>
     </template>
     <template v-else>
       <div class="pb-64">

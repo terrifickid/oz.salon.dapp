@@ -1,38 +1,29 @@
 <template>
-  <div class="mb-32" v-if="!exec && isAdmin">
-    <AppButton @click="sendKick">Execute Kick</AppButton>
-  </div>
-  <div class="mb-32 text-xs" v-if="exec">
-    <hr class="mb-2" />
-    <p class="mb-2">The kick has been executed.</p>
-    <p class="mb-2">
-      NAME was found to be in violation of Salon's operating agreement. A
-      majority of members voted to kick NAME on DATE KICK PROPOSAL ENDED at TIME
-      KICK PROPOSAL ENDED.
-    </p>
+  <AppLoaderFull v-if="processing" />
 
-    <p class="mb-2">
-      The book value of Salon units on DATE at TIME was $PRICE per unit. At that
-      time, NAME'S units were valued at $VALUE OF NAME'S UNITS AT BOOK VALUE AT
-      TIME KICK PROPOSAL ENDED.
+  <div v-if="loaded">
+    <p class="mt-4" v-if="statusMessage">
+      <span class="opacity-50">Status</span><br />{{ statusMessage }}
     </p>
-
-    <p class="mb-2">
-      The financial committee will be in touch with NAME to arrange a payout
-      when funds are available.
-    </p>
-
-    <p class="mb-2">NAME'S unit holdings have been eliminated.</p>
+    <div class="my-8" v-if="!executionStatus && isAdmin">
+      <AppButton @click="sendKick">Execute Kick</AppButton>
+    </div>
+    <div v-if="executionStatus == 'Completed'"></div>
   </div>
 </template>
 <script>
 import _ from "lodash";
 import axios from "axios";
+import AppButton from "@/components/AppButton";
+import AppLoaderFull from "@/components/AppLoaderFull";
 export default {
   props: ["item"],
+  components: { AppButton, AppLoaderFull },
   data() {
     return {
       exec: false,
+      loaded: false,
+      processing: false,
     };
   },
   computed: {
@@ -45,21 +36,53 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
+    executionStatus() {
+      var status = _.get(this, "exec[0].fields.status");
+      if (status) return status;
+      return false;
+    },
+    statusMessage() {
+      var msg;
+      switch (this.executionStatus) {
+        case "Pending":
+          msg = "Kick Pending";
+          break;
+        case "Completed":
+          msg = "Kicked";
+          break;
+        default:
+          msg = false;
+      }
+      return msg;
+    },
   },
   methods: {
     async sendKick() {
       try {
-        var res = await this.submitExecution(this.id, {});
+        this.processing = true;
+        var res = await this.submitExecution(this.item.sys.id, "kick", {});
+
         if (res.result === false) {
           var e = JSON.parse(res.message);
           alert("Error: " + _.get(e, "details.errors[0].details"));
+        } else {
+          window.location.reload();
         }
       } catch (err) {
         console.error(err);
       }
-      window.location.reload();
+    },
+    async submitExecution(id, type, obj) {
+      console.log("Sending Ex");
+      const res = await axios.post(this.uri, {
+        proposal: id,
+        type: type,
+        data: obj,
+      });
+      return res.data;
     },
   },
+
   async mounted() {
     try {
       console.log("Load Exec!");
