@@ -1,18 +1,9 @@
 <template>
-  <select
-    class="focus:outline-none border-b border-black disabled:border-0 pb-2"
-    v-model="selected"
-    @change="onChange"
-  >
-    <option value="0">No Delegate</option>
-    <option
-      v-for="(m, index) in members"
-      :key="index"
-      :value="m.fields.walletAddress"
-    >
-      {{ m.fields.firstName }} {{ m.fields.lastName }}
-    </option>
-  </select>
+  <div>
+    <p v-for="(d, index) in delegates" :key="index">
+      {{ d.fields.firstName }} {{ d.fields.lastName }}
+    </p>
+  </div>
 </template>
 <script>
 import _ from "lodash";
@@ -29,13 +20,16 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-  },
-  methods: {
-    async onChange() {
-      console.log("change");
-      this.$emit("delegate", this.selected);
+    delegates() {
+      var d = [];
+      //
+      this.members.forEach((m) => {
+        if (m.fields.delegate == this.profile.walletAddress) d.push(m);
+      });
+      return d;
     },
   },
+  methods: {},
   async beforeMount() {
     this.selected = _.get(this.profile, "delegate");
     console.log("members load!");

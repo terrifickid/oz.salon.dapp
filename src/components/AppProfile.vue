@@ -97,6 +97,7 @@
         <span class="opacity-50" v-show="showDelegateForMessage"
           >Salon members who delegated their voting power to you.</span
         >
+        <AppDelegateFor :class="{ invisible: showDelegateForMessage }" />
       </div>
     </div>
 
@@ -165,10 +166,11 @@
 <script>
 import axios from "axios";
 import AppDelegateSelect from "@/components/AppDelegateSelect";
+import AppDelegateFor from "@/components/AppDelegateFor";
 import AppButton from "@/components/AppButton";
 import AppLoaderFull from "@/components/AppLoaderFull";
 export default {
-  components: { AppDelegateSelect, AppButton, AppLoaderFull },
+  components: { AppDelegateSelect, AppDelegateFor, AppButton, AppLoaderFull },
   props: ["profile"],
   data() {
     return {
