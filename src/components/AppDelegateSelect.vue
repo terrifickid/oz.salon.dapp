@@ -1,6 +1,6 @@
 <template>
   <select
-    class="focus:outline-none border-b border-black disabled:border-0 pb-2"
+    class="focus:outline-none border-b border-black disabled:border-0 pb-2 bg-white"
     v-model="selected"
     @change="onChange"
   >

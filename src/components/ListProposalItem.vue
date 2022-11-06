@@ -34,12 +34,13 @@
         {{ item.fields.profile.firstName }}
         {{ item.fields.profile.lastName }}
       </div>
-      <div class="hidden xl:block xl:col-span-1 md:text-right">0% / 0%</div>
+      <!-- <div class="hidden xl:block xl:col-span-1 md:text-right">0% / 0%</div> -->
     </div>
   </router-link>
 </template>
 <script>
 import _ from "lodash";
+//import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 export default {
   components: { AppCountdown },

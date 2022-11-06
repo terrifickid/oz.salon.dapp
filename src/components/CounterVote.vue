@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="mode">Testo!</div>
+  <div v-if="!mode">
     <div class="grid grid-cols-12 py-4">
       <div class="col-span-4 sm:col-span-3 md:col-span-3">Votes</div>
       <div class="col-span-4 sm:col-span-2">{{ total }}</div>
@@ -34,7 +35,7 @@
 <script>
 import _ from "lodash";
 export default {
-  props: ["votes", "weights"],
+  props: ["votes", "weights", "mode"],
   computed: {
     hasEnded() {
       return typeof _.get(this.votes, "passed") == "boolean";
