@@ -1,5 +1,6 @@
 <template>
   <router-link :to="'/manage/' + item.sys.id" class="group">
+    {{ item.sys.id }}
     <div
       class="grid grid-cols-12 flex items-center gap-x-5"
       :class="{ 'mb-10': !hasPassed, 'mb-5': hasPassed }"
