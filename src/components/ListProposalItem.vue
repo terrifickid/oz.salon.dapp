@@ -47,11 +47,11 @@ export default {
   props: ["item"],
   computed: {
     prettyId() {
+      var id = this.item.fields.prettyId;
+      if (!id) id = 0;
       //return this.item.fields.prettyId;
       var zeroes = new Array(3 + 1).join("0");
-      return (
-        zeroes + this.item.fields.prettyId.toString().replace(/\D/g, "")
-      ).slice(-3);
+      return (zeroes + id.toString().replace(/\D/g, "")).slice(-3);
     },
     hasPassed() {
       return typeof _.get(this.item, "fields.votes.passed") == "boolean";

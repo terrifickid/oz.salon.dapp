@@ -277,10 +277,7 @@ export default {
       return JSON.parse(this.proposal.fields.units0units).amount;
     },
     wireCode() {
-      return (
-        _.get(this.proposal, "fields.profile.lastName") +
-        _.get(this.proposal, "fields.profile.walletAddress").substr(-4)
-      );
+      return this.type + _.get(this.proposal, "fields.prettyId");
     },
   },
   methods: {

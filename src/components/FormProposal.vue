@@ -45,7 +45,7 @@
         />
 
         <div
-          class="grid grid-cols-12 flex items-center"
+          class="grid grid-cols-12 flex items-center py-5"
           v-if="canVote && isVotable"
         >
           <div class="col-span-4 lg:col-span-2" v-if="!hasPassed">

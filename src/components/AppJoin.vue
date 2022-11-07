@@ -4,11 +4,9 @@
       <div class="col-span-12 md:col-span-9 gap-6">
         <template v-if="isNew"><AppForm :url="membersURI" /></template>
         <template v-if="!isKycApproved && !isNew">
-          <p class="mb-8 text-green-500">Apply</p>
+          <p class="mb-8">Apply</p>
           <h1 class="opacity-50 font-haffer">
-            Your application is currently under review. We will notify you when
-            you are approved to move to the second stage of our application
-            process.
+            Your application is currently under review.
           </h1>
         </template>
 
