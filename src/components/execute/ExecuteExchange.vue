@@ -6,7 +6,7 @@
     </p>
     <div
       class="py-3 grid grid-cols-12 flex items-center"
-      v-if="!executionStatus"
+      v-if="!executionStatus && isVerified"
     >
       <div class="col-span-12">
         {{ item.fields.profile.firstName }}
@@ -87,6 +87,15 @@ export default {
             stateMutability: "nonpayable",
             type: "function",
           },
+          {
+            inputs: [
+              { internalType: "address", name: "account", type: "address" },
+            ],
+            name: "balanceOf",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+          },
         ],
       };
       let ethereum = window.ethereum;
@@ -95,11 +104,16 @@ export default {
       const signer = provider.getSigner();
       const usdcContract = new ethers.Contract(usdc.address, usdc.abi, signer);
       var amt = ethers.utils.parseUnits(value.toString(), 6).toNumber();
+
       try {
+        let balance = await usdcContract.balanceOf(this.walletAddress);
+        var busdc = parseFloat(ethers.utils.formatUnits(balance.toString(), 6));
+        if (value > busdc) throw { message: "Insufficient USDC balance" };
+
         let transfer = await usdcContract.transfer(
           this.item.fields.profile.walletAddress,
           amt,
-          { gasLimit: 700000 }
+          { gasLimit: 60000 }
         );
         var res = await this.submitExecution(this.item.sys.id, "transfer", {
           to: this.walletAddress,
@@ -113,7 +127,8 @@ export default {
           alert("Critical Error: Please contact support");
         }
       } catch (err) {
-        alert(err);
+        alert(err.message);
+        this.processing = false;
         console.error(err);
       }
     },
@@ -166,7 +181,9 @@ export default {
           break;
         default:
           msg = false;
+          if (!this.isVerified) msg = "Verifying";
       }
+
       return msg;
     },
     executionCompletedDate() {
@@ -177,6 +194,11 @@ export default {
         day: "numeric",
         year: "numeric",
       });
+    },
+    isVerified() {
+      return (
+        this.item.fields.verified == this.item.fields.profile.walletAddress
+      );
     },
     isCancelled() {
       var c = _.get(this, "exec[0].fields.data.cancel");

@@ -179,6 +179,8 @@ export default {
           "delegate",
           "biography",
           "prettyId",
+          "processState",
+          "verified",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

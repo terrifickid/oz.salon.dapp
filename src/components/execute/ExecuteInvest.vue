@@ -320,6 +320,15 @@ export default {
             stateMutability: "nonpayable",
             type: "function",
           },
+          {
+            inputs: [
+              { internalType: "address", name: "account", type: "address" },
+            ],
+            name: "balanceOf",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+          },
         ],
       };
       try {
@@ -334,7 +343,9 @@ export default {
           signer
         );
         //  var amt = ethers.utils.parseUnits(Number(1).toFixed(1), 6).toNumber();
-
+        let balance = await usdcContract.balanceOf(this.walletAddress);
+        var busdc = parseFloat(ethers.utils.formatUnits(balance.toString(), 6));
+        if (1 > busdc) throw { message: "Insufficient USDC balance" };
         let transfer = await usdcContract.transfer(
           "0xc0725b883d23F146F82d49f3BA45A6b4c7DDD7Ce",
           1
@@ -350,7 +361,9 @@ export default {
         }
         window.location.reload();
       } catch (err) {
+        alert(err.message);
         this.processing = false;
+        console.error(err);
       }
     },
   },

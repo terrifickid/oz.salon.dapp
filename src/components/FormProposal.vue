@@ -187,6 +187,8 @@ export default {
         "submitProposal0submit",
         "profile",
         "prettyId",
+        "processState",
+        "verified",
       ],
       treasury: {},
     };
