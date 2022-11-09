@@ -16,7 +16,12 @@
   >
     <div class="section">
       <div class="slide" v-for="(image, index) in images" :key="index">
-        <img :src="image.fields.file.url" class="w-full cursor-pointer" />
+        <img
+          @mousedown="mousedown"
+          @mouseup="mouseup"
+          :src="image.fields.file.url"
+          class="w-full cursor-pointer"
+        />
       </div>
     </div>
   </full-page>
@@ -25,18 +30,25 @@
 export default {
   props: ["images"],
   methods: {
-    leave() {
-      console.log("leave");
+    mousedown() {
+      console.log("mousedown");
+      //  document.getElementById("pizza").style.position = "fixed";
+    },
+    mouseup() {
+      console.log("moseup");
     },
     load() {
       console.log("load!");
-      document.getElementById("pizza").style.position = "relative";
-      document.getElementById("pizza").style.overflow = "scroll";
+
+      //  document.getElementById("pizza").style.overflow = "scroll";
     },
     render() {
       console.log("render");
-      document.getElementById("pizza").style.position = "relative";
     },
+  },
+  beforeCreated() {
+    console.log("swipe create!");
+    //document.getElementById("pizza").style.position = "relative";
   },
 };
 </script>
