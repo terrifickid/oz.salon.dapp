@@ -20,6 +20,7 @@ export default {
       artworks: [],
       isLoaded: false,
       test: 0,
+      shuffled: [],
     };
   },
   computed: {
@@ -38,8 +39,19 @@ export default {
       await this.$store.dispatch("disconnect");
     },
     async randomlySelectArtwork() {
-      this.collection = _.shuffle(this.collection);
-      this.artworks.push(this.collection.shift());
+      console.log(this.shuffled);
+      this.shuffled = _.shuffle(this.shuffled);
+
+      this.artworks.push(this.shuffled.shift());
+    },
+    async shuffle() {
+      console.log("shuffle");
+      this.shuffled = this.collection;
+      this.artworks = [];
+      while (this.artworks.length < 3) {
+        await this.randomlySelectArtwork();
+      }
+      console.log("artworks", this.artworks);
     },
   },
   async mounted() {
@@ -47,15 +59,13 @@ export default {
     try {
       const res = await axios.get(process.env.VUE_APP_URI + "/type/collection");
       this.collection = res.data.message.items;
-      while (this.artworks.length < 3) {
-        this.randomlySelectArtwork();
-      }
-      console.log(this.artworks);
+      await this.shuffle();
       this.isLoaded = true;
     } catch (error) {
       console.log("error", error);
     }
-    setInterval(() => {
+    setInterval(async () => {
+      await this.shuffle();
       this.test = Math.round(Math.random() * 1000);
     }, 12000);
   },
