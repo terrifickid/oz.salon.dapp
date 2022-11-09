@@ -1,11 +1,6 @@
 <template>
-  <AppShell
-    :isLoaded="ready"
-    :protected="false"
-    :kycAllowed="true"
-    class="pb-64"
-  >
-    <div>
+  <AppShell :isLoaded="ready" :protected="false" :kycAllowed="true" class="">
+    <div ref="pizza" id="pizza" class="w-screen h-screen">
       <CollectionHero :collection="collection" />
 
       <div ref="nav" class="grid grid-cols-12 px-5 py-10 gap-5">
@@ -151,7 +146,7 @@ export default {
     },
     collectionSorted() {
       var r = Object.values(this.collection);
-      console.log(r);
+
       switch (this.selectedSort) {
         case "acquired":
           r.sort(function compareFn(a, b) {
@@ -184,7 +179,6 @@ export default {
   },
   methods: {
     navScroll() {
-      console.log(window.pageYOffset > this.$refs.nav.offsetTop);
       if (window.pageYOffset + 64 > this.$refs.nav.offsetTop)
         return (this.sticky = true);
       return (this.sticky = false);
@@ -204,7 +198,9 @@ export default {
 };
 </script>
 <style scoped>
-select {
+element.style {
+}
+<style > select {
   border: 0px;
   outline: 0px;
 }
