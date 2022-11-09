@@ -169,6 +169,7 @@ export default {
       switch (this.executionStatus) {
         case "Pending":
           msg = "Exchange accepted, transaction processing";
+          if (this.isCancelled) msg = "Canceling";
           break;
         case "Completed":
           msg = "Exchange completed on " + this.executionCompletedDate;

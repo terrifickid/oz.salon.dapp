@@ -171,11 +171,9 @@ export default {
   },
   methods: {
     nextArtwork() {
-      var k;
-      k = parseInt(this.hkey) + 1;
-      if (k > this.collection.length - 1) k = 0;
-      window.location.href = "/#/collection/" + k;
-      window.location.reload();
+      this.information = false;
+      this.hkey++;
+      if (this.hkey > this.collection.length - 1) this.hkey = 0;
     },
     prevArtwork() {
       this.information = false;
