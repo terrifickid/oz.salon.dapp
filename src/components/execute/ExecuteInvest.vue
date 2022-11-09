@@ -57,7 +57,7 @@
             <span>Fund with Bank Wire (FIAT)</span>
             <div :class="{ active: method == 'wire' }" class="collapse">
               <div>
-                <p class="text-lg mt-6">Domestic Wire Instructions</p>
+                <p class="mt-6">Domestic Wire Instructions</p>
                 <div class="mt-2 mr-8">
                   <p class="text-sm mb-2">Beneficiary</p>
                   <table class="text-sm w-full">
@@ -117,7 +117,7 @@
                     </tr>
                     <tr>
                       <td colspan="2">
-                        <p class="text-lg mt-12">Foreign Wire Instructions</p>
+                        <p class="mt-12">Foreign Wire Instructions</p>
                         <div class="mt-2 mr-8">
                           <p class="text-sm mb-2">
                             Receiving Bank | 57D Account with Institution
@@ -206,9 +206,9 @@
                   @click="sendWire"
                   :disabled="processing"
                   class="my-2 mt-6"
-                  >I have sent the wire with <span>'{{ wireCode }}'</span> in
-                  the memo field</AppButton
-                >
+                  >I have sent the wire with code "{{ wireCode }}" in the Memo
+                  Field
+                </AppButton>
               </div>
             </div>
           </div>
