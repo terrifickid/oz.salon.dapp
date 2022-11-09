@@ -1,6 +1,6 @@
 <template>
   <AppShell :isLoaded="ready" :protected="false" :kycAllowed="true" class="">
-    <div ref="pizza" id="pizza" class="w-screen h-screen">
+    <div ref="pizza" id="pizza">
       <CollectionHero :collection="collection" />
 
       <div ref="nav" class="grid grid-cols-12 px-5 py-10 gap-5">

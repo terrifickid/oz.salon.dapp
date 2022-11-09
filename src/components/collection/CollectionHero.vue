@@ -1,6 +1,10 @@
 <template>
   <div v-for="(artwork, index) in collection" :key="index">
-    <div class="bg-gray-100 pt-24 px-5 relative pb-6 flex" v-if="hkey == index">
+    <div
+      class="bg-gray-100 pt-24 px-5 relative pb-6 flex"
+      id="bg_s"
+      v-if="hkey == index"
+    >
       <div class="absolute bottom-5 right-5 opacity-50" v-show="!information">
         {{ hikey + 1 }} of {{ artwork.fields.images.length }} Images
       </div>
@@ -21,7 +25,8 @@
             />
           </svg>
         </button>
-        <button @click="nextArtwork()">
+
+        <button @click="nextArtwork">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -39,7 +44,7 @@
         </button>
       </div>
 
-      <div class="absolute bottom-5 left-5">
+      <div class="absolute bottom-5 left-5 z-40">
         <button
           class="flex items-center"
           v-show="!information"
@@ -166,12 +171,11 @@ export default {
   },
   methods: {
     nextArtwork() {
-      console.log("next artwork");
-      document.getElementById("pizza").style.position = "fixed";
-      this.information = false;
-      this.hkey++;
-      if (this.hkey > this.collection.length - 1) this.hkey = 0;
-      console.log("key", this.hkey);
+      var k;
+      k = parseInt(this.hkey) + 1;
+      if (k > this.collection.length - 1) k = 0;
+      window.location.href = "/#/collection/" + k;
+      window.location.reload();
     },
     prevArtwork() {
       this.information = false;
@@ -179,6 +183,10 @@ export default {
       if (this.hkey < 0) this.hkey = this.collection.length - 1;
       console.log("key", this.hkey);
     },
+  },
+  mounted() {
+    this.hkey = this.$route.params.id;
+    if (!this.$route.params.id) this.hkey = 0;
   },
 };
 </script>

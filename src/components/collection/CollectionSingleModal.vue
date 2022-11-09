@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed w-screen h-screen bg-gray-100 top-0 left-0 z-50 text-black p-5"
+    class="fixed w-screen h-screen bg-gray-100 top-0 left-0 z-50 text-black p-5 overflow-scroll"
   >
     <div class="absolute top-0 right-5 pt-24 flex" v-show="!information">
       <button @click="prevArtwork()">

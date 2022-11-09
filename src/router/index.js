@@ -33,6 +33,15 @@ const routes = [
     },
   },
   {
+    path: "/collection/:id",
+    name: "artwork",
+    component: function () {
+      return import(
+        /* webpackChunkName: "CollectionView" */ "../views/ViewCollection.vue"
+      );
+    },
+  },
+  {
     path: "/members",
     name: "Members ",
     component: function () {

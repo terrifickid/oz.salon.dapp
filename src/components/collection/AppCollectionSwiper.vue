@@ -5,11 +5,9 @@
       licenseKey: 'K9EP6-N164H-2BKM8-MJLGI-KSURM',
       loopHorizontal: true,
       autoScrolling: false,
-      dragAndMove: 'horizontal',
+      dragAndMove: false,
       dragAndMoveKey: 'c2Fsb25kYW8ueHl6X3RNUVpISmhaMEZ1WkUxdmRtVT05SWY',
-      afterSlideLoad: load,
-      onSlideLeave: leave,
-      afterRender: render,
+
       controlArrows: false,
     }"
     class=""
@@ -32,17 +30,19 @@ export default {
   methods: {
     mousedown() {
       console.log("mousedown");
-      //  document.getElementById("pizza").style.position = "fixed";
     },
     mouseup() {
       console.log("moseup");
     },
     load() {
       console.log("load!");
-
+      document.getElementById("pizza").style.position = "sticky";
       //  document.getElementById("pizza").style.overflow = "scroll";
     },
     render() {
+      //document.getElementById("pizza").style.position = "fixed";
+      document.getElementById("pizza").style.overflow = "scroll";
+      document.getElementById("bg_s").style.height = "auto";
       console.log("render");
     },
   },
