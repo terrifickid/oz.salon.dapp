@@ -1,5 +1,5 @@
 <template>
-  <div v-if="mode">Testo!</div>
+  <div v-if="mode">{{ yesPercentageTally }}% / {{ noPercentageTally }}%</div>
   <div v-if="!mode">
     <div class="grid grid-cols-12 py-4">
       <div class="col-span-4 sm:col-span-3 md:col-span-3">Votes</div>
@@ -63,7 +63,7 @@ export default {
         .reduce((partialSum, a) => partialSum + a, 0);
     },
     total() {
-      return this.votes.votes.length;
+      return _.get(this.votes, "votes.length");
     },
     yesTotal() {
       return this.votes.votes.filter((vote) => {

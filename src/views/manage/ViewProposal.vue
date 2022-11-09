@@ -14,9 +14,7 @@
               <router-link to="/manage/proposals">
                 <li class="opacity-50">Pending</li>
               </router-link>
-              <router-link to="/manage/proposals">
-                <li class="opacity-50">Voted</li>
-              </router-link>
+
               <router-link to="/manage/proposals">
                 <li class="opacity-50">Closed</li>
               </router-link>

@@ -54,6 +54,7 @@
           v-for="(item, index) in filteredProposals.slice(0, perPage)"
           :key="index"
           :item="item"
+          :weights="weights"
         />
 
         <button
@@ -172,13 +173,31 @@ export default {
   methods: {
     async getWeights() {
       try {
-        const res = await axios.get(
-          process.env.VUE_APP_URI + "/members?cache=true"
-        );
-        this.weights = res.data;
+        const res = await axios.get(process.env.VUE_APP_URI + "/members");
+        console.log(res.data);
+        var scope = this;
+        this.weights = res.data.map(function (item) {
+          return {
+            walletAddress: item.fields.walletAddress,
+            units: scope.getDelegatedUnits(res.data, item.fields.walletAddress),
+          };
+        });
       } catch (error) {
         console.log("error", error);
       }
+    },
+    getDelegatedUnits(members, address) {
+      var units = 0;
+      members.forEach(function (item) {
+        if (address == _.get(item, "fields.delegate"))
+          units = units + _.get(item, "fields.units");
+        if (
+          address == _.get(item, "fields.walletAddress") &&
+          _.get(item, "fields.delegate") == 0
+        )
+          units = units + _.get(item, "fields.units");
+      });
+      return units;
     },
   },
   async beforeMount() {

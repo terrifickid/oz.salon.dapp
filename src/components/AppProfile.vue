@@ -1,7 +1,7 @@
 <template>
   <AppLoaderFull v-if="loading" />
   <div class="font-haffer pb-64">
-    <div class="grid grid-cols-12 pb-8">
+    <div class="grid grid-cols-12 pb-12">
       <div class="col-span-12">
         Profile
         <button
@@ -116,12 +116,12 @@
         {{ decimal.format(profile.units) }}
       </div>
     </div>
-
-    <div class="grid grid-cols-12 pt-12">
-      <div class="col-span-12 md:col-span-3">Biography</div>
+    <p class="pt-12 pb-4">More</p>
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:col-span-3 opacity-50">Biography</div>
       <div class="col-span-12 md:col-span-6">
         <template v-if="!editMode">
-          <p class="border-b border-transparent p-1 mb-2">
+          <p class="border-b border-transparent mb-2">
             {{ profile.biography }}
           </p>
         </template>
@@ -136,7 +136,7 @@
 
     <router-link
       to="/manage/proposals"
-      class="pt-16 flex items-center"
+      class="pt-16 flex items-center opacity-50"
       v-show="!editMode"
     >
       <svg

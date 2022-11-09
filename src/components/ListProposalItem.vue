@@ -17,7 +17,7 @@
         <b class="capitalize">{{ item.sys.contentType.sys.id }} </b>
       </div>
 
-      <div class="hidden col-start-2 col-span-10 lg:block xl:col-span-6">
+      <div class="hidden col-start-2 col-span-10 lg:block xl:col-span-5">
         <AppCountdown
           v-if="hasPassed"
           :start="0"
@@ -34,17 +34,19 @@
         {{ item.fields.profile.firstName }}
         {{ item.fields.profile.lastName }}
       </div>
-      <!-- <div class="hidden xl:block xl:col-span-1 md:text-right">0% / 0%</div> -->
+      <div class="hidden xl:block xl:col-span-2 md:text-right">
+        <CounterVote :votes="item.fields.votes" :weights="weights" :mode="1" />
+      </div>
     </div>
   </router-link>
 </template>
 <script>
 import _ from "lodash";
-//import CounterVote from "@/components/CounterVote";
+import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 export default {
-  components: { AppCountdown },
-  props: ["item"],
+  components: { AppCountdown, CounterVote },
+  props: ["item", "weights"],
   computed: {
     prettyId() {
       var id = this.item.fields.prettyId;
