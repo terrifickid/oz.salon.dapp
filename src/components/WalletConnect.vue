@@ -135,15 +135,28 @@
           </g>
         </g>
       </svg>
-
-      <p class="">
-        <AppButton class="mt-8 sm:mt-4 mx-auto" @click="connect">
-          Connect MetaMask
-        </AppButton>
-      </p>
-      <p class="mt-4 font-haffer text-xs">
-        Download Metamask to connect your digital wallet
-      </p>
+      <div v-if="!isMetamask">
+        <p class="">
+          <a href="https://metamask.io/download/">
+            <AppButton class="mt-8 sm:mt-4 mx-auto">
+              Download Metamask
+            </AppButton>
+          </a>
+        </p>
+        <p class="mt-4 font-haffer text-xs">
+          Please connect your digital wallet to access Salon.
+        </p>
+      </div>
+      <div v-if="isMetamask">
+        <p class="">
+          <AppButton class="mt-8 sm:mt-4 mx-auto" @click="connect">
+            Connect MetaMask
+          </AppButton>
+        </p>
+        <p class="mt-4 font-haffer text-xs">
+          Please connect your digital wallet to access Salon.
+        </p>
+      </div>
     </div>
   </AppContent>
 </template>
@@ -158,6 +171,24 @@ export default {
     },
     isMetamask() {
       return typeof window.ethereum !== "undefined";
+    },
+    isMetaMaskBrowser() {
+      if (/MetaMaskMobile/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   methods: {
