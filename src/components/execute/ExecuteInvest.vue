@@ -117,7 +117,7 @@
                     </tr>
                     <tr>
                       <td colspan="2">
-                        <p class="mt-12">Foreign Wire Instructions</p>
+                        <p class="mt-12 text-base">Foreign Wire Instructions</p>
                         <div class="mt-2 mr-8">
                           <p class="text-sm mb-2">
                             Receiving Bank | 57D Account with Institution
