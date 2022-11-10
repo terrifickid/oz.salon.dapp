@@ -17,7 +17,7 @@
           <li class="mb-5">
             <router-link to="/manage/propose">
               <p>Propose</p>
-              <p class="opacity-50">-> Initiate a vote on a proposal</p>
+              <p class="opacity-50">-> Initiate a vote on general matters</p>
             </router-link>
           </li>
           <li class="mb-5">

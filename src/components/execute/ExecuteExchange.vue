@@ -173,6 +173,8 @@ export default {
           break;
         case "Completed":
           msg = "Exchange completed on " + this.executionCompletedDate;
+          if (this.isCancelled)
+            msg = "Exchange cancelled on " + this.executionCompletedDate;
           break;
         case "Expired":
           msg = this.executionStatus;
