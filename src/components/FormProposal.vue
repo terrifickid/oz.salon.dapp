@@ -91,7 +91,8 @@
               ><br />
 
               {{ name }} would like to purchase
-              {{ getJSON(field.value).units }} units at a price of
+              {{ getJSON(field.value).units.toLocaleString() }} units at a price
+              of
               {{
                 format.format(
                   getJSON(field.value).amount / getJSON(field.value).units
