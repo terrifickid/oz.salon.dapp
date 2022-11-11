@@ -59,10 +59,10 @@ export default {
         var obj = {};
         obj.walletAddress = member.fields.walletAddress;
         obj.units = this.getDelegatedUnits(
-          members,
+          this.members,
           member.fields.walletAddress
         );
-        if (obj.units > maxUnits) obj.units = maxUnits;
+        if (obj.units > this.maxUnits) obj.units = this.maxUnits;
         return obj;
       });
     },
