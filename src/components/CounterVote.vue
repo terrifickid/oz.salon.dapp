@@ -10,7 +10,9 @@
       <div class="col-span-4 sm:col-span-2 md:col-span-3 lg:col-span-2">
         {{ yesPercentageTally }}%
       </div>
-      <div class="col-span-4 md:col-span-2">{{ yesWeight }} units</div>
+      <div class="col-span-4 md:col-span-2">
+        {{ yesWeight.toLocaleString() }} units
+      </div>
     </div>
     <div class="grid grid-cols-12">
       <div class="col-span-4 sm:col-span-3 md:col-span-3">No</div>
@@ -18,7 +20,7 @@
         {{ noPercentageTally }}%
       </div>
       <div class="col-span-4 sm:col-span-2 md:col-span-3 lg:col-span-2">
-        {{ noWeight }} units
+        {{ noWeight.toLocaleString() }} units
       </div>
     </div>
 
