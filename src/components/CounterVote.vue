@@ -58,7 +58,10 @@ export default {
       return this.members.map((member) => {
         var obj = {};
         obj.walletAddress = member.fields.walletAddress;
-        obj.units = getDelegatedUnits(members, member.fields.walletAddress);
+        obj.units = this.getDelegatedUnits(
+          members,
+          member.fields.walletAddress
+        );
         if (obj.units > maxUnits) obj.units = maxUnits;
         return obj;
       });
