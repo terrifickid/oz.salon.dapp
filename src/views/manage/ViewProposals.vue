@@ -54,7 +54,7 @@
           v-for="(item, index) in filteredProposals.slice(0, perPage)"
           :key="index"
           :item="item"
-          :weights="weights"
+          :members="members"
         />
 
         <button
@@ -99,7 +99,7 @@ export default {
   },
   data() {
     return {
-      weights: [],
+      members: [],
       loaded: false,
       filter: "all",
       perPage: 10,
@@ -171,33 +171,13 @@ export default {
     },
   },
   methods: {
-    async getWeights() {
+    async getMembers() {
       try {
         const res = await axios.get(process.env.VUE_APP_URI + "/members");
-        console.log(res.data);
-        var scope = this;
-        this.weights = res.data.map(function (item) {
-          return {
-            walletAddress: item.fields.walletAddress,
-            units: scope.getDelegatedUnits(res.data, item.fields.walletAddress),
-          };
-        });
+        return res.data;
       } catch (error) {
         console.log("error", error);
       }
-    },
-    getDelegatedUnits(members, address) {
-      var units = 0;
-      members.forEach(function (item) {
-        if (address == _.get(item, "fields.delegate"))
-          units = units + _.get(item, "fields.units");
-        if (
-          address == _.get(item, "fields.walletAddress") &&
-          _.get(item, "fields.delegate") == 0
-        )
-          units = units + _.get(item, "fields.units");
-      });
-      return units;
     },
   },
   async beforeMount() {
@@ -207,7 +187,7 @@ export default {
     });
     this.$store.state.proposals = _.get(res, "data.message");
 
-    await this.getWeights();
+    this.members = await this.getWeights();
     this.loaded = true;
     console.log("loaded!");
   },

@@ -35,7 +35,7 @@
         {{ item.fields.profile.lastName }}
       </div>
       <div class="hidden xl:block xl:col-span-2 md:text-right">
-        <CounterVote :votes="item.fields.votes" :weights="weights" :mode="1" />
+        <CounterVote :votes="item.fields.votes" :members="members" :mode="1" />
       </div>
     </div>
   </router-link>
@@ -46,7 +46,7 @@ import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 export default {
   components: { AppCountdown, CounterVote },
-  props: ["item", "weights"],
+  props: ["item", "members"],
   computed: {
     prettyId() {
       var id = this.item.fields.prettyId;

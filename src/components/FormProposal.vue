@@ -40,7 +40,7 @@
 
         <CounterVote
           :votes="proposalFormat.votes"
-          :weights="weights"
+          :members="members"
           v-if="isVotable"
         />
 
@@ -174,7 +174,7 @@ export default {
       fileModal: false,
       proposal: {},
       proposalFormat: {},
-      weights: [],
+      members: [],
       loaded: false,
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -250,33 +250,13 @@ export default {
     getJSON(v) {
       return JSON.parse(v);
     },
-    async getWeights() {
+    async getMembers() {
       try {
         const res = await axios.get(process.env.VUE_APP_URI + "/members");
-        console.log(res.data);
-        var scope = this;
-        this.weights = res.data.map(function (item) {
-          return {
-            walletAddress: item.fields.walletAddress,
-            units: scope.getDelegatedUnits(res.data, item.fields.walletAddress),
-          };
-        });
+        return res.data;
       } catch (error) {
         console.log("error", error);
       }
-    },
-    getDelegatedUnits(members, address) {
-      var units = 0;
-      members.forEach(function (item) {
-        if (address == _.get(item, "fields.delegate"))
-          units = units + _.get(item, "fields.units");
-        if (
-          address == _.get(item, "fields.walletAddress") &&
-          _.get(item, "fields.delegate") == 0
-        )
-          units = units + _.get(item, "fields.units");
-      });
-      return units;
     },
     getFieldLabel(fields, id) {
       for (let field of fields) {
@@ -337,10 +317,10 @@ export default {
       );
       this.proposalFormat = r;
 
-      if (_.get(this.proposalFormat, "votes.weights.length")) {
-        this.weights = _.get(this.proposalFormat, "votes.weights");
+      if (_.get(this.proposalFormat, "votes.members.length")) {
+        this.members = _.get(this.proposalFormat, "votes.members");
       } else {
-        await this.getWeights();
+        this.members = await this.getMembers();
       }
 
       this.loaded = true;
