@@ -85,16 +85,16 @@
     <div class="grid grid-cols-12 gap-5 w-full">
       <div
         :class="{
-          'col-span-12 xl:col-span-4': !information,
-          'col-span-12 xl:col-span-5': information,
+          'col-span-12 lg:col-span-4': !information,
+          'col-span-12 lg:col-span-5': information,
         }"
       >
         <div>
-          <span class="block xl:inline">{{ artwork.fields.artist }}</span>
-          <i class="xl:mr-2 xl:ml-1 block xl:inline">{{
+          <span class="block lg:inline">{{ artwork.fields.artist }}</span>
+          <i class="lg:mr-2 lg:ml-1 block lg:inline">{{
             artwork.fields.title
           }}</i>
-          <span class="block xl:inline">{{ artwork.fields.year }}</span>
+          <span class="block lg:inline">{{ artwork.fields.year }}</span>
         </div>
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
           artwork.fields.state
@@ -123,8 +123,8 @@
       </div>
       <div
         :class="{
-          'col-span-12 xl:col-span-4': !information,
-          'col-span-12 xl:col-span-4 xl:col-start-8': information,
+          'col-span-12 lg:col-span-4': !information,
+          'col-span-12 lg:col-span-4 lg:col-start-8': information,
         }"
         class="py-20"
       >
@@ -133,7 +133,6 @@
           :src="image.fields.file.url"
           :key="index"
           v-show="index == this.hikey"
-          style="max-height: 60vh"
           class="mx-auto"
         />
         <div
