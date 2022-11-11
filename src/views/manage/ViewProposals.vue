@@ -187,7 +187,7 @@ export default {
     });
     this.$store.state.proposals = _.get(res, "data.message");
 
-    this.members = await this.getWeights();
+    this.members = await this.getMembers();
     this.loaded = true;
     console.log("loaded!");
   },
