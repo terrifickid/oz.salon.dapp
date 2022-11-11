@@ -85,8 +85,8 @@
     <div class="grid grid-cols-12 gap-5 w-full">
       <div
         :class="{
-          'col-span-12 md:col-span-4': !information,
-          'col-span-12 md:col-span-5': information,
+          'col-span-12 xl:col-span-4': !information,
+          'col-span-12 xl:col-span-5': information,
         }"
       >
         <div>
@@ -123,8 +123,8 @@
       </div>
       <div
         :class="{
-          'col-span-12 md:col-span-4': !information,
-          'col-span-12 md:col-span-4 md:col-start-8': information,
+          'col-span-12 xl:col-span-4': !information,
+          'col-span-12 xl:col-span-4 xl:col-start-8': information,
         }"
         class="py-20"
       >
