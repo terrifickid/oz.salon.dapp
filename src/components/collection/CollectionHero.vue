@@ -1,7 +1,7 @@
 <template>
   <div v-for="(artwork, index) in collection" :key="index">
     <div
-      class="bg-gray-100 pt-24 px-5 relative pb-6 flex"
+      class="bg-gray-100 pt-24 px-5 relative pb-6 flex min-h-screen"
       id="bg_s"
       v-if="hkey == index"
     >
