@@ -99,7 +99,7 @@
         <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
           artwork.fields.state
         }}</span>
-        <div class="pt-4 grid grid-cols-12 gap-4" v-if="information">
+        <div class="pt-24 grid grid-cols-12 gap-4" v-if="information">
           <p class="col-span-8">
             <span class="opacity-50">Acquired</span><br />
             {{ artwork.fields.purchaseDate }} from

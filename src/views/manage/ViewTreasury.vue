@@ -14,10 +14,10 @@
 
         <ul>
           <li class="pb-5">
-            <span class="opacity-50">Appraised Collection Value</span
-            ><br /><span class="text-2xl">{{
-              format.format(treasury.collectionValue)
-            }}</span>
+            <span class="opacity-50">Art Assets</span><br /><span
+              class="text-2xl"
+              >{{ format.format(treasury.collectionValue) }}</span
+            >
           </li>
           <li class="pb-5">
             <span class="opacity-50">Cash Assets Available</span><br /><span
