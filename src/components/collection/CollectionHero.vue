@@ -140,8 +140,12 @@
         >
           <div style="overflow: none; width: 100%">
             <img
-              style="height: 65vh"
-              class="mx-auto py-5"
+              style="
+                height: 65vh;
+                width: auto !important;
+                max-width: none !important;
+              "
+              class="mx-auto py-8"
               :src="artwork.fields.images[0].fields.file.url"
             />
           </div>
