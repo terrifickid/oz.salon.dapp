@@ -14,8 +14,6 @@
         {{ usd.format(bookValue) }} (book value) and
         {{ usd.format(currentTradePrice) }} (trade price).
       </p>
-
-      <pre>{{ item.fields }}</pre>
     </div>
   </div>
 </template>
