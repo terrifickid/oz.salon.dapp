@@ -8,11 +8,11 @@
         </div>
       </div>
       <div v-if="loaded" class="col-span-12 md:col-span-9">
-        Treasury<br />
+        <!-- Treasury<br />
 
-        <div class="opacity-50" v-html="data.code"></div>
+        <div class="opacity-50" v-html="data.code"></div> -->
 
-        <ul class="pt-10">
+        <ul>
           <li class="pb-5">
             <span class="opacity-50">Appraised Collection Value</span
             ><br /><span class="text-2xl">{{
