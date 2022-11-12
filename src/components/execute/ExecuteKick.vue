@@ -14,6 +14,8 @@
         {{ usd.format(bookValue) }} (book value) and
         {{ usd.format(currentTradePrice) }} (trade price).
       </p>
+
+      <pre>{{ item.fields }}</pre>
     </div>
   </div>
 </template>
@@ -85,11 +87,14 @@ export default {
     units() {
       try {
         var kicked = JSON.parse(_.get(this, "item.fields.member0member"));
-        var weights = _.get(this, "item.fields.votes.weights");
+        var members = _.get(this, "item.fields.votes.members");
+
         var u;
-        weights.forEach((w) => {
-          if (w.walletAddress == kicked.walletAddress) u = w.units;
+        members.forEach((w) => {
+          if (w.fields.walletAddress == kicked.walletAddress)
+            u = w.fields.units;
         });
+
         return u;
       } catch (e) {
         return 0;
