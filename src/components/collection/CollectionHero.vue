@@ -1,7 +1,7 @@
 <template>
   <div v-for="(artwork, index) in collection" :key="index">
     <div
-      class="bg-gray-100 pt-24 px-5 relative pb-6 flex min-h-screen"
+      class="bg-gray-100 pt-24 px-5 relative pb-6 flex"
       id="bg_s"
       v-if="hkey == index"
     >
@@ -136,18 +136,23 @@
             'col-span-12 md:col-span-4': !information,
             'col-span-12 md:col-span-4 md:col-start-8': information,
           }"
-          class="pt-10 pb-24 md:py-20"
+          class="relative items-center"
         >
-          <AppCollectionSwiper :images="artwork.fields.images" />
+          <div style="overflow: none; width: 100%">
+            <img
+              style="height: 65vh"
+              class="mx-auto py-5"
+              :src="artwork.fields.images[0].fields.file.url"
+            />
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import AppCollectionSwiper from "@/components/collection/AppCollectionSwiper";
 export default {
-  components: { AppCollectionSwiper },
+  components: {},
   props: ["collection"],
   data() {
     return {
