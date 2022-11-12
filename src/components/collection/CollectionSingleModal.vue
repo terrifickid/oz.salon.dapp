@@ -62,7 +62,7 @@
       <button
         class="flex items-center opacity-50"
         v-show="information"
-        @click="$emit('close')"
+        @click="close()"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -166,6 +166,12 @@ export default {
       }),
     };
   },
+  methods: {
+    close() {
+      document.body.style.overflow = "scroll";
+      this.$emit("close");
+    },
+  },
   computed: {
     profile() {
       return this.$store.state.profile;
@@ -174,6 +180,10 @@ export default {
       if ("units" in this.profile) return this.profile.units;
       return false;
     },
+  },
+  created() {
+    console.log("modal create!");
+    document.body.style.overflow = "hidden";
   },
 };
 </script>
