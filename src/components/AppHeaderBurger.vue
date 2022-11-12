@@ -37,19 +37,16 @@
         <button @click="toggler" class="float-right">
           <svg
             v-if="!toggle"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
+            width="20"
+            height="13"
+            viewBox="0 0 20 13"
             fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4 8h16M4 16h16"
-            />
+            <path d="M20 1H0" stroke="black" />
+            <path d="M20 12H0" stroke="black" />
           </svg>
+
           <svg
             v-else
             xmlns="http://www.w3.org/2000/svg"

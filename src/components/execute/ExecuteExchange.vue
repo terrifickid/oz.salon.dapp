@@ -24,13 +24,15 @@
         <p class="pb-6">
           <span class="opacity-50">Note</span><br />{{ item.fields.note0long }}
         </p>
-        <p class="mb-6 border-t pt-6">
+
+        <p class="pb-6">
+          <span class="opacity-50">Instructions</span><br />
           Salon's exchange proposal facilitates the buying and selling of units
           amongst our community, empowering members to transact with one another
           safely. All transactions take place using a secure wallet-to-wallet
           transfer in USDC.
         </p>
-        <p class="border-b pb-6">
+        <p class="pb-6">
           If you are the buyer, please ensure you have sufficient USDC in your
           digital wallet to complete the transaction. USDC can be purchased
           using a crypto exchange service, such as Coinbase, and then
@@ -38,11 +40,11 @@
         </p>
       </div>
       <div class="col-span-12">
-        <AppButton v-if="isSameUser" @click="cancel()" class="mt-8"
+        <AppButton v-if="isSameUser" @click="cancel()" class=""
           >Cancel</AppButton
         >
 
-        <AppButton @click="sendUSDC(0.001)" v-if="!isSameUser" class="mt-8"
+        <AppButton @click="sendUSDC(0.001)" v-if="!isSameUser" class=""
           >Accept Offer</AppButton
         >
       </div>
