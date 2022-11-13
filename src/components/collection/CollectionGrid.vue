@@ -5,7 +5,7 @@
       v-if="collectionSingleItem"
       @close="collectionSingleItem = null"
     />
-    <div class="grid grid-cols-12 gap-10">
+    <div class="grid grid-cols-12 md:gap-10">
       <div
         class="col-span-12 md:col-span-6 group cursor-pointer relative mb-12 cursor-pointer flex items-center"
         v-for="(item, index) in collection"
@@ -13,7 +13,7 @@
         @click="collectionSingleItem = item"
       >
         <div>
-          <img class="mb-24 w-full" :src="image(item)" />
+          <img class="mb-24" :src="image(item)" />
           <div class="opacity-50 group-hover:opacity-100 absolute bottom-0">
             {{ item.fields.artist }}<br />
             <i>{{ item.fields.title }}</i

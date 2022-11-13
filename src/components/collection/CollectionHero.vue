@@ -138,17 +138,19 @@
           }"
           class="relative items-center"
         >
-          <div style="overflow: none; width: 100%">
-            <img
-              style="
-                height: 65vh;
-                width: auto !important;
-                max-width: none !important;
-              "
-              class="mx-auto py-8"
-              :src="artwork.fields.images[0].fields.file.url"
-            />
-          </div>
+          <div
+            style="
+              overflow: none;
+              width: 100%;
+
+              height: 65vh;
+            "
+            class="bg-contain bg-center bg-no-repeat my-10"
+            :style="{
+              backgroundImage:
+                'url(' + artwork.fields.images[0].fields.file.url + ')',
+            }"
+          ></div>
         </div>
       </div>
     </div>
