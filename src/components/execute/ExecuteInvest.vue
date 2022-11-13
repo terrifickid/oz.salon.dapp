@@ -30,7 +30,7 @@
                   small amount of ETH to cover network gas fees.
                 </p>
                 <AppButton
-                  @click="sendUSDC(0.001)"
+                  @click="sendUSDC(amount)"
                   :disabled="processing"
                   class="mb-4"
                   >Send USDC</AppButton
@@ -239,6 +239,9 @@ export default {
     };
   },
   computed: {
+    amount() {
+      return JSON.parse(item.fields.units0units).amount;
+    },
     type() {
       return _.get(this, "proposal.sys.contentType.sys.id");
     },

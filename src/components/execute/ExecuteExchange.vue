@@ -44,7 +44,7 @@
           >Cancel</AppButton
         >
 
-        <AppButton @click="sendUSDC(0.001)" v-if="!isSameUser" class=""
+        <AppButton @click="sendUSDC(amount)" v-if="!isSameUser" class=""
           >Accept Offer</AppButton
         >
       </div>
@@ -199,6 +199,9 @@ export default {
         day: "numeric",
         year: "numeric",
       });
+    },
+    amount() {
+      return JSON.parse(this.item.fields.units0units).amount;
     },
     isVerified() {
       return (
