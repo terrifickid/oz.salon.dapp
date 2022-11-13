@@ -1,7 +1,7 @@
 <template>
   <AppLoaderFull v-if="loading" />
   <div class="font-haffer pb-64">
-    <div class="grid grid-cols-12 pb-12">
+    <div class="grid grid-cols-12 pb-10">
       <div class="col-span-12">
         Profile
         <button
@@ -21,25 +21,25 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-12 pb-3">
+    <div class="grid grid-cols-12 pb-5">
       <div class="col-span-12">Contact</div>
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-3 opacity-50">Name</div>
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-3 flex">
+      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">Name</div>
+      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 flex">
         <template v-if="!editMode">
-          <p class="border-b border-transparent pb-1 mb-2">
+          <p class="border-b border-transparent">
             {{ profile.firstName }} {{ profile.lastName }}
           </p>
         </template>
         <template v-else>
           <input
-            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb pb-1 mb-2"
+            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb"
             v-model="update.firstName"
           />
           <input
-            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb pb-1 mb-2 ml-5"
+            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb ml-5"
             v-model="update.lastName"
           />
         </template>
@@ -47,34 +47,34 @@
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-3 opacity-50">
+      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">
         Email Address
       </div>
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-3">
+      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3">
         <template v-if="!editMode">
-          <p class="border-b border-transparent pb-1 mb-2">
+          <p class="border-b border-transparent">
             {{ profile.emailAddress }}
           </p>
         </template>
         <template v-else>
           <input
-            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb pb-1 mb-2"
+            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb"
             v-model="update.emailAddress"
           />
         </template>
       </div>
     </div>
 
-    <p class="pt-12 pb-3">Delegation</p>
+    <p class="pb-3">Delegation</p>
     <div class="grid grid-cols-12 pb-3">
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-3 opacity-50">
+      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">
         <span
           @mouseover="showYourDelegateMessage = true"
           @mouseout="showYourDelegateMessage = false"
           >Your Delegate *</span
         >
       </div>
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-9">
+      <div class="col-span-12 md:pb-0 md:col-span-9">
         <div class="flex w-full">
           <span class="opacity-50" v-show="showYourDelegateMessage"
             >Delegate your voting power to another member of Salon.</span
@@ -88,14 +88,14 @@
       </div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-3 opacity-50">
+      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">
         <span
           @mouseover="showDelegateForMessage = true"
           @mouseout="showDelegateForMessage = false"
           >Delagating For *</span
         >
       </div>
-      <div class="col-span-12 pb-4 md:pb-0 md:col-span-9">
+      <div class="col-span-12 md:pb-0 md:col-span-9">
         <span class="opacity-50" v-show="showDelegateForMessage"
           >Salon members who delegated their voting power to you.</span
         >
@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <p class="pt-12 pb-4">Financial</p>
+    <p class="pb-3">Financial</p>
     <div class="grid grid-cols-12 pb-3">
       <div class="col-span-12 md:col-span-3 opacity-50">Wallet Address</div>
       <div class="col-span-12 md:col-span-3">
@@ -116,7 +116,7 @@
         {{ decimal.format(profile.units) }}
       </div>
     </div>
-    <p class="pt-12 pb-4">More</p>
+    <p class="pb-3">More</p>
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3 opacity-50">Biography</div>
       <div class="col-span-12 md:col-span-6">
