@@ -92,22 +92,21 @@
       <div class="grid grid-cols-12 gap-5 w-full">
         <div
           :class="{
-            'col-span-12 md:col-span-4': !information,
-            'col-span-12 md:col-span-5': information,
+            'col-span-12 lg:col-span-4': !information,
+            'col-span-12 lg:col-span-5': information,
           }"
         >
           <div>
-            <span class="block xl:inline">{{ artwork.fields.artist }}</span>
-            <i class="xl:mr-2 xl:ml-1 block xl:inline">{{
+            <span class="block lg:inline">{{ artwork.fields.artist }}</span>
+            <i class="lg:mr-2 lg:ml-1 block lg:inline">{{
               artwork.fields.title
             }}</i>
-            <span class="block xl:inline">{{ artwork.fields.year }}</span>
+            <span class="block lg:inline">{{ artwork.fields.year }}</span>
           </div>
           <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
             artwork.fields.state
           }}</span>
-
-          <div class="pt-4 grid grid-cols-12" v-if="information">
+          <div class="pt-24 grid grid-cols-12 gap-4" v-if="information">
             <p class="col-span-8">
               <span class="opacity-50">Acquired</span><br />
               {{ artwork.fields.purchaseDate }} from
@@ -126,31 +125,36 @@
               {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
             </p>
 
-            <p class="pt-8 col-span-12 md:pb-16">
-              {{ artwork.fields.description }}
-            </p>
+            <p class="pt-8 col-span-12">{{ artwork.fields.description }}</p>
           </div>
         </div>
         <div
           :class="{
-            'col-span-12 md:col-span-4': !information,
-            'col-span-12 md:col-span-4 md:col-start-8': information,
+            'col-span-12 lg:col-span-4': !information,
+            'col-span-12 lg:col-span-4 lg:col-start-8': information,
           }"
-          class="relative items-center"
+          class="py-20"
         >
+          <img
+            v-for="(image, index) in artwork.fields.images"
+            :src="image.fields.file.url"
+            :key="index"
+            v-show="index == this.hikey"
+            class="mx-auto"
+          />
           <div
-            style="
-              overflow: none;
-              width: 100%;
-
-              height: 65vh;
-            "
-            class="bg-contain bg-center bg-no-repeat my-10"
-            :style="{
-              backgroundImage:
-                'url(' + artwork.fields.images[0].fields.file.url + ')',
-            }"
-          ></div>
+            v-show="information"
+            class="flex justify-center items-center"
+            v-if="artwork.fields.images.length > 1"
+          >
+            <img
+              v-for="(image, index) in artwork.fields.images"
+              :src="image.fields.file.url"
+              :key="index"
+              class="w-20 my-5 mx-2 cursor-pointer"
+              @click="this.hikey = index"
+            />
+          </div>
         </div>
       </div>
     </div>
