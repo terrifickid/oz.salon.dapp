@@ -5,6 +5,7 @@
     <textarea
       class="font-haffer sm:ml-0 bg-transparent block border border-black w-full text-black p-5 outline-none placeholder-opb"
       placeholder=""
+      maxlength="10000"
       required
       rows="3"
       v-model="value"
