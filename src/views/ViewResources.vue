@@ -2,7 +2,7 @@
   <AppShell :isLoaded="loaded" :protected="true" class="pb-64">
     <div
       v-if="loaded"
-      class="grid grid-cols-12 pt-16 gap-x-24 w-full font-haffer px-5"
+      class="grid grid-cols-12 pt-16 md:gap-x-12 w-full font-haffer px-5"
     >
       <div class="col-span-12 text-2xl">
         <p class="mb-8" v-html="data.fields.title"></p>
