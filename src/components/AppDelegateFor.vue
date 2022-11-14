@@ -3,7 +3,7 @@
     <p v-for="(d, index) in delegates" :key="index">
       {{ d.fields.firstName }} {{ d.fields.lastName }}
     </p>
-    <p v-if="!delegates.length">--</p>
+    <p v-if="!delegates.length">&mdash;</p>
   </div>
 </template>
 <script>
