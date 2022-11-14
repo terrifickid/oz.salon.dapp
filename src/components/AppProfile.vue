@@ -1,7 +1,7 @@
 <template>
   <AppLoaderFull v-if="loading" />
   <div class="font-haffer pb-64">
-    <div class="grid grid-cols-12 pb-10">
+    <div class="grid grid-cols-12">
       <div class="col-span-12">
         Profile
         <button
@@ -21,13 +21,13 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-12 pb-5">
+    <div class="grid grid-cols-12 pt-12 pb-4">
       <div class="col-span-12">Contact</div>
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">Name</div>
-      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 flex">
+      <div class="col-span-12 md:pb-4 md:col-span-3 opacity-50">Name</div>
+      <div class="col-span-12 pb-4 md:col-span-3 flex">
         <template v-if="!editMode">
           <p class="border-b border-transparent">
             {{ profile.firstName }} {{ profile.lastName }}
@@ -47,10 +47,8 @@
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">
-        Email Address
-      </div>
-      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3">
+      <div class="col-span-12 md:col-span-3 opacity-50">Email Address</div>
+      <div class="col-span-12 md:col-span-3">
         <template v-if="!editMode">
           <p class="border-b border-transparent">
             {{ profile.emailAddress }}
@@ -65,16 +63,17 @@
       </div>
     </div>
 
-    <p class="pb-3">Delegation</p>
-    <div class="grid grid-cols-12 pb-3">
-      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">
+    <p class="pt-12 pb-4">Delegation</p>
+
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:pb-4 md:col-span-3 opacity-50">
         <span
           @mouseover="showYourDelegateMessage = true"
           @mouseout="showYourDelegateMessage = false"
           >Your Delegate *</span
         >
       </div>
-      <div class="col-span-12 md:pb-0 md:col-span-9">
+      <div class="col-span-12 pb-4 md:col-span-9">
         <div class="flex w-full">
           <span class="opacity-50" v-show="showYourDelegateMessage"
             >Delegate your voting power to another member of Salon.</span
@@ -88,14 +87,14 @@
       </div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-12 pb-3 md:pb-0 md:col-span-3 opacity-50">
+      <div class="col-span-12 md:col-span-3 opacity-50">
         <span
           @mouseover="showDelegateForMessage = true"
           @mouseout="showDelegateForMessage = false"
-          >Delagating For *</span
+          >Delegating For *</span
         >
       </div>
-      <div class="col-span-12 md:pb-0 md:col-span-9">
+      <div class="col-span-12 md:col-span-9">
         <span class="opacity-50" v-show="showDelegateForMessage"
           >Salon members who delegated their voting power to you.</span
         >
@@ -103,10 +102,10 @@
       </div>
     </div>
 
-    <p class="pb-3">Financial</p>
-    <div class="grid grid-cols-12 pb-3">
+    <p class="pt-12 pb-4">Financial</p>
+    <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3 opacity-50">Wallet Address</div>
-      <div class="col-span-12 md:col-span-3">
+      <div class="col-span-12 pb-4 md:col-span-3">
         {{ profile.walletAddress }}
       </div>
     </div>
@@ -116,7 +115,7 @@
         {{ decimal.format(profile.units) }}
       </div>
     </div>
-    <p class="pb-3">More</p>
+    <p class="pt-12 pb-4">More</p>
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3 opacity-50">Biography</div>
       <div class="col-span-12 md:col-span-6">

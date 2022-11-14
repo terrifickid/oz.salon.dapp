@@ -239,9 +239,6 @@ export default {
     };
   },
   computed: {
-    amount() {
-      return JSON.parse(item.fields.units0units).amount;
-    },
     type() {
       return _.get(this, "proposal.sys.contentType.sys.id");
     },
