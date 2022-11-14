@@ -39,18 +39,20 @@
               >{{ decimal.format(treasury.totalUnits) }}</span
             >
           </li>
+          <li class="pb-5">
+            <span class="opacity-50">Book Value (per unit)</span><br /><span
+              class="text-2xl"
+            >
+              {{
+                format.format(
+                  (treasury.collectionValue + treasury.balance) /
+                    treasury.totalUnits
+                )
+              }}</span
+            >
+          </li>
         </ul>
-        <div class="grid grid-cols-2">
-          <div>
-            <span>Book Value (per unit)</span><br />
-            {{
-              format.format(
-                (treasury.collectionValue + treasury.balance) /
-                  treasury.totalUnits
-              )
-            }}
-          </div>
-        </div>
+
         <div class="border-t border-black mt-12 pt-1">
           <span>Current Trade Price (per unit)</span><br />
           <span class="text-2xl text-green-500">{{
