@@ -92,7 +92,7 @@
           Close
         </button>
       </div>
-      <div class="grid grid-cols-12 gap-x-10 w-full">
+      <div class="grid grid-cols-12 md:gap-x-10 w-full">
         <div
           :class="{
             'col-span-12 lg:col-span-4': !information,
@@ -109,7 +109,7 @@
           <span v-if="artwork.fields.state != 'Default'" class="opacity-50">{{
             artwork.fields.state
           }}</span>
-          <div class="pt-8 grid grid-cols-12 gap-x-10" v-if="information">
+          <div class="pt-8 grid grid-cols-12 md:gap-x-10" v-if="information">
             <p class="col-span-6 xl:col-span-8">
               <span class="opacity-50">Acquired</span><br />
               {{ artwork.fields.purchaseDate }} from

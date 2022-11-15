@@ -82,7 +82,7 @@
         Close
       </button>
     </div>
-    <div class="grid grid-cols-12 gap-x-10 w-full">
+    <div class="grid grid-cols-12 md:gap-x-10 w-full">
       <div
         :class="{
           'col-span-12 lg:col-span-4': !information,
