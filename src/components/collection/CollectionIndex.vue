@@ -6,7 +6,7 @@
       @close="collectionSingleItem = null"
     />
     <div
-      class="grid grid-cols-12 border-t border-black py-2 gap-x-5 cursor-pointer"
+      class="grid grid-cols-12 border-t border-black py-2 md:gap-x-5 cursor-pointer"
       v-for="(item, index) in collection"
       :key="index"
       @click="collectionSingleItem = item"
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="col-span-8 md:col-span-12">
-        <div class="grid grid-cols-12 gap-x-5">
+        <div class="grid grid-cols-12 md:gap-x-5">
           <div class="hidden md:block col-span-2 group cursor-pointer">
             <div class="bg-gray-100 p-5">
               <div

@@ -154,7 +154,7 @@
             />
             <div
               v-show="information"
-              class="flex justify-center items-center"
+              class="flex justify-center items-center overflow-hidden"
               v-if="artwork.fields.images.length > 1"
             >
               <img
