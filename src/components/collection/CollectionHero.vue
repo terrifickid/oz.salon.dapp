@@ -69,7 +69,10 @@
         <button
           class="flex items-center opacity-50"
           v-show="information"
-          @click="information = false"
+          @click="
+            information = false;
+            hikey = 0;
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +145,10 @@
               v-for="(image, index) in artwork.fields.images"
               :src="image.fields.file.url"
               :key="index"
-              v-show="index == this.hikey"
+              :class="{
+                hidden: index != this.hikey,
+                visible: index == this.hikey,
+              }"
               class="mx-auto"
               style="max-height: 60vh"
             />
