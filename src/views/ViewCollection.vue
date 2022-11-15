@@ -3,7 +3,7 @@
     <div>
       <CollectionHero :collection="collection" />
 
-      <div ref="nav" class="grid grid-cols-12 px-5 py-10 gap-5">
+      <div ref="nav" class="grid grid-cols-12 px-5 py-10 md:gap-5">
         <div class="col-span-12 md:col-span-2">
           <div class="md:hidden">
             <ul class="mb-5">
