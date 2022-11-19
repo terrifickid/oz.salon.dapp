@@ -75,17 +75,33 @@
             class="mr-5 mb-5"
           >
             <template v-if="disabledFields.includes(field.id)"></template>
-            <template v-else-if="String(field.id).split('0').includes('upload')"
-              ><div class="grid grid-cols-12 gap-5">
-                <div class="col-span-4">
-                  <span class="opacity-50">{{ field.label }}</span
-                  ><br /><img
+            <template
+              v-else-if="String(field.id).split('0').includes('upload')"
+            >
+              <span class="opacity-50">{{ field.label }}</span
+              ><br />
+              <div class="grid grid-cols-12 gap-4">
+                <div
+                  class="col-span-12 md:col-span-4 xl:col-span-3"
+                  v-for="(item, index) in JSON.parse(field.value)"
+                  :key="index"
+                >
+                  <img
                     class="cursor-pointer"
-                    @click="fileModal = field.value"
-                    :src="field.value"
+                    @click="fileModal = item"
+                    v-if="item.type.includes('image')"
+                    :src="item.url"
                   />
-                </div></div
-            ></template>
+                  <div
+                    @click="fileModal = item"
+                    v-if="item.type.includes('pdf')"
+                    class="w-full aspect-square bg-gray-100 flex items-end p-4 border cursor-pointer"
+                  >
+                    {{ item.name }} ({{ formatBytes(item.size) }})
+                  </div>
+                </div>
+              </div>
+            </template>
             <template v-else-if="String(field.id).split('0').includes('units')">
               <span class="opacity-50">{{ field.label }}</span
               ><br />
@@ -247,6 +263,14 @@ export default {
     },
   },
   methods: {
+    formatBytes(a, b = 2) {
+      if (!+a) return "0 Bytes";
+      const c = 0 > b ? 0 : b,
+        d = Math.floor(Math.log(a) / Math.log(1024));
+      return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${
+        ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
+      }`;
+    },
     getJSON(v) {
       return JSON.parse(v);
     },
