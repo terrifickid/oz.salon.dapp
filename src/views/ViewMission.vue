@@ -35,7 +35,7 @@ export default {
   async mounted() {
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/5Fzu95Zbg2X9r0Ke6RKwFo"
+        process.env.VUE_APP_URI + "/entry/5Fzu95Zbg2X9r0Ke6RKwFo?cache=true"
       );
       this.data = res.data;
       this.loaded = true;

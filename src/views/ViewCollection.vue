@@ -189,7 +189,9 @@ export default {
 
     console.log("collection load!");
     try {
-      const res = await axios.get(process.env.VUE_APP_URI + "/type/collection");
+      const res = await axios.get(
+        process.env.VUE_APP_URI + "/type/collection?cache=true"
+      );
       this.collection = res.data.message.items;
     } catch (error) {
       console.log("error", error);

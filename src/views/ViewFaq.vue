@@ -65,9 +65,13 @@ export default {
   },
   async mounted() {
     try {
-      const res = await axios.get(process.env.VUE_APP_URI + "/type/faq");
+      const res = await axios.get(
+        process.env.VUE_APP_URI + "/type/faq?cache=true"
+      );
       this.data = res.data.message.items;
-      var sorter = await axios.get(process.env.VUE_APP_URI + "/form/faq");
+      var sorter = await axios.get(
+        process.env.VUE_APP_URI + "/form/faq?cache=true"
+      );
       sorter = sorter.data.fields[0].validations[0].in;
       sorter.forEach((s) => {
         //Enumerate
