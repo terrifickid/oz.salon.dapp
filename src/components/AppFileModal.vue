@@ -18,7 +18,7 @@
         />
       </svg>
     </button>
-    <embed :src="file" class="w-full h-full text-center" />
+    <embed :src="file.url" class="w-full h-full text-center" />
   </div>
 </template>
 <script>

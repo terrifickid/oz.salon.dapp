@@ -8,6 +8,8 @@ import "./assets/reg/stylesheet.css";
 import "./assets/mono/stylesheet.css";
 import "./assets/manrope.css";
 import "vue-fullpage.js/dist/style.css";
+import "./fullpage.dragAndMove.min";
+import "./fullpage.scrollHorizontally.min";
 import VueFullPage from "vue-fullpage.js";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 createApp(App)

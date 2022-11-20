@@ -135,24 +135,26 @@
           </g>
         </g>
       </svg>
+      <div v-if="!isMetamask">
+        <p class="">
+          <a href="https://metamask.io/download/">
+            <AppButton class="mt-8 sm:mt-4 mx-auto">
+              Download Metamask
+            </AppButton>
+          </a>
+        </p>
+        <p class="mt-4 font-haffer text-xs">
+          Please connect your digital wallet to access Salon.
+        </p>
+      </div>
       <div v-if="isMetamask">
-        <p>
-          <AppButton class="mt-8 sm:mt-4" @click="connect">
+        <p class="">
+          <AppButton class="mt-8 sm:mt-4 mx-auto" @click="connect">
             Connect MetaMask
           </AppButton>
         </p>
-        <p class="sm:hidden mt-4 font-haffer text-xs">
-          To access Salon on your mobile device, please connect to Salon through
-          the browser on your Metamask iOS or Android app.
-        </p>
-      </div>
-      <div v-else>
-        <p class="mt-4">
-          Download the
-          <a class="underline" href="https://metamask.io/download/"
-            >Metamask browser extension</a
-          >
-          to securely connect your digital wallet.
+        <p class="mt-4 font-haffer text-xs">
+          Please connect your digital wallet to access Salon.
         </p>
       </div>
     </div>
@@ -169,6 +171,24 @@ export default {
     },
     isMetamask() {
       return typeof window.ethereum !== "undefined";
+    },
+    isMetaMaskBrowser() {
+      if (/MetaMaskMobile/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   methods: {

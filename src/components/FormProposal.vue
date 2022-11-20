@@ -1,23 +1,12 @@
 <template>
-  <AppLoader v-if="!loaded" />
+  <AppLoaderFull v-if="!loaded" />
   <AppFileModal :file="fileModal" @close="fileModal = false" v-if="fileModal" />
   <template v-if="loaded">
     <template v-if="isProposer && !isMember && !passed">
-      <div class="pt-20 px-5 container">
-        <div class="grid grid-cols-12">
-          <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">
-              We've received your onboarding proposal
-            </p>
-            <h1 class="text-2xl opacity-50 font-haffer">
-              Our members will now vote on your membership. After you're
-              approved, you'll have seven days to finalize your membership by
-              sending your funds by bank wire or digital wallet. Please reach
-              out to hello@salondao.xyz with any questions.
-            </h1>
-          </div>
-        </div>
-      </div>
+      <p class="mb-8">Onboard</p>
+      <h1 class="opacity-50 font-haffer">
+        Your application is being voted on by Salon members.
+      </h1>
     </template>
     <template v-else>
       <div class="pb-64">
@@ -51,12 +40,12 @@
 
         <CounterVote
           :votes="proposalFormat.votes"
-          :weights="weights"
+          :members="members"
           v-if="isVotable"
         />
 
         <div
-          class="grid grid-cols-12 flex items-center pt-5 pb-8"
+          class="grid grid-cols-12 flex items-center py-5"
           v-if="canVote && isVotable"
         >
           <div class="col-span-4 lg:col-span-2" v-if="!hasPassed">
@@ -86,23 +75,40 @@
             class="mr-5 mb-5"
           >
             <template v-if="disabledFields.includes(field.id)"></template>
-            <template v-else-if="String(field.id).split('0').includes('upload')"
-              ><div class="grid grid-cols-12 gap-5">
-                <div class="col-span-4">
-                  <span class="opacity-50">{{ field.label }}</span
-                  ><br /><img
+            <template
+              v-else-if="String(field.id).split('0').includes('upload')"
+            >
+              <span class="opacity-50">{{ field.label }}</span
+              ><br />
+              <div class="grid grid-cols-12 gap-4">
+                <div
+                  class="col-span-12 md:col-span-4 xl:col-span-3"
+                  v-for="(item, index) in JSON.parse(field.value)"
+                  :key="index"
+                >
+                  <img
                     class="cursor-pointer"
-                    @click="fileModal = field.value"
-                    :src="field.value"
+                    @click="fileModal = item"
+                    v-if="item.type.includes('image')"
+                    :src="item.url"
                   />
-                </div></div
-            ></template>
+                  <div
+                    @click="fileModal = item"
+                    v-if="item.type.includes('pdf')"
+                    class="w-full aspect-square bg-gray-100 flex items-end p-4 border cursor-pointer"
+                  >
+                    {{ item.name }} ({{ formatBytes(item.size) }})
+                  </div>
+                </div>
+              </div>
+            </template>
             <template v-else-if="String(field.id).split('0').includes('units')">
               <span class="opacity-50">{{ field.label }}</span
               ><br />
 
               {{ name }} would like to purchase
-              {{ getJSON(field.value).units }} units at a price of
+              {{ getJSON(field.value).units.toLocaleString() }} units at a price
+              of
               {{
                 format.format(
                   getJSON(field.value).amount / getJSON(field.value).units
@@ -135,7 +141,7 @@
         <ExecuteProposal :proposal="proposal" />
 
         <router-link to="/manage/proposals">
-          <button class="flex items-center mt-12">
+          <button class="flex items-center mt-12 opacity-50">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -161,7 +167,7 @@
 <script>
 import _ from "lodash";
 import axios from "axios";
-import AppLoader from "@/components/AppLoader";
+import AppLoaderFull from "@/components/AppLoaderFull";
 import CounterVote from "@/components/CounterVote";
 import AppCountdown from "@/components/AppCountdown";
 import AppButtonVote from "@/components/AppButtonVote";
@@ -174,7 +180,7 @@ export default {
     CounterVote,
     AppCountdown,
     AppButtonVote,
-    AppLoader,
+    AppLoaderFull,
     ExecuteProposal,
   },
   props: ["id"],
@@ -184,7 +190,7 @@ export default {
       fileModal: false,
       proposal: {},
       proposalFormat: {},
-      weights: [],
+      members: [],
       loaded: false,
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -193,11 +199,13 @@ export default {
       disabledFields: [
         "profile",
         "Submit Proposal",
-        "Subscription Booklet",
+        "subscriptionBooklet0upload",
         "votes",
         "submitProposal0submit",
         "profile",
         "prettyId",
+        "processState",
+        "verified",
       ],
       treasury: {},
     };
@@ -255,36 +263,24 @@ export default {
     },
   },
   methods: {
+    formatBytes(a, b = 2) {
+      if (!+a) return "0 Bytes";
+      const c = 0 > b ? 0 : b,
+        d = Math.floor(Math.log(a) / Math.log(1024));
+      return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${
+        ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
+      }`;
+    },
     getJSON(v) {
       return JSON.parse(v);
     },
-    async getWeights() {
+    async getMembers() {
       try {
         const res = await axios.get(process.env.VUE_APP_URI + "/members");
-        console.log(res.data);
-        var scope = this;
-        this.weights = res.data.map(function (item) {
-          return {
-            walletAddress: item.fields.walletAddress,
-            units: scope.getDelegatedUnits(res.data, item.fields.walletAddress),
-          };
-        });
+        return res.data;
       } catch (error) {
         console.log("error", error);
       }
-    },
-    getDelegatedUnits(members, address) {
-      var units = 0;
-      members.forEach(function (item) {
-        if (address == _.get(item, "fields.delegate"))
-          units = units + _.get(item, "fields.units");
-        if (
-          address == _.get(item, "fields.walletAddress") &&
-          _.get(item, "fields.delegate") == 0
-        )
-          units = units + _.get(item, "fields.units");
-      });
-      return units;
     },
     getFieldLabel(fields, id) {
       for (let field of fields) {
@@ -345,10 +341,10 @@ export default {
       );
       this.proposalFormat = r;
 
-      if (_.get(this.proposalFormat, "votes.weights.length")) {
-        this.weights = _.get(this.proposalFormat, "votes.weights");
+      if (_.get(this.proposalFormat, "votes.members.length")) {
+        this.members = _.get(this.proposalFormat, "votes.members");
       } else {
-        await this.getWeights();
+        this.members = await this.getMembers();
       }
 
       this.loaded = true;

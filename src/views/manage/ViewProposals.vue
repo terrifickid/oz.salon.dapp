@@ -1,4 +1,5 @@
 <template>
+  <AppLoaderFull v-if="!loaded" />
   <div class="container-fluid px-5">
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-3">
@@ -8,56 +9,41 @@
           <div class="hidden md:block">
             <span class="opacity-50">Filters</span>
             <ul>
-              <router-link to="/manage/proposals">
-                <li
-                  :class="{
-                    'opacity-50': filter != 'all',
-                    'opacity-100': filter == 'all',
-                  }"
-                >
-                  <button @click="filter = 'all'">All</button>
-                </li>
-              </router-link>
-              <router-link to="/manage/proposals">
-                <li
-                  :class="{
-                    'opacity-50': filter != 'pending',
-                    'opacity-100': filter == 'pending',
-                  }"
-                >
-                  <button @click="filter = 'pending'">Pending</button>
-                </li>
-              </router-link>
-              <router-link to="/manage/proposals">
-                <li
-                  :class="{
-                    'opacity-50': filter != 'voted',
-                    'opacity-100': filter == 'voted',
-                  }"
-                >
-                  <button @click="filter = 'voted'">Voted</button>
-                </li>
-              </router-link>
-              <router-link to="/manage/proposals">
-                <li
-                  :class="{
-                    'opacity-50': filter != 'closed',
-                    'opacity-100': filter == 'closed',
-                  }"
-                >
-                  <button @click="filter = 'closed'">Closed</button>
-                </li>
-              </router-link>
-              <router-link to="/manage/proposals">
-                <li
-                  :class="{
-                    'opacity-50': filter != 'my',
-                    'opacity-100': filter == 'my',
-                  }"
-                >
-                  <button @click="filter = 'my'">My Proposals</button>
-                </li>
-              </router-link>
+              <li
+                :class="{
+                  'opacity-50': filter != 'all',
+                  'opacity-100': filter == 'all',
+                }"
+              >
+                <button @click="filter = 'all'">All</button>
+              </li>
+
+              <li
+                :class="{
+                  'opacity-50': filter != 'pending',
+                  'opacity-100': filter == 'pending',
+                }"
+              >
+                <button @click="filter = 'pending'">Pending</button>
+              </li>
+
+              <li
+                :class="{
+                  'opacity-50': filter != 'closed',
+                  'opacity-100': filter == 'closed',
+                }"
+              >
+                <button @click="filter = 'closed'">Closed</button>
+              </li>
+
+              <li
+                :class="{
+                  'opacity-50': filter != 'my',
+                  'opacity-100': filter == 'my',
+                }"
+              >
+                <button @click="filter = 'my'">My Proposals</button>
+              </li>
             </ul>
           </div>
         </div>
@@ -68,6 +54,7 @@
           v-for="(item, index) in filteredProposals.slice(0, perPage)"
           :key="index"
           :item="item"
+          :members="members"
         />
 
         <button
@@ -101,16 +88,18 @@
 //import _ from "lodash";
 import axios from "axios";
 import ManageNav from "@/components/ManageNav";
+import AppLoaderFull from "@/components/AppLoaderFull";
 import ListProposalItem from "@/components/ListProposalItem";
 import _ from "lodash";
 export default {
   components: {
     ManageNav,
     ListProposalItem,
+    AppLoaderFull,
   },
   data() {
     return {
-      weights: [],
+      members: [],
       loaded: false,
       filter: "all",
       perPage: 10,
@@ -135,8 +124,20 @@ export default {
         default:
           p = this.proposals;
       }
-
-      return p;
+      var addressFilter = _.get(this.$route, "params.address");
+      if (addressFilter) {
+        p = p.filter((item) => {
+          var checkAddress = _.get(item, "fields.profile.walletAddress");
+          return addressFilter == checkAddress;
+        });
+      }
+      return p.sort(function compareFn(a, b) {
+        var aIsClosed = typeof _.get(a, "fields.votes.passed") == "boolean";
+        var bIsClosed = typeof _.get(b, "fields.votes.passed") == "boolean";
+        if (aIsClosed && !bIsClosed) return 1;
+        if (!aIsClosed && bIsClosed) return -1;
+        return 0;
+      });
     },
     proposals() {
       return this.$store.state.proposals;
@@ -170,12 +171,10 @@ export default {
     },
   },
   methods: {
-    async getWeights() {
+    async getMembers() {
       try {
-        const res = await axios.get(
-          process.env.VUE_APP_URI + "/members?cache=true"
-        );
-        this.weights = res.data;
+        const res = await axios.get(process.env.VUE_APP_URI + "/members");
+        return res.data;
       } catch (error) {
         console.log("error", error);
       }
@@ -188,7 +187,7 @@ export default {
     });
     this.$store.state.proposals = _.get(res, "data.message");
 
-    await this.getWeights();
+    this.members = await this.getMembers();
     this.loaded = true;
     console.log("loaded!");
   },

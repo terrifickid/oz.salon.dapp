@@ -21,7 +21,7 @@
         v-for="(profile, index) in data.list1"
         :key="index"
       >
-        <b>{{ profile }}</b>
+        <span>{{ profile }}</span>
       </div>
     </div>
     <div class="grid grid-cols-12 pt-12 w-full font-haffer px-5 pt-24 gap-5">
@@ -38,7 +38,7 @@
         v-for="(artist, index) in data.list2"
         :key="index"
       >
-        <b>{{ artist }}</b>
+        <span>{{ artist }}</span>
       </div>
     </div>
   </AppShell>

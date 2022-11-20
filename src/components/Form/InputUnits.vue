@@ -2,7 +2,7 @@
   <div>
     <FormLabel :count="count" :required="required">{{ title }}</FormLabel>
 
-    <div class="grid grid-cols-2 gap-20">
+    <div class="grid grid-cols-2 gap-6">
       <div class="col-span-1 flex items-center border-b border-black">
         <span class="mr-2">$</span>
         <input
@@ -72,7 +72,7 @@ export default {
   computed: {
     minimumInvestment() {
       if (this.profileUnits > 0) return -1;
-      return 3;
+      return 0;
     },
     profileUnits() {
       return _.get(this.$store, "state.profile.units");
@@ -99,6 +99,8 @@ export default {
   },
   methods: {
     next() {
+      console.log("route", this.$route.name);
+      if (this.$route.name == "Exchange") return this.$emit("ready");
       if (parseFloat(this.amount) < parseFloat(this.minimumInvestment)) {
         alert("Proposal below the minimum buy-in price of $30,000.");
         return;

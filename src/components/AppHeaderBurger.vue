@@ -1,8 +1,8 @@
 <template>
   <div
-    class="px-5 py-4 fixed w-screen overflow-hidden z-50 font-haffer"
+    class="px-5 py-4 fixed w-screen overflow-hidden z-40 font-haffer"
     :class="{
-      'h-screen bg-white text-black': toggle,
+      'h-screen bg-owhite text-black': toggle,
       'bg-white text-black': !toggle,
     }"
   >
@@ -12,9 +12,9 @@
       >
       <router-link
         v-if="isMember"
-        id="manage"
-        class="inline-block ml-5"
+        class="inline-block ml-5 manage"
         to="/manage/start"
+        :class="{ routy: isChildRoute }"
         >Manage</router-link
       >
       <router-link
@@ -26,69 +26,108 @@
       <router-link
         v-if="!walletAddress"
         class="inline-block ml-5"
-        to="/apply"
+        to="/manage/start"
         @click="connect()"
         >Login</router-link
       >
     </div>
-    <span class="md:hidden">{{ pageTitle }}</span>
-    <button @click="toggler" class="md:hidden z-20 float-right">
-      <svg
-        v-if="!toggle"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 8h16M4 16h16"
-        />
-      </svg>
-      <svg
-        v-else
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    </button>
+    <div class="grid flex grid-cols-12 items-center w-full">
+      <div class="md:hidden justify-self-start col-span-6">{{ pageTitle }}</div>
+      <div class="md:hidden col-span-6">
+        <button @click="toggler" class="float-right">
+          <svg
+            v-if="!toggle"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 8h16M4 16h16"
+            />
+          </svg>
 
-    <div class="links text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="text-xl pb-16 pt-16 fixed top-0 text-3xl" v-show="toggle">
       <div class="pb-10">
         <router-link @click="toggleDown()" class="block" to="/collection"
           >Our Collection</router-link
         >
-        <router-link @click="toggleDown()" class="block" to="/manage/start"
+        <router-link
+          v-if="!isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/manage/start"
+          >Login</router-link
+        >
+        <router-link
+          v-if="isMember"
+          @click="toggleDown()"
+          class="relative manage"
+          to="/manage/start"
           >Manage</router-link
         >
-        <router-link @click="toggleDown()" class="block" to="/manage/profile"
+        <router-link
+          v-if="isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/manage/profile"
           >Account</router-link
         >
       </div>
       <div class="pb-10">
-        <router-link @click="toggleDown()" class="block" to="/faq"
-          >FAQ</router-link
+        <router-link
+          v-if="!isMember"
+          @click="toggleDown()"
+          class="block"
+          to="/members"
+          >Members</router-link
         >
         <router-link @click="toggleDown()" class="block" to="/mission"
           >Mission</router-link
         >
+        <router-link @click="toggleDown()" class="block" to="/faq"
+          >FAQ</router-link
+        >
+
         <router-link class="block" to="/contact" @click="toggleDown()"
           >Contact</router-link
         >
-        <router-link class="block" to="/resources" @click="toggleDown()"
+        <router-link
+          v-if="isMember"
+          class="block"
+          to="/resources"
+          @click="toggleDown()"
           >Resources</router-link
+        >
+        <router-link
+          v-if="!isMember"
+          class="block"
+          to="/manage/start"
+          @click="toggleDown()"
+          >Apply</router-link
         >
       </div>
     </div>
@@ -105,6 +144,13 @@ export default {
     };
   },
   computed: {
+    isChildRoute() {
+      var on = this.$route.path.includes("manage");
+      var off = this.$route.path.includes("profile");
+      if (off) return false;
+      if (on) return true;
+      return false;
+    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
@@ -120,6 +166,10 @@ export default {
       return false;
     },
     pageTitle() {
+      var manage = ["start"];
+      if (this.$route.name == "home") return "";
+      var name = String(this.$route.name).toLowerCase();
+      if (manage.includes(name)) return "Manage";
       return this.$route.name;
     },
   },
@@ -144,11 +194,12 @@ export default {
 .links a {
   @apply opacity-50 relative;
 }
-a.router-link-active {
+a.router-link-active,
+a.routy {
   @apply opacity-100 relative;
 }
 
-#manage::after {
+.manage::after {
   content: "";
   @apply bg-green-500 absolute top-1 -right-2 w-2 h-2 rounded-full;
 }

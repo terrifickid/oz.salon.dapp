@@ -9,7 +9,7 @@ const routes = [
   },
   {
     path: "/about",
-    name: "about",
+    name: "About",
     component: function () {
       return import(/* webpackChunkName: "About" */ "../views/ViewAbout.vue");
     },
@@ -32,13 +32,21 @@ const routes = [
       );
     },
   },
-
   {
-    path: "/members",
-    name: "members",
+    path: "/collection/:id",
+    name: "artwork",
     component: function () {
       return import(
-        /* webpackChunkName: "ViewMember" */ "../views/ViewMembers.vue"
+        /* webpackChunkName: "CollectionView" */ "../views/ViewCollection.vue"
+      );
+    },
+  },
+  {
+    path: "/members",
+    name: "Members ",
+    component: function () {
+      return import(
+        /* webpackChunkName: "ViewMemberPub" */ "../views/ViewMembers.vue"
       );
     },
   },
@@ -69,7 +77,7 @@ const routes = [
   },
   {
     path: "/apply",
-    name: "apply",
+    name: "Apply",
     component: function () {
       return import(
         /* webpackChunkName: "ViewApply" */ "../views/ViewApply.vue"
@@ -78,7 +86,7 @@ const routes = [
   },
   {
     path: "/manage",
-    name: "manage",
+    name: "Manage",
     component: function () {
       return import(
         /* webpackChunkName: "ViewApply" */ "../views/ViewManage.vue"
@@ -106,6 +114,15 @@ const routes = [
       {
         path: "proposals",
         name: "Proposals",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewProposals" */ "../views/manage/ViewProposals.vue"
+          );
+        },
+      },
+      {
+        path: "proposals/:address",
+        name: "Member Proposals",
         component: function () {
           return import(
             /* webpackChunkName: "ViewProposals" */ "../views/manage/ViewProposals.vue"
@@ -204,15 +221,6 @@ const routes = [
     },
   },
 
-  {
-    path: "/profile",
-    name: "profile",
-    component: function () {
-      return import(
-        /* webpackChunkName: "ViewProfile" */ "../views/ViewProfile.vue"
-      );
-    },
-  },
   {
     path: "/:catchAll(.*)",
     component: function () {

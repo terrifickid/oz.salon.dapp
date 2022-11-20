@@ -5,12 +5,16 @@
         <li><router-link to="/manage/start">Start</router-link></li>
         <li><router-link to="/manage/treasury">Treasury</router-link></li>
         <li>
-          <router-link class="flex items-center" to="/manage/proposals"
-            >Proposals
-            <p class="text-green-500 dot">
-              <span style="margin-right: 1px" class="ml-1">(</span
-              >{{ activeProposalsCount }}
-              <span style="margin-left: -2px">)</span>
+          <router-link class="flex items-center" to="/manage/proposals">
+            <p class="dot inline-block">
+              Proposals
+              <span
+                :class="{ hidden: !activeProposalsCount }"
+                class="text-green-500"
+              >
+                <span style="margin-right: 1px">(</span>{{ activeProposalsCount
+                }}<span style="margin-left: 1px">)</span></span
+              >
             </p></router-link
           >
         </li>
@@ -21,9 +25,11 @@
         <li><router-link to="/manage/profile">Profile</router-link></li>
         <li>
           <router-link to="/manage/members"
-            >Members <span style="margin-right: 1px" class="ml-1">(</span
-            >{{ membersCount
-            }}<span style="margin-left: 1px">)</span></router-link
+            >Members
+            <p class="inline-block" :class="{ hidden: !membersCount }">
+              <span style="margin-right: 1px">(</span>{{ membersCount
+              }}<span style="margin-left: 1px">)</span>
+            </p></router-link
           >
         </li>
       </ul>

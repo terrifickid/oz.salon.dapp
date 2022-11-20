@@ -8,7 +8,7 @@
     <div v-if="loaded" class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
       <div class="col-span-12 md:col-span-6">
         <p class="text-2xl mb-8" v-html="data.fields.title"></p>
-        <div v-html="data.fields.code"></div>
+        <div class="text-2xl" v-html="data.fields.code"></div>
       </div>
       <div class="hidden md:block md:col-span-3"></div>
       <div class="hidden md:block md:col-span-3">
@@ -35,7 +35,7 @@ export default {
   async mounted() {
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/5Fzu95Zbg2X9r0Ke6RKwFo"
+        process.env.VUE_APP_URI + "/entry/5Fzu95Zbg2X9r0Ke6RKwFo?cache=true"
       );
       this.data = res.data;
       this.loaded = true;

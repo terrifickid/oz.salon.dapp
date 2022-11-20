@@ -9,6 +9,18 @@
       <div class="col-span-12 md:col-span-9">
         <ul>
           <li class="mb-5">
+            <router-link to="/manage/acquire">
+              <p>Acquire</p>
+              <p class="opacity-50">-> Propose a work for Salon to collect</p>
+            </router-link>
+          </li>
+          <li class="mb-5">
+            <router-link to="/manage/propose">
+              <p>Propose</p>
+              <p class="opacity-50">-> Initiate a vote on general matters</p>
+            </router-link>
+          </li>
+          <li class="mb-5">
             <router-link to="/manage/invest">
               <p>Invest</p>
               <p class="opacity-50">-> Add to your existing investment</p>
@@ -18,18 +30,6 @@
             <router-link to="/manage/exchange">
               <p>Exchange</p>
               <p class="opacity-50">-> Cash out some or all of your units</p>
-            </router-link>
-          </li>
-          <li class="mb-5">
-            <router-link to="/manage/propose">
-              <p>Propose</p>
-              <p class="opacity-50">-> Initiate a vote on a proposal</p>
-            </router-link>
-          </li>
-          <li class="mb-5">
-            <router-link to="/manage/acquire">
-              <p>Acquire</p>
-              <p class="opacity-50">-> Propose a work for Salon to collect</p>
             </router-link>
           </li>
           <li class="mb-5">
@@ -46,9 +46,9 @@
               <p class="opacity-50">-> Initiate a vote to kick</p>
             </router-link>
           </li>
-          <li class="mb-5">
+          <li class="mt-12 mb-5">
             <router-link to="/manage/proposals">
-              <p class="opacity-50">-> View Proposals</p>
+              <p class="text-green-500">-> View Proposals</p>
             </router-link>
           </li>
         </ul>

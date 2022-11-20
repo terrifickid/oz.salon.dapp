@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <p class="font-haffer opacity-50">{{ description }}</p>
+  <div class="form_intro">
+    <div class="font-haffer opacity-50" v-html="description"></div>
     <FormButtonBegin @ready="$emit('ready')" />
   </div>
 </template>
@@ -11,3 +11,8 @@ export default {
   props: ["name", "description"],
 };
 </script>
+<style>
+.form_intro p {
+  @apply mb-4;
+}
+</style>

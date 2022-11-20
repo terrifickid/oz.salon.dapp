@@ -1,22 +1,23 @@
 <template>
-  <div v-if="loaded" class="container-fluid px-5">
+  <AppLoaderFull v-if="!loaded" />
+  <div class="container-fluid px-5">
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-3">
         <div class="md:fixed">
           <ManageNav />
         </div>
       </div>
-      <div class="col-span-12 md:col-span-9">
-        <b>Treasury</b><br />
+      <div v-if="loaded" class="col-span-12 md:col-span-9">
+        <!-- Treasury<br />
 
-        <div class="opacity-50" v-html="data.code"></div>
+        <div class="opacity-50" v-html="data.code"></div> -->
 
-        <ul class="pt-10">
+        <ul>
           <li class="pb-5">
-            <span class="opacity-50">Appraised Collection Value</span
-            ><br /><span class="text-2xl">{{
-              format.format(treasury.collectionValue)
-            }}</span>
+            <span class="opacity-50">Art Assets</span><br /><span
+              class="text-2xl"
+              >{{ format.format(treasury.collectionValue) }}</span
+            >
           </li>
           <li class="pb-5">
             <span class="opacity-50">Cash Assets Available</span><br /><span
@@ -38,18 +39,20 @@
               >{{ decimal.format(treasury.totalUnits) }}</span
             >
           </li>
+          <li class="pb-5">
+            <span class="opacity-50">Book Value (per unit)</span><br /><span
+              class="text-2xl"
+            >
+              {{
+                format.format(
+                  (treasury.collectionValue + treasury.balance) /
+                    treasury.totalUnits
+                )
+              }}</span
+            >
+          </li>
         </ul>
-        <div class="grid grid-cols-2">
-          <div>
-            <span>Book Value (per unit)</span><br />
-            {{
-              format.format(
-                (treasury.collectionValue + treasury.balance) /
-                  treasury.totalUnits
-              )
-            }}
-          </div>
-        </div>
+
         <div class="border-t border-black mt-12 pt-1">
           <span>Current Trade Price (per unit)</span><br />
           <span class="text-2xl text-green-500">{{
@@ -66,8 +69,9 @@
 
 import axios from "axios";
 import ManageNav from "@/components/ManageNav";
+import AppLoaderFull from "@/components/AppLoaderFull";
 export default {
-  components: { ManageNav },
+  components: { ManageNav, AppLoaderFull },
   data() {
     return {
       loaded: false,
@@ -86,10 +90,9 @@ export default {
     console.log("content load!");
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/5x22MY3IFgYYzSyf9Wq15j"
+        process.env.VUE_APP_URI + "/entry/2WgcedHH3c0EDpVKALRQnd"
       );
       this.data = res.data.fields;
-      this.loaded = true;
     } catch (error) {
       console.log("error", error);
     }

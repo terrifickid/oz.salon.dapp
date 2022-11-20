@@ -4,7 +4,7 @@
     <FormHelp :help="help" v-if="help" />
     <div class="font-haffer">
       <button
-        class="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block text-xl mb-2"
+        class="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block mb-2"
         v-for="(choice, index) in choices"
         :key="index"
         @click="

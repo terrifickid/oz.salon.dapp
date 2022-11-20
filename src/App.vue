@@ -36,7 +36,9 @@ export default {
   beforeUnmount() {
     window.removeEventListener("resize", this.hideUI);
   },
-  mounted() {},
+  mounted() {
+    console.log("APP", process.env);
+  },
 };
 </script>
 <style lang="scss"></style>

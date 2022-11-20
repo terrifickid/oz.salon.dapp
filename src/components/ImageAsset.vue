@@ -28,7 +28,6 @@ export default {
 </script>
 <style scoped>
 * {
-  cursor: pointer;
   -khtml-user-select: none;
   -o-user-select: none;
   -moz-user-select: none;

@@ -1,21 +1,30 @@
 <template>
-  <div>
+  <div v-if="mode">{{ yesPercentageTally }}% / {{ noPercentageTally }}%</div>
+  <div v-if="!mode">
     <div class="grid grid-cols-12 py-4">
-      <div class="col-span-4 md:col-span-2">Votes</div>
-      <div class="col-span-4 md:col-span-1">{{ total }}</div>
+      <div class="col-span-4 sm:col-span-3 md:col-span-3">Votes</div>
+      <div class="col-span-4 sm:col-span-2">{{ total }}</div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-4 md:col-span-2">Yes</div>
-      <div class="col-span-4 md:col-span-1">{{ yesPercentageTally }}%</div>
-      <div class="col-span-4 md:col-span-1">{{ yesWeight }} units</div>
+      <div class="col-span-4 sm:col-span-3 md:col-span-3">Yes</div>
+      <div class="col-span-4 sm:col-span-2 md:col-span-3 lg:col-span-2">
+        {{ yesPercentageTally }}%
+      </div>
+      <div class="col-span-4 md:col-span-2">
+        {{ yesWeight.toLocaleString() }} units
+      </div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-4 md:col-span-2">No</div>
-      <div class="col-span-4 md:col-span-1">{{ noPercentageTally }}%</div>
-      <div class="col-span-4 md:col-span-1">{{ noWeight }} units</div>
+      <div class="col-span-4 sm:col-span-3 md:col-span-3">No</div>
+      <div class="col-span-4 sm:col-span-2 md:col-span-3 lg:col-span-2">
+        {{ noPercentageTally }}%
+      </div>
+      <div class="col-span-4 sm:col-span-2 md:col-span-3 lg:col-span-2">
+        {{ noWeight.toLocaleString() }} units
+      </div>
     </div>
 
-    <div class="pt-2" v-if="hasEnded">
+    <div class="py-6" v-if="hasEnded">
       <div v-if="!passed" class="text-red-500">This did not pass.</div>
       <div
         v-else
@@ -28,14 +37,41 @@
 <script>
 import _ from "lodash";
 export default {
-  props: ["votes", "weights"],
+  props: ["votes", "members", "mode"],
+  methods: {
+    getDelegatedUnits(members, address) {
+      var units = 0;
+      members.forEach(function (item) {
+        if (address == _.get(item, "fields.delegate"))
+          units = units + _.get(item, "fields.units");
+        if (
+          address == _.get(item, "fields.walletAddress") &&
+          _.get(item, "fields.delegate") == 0
+        )
+          units = units + _.get(item, "fields.units");
+      });
+      return units;
+    },
+  },
   computed: {
+    weights() {
+      return this.members.map((member) => {
+        var obj = {};
+        obj.walletAddress = member.fields.walletAddress;
+        obj.units = this.getDelegatedUnits(
+          this.members,
+          member.fields.walletAddress
+        );
+        if (obj.units > this.maxUnits) obj.units = this.maxUnits;
+        return obj;
+      });
+    },
     hasEnded() {
       return typeof _.get(this.votes, "passed") == "boolean";
     },
     totalUnits() {
-      var totalUnits = this.weights
-        .map((item) => item.units)
+      var totalUnits = this.members
+        .map((item) => item.fields.units)
         .reduce((partialSum, a) => partialSum + a, 0);
       return totalUnits;
     },
@@ -43,20 +79,12 @@ export default {
       return Math.round(this.totalUnits * 0.1);
     },
     totalValidUnits() {
-      var scope = this;
-      var weights = this.weights.map(function (member) {
-        var obj = {};
-        obj.walletAddress = member.walletAddress;
-        obj.units = member.units;
-        if (obj.units > scope.maxUnits) obj.units = scope.maxUnits;
-        return obj;
-      });
-      return weights
+      return this.weights
         .map((item) => item.units)
         .reduce((partialSum, a) => partialSum + a, 0);
     },
     total() {
-      return this.votes.votes.length;
+      return _.get(this.votes, "votes.length");
     },
     yesTotal() {
       return this.votes.votes.filter((vote) => {

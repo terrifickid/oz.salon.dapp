@@ -1,11 +1,6 @@
 <template>
-  <AppLoader v-show="processing" />
-  <div
-    v-show="!processing"
-    v-if="ready"
-    ref="fullpage"
-    class="px-5 container pb-64"
-  >
+  <AppLoaderFull v-show="processing" />
+  <div v-show="!processing" v-if="ready" ref="fullpage" class="pb-32">
     <div class="grid grid-cols-12">
       <div class="col-span-12 lg:col-span-8">
         <div class="mb-6">{{ name }}</div>
@@ -26,7 +21,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6 ml-2"
+                class="w-4 h-4 ml-2"
               >
                 <path
                   stroke-linecap="round"
@@ -43,7 +38,11 @@
         <div v-show="selectedIndex == 1000" class="">
           <span class="text-green-500"> {{ name }} proposal submitted.</span>
           <p class="opacity-50 mt-20">
-            <router-link to="/manage/proposals" class="flex items-center">
+            <router-link
+              to="/manage/proposals"
+              class="flex items-center"
+              v-if="isMember"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -78,12 +77,13 @@
   </div>
 </template>
 <script>
+import _ from "lodash";
 import axios from "axios";
 import FormField from "@/components/Form/FormField.vue";
 import FormIntro from "@/components/Form/FormIntro.vue";
-import AppLoader from "@/components/AppLoader.vue";
+import AppLoaderFull from "@/components/AppLoaderFull.vue";
 export default {
-  components: { FormField, AppLoader, FormIntro },
+  components: { FormField, AppLoaderFull, FormIntro },
   props: ["url"],
   emits: ["success", "ready"],
   data() {
@@ -103,6 +103,9 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
+    isMember() {
+      return _.get(this.profile, "units");
+    },
   },
   methods: {
     async back() {
@@ -110,7 +113,13 @@ export default {
       this.selectedIndex--;
     },
     async next() {
-      if (await this.validate()) this.submitForm();
+      if (this.selectedIndex == this.fields.length - 1) {
+        if (await this.validate()) {
+          this.submitForm();
+        }
+      } else {
+        this.selectedIndex++;
+      }
     },
     async validate() {
       console.log("validate form!");
@@ -141,11 +150,12 @@ export default {
           console.log("success", res.data);
           this.selectedIndex = 1000;
           this.processing = false;
-          this.$store.dispatch("connect");
+          //this.$store.dispatch("connect");
         } else {
-          alert("Error, Please try again.");
+          console.error(res.data.message);
+          var error = JSON.parse(res.data.message.message);
+          alert(JSON.stringify(_.get(error, "details.errors[0]")));
           this.processing = false;
-          console.log("error", res.data);
         }
       } catch (error) {
         this.processing = false;
@@ -170,6 +180,8 @@ export default {
           "delegate",
           "biography",
           "prettyId",
+          "processState",
+          "verified",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

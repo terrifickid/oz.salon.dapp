@@ -24,7 +24,7 @@
               Since {{ dateFormated(member.sys.createdAt) }}
             </div>
 
-            <div class="hidden md:block col-span-4">
+            <div class="hidden md:block col-span-12 md:col-span-4">
               {{ member.fields.emailAddress }}
             </div>
           </div>
@@ -32,14 +32,14 @@
             class="grid grid-cols-12 gap-5 w-full pt-10 pb-10"
             v-show="selectedIndex == index"
           >
-            <div class="col-span-3 opacity-50">Wallet ID</div>
+            <div class="col-span-12 md:col-span-3 opacity-50">Wallet ID</div>
 
-            <div class="col-span-9">
+            <div class="col-span-12 md:col-span-9 truncate">
               {{ member.fields.walletAddress }}
             </div>
 
-            <div class="col-span-3 opacity-50">Biography</div>
-            <div class="col-span-9">
+            <div class="col-span-12 md:col-span-3 opacity-50">Biography</div>
+            <div class="col-span-12 md:col-span-9">
               {{ member.fields.biography }}
             </div>
             <div class="col-span-12 opacity-50 hover:opacity-100 pt-4">
@@ -58,8 +58,12 @@
                     d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                   />
                 </svg>
-                View {{ member.fields.firstName }}
-                {{ member.fields.lastName }}'s Proposals
+                <router-link
+                  :to="'/manage/proposals/' + member.fields.walletAddress"
+                >
+                  View {{ member.fields.firstName }}
+                  {{ member.fields.lastName }}'s Proposals</router-link
+                >
               </router-link>
             </div>
           </div>

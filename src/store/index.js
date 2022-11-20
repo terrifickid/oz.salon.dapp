@@ -61,10 +61,16 @@ export default createStore({
       var id = await provider.getNetwork();
       console.log("ID", id);
       if (process.env.VUE_APP_CHAIN_NAME != id.name) {
-        this.state.networkError =
-          "Please connect to " +
-          process.env.VUE_APP_CHAIN_NAME.toUpperCase() +
-          " network.";
+        var msg;
+        switch (process.env.VUE_APP_CHAIN_NAME) {
+          case "goerli":
+            msg = "Please connect to the Goerli Test Network to continue.";
+            break;
+          case "homestead":
+            msg = "Please connect to the Ethereum Mainnet to continue.";
+            break;
+        }
+        this.state.networkError = msg;
         return;
       }
       await provider.send("eth_requestAccounts", []);

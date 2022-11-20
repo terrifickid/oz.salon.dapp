@@ -1,42 +1,72 @@
 <template>
+  <AppLoaderFull v-if="processing" />
   <div v-if="loaded">
+    <p class="mb-8" v-if="statusMessage">
+      <span class="opacity-50">Status</span><br />{{ statusMessage }}
+    </p>
     <div
       class="py-3 grid grid-cols-12 flex items-center"
-      v-if="!executionStatus"
+      v-if="!executionStatus && isVerified"
     >
       <div class="col-span-12">
-        {{ JSON.parse(item.fields.units0units).units }} units offered for
-        {{ format.format(JSON.parse(item.fields.units0units).amount) }}
+        {{ item.fields.profile.firstName }}
+        {{ item.fields.profile.lastName }} is offering to sell
+        {{ JSON.parse(item.fields.units0units).units }} Salon units for a total
+        of {{ format.format(JSON.parse(item.fields.units0units).amount) }}.
+        Their offer represents a per-unit price of
+        {{ format.format(JSON.parse(item.fields.units0units).pricePerUnit) }}.
+        <p class="text-green-500 mb-6">
+          For reference, the current trade price of Salon units is
+
+          {{ format.format(suggestedTradingPrice) }}.
+        </p>
+
+        <p class="pb-6">
+          <span class="opacity-50">Note</span><br />{{ item.fields.note0long }}
+        </p>
+
+        <p class="pb-6">
+          <span class="opacity-50">Instructions</span><br />
+          Salon's exchange proposal facilitates the buying and selling of units
+          amongst our community, empowering members to transact with one another
+          safely. All transactions take place using a secure wallet-to-wallet
+          transfer in USDC.
+        </p>
+        <p class="pb-6">
+          If you are the buyer, please ensure you have sufficient USDC in your
+          digital wallet to complete the transaction. USDC can be purchased
+          using a crypto exchange service, such as Coinbase, and then
+          transferred to your Salon Metamask wallet.
+        </p>
       </div>
       <div class="col-span-12">
-        <AppButton v-if="isSameUser" @click="cancel()" class="mt-8"
+        <AppButton v-if="isSameUser" @click="cancel()" class=""
           >Cancel</AppButton
         >
 
-        <AppButton @click="sendUSDC(0.001)" v-if="!isSameUser" class="mt-8"
+        <AppButton @click="sendUSDC(amount)" v-if="!isSameUser" class=""
           >Accept Offer</AppButton
         >
       </div>
-    </div>
-    <div v-else-if="isCancelled">Cancelled</div>
-    <div v-else>
-      {{ executionStatus }}
     </div>
   </div>
 </template>
 <script>
 import _ from "lodash";
 import AppButton from "@/components/AppButton";
+import AppLoaderFull from "@/components/AppLoaderFull";
 import axios from "axios";
 import { ethers } from "ethers";
 export default {
-  components: { AppButton },
+  components: { AppButton, AppLoaderFull },
   props: ["item"],
   emits: ["transfer", "loading", "done"],
   data() {
     return {
+      processing: true,
       loaded: false,
       exec: false,
+      treasury: {},
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -59,6 +89,15 @@ export default {
             stateMutability: "nonpayable",
             type: "function",
           },
+          {
+            inputs: [
+              { internalType: "address", name: "account", type: "address" },
+            ],
+            name: "balanceOf",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            stateMutability: "view",
+            type: "function",
+          },
         ],
       };
       let ethereum = window.ethereum;
@@ -67,11 +106,16 @@ export default {
       const signer = provider.getSigner();
       const usdcContract = new ethers.Contract(usdc.address, usdc.abi, signer);
       var amt = ethers.utils.parseUnits(value.toString(), 6).toNumber();
+
       try {
+        let balance = await usdcContract.balanceOf(this.walletAddress);
+        var busdc = parseFloat(ethers.utils.formatUnits(balance.toString(), 6));
+        if (value > busdc) throw { message: "Insufficient USDC balance" };
+
         let transfer = await usdcContract.transfer(
           this.item.fields.profile.walletAddress,
           amt,
-          { gasLimit: 700000 }
+          { gasLimit: 60000 }
         );
         var res = await this.submitExecution(this.item.sys.id, "transfer", {
           to: this.walletAddress,
@@ -85,22 +129,23 @@ export default {
           alert("Critical Error: Please contact support");
         }
       } catch (err) {
+        alert(err.message);
         this.processing = false;
         console.error(err);
       }
     },
     async cancel() {
-      this.$emit("loading");
+      this.processing = true;
       try {
         var r = await this.submitExecution(this.item.sys.id, "transfer", {
           cancel: true,
         });
+        window.location.reload();
         console.log(r);
       } catch (e) {
         console.error(e);
         alert("Error");
       }
-      //window.location.reload();
     },
     async submitExecution(id, type, obj) {
       console.log("Sending Ex");
@@ -113,10 +158,55 @@ export default {
     },
   },
   computed: {
+    suggestedTradingPrice() {
+      return _.get(this.treasury, "currentTradePrice");
+    },
     executionStatus() {
       var status = _.get(this, "exec[0].fields.status");
       if (status) return status;
       return false;
+    },
+    statusMessage() {
+      var msg;
+      switch (this.executionStatus) {
+        case "Pending":
+          msg = "Exchange accepted, transaction processing";
+          if (this.isCancelled) msg = "Canceling";
+          break;
+        case "Completed":
+          msg = "Exchange completed on " + this.executionCompletedDate;
+          if (this.isCancelled)
+            msg = "Exchange cancelled on " + this.executionCompletedDate;
+          break;
+        case "Expired":
+          msg = this.executionStatus;
+          break;
+        case "Cancelled":
+          msg = this.executionStatus;
+          break;
+        default:
+          msg = false;
+          if (!this.isVerified) msg = "Verifying";
+      }
+
+      return msg;
+    },
+    executionCompletedDate() {
+      var date = _.get(this, "exec[0].sys.updatedAt");
+      var d = new Date(date);
+      return d.toLocaleString("default", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+    },
+    amount() {
+      return JSON.parse(this.item.fields.units0units).amount;
+    },
+    isVerified() {
+      return (
+        this.item.fields.verified == this.item.fields.profile.walletAddress
+      );
     },
     isCancelled() {
       var c = _.get(this, "exec[0].fields.data.cancel");
@@ -138,11 +228,15 @@ export default {
   async mounted() {
     try {
       console.log("Load Exec!");
-      const res = await axios.get(
-        process.env.VUE_APP_URI + "/execution/" + this.item.sys.id
-      );
-      this.exec = _.get(res, "data");
+      var res = await Promise.all([
+        axios.get(process.env.VUE_APP_URI + "/treasury/"),
+        axios.get(process.env.VUE_APP_URI + "/execution/" + this.item.sys.id),
+      ]);
+      this.treasury = res[0].data.message;
+      this.exec = _.get(res[1], "data");
+
       this.loaded = true;
+      this.processing = false;
     } catch (err) {
       console.error(err);
     }

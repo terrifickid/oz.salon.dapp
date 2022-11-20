@@ -4,6 +4,7 @@
       <div class="col-span-12 md:col-span-9 xl:col-span-7 text-2xl">
         <p class="mb-8" v-html="data.fields.title"></p>
         <div v-html="data.fields.code"></div>
+        <div v-html="data.fields.code2"></div>
       </div>
     </div>
     <div class="lg:col-span-4"></div>
@@ -25,7 +26,7 @@ export default {
   async mounted() {
     try {
       const res = await axios.get(
-        process.env.VUE_APP_URI + "/entry/HlkDGtPc9H5T6Eaxu51hI"
+        process.env.VUE_APP_URI + "/entry/HlkDGtPc9H5T6Eaxu51hI?cache=true"
       );
       this.data = res.data;
       this.loaded = true;

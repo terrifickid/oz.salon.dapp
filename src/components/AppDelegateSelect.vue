@@ -1,5 +1,9 @@
 <template>
-  <select class="focus:outline-none" v-model="selected" @change="onChange">
+  <select
+    class="focus:outline-none border-b border-black disabled:border-0 bg-white"
+    v-model="selected"
+    @change="onChange"
+  >
     <option value="0">No Delegate</option>
     <option
       v-for="(m, index) in members"
@@ -40,7 +44,6 @@ export default {
         process.env.VUE_APP_URI + "/members?cache=true"
       );
       this.members = res.data;
-      console.log(this.members);
     } catch (error) {
       console.log("error", error);
     }

@@ -11,8 +11,8 @@
     <div class="absolute bottom-5 left-5">
       <button
         class="flex items-center"
-        v-show="!information"
-        @click="information = true"
+        v-show="!information[index]"
+        @click="information[index] = true"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,8 +32,8 @@
       </button>
       <button
         class="flex items-center"
-        v-show="information"
-        @click="information = false"
+        v-show="information[index]"
+        @click="information[index] = false"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -53,18 +53,18 @@
         Close
       </button>
     </div>
-    <div class="grid grid-cols-12 gap-5 w-full">
+    <div class="grid grid-cols-12 md:gap-5 w-full">
       <div
         :class="{
-          'col-span-12 md:col-span-4': !information,
-          'col-span-12 md:col-span-5': information,
+          'col-span-12 md:col-span-4': !information[index],
+          'col-span-12 md:col-span-5': information[index],
         }"
       >
-        <p class="font-bold">
+        <p>
           {{ artwork.fields.artist }} <i>{{ artwork.fields.title }}</i>
           {{ artwork.fields.year }}
         </p>
-        <div class="pt-4" v-if="information">
+        <div class="pt-4" v-if="information[index]">
           <p>
             <span class="opacity-50">Acquired</span><br />
             {{ artwork.fields.purchaseDate }} from
@@ -75,13 +75,13 @@
             {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
           </p>
 
-          <p class="pt-8">{{ artwork.fields.description }}</p>
+          <p class="pt-8 pb-12">{{ artwork.fields.description }}</p>
         </div>
       </div>
       <div
         :class="{
-          'col-span-12 md:col-span-4': !information,
-          'col-span-12 md:col-span-4 md:col-start-8': information,
+          'col-span-12 md:col-span-4': !information[index],
+          'col-span-12 md:col-span-4 md:col-start-8': information[index],
         }"
         class="py-20"
       >
@@ -92,7 +92,11 @@
           v-show="index == this.hikey"
           class="w-full"
         />
-        <div v-show="information" class="flex justify-center items-center">
+        <div
+          v-show="information[index]"
+          class="flex justify-center items-center"
+          v-if="artwork.fields.images.length > 1"
+        >
           <img
             v-for="(image, index) in artwork.fields.images"
             :src="image.fields.file.url"
@@ -112,7 +116,7 @@ export default {
     return {
       hkey: 0,
       hikey: 0,
-      information: false,
+      information: [],
       format: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",

@@ -11,8 +11,12 @@
 html,
 body {
   height: 100%;
+  line-height: 1.2;
 }
 
+.fix {
+  @apply col-span-12 md:col-span-6;
+}
 .app-text {
   @apply text-lg sm:text-xl lg:text-2xl;
 }
@@ -46,34 +50,6 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: white;
   border-radius: 0px;
   border: 0 solid orange;
-}
-
-#fp-nav ul li a.active span,
-#fp-nav ul li:hover a.active span,
-.fp-slidesNav ul li a.active span,
-.fp-slidesNav ul li:hover a.active span {
-  width: 8px !important;
-  height: 2px !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  background: #fff !important;
-}
-#fp-nav ul li a span,
-.fp-slidesNav ul li a span {
-  width: 8px !important;
-  height: 1rem !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  background: #000 !important;
-}
-#fp-nav ul li,
-.fp-slidesNav ul li {
-  width: 8px !important;
-  height: 2px !important;
-  margin: 0 !important;
-}
-#fp-nav.fp-right {
-  right: 6px !important;
 }
 
 @media (max-width: 640px) and (orientation: landscape) {

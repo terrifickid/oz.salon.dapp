@@ -1,33 +1,28 @@
 <template>
   <div v-if="ready">
-    <template v-if="isNew"> <AppForm :url="membersURI" /></template>
-    <template v-if="!isKycApproved && !isNew">
-      <div class="pt-20 px-5 container">
-        <div class="grid grid-cols-12">
-          <div class="col-span-10">
-            <p class="text-2xl mb-8 text-green-500">
-              We've received your application
-            </p>
-            <h1 class="text-2xl opacity-50 font-haffer">
-              You'll receive an email notification when you are approved to move
-              to the second stage of our application process. Please reach out
-              to
-              <a class="bold underline" href="mailto:hello@salondao.xyz"
-                >hello@salondao.xyz</a
-              >
-              with any questions.
-            </h1>
-          </div>
-        </div>
-      </div>
-    </template>
+    <div class="grid grid-cols-12 w-full font-haffer px-6">
+      <div class="col-span-12 md:col-span-9 gap-6">
+        <template v-if="isNew"><AppForm :url="membersURI" /></template>
+        <template v-if="!isKycApproved && !isNew">
+          <p class="mb-8">Apply</p>
+          <h1 class="opacity-50 font-haffer">
+            Your application is currently under review.
+          </h1>
+        </template>
 
-    <template v-if="isKycApproved && !isApplied">
-      <AppForm :url="onboardURI" />
-    </template>
-    <template v-if="isApplied && !isMember">
-      <FormProposal :id="profile.onboardId"
-    /></template>
+        <template v-if="isKycApproved && !isApplied">
+          <AppForm :url="onboardURI" />
+        </template>
+        <template v-if="isApplied && !isMember">
+          <FormProposal :id="profile.onboardId" />
+        </template>
+      </div>
+      <div class="hidden md:block md:col-span-3">
+        <p class="pb-8">Contact</p>
+        <p class="opacity-50 pb-4">Jordan Huelskamp<br /><i>Founder</i></p>
+        <p class="opacity-50">hello@salondao.xyz</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
