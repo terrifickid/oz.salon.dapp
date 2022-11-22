@@ -72,7 +72,7 @@ export default {
   computed: {
     minimumInvestment() {
       if (this.profileUnits > 0) return -1;
-      return 0;
+      return 30000;
     },
     profileUnits() {
       return _.get(this.$store, "state.profile.units");
