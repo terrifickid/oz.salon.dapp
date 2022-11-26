@@ -1,6 +1,6 @@
 <template>
   <AppLoaderFull v-if="loading" />
-  <div class="font-haffer pb-64">
+  <div class="font-haffer">
     <div class="grid grid-cols-12">
       <div class="col-span-12">
         Profile

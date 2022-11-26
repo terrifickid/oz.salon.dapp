@@ -118,8 +118,8 @@ export default {
       var weight = 0;
       var scope = this;
       this.votes.votes.forEach(function (vote) {
-        if (!scope.wNormal[v.address]) return;
         var v = JSON.parse(vote.vote);
+        if (!scope.wNormal[v.address]) return;
         if (v.vote)
           weight = parseInt(weight) + parseInt(scope.wNormal[v.address]);
       });
@@ -129,8 +129,8 @@ export default {
       var weight = 0;
       var scope = this;
       this.votes.votes.forEach(function (vote) {
-        if (!scope.wNormal[v.address]) return;
         var v = JSON.parse(vote.vote);
+        if (!scope.wNormal[v.address]) return;
         if (!v.vote)
           weight = parseInt(weight) + parseInt(scope.wNormal[v.address]);
       });

@@ -58,7 +58,7 @@
         />
 
         <button
-          class="flex opacity-50 mt-12 mb-32 cursor-pointer"
+          class="flex opacity-50 mt-12 cursor-pointer"
           @click="perPage += 10"
           v-if="perPage <= filteredProposals.length"
         >
