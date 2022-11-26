@@ -36,7 +36,7 @@
           <FormIntro :name="name" :description="description" @ready="next" />
         </div>
         <div v-show="selectedIndex == 1000" class="">
-          <span class="text-green-500"
+          <span class="text-green-500 capitalize"
             ><span v-if="name != 'Propose'">{{ name }}</span> proposal
             submitted.</span
           >
