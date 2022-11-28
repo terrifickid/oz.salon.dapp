@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 gap-5 px-5 flex w-full pb-48 h-screen">
+  <div class="grid grid-cols-12 gap-5 px-5 flex w-full h-screen">
     <div
       v-for="(slide, key) in slides"
       :key="key"

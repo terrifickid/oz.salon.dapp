@@ -27,16 +27,11 @@
 
         <p class="pb-6">
           <span class="opacity-50">Instructions</span><br />
-          Salon's exchange proposal facilitates the buying and selling of units
-          amongst our community, empowering members to transact with one another
-          safely. All transactions take place using a secure wallet-to-wallet
-          transfer in USDC.
-        </p>
-        <p class="pb-6">
-          If you are the buyer, please ensure you have sufficient USDC in your
-          digital wallet to complete the transaction. USDC can be purchased
-          using a crypto exchange service, such as Coinbase, and then
-          transferred to your Salon Metamask wallet.
+          Salon's exchange facilitates the buying and selling of units within
+          our community. Transactions take place using a secure wallet-to-wallet
+          transfer in USDC. Ensure you have sufficient funds in your digital
+          wallet to complete the transaction, including a small amount of ETH to
+          cover gas fees.
         </p>
       </div>
       <div class="col-span-12">
@@ -115,7 +110,7 @@ export default {
         let transfer = await usdcContract.transfer(
           this.item.fields.profile.walletAddress,
           amt,
-          { gasLimit: 60000 }
+          { gasLimit: 120000 }
         );
         var res = await this.submitExecution(this.item.sys.id, "transfer", {
           to: this.walletAddress,

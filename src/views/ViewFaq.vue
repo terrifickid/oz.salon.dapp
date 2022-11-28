@@ -1,10 +1,5 @@
 <template>
-  <AppShell
-    :colors="colors"
-    :isLoaded="loaded"
-    :protected="false"
-    class="pb-64"
-  >
+  <AppShell :colors="colors" :isLoaded="loaded" :protected="false">
     <div class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
       <div class="col-span-12 md:col-span-6 text-2xl">
         <p class="mb-16">Frequently Asked Questions</p>

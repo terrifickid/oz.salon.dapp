@@ -1,6 +1,6 @@
 <template>
   <AppLoaderFull v-show="processing" />
-  <div v-show="!processing" v-if="ready" ref="fullpage" class="pb-32">
+  <div v-show="!processing" v-if="ready" ref="fullpage">
     <div class="grid grid-cols-12">
       <div class="col-span-12 lg:col-span-8">
         <div class="mb-6">{{ name }}</div>
@@ -35,8 +35,11 @@
         <div v-show="selectedIndex == -1">
           <FormIntro :name="name" :description="description" @ready="next" />
         </div>
-        <div v-show="selectedIndex == 1000" class="">
-          <span class="text-green-500"> {{ name }} proposal submitted.</span>
+        <div v-show="selectedIndex == 1000">
+          <span class="text-green-500">
+            <span v-if="name == 'Propose'">Proposal submitted.</span>
+            <span v-else>{{ name }} proposal submitted.</span>
+          </span>
           <p class="opacity-50 mt-20">
             <router-link
               to="/manage/proposals"

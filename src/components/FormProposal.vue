@@ -82,23 +82,25 @@
               ><br />
               <div class="grid grid-cols-12 gap-4">
                 <div
-                  class="col-span-12 md:col-span-4 xl:col-span-3"
+                  class="col-span-12 md:col-span-4 lg:col-span-3"
                   v-for="(item, index) in JSON.parse(field.value)"
                   :key="index"
                 >
-                  <img
-                    class="cursor-pointer"
-                    @click="fileModal = item"
+                  <a
                     v-if="item.type.includes('image')"
-                    :src="item.url"
-                  />
-                  <div
-                    @click="fileModal = item"
+                    :href="item.url"
+                    target="_blank"
+                  >
+                    <img class="cursor-pointer" :src="item.url" />
+                  </a>
+                  <a
+                    :href="item.url"
                     v-if="item.type.includes('pdf')"
-                    class="w-full aspect-square bg-gray-100 flex items-end p-4 border cursor-pointer"
+                    class="block w-full aspect-square bg-gray-100 flex items-end p-4 border cursor-pointer"
+                    target="_blank"
                   >
                     {{ item.name }} ({{ formatBytes(item.size) }})
-                  </div>
+                  </a>
                 </div>
               </div>
             </template>

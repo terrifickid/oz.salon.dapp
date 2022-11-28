@@ -20,6 +20,9 @@ module.exports = {
         //manrope: ["Manrope"],
       },
       colors: {
+        green: {
+          500: "#34AE35",
+        },
         neon: "#82f054",
         tope: "#f7f7f7",
         lilac: "#8719e0",

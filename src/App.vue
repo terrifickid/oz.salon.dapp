@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-48">
     <div v-show="!ready"></div>
     <div v-show="ready">
       <AppHeader :colors="colors" />

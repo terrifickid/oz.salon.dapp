@@ -1,5 +1,5 @@
 <template>
-  <AppShell :isLoaded="loaded" :protected="false" class="pb-64">
+  <AppShell :isLoaded="loaded" :protected="false">
     <div v-if="loaded" class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
       <div class="col-span-12 md:col-span-6">
         <p class="text-2xl mb-8">Members</p>
