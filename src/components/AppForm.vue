@@ -35,11 +35,11 @@
         <div v-show="selectedIndex == -1">
           <FormIntro :name="name" :description="description" @ready="next" />
         </div>
-        <div v-show="selectedIndex == 1000" class="">
-          <span class="text-green-500 capitalize"
-            ><span v-if="name != 'Propose'">{{ name }}</span> proposal
-            submitted.</span
-          >
+        <div v-show="selectedIndex == 1000">
+          <span class="text-green-500">
+            <span v-if="name == 'Propose'">Proposal submitted.</span>
+            <span v-else>{{ name }} proposal submitted.</span>
+          </span>
           <p class="opacity-50 mt-20">
             <router-link
               to="/manage/proposals"
