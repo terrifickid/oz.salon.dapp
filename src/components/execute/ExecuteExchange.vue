@@ -110,7 +110,7 @@ export default {
         let transfer = await usdcContract.transfer(
           this.item.fields.profile.walletAddress,
           amt,
-          { gasLimit: 60000 }
+          { gasLimit: 120000 }
         );
         var res = await this.submitExecution(this.item.sys.id, "transfer", {
           to: this.walletAddress,
