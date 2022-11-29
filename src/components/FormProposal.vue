@@ -135,8 +135,9 @@
             </template>
             <template v-else>
               <span class="opacity-50">{{ field.label }}</span
-              ><br />{{ field.value }}</template
-            >
+              ><br />
+              <div style="white-space: pre-wrap">{{ field.value }}</div>
+            </template>
           </li>
         </ul>
 
