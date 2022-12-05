@@ -9,7 +9,7 @@
   <ExecuteInvest
     :proposal="proposal"
     class="mb-32"
-    v-else-if="hasEnded && passed"
+    v-else-if="type == 'invest' && hasEnded && passed"
   />
 </template>
 
