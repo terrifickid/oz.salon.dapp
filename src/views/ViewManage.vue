@@ -48,9 +48,7 @@ export default {
     console.log("Mobile Check!", this.isMobile);
     if (this.isMobile) {
       if (!this.isMetaMaskBrowser) {
-        this.openMetaMaskUrl(
-          "https://metamask.app.link/dapp/salondao.xyz/" + window.location.hash
-        );
+        this.openMetaMaskUrl("dapp://salondao.xyz/" + window.location.hash);
       }
     }
   },
