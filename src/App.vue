@@ -1,6 +1,6 @@
 <template>
   <div class="pb-48">
-    <div v-show="!ready"></div>
+    <div v-show="!ready" class="loat"></div>
     <div v-show="ready">
       <AppHeader :colors="colors" />
       <router-view />
