@@ -38,9 +38,7 @@ export default {
     console.log("Mobile Check!", this.isMobile);
     if (this.isMobile) {
       if (!this.isMetaMaskBrowser) {
-        window.location.href =
-          "https://metamask.app.link/dapp/salon-dev.on.fleek.co/" +
-          window.location.hash;
+        this.openMetaMaskUrl("dapp://salondao.xyz/" + window.location.hash);
       }
     }
   },
