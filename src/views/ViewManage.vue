@@ -34,6 +34,16 @@ export default {
       }
     },
   },
+  methods: {
+    openMetaMaskUrl(url) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_self";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    },
+  },
   mounted() {
     console.log("Mobile Check!", this.isMobile);
     if (this.isMobile) {
