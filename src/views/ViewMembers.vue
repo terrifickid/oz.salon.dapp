@@ -1,44 +1,49 @@
 <template>
   <AppShell :isLoaded="loaded" :protected="false">
-    <div v-if="loaded" class="grid grid-cols-12 pt-20 w-full font-haffer px-5">
-      <div class="col-span-12 md:col-span-6">
-        <p class="text-2xl mb-8">Members</p>
-        <p class="text-2xl opacity-50" v-html="data.code"></p>
-      </div>
-      <div class="hidden md:block md:col-span-3"></div>
-      <div class="hidden md:block md:col-span-3">
-        <p class="pb-8">Contact</p>
-        <p class="opacity-50 pb-4">Jordan Huelskamp<br /><i>Founder</i></p>
-        <p class="opacity-50">hello@salondao.xyz</p>
-      </div>
-    </div>
-    <div
-      class="grid grid-cols-12 w-full fot-haffer px-5 pt-12"
-      stye="font-size: 16px;"
-    >
+    <div class="pb-48">
       <div
-        class="col-span-6 md:col-span-3 pb-4"
-        v-for="(profile, index) in data.list1"
-        :key="index"
+        v-if="loaded"
+        class="grid grid-cols-12 pt-20 w-full font-haffer px-5"
       >
-        <span>{{ profile }}</span>
+        <div class="col-span-12 md:col-span-6">
+          <p class="text-2xl mb-8">Members</p>
+          <p class="text-2xl opacity-50" v-html="data.code"></p>
+        </div>
+        <div class="hidden md:block md:col-span-3"></div>
+        <div class="hidden md:block md:col-span-3">
+          <p class="pb-8">Contact</p>
+          <p class="opacity-50 pb-4">Jordan Huelskamp<br /><i>Founder</i></p>
+          <p class="opacity-50">hello@salondao.xyz</p>
+        </div>
       </div>
-    </div>
-    <div class="grid grid-cols-12 pt-12 w-full font-haffer px-5 pt-24 gap-5">
-      <div class="col-span-12 md:col-span-6">
-        <p class="text-2xl opacity-50" v-html="data.code2"></p>
-      </div>
-    </div>
-    <div
-      class="grid grid-cols-12 w-full fot-haffer px-5 pt-12 gap-5"
-      stye="font-size: 16px;"
-    >
       <div
-        class="col-span-6 md:col-span-3 pb-4"
-        v-for="(artist, index) in data.list2"
-        :key="index"
+        class="grid grid-cols-12 w-full fot-haffer px-5 pt-12"
+        stye="font-size: 16px;"
       >
-        <span>{{ artist }}</span>
+        <div
+          class="col-span-6 md:col-span-3 pb-4"
+          v-for="(profile, index) in data.list1"
+          :key="index"
+        >
+          <span>{{ profile }}</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 pt-12 w-full font-haffer px-5 pt-24 gap-5">
+        <div class="col-span-12 md:col-span-6">
+          <p class="text-2xl opacity-50" v-html="data.code2"></p>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-12 w-full fot-haffer px-5 pt-12 gap-5"
+        stye="font-size: 16px;"
+      >
+        <div
+          class="col-span-6 md:col-span-3 pb-4"
+          v-for="(artist, index) in data.list2"
+          :key="index"
+        >
+          <span>{{ artist }}</span>
+        </div>
       </div>
     </div>
   </AppShell>

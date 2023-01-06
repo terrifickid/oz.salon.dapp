@@ -1,6 +1,6 @@
 <template>
   <AppShell :isLoaded="ready" :protected="false" :kycAllowed="true" class="">
-    <div>
+    <div class="pb-48">
       <CollectionHero :collection="collection" />
 
       <div ref="nav" class="grid grid-cols-12 px-5 py-10 md:gap-5">

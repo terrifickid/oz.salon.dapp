@@ -1,5 +1,5 @@
 <template>
-  <AppShell :isLoaded="isLoaded" :protected="false" class="font-haffer pt-16">
+  <AppShell :isLoaded="isLoaded" :protected="false" class="font-haffer">
     <HomeFaderSlide :slides="artworks" :key="test" />
   </AppShell>
 </template>
