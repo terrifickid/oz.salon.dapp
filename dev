@@ -2,4 +2,4 @@ git checkout dev
 yarn dev
 git add -A
 git commit -a -m 'autodeploy'
-git push dev dev
+git push origin dev
