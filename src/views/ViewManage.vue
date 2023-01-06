@@ -1,6 +1,6 @@
 <template>
   <AppShell :isLoaded="true" :protected="true">
-    <div class="pt-20">
+    <div class="pt-20 pb-48">
       <router-view></router-view>
     </div>
   </AppShell>

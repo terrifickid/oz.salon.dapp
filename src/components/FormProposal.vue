@@ -9,7 +9,7 @@
       </h1>
     </template>
     <template v-else>
-      <div class="pb-64">
+      <div>
         <div class="grid grid-cols-12 mb-4">
           <div
             class="col-span-12 lg:col-span-3 capitalize"

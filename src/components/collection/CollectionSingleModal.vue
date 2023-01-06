@@ -130,8 +130,7 @@
         }"
         class="py-10 flex items-center justify-center"
       >
-        <div>
-          prk
+        <div class="pb-20 sm:pb-0">
           <img
             v-for="(image, index) in artwork.fields.images"
             :src="image.fields.file.url"
@@ -193,6 +192,10 @@ export default {
   created() {
     console.log("modal create!");
     document.body.style.overflow = "hidden";
+    window.onhashchange = function () {
+      //blah blah blah
+      document.body.style.overflow = "scroll";
+    };
   },
 };
 </script>
