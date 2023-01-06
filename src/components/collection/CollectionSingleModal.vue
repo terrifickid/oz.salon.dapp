@@ -131,6 +131,7 @@
         class="py-10 flex items-center justify-center"
       >
         <div>
+          prk
           <img
             v-for="(image, index) in artwork.fields.images"
             :src="image.fields.file.url"

@@ -180,7 +180,7 @@ export default {
           "onboardProposal",
           "profile",
           "role",
-          "delegate",
+          "",
           "biography",
           "prettyId",
           "processState",

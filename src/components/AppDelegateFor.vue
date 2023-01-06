@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p v-for="(d, index) in delegates" :key="index">
+    <p v-for="(d, index) in s" :key="index">
       {{ d.fields.firstName }} {{ d.fields.lastName }}
     </p>
-    <p v-if="!delegates.length">&mdash;</p>
+    <p v-if="!s.length">&mdash;</p>
   </div>
 </template>
 <script>
@@ -15,24 +15,25 @@ export default {
       selected: "",
       members: [],
     };
+
   },
-  emits: ["delegate"],
+  emits: [""],
   computed: {
     profile() {
       return this.$store.state.profile;
     },
-    delegates() {
+    s() {
       var d = [];
       //
       this.members.forEach((m) => {
-        if (m.fields.delegate == this.profile.walletAddress) d.push(m);
+        if (m.fields. == this.profile.walletAddress) d.push(m);
       });
       return d;
     },
   },
   methods: {},
   async beforeMount() {
-    this.selected = _.get(this.profile, "delegate");
+    this.selected = _.get(this.profile, "");
     console.log("members load!");
     try {
       const res = await axios.get(
