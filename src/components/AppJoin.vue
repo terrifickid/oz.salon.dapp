@@ -1,6 +1,6 @@
 <template>
   <div v-if="ready">
-    <div class="grid grid-cols-12 w-full font-haffer px-6">
+    <div class="grid grid-cols-12 w-full font-haffer px-5 pb-48">
       <div class="col-span-12 md:col-span-9 gap-6">
         <template v-if="isNew"><AppForm :url="membersURI" /></template>
         <template v-if="!isKycApproved && !isNew">
