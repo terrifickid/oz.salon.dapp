@@ -1,15 +1,14 @@
 <template>
   <div class="font-haffer">
-    <div
-      v-if="networkError"
-      class="flex min-h-screen items-center justify-center w-screen"
-    >
+    <div v-if="networkError" class="flex min-h-screen items-center justify-center w-screen px-6 text-center">
       {{ networkError }}
     </div>
     <div v-else>
       <div v-if="check">
         <AppLoaderFull v-if="!ready" />
-        <div v-show="ready"><slot></slot></div>
+        <div v-show="ready">
+          <slot></slot>
+        </div>
         <AppFooter />
       </div>
       <div v-if="!check">
@@ -60,7 +59,7 @@ export default {
     },
   },
   methods: {
-    mounted() {},
+    mounted() { },
     connect() {
       this.$store.dispatch("connect");
     },
