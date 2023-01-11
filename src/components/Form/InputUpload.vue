@@ -4,28 +4,14 @@
 
     <p v-for="(file, index) in files" :key="index" class="mb-4">
       {{ file.name }} ({{ formatBytes(file.size) }})
-      <span class="pl-4 cursor-pointer opacity-50" @click="remove(index)"
-        >Remove</span
-      >
+      <span class="pl-4 cursor-pointer opacity-50" @click="remove(index)">Remove</span>
     </p>
-    <input
-      v-show="!progress"
-      type="file"
-      ref="file"
-      @change="execute"
-      class="sm:ml-0 font-haffer"
-      title=""
-    />
-    <div
-      v-show="progress"
-      class="bg-black h-1 ml-10 sm:ml-0"
-      :style="{ width: progress + '%' }"
-    ></div>
+    <input v-show="!progress" type="file" ref="file" @change="execute" class="sm:ml-0 font-haffer" title="" />
+    <div v-show="progress" class="bg-black h-1 ml-10 sm:ml-0" :style="{ width: progress + '%' }"></div>
     <span v-show="progress != 0" class="ml-10 sm:ml-0 font-haffer hidden">
       {{ progress }}%
       <span v-show="progress != 100">Uploading...</span>
-      <span v-show="progress == 100">Complete!</span></span
-    >
+      <span v-show="progress == 100">Complete!</span></span>
     <FormHelp :help="help" v-if="help" />
     <FormButtonOk @ready="$emit('ready')" @back="$emit('back')" />
   </div>
@@ -56,9 +42,8 @@ export default {
       if (!+a) return "0 Bytes";
       const c = 0 > b ? 0 : b,
         d = Math.floor(Math.log(a) / Math.log(1024));
-      return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${
-        ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
-      }`;
+      return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]
+        }`;
     },
     async remove(index) {
       this.files = [
@@ -74,7 +59,6 @@ export default {
       var name = file.name;
       var size = file.size;
       if (file.size > 5000000) {
-        this.$refs.file.value = null;
         return alert("Limit file size to 5mb.");
       }
       const { fileUrl, fileId } = await this.upload.uploadFile({
@@ -102,7 +86,8 @@ input[type="file"] {
   color: transparent;
   @apply block;
 }
+
 input::file-selector-button {
-  @apply px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block border-0;
+  @apply px-4 py-2 rounded-full bg-gray-200 hover: bg-gray-300 block border-0;
 }
 </style>
