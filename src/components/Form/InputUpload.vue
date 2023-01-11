@@ -88,6 +88,6 @@ input[type="file"] {
 }
 
 input::file-selector-button {
-  @apply px-4 py-2 rounded-full bg-gray-200 hover: bg-gray-300 block border-0;
+  @apply file-selector-button;
 }
 </style>

@@ -68,3 +68,7 @@ input[type="number"]::-webkit-outer-spin-button {
   content: "";
   @apply bg-green-500 absolute top-1 -right-3 w-2 h-2 rounded-full;
 }
+
+.file-selector-button {
+  @apply px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block border-0;
+}
