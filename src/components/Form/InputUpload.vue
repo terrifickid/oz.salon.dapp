@@ -86,8 +86,4 @@ input[type="file"] {
   color: transparent;
   @apply block;
 }
-
-input::file-selector-button {
-  @apply file-selector-button;
-}
 </style>
