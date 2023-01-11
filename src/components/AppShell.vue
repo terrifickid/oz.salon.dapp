@@ -1,6 +1,6 @@
 <template>
   <div class="font-haffer">
-    <div v-if="networkError" class="flex min-h-screen items-center justify-center w-screen px-6">
+    <div v-if="networkError" class="flex min-h-screen items-center justify-center w-screen px-6 text-center">
       {{ networkError }}
     </div>
     <div v-else>
