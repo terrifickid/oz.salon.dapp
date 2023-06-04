@@ -7,7 +7,7 @@
       <span class="pl-4 cursor-pointer opacity-50" @click="remove(index)">Remove</span>
     </p>
     <input v-show="!progress" type="file" ref="file" @change="execute" class="sm:ml-0 font-haffer" title="" />
-    <div v-show="progress" class="bg-black h-1 ml-10 sm:ml-0" :style="{ width: progress + '%' }"></div>
+    <div v-show="progress" class="bg-black h-1" :style="{ width: progress + '%' }"></div>
     <span v-show="progress != 0" class="ml-10 sm:ml-0 font-haffer hidden">
       {{ progress }}%
       <span v-show="progress != 100">Uploading...</span>
