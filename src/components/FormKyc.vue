@@ -93,7 +93,7 @@ export default {
         );
         if (res.data.result) {
           console.log("success", res.data);
-          this.$store.dispatch("connect");
+          // this.$store.dispatch("connect");
         } else {
           alert("Error, Please try again.");
           this.processing = false;

@@ -54,7 +54,7 @@ export default {
           units: this.sAmount.toString(),
         });
         if (res.data.result) {
-          this.$store.dispatch("connect");
+          //this.$store.dispatch("connect");
         } else {
           console.log(res.data);
           this.btnTxt = "ERROR A1: Contact Support";

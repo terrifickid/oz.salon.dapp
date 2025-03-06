@@ -30,8 +30,11 @@ export default {
     },
   },
   beforeMount() {
-    if (localStorage.getItem("salon_login")) this.$store.dispatch("connect");
     window.addEventListener("resize", this.hideUI);
+    var l = localStorage.getItem("salon_login");
+    if (l) {
+      this.$store.dispatch("connect", JSON.parse(l));
+    }
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.hideUI);
@@ -41,6 +44,4 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

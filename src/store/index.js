@@ -4,6 +4,7 @@ import axios from "axios";
 import _ from "lodash";
 export default createStore({
   state: {
+    login: null,
     connecting: false,
     walletAddress: null,
     provider: null,
@@ -38,44 +39,21 @@ export default createStore({
   },
   actions: {
     async disconnect() {
-      this.state.walletAddress = null;
+      this.state.login = null;
       this.state.profile = { loading: true };
 
       localStorage.setItem("salon_login", 0);
     },
-    async connect() {
+    async connect({ commit }, { username, password }) {
       console.log("Connecting!");
-      if (typeof window.ethereum == "undefined") return;
       this.state.connecting = true;
-      var provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-      provider.on("network", (newNetwork, oldNetwork) => {
-        console.log("switch!");
-        // When a Provider makes its initial connection, it emits a "network"
-        // event with a null oldNetwork along with the newNetwork. So, if the
-        // oldNetwork exists, it represents a changing network
-        if (oldNetwork) {
-          window.location.reload();
-        }
-      });
-
-      var id = await provider.getNetwork();
-      console.log("ID", id);
-      if (process.env.VUE_APP_CHAIN_NAME != id.name) {
-        var msg;
-        switch (process.env.VUE_APP_CHAIN_NAME) {
-          case "goerli":
-            msg = "Please connect to the Goerli Test Network to continue.";
-            break;
-          case "homestead":
-            msg = "Please connect to the Ethereum Mainnet to continue.";
-            break;
-        }
-        this.state.networkError = msg;
-        return;
-      }
-      await provider.send("eth_requestAccounts", []);
-      var signer = provider.getSigner();
-      this.state.walletAddress = await signer.getAddress();
+      localStorage.setItem(
+        "salon_login",
+        JSON.stringify({ username, password })
+      );
+      this.state.login = { username, password };
+      //this.state.networkError = "test";
+      /*
       try {
         const res = await axios.get(
           process.env.VUE_APP_URI + "/profile/" + this.state.walletAddress
@@ -86,7 +64,7 @@ export default createStore({
       } catch (error) {
         console.log("init profile error", error);
       }
-
+*/
       this.state.connecting = false;
     },
   },

@@ -32,14 +32,14 @@ export default {
   props: ["colors"],
   components: {},
   computed: {
-    walletAddress() {
-      return this.$store.state.walletAddress;
+    login() {
+      return this.$store.state.login;
     },
     profile() {
       return this.$store.state.profile;
     },
     isMember() {
-      return _.get(this.profile, "units");
+      return _.get(this, "login");
     },
     isAdmin() {
       var role = _.get(this.profile, "role");

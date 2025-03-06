@@ -1,6 +1,9 @@
 <template>
   <div class="font-haffer">
-    <div v-if="networkError" class="flex min-h-screen items-center justify-center w-screen px-6 text-center">
+    <div
+      v-if="networkError"
+      class="flex min-h-screen items-center justify-center w-screen px-6 text-center"
+    >
       {{ networkError }}
     </div>
     <div v-else>
@@ -12,8 +15,8 @@
         <AppFooter />
       </div>
       <div v-if="!check">
-        <WalletConnect v-if="!this.walletAddress" />
-        <AppJoin v-if="this.walletAddress" class="pt-16" />
+        <WalletConnect v-if="!this.login" />
+        <AppJoin v-if="0" class="pt-16" />
         <AppFooter />
       </div>
     </div>
@@ -36,7 +39,7 @@ export default {
   computed: {
     check() {
       if (!this.protected) return true;
-      return _.get(this, "profile.units");
+      return _.get(this, "login");
     },
     debug() {
       return "test";
@@ -45,8 +48,8 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-    walletAddress() {
-      return this.$store.state.walletAddress;
+    login() {
+      return this.$store.state.login;
     },
     networkError() {
       return this.$store.state.networkError;
@@ -59,10 +62,7 @@ export default {
     },
   },
   methods: {
-    mounted() { },
-    connect() {
-      this.$store.dispatch("connect");
-    },
+    mounted() {},
     disconnect() {
       this.$store.dispatch("disconnect");
     },

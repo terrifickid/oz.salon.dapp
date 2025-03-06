@@ -14,43 +14,8 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    isMetaMaskBrowser() {
-      if (/MetaMaskMobile/i.test(navigator.userAgent)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    isMobile() {
-      if (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-  },
-  methods: {
-    openMetaMaskUrl(url) {
-      const a = document.createElement("a");
-      a.href = url;
-      a.target = "_self";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    },
-  },
-  mounted() {
-    console.log("Mobile Check!", this.isMobile);
-    if (this.isMobile) {
-      if (!this.isMetaMaskBrowser) {
-        this.openMetaMaskUrl("dapp://salondao.xyz/" + window.location.hash);
-      }
-    }
-  },
+  computed: {},
+  methods: {},
+  mounted() {},
 };
 </script>

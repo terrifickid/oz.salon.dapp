@@ -59,7 +59,7 @@ export default {
     },
     ready() {
       if (!("loading" in this.profile)) return true;
-      return false;
+      return true;
     },
     membersURI() {
       return process.env.VUE_APP_URI + "/form/members";

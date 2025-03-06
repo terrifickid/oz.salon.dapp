@@ -185,7 +185,7 @@ export default {
     },
   },
   async mounted() {
-    window.onscroll = this.navScroll;
+    //window.onscroll = this.navScroll;
 
     console.log("collection load!");
     try {

@@ -66,12 +66,6 @@ export default {
     toggleDown() {
       this.toggle = false;
     },
-    connect() {
-      this.$store.dispatch("connect");
-    },
-    disconnect() {
-      this.$store.dispatch("disconnect");
-    },
   },
 };
 </script>

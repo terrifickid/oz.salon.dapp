@@ -23,12 +23,15 @@
         to="/manage/profile"
         >Account</router-link
       >
-      <router-link
-        v-if="!walletAddress"
-        class="inline-block ml-5"
-        to="/manage/start"
-        @click="connect()"
+      <router-link v-if="!login" class="inline-block ml-5" to="/manage/start"
         >Login</router-link
+      >
+      <a
+        v-if="login"
+        class="inline-block ml-5"
+        @click="disconnect"
+        href="/#/manage/start"
+        >Logout</a
       >
     </div>
     <div class="grid flex grid-cols-12 items-center w-full">
@@ -151,6 +154,9 @@ export default {
       if (on) return true;
       return false;
     },
+    login() {
+      return this.$store.state.login;
+    },
     walletAddress() {
       return this.$store.state.walletAddress;
     },
@@ -158,7 +164,7 @@ export default {
       return this.$store.state.profile;
     },
     isMember() {
-      return _.get(this.profile, "units");
+      return _.get(this, "login");
     },
     isAdmin() {
       var role = _.get(this.profile, "role");
@@ -180,9 +186,6 @@ export default {
     },
     toggleDown() {
       this.toggle = false;
-    },
-    connect() {
-      this.$store.dispatch("connect");
     },
     disconnect() {
       this.$store.dispatch("disconnect");
