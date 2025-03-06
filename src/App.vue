@@ -33,7 +33,8 @@ export default {
     window.addEventListener("resize", this.hideUI);
     var l = localStorage.getItem("salon_login");
     if (l) {
-      this.$store.dispatch("connect", JSON.parse(l));
+      console.log("l ist", l);
+      //this.$store.dispatch("connect", JSON.parse(l));
     }
   },
   beforeUnmount() {

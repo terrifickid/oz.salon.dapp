@@ -1,5 +1,5 @@
 <template>
-  <AppShell :colors="colors" :isLoaded="true" :protected="true"> </AppShell>
+  <div style="height: 100vw; background: red"></div>
 </template>
 <script>
 // @ is an alias to /src

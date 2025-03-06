@@ -19,7 +19,7 @@
         <router-link v-if="isMember" class="ml-5" to="/resources"
           >Resources</router-link
         >
-        <router-link v-if="!isMember" class="ml-5" to="/manage/start"
+        <router-link v-if="!isMember" class="ml-5" to="/apply"
           >Apply</router-link
         >
       </div>
