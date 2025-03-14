@@ -1,7 +1,7 @@
 <template>
   <div class="font-haffer">
     <div
-      v-if="networkError"
+      v-if="0"
       class="flex min-h-screen items-center justify-center w-screen px-6 text-center"
     >
       {{ networkError }}

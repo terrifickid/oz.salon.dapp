@@ -31,11 +31,11 @@ export default {
   },
   beforeMount() {
     window.addEventListener("resize", this.hideUI);
-    var l = localStorage.getItem("salon_login");
-    if (l) {
-      console.log("l ist", l);
-      //this.$store.dispatch("connect", JSON.parse(l));
-    }
+    //var l = localStorage.getItem("salon_login");
+    // if (l) {
+    //console.log("l ist", l);
+    //this.$store.dispatch("connect", JSON.parse(l));
+    //}
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.hideUI);
