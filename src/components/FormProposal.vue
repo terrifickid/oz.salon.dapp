@@ -58,12 +58,18 @@
               :choice="true"
               :label="'Yes'"
               class="mr-2"
+              @voting="handleVoting"
+              @voted="handleVoted"
+              :processing="isVoting"
             />
             <AppButtonVote
               :id="proposalFormat.id"
               :votes="proposalFormat.votes"
               :choice="false"
               :label="'No'"
+              @voting="handleVoting"
+              @voted="handleVoted"
+              :processing="isVoting"
             />
           </div>
         </div>
@@ -141,7 +147,7 @@
           </li>
         </ul>
 
-        <ExecuteProposal :proposal="proposal" />
+        <ExecuteProposal v-if="0" :proposal="proposal" />
 
         <router-link to="/manage/proposals">
           <button class="flex items-center mt-12 opacity-50">
@@ -190,6 +196,7 @@ export default {
   emits: ["ready"],
   data() {
     return {
+      isVoting: false,
       fileModal: false,
       proposal: {},
       proposalFormat: {},
@@ -266,6 +273,16 @@ export default {
     },
   },
   methods: {
+    async handleVoting(label) {
+      console.log("voting!", label);
+      this.isVoting = label;
+    },
+    async handleVoted() {
+      console.log("voted!");
+      await this.init();
+      this.isVoting = false;
+    },
+    handleVote() {},
     formatBytes(a, b = 2) {
       if (!+a) return "0 Bytes";
       const c = 0 > b ? 0 : b,
@@ -325,36 +342,40 @@ export default {
         return [];
       }
     },
+    async init() {
+      console.log("loading proposal!");
+
+      try {
+        var res = await Promise.all([
+          axios.get(process.env.VUE_APP_URI + "/treasury/"),
+          axios.get(this.uri),
+        ]);
+        this.treasury = res[0].data.message;
+        this.proposal = res[1].data;
+
+        console.log(this.treasury);
+
+        var r = await this.assembleProposalType(
+          this.proposal.sys.contentType.sys.id
+        );
+        this.isVoting = false;
+        this.proposalFormat = r;
+
+        if (_.get(this.proposalFormat, "votes.members.length")) {
+          this.members = _.get(this.proposalFormat, "votes.members");
+        } else {
+          this.members = await this.getMembers();
+        }
+
+        this.loaded = true;
+        this.$emit("ready");
+      } catch (error) {
+        console.log("error", error);
+      }
+    },
   },
   async mounted() {
-    console.log("loading proposal!");
-
-    try {
-      var res = await Promise.all([
-        axios.get(process.env.VUE_APP_URI + "/treasury/"),
-        axios.get(this.uri),
-      ]);
-      this.treasury = res[0].data.message;
-      this.proposal = res[1].data;
-
-      console.log(this.treasury);
-
-      var r = await this.assembleProposalType(
-        this.proposal.sys.contentType.sys.id
-      );
-      this.proposalFormat = r;
-
-      if (_.get(this.proposalFormat, "votes.members.length")) {
-        this.members = _.get(this.proposalFormat, "votes.members");
-      } else {
-        this.members = await this.getMembers();
-      }
-
-      this.loaded = true;
-      this.$emit("ready");
-    } catch (error) {
-      console.log("error", error);
-    }
+    this.init();
   },
 };
 </script>

@@ -54,17 +54,21 @@ export default createStore({
         switch (res.status) {
           case 200:
             this.state.profile = res.data;
+            this.state.walletAddress = res.data.walletAddress;
             this.state.login = { username, password };
             console.log("init profile", this.state.profile);
             break;
           default:
             console.log("login failed", res);
-            this.state.networkError = res.data;
+            this.state.networkError = _.get(
+              res,
+              "data",
+              "Login failed, please try again."
+            );
             break;
         }
       } catch (error) {
         console.log("init profile error", error);
-
         this.state.networkError = _.get(
           error,
           "response.data",

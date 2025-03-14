@@ -6,7 +6,29 @@
     :class="{ active: voted }"
     v-if="!hasEnded"
   >
-    {{ label }}
+    <span v-if="!isProcessing">{{ label }}</span>
+    <svg
+      v-else
+      class="size-5 animate-spin"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+
     <svg
       v-if="voted"
       xmlns="http://www.w3.org/2000/svg"
@@ -27,18 +49,19 @@ import AppButton from "@/components/AppButton.vue";
 import { ethers } from "ethers";
 export default {
   components: { AppButton },
-  props: ["id", "votes", "choice", "label"],
-  data() {
-    return {
-      processing: false,
-    };
-  },
+  props: ["id", "votes", "choice", "label", "processing"],
   computed: {
+    isProcessing() {
+      return this.processing == this.label;
+    },
     hasEnded() {
       return typeof _.get(this.votes, "passed") == "boolean";
     },
     walletAddress() {
       return this.$store.state.walletAddress;
+    },
+    login() {
+      return this.$store.state.login;
     },
     voted() {
       if (!this.votes) return false;
@@ -57,6 +80,7 @@ export default {
   },
   methods: {
     async vote() {
+      this.$emit("voting", this.label);
       const vote = JSON.stringify({
         address: this.walletAddress,
         vote: this.choice,
@@ -65,20 +89,14 @@ export default {
 
       //Sign Message and Vote
       try {
-        var provider = new ethers.providers.Web3Provider(
-          window.ethereum,
-          "any"
-        );
-        var signer = provider.getSigner();
-        const signature = await signer.signMessage(vote);
         console.log("Sending Vote!");
         const res = await axios.post(this.uri, {
           address: this.walletAddress,
           vote: vote,
-          signature: signature,
+          signature: this.login,
         });
         console.log(res.data);
-        location.reload();
+        this.$emit("voted");
       } catch (err) {
         console.log(err);
       }
