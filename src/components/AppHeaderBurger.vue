@@ -85,6 +85,7 @@
           to="/manage/start"
           >Login</router-link
         >
+
         <router-link
           v-if="isMember"
           @click="toggleDown()"
@@ -98,6 +99,13 @@
           class="block"
           to="/manage/profile"
           >Account</router-link
+        >
+        <router-link
+          v-if="login"
+          @click="disconnect()"
+          class="block"
+          to="/manage/start"
+          >Logout</router-link
         >
       </div>
       <div class="pb-10">
@@ -128,7 +136,7 @@
         <router-link
           v-if="!isMember"
           class="block"
-          to="/manage/start"
+          to="/apply"
           @click="toggleDown()"
           >Apply</router-link
         >
@@ -189,6 +197,7 @@ export default {
     },
     disconnect() {
       this.$store.dispatch("disconnect");
+      this.toggleDown();
     },
   },
 };
