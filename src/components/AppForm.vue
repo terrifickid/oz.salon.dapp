@@ -157,7 +157,10 @@ export default {
         } else {
           console.error(res.data.message);
           var error = JSON.parse(res.data.message.message);
-          alert(JSON.stringify(_.get(error, "details.errors[0]")));
+          alert(
+            "Sorry, there is a problem with your application: " +
+              _.get(error, "details.errors[0].details")
+          );
           this.processing = false;
         }
       } catch (error) {
@@ -185,6 +188,8 @@ export default {
           "prettyId",
           "processState",
           "verified",
+          "walletAddress",
+          "softInvestmentCommitment",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

@@ -32,12 +32,6 @@
             class="grid grid-cols-12 gap-5 w-full pt-10 pb-10"
             v-show="selectedIndex == index"
           >
-            <div class="col-span-12 md:col-span-3 opacity-50">Wallet ID</div>
-
-            <div class="col-span-12 md:col-span-9 truncate">
-              {{ member.fields.walletAddress }}
-            </div>
-
             <div class="col-span-12 md:col-span-3 opacity-50">Biography</div>
             <div class="col-span-12 md:col-span-9">
               {{ member.fields.biography }}

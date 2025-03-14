@@ -103,12 +103,7 @@
     </div>
 
     <p class="pt-12 pb-4">Financial</p>
-    <div class="grid grid-cols-12">
-      <div class="col-span-12 md:col-span-3 opacity-50">Wallet Address</div>
-      <div class="col-span-12 pb-4 md:col-span-3">
-        {{ profile.walletAddress }}
-      </div>
-    </div>
+
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3 opacity-50">Current Units</div>
       <div class="col-span-12 md:col-span-3">
@@ -189,6 +184,9 @@ export default {
     walletAddress() {
       return this.$store.state.walletAddress;
     },
+    login() {
+      return this.$store.state.login;
+    },
   },
   methods: {
     async updateProfile() {
@@ -199,11 +197,12 @@ export default {
           this.update
         );
         console.log(res);
+        await this.$store.dispatch("connect", this.login);
       } catch (e) {
         console.error(e);
       }
       this.editMode = false;
-      window.location.reload();
+      this.loading = false;
     },
     updateDelegate(d) {
       this.update.delegate = d;
