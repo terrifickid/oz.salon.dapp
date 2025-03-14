@@ -25,7 +25,6 @@
             ><span v-if="!isConnecting">Login</span>
 
             <svg
-              v-if="isConnecting"
               class="size-5 animate-spin"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
