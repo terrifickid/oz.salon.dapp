@@ -5,7 +5,7 @@
         <div :class="shakeClass">
           <input
             type="text"
-            placeholder="username"
+            placeholder="Username"
             v-model="username"
             class="block w-full p-2 rounded-t-xl border bg-gray-50"
             autocomplete="off"
@@ -13,7 +13,7 @@
           />
           <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             v-model="password"
             class="block w-full p-2 rounded-b-xl border-b border-l border-r bg-gray-50"
             autocomplete="off"
