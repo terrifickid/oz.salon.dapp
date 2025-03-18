@@ -37,8 +37,14 @@
         </div>
         <div v-show="selectedIndex == 1000">
           <span class="text-green-500">
-            <span v-if="name == 'Propose'">Proposal submitted.</span>
-            <span v-else>{{ name }} proposal submitted.</span>
+            <span v-if="name == 'Propose'"
+              >Proposal submitted for review by Salon's Financial
+              Committee.</span
+            >
+            <span v-else
+              >{{ name }} proposal submitted for review by Salon's Financial
+              Committee.</span
+            >
           </span>
           <p class="opacity-50 mt-20">
             <router-link
