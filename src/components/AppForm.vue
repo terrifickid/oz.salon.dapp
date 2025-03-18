@@ -196,6 +196,7 @@ export default {
           "verified",
           "walletAddress",
           "softInvestmentCommitment",
+          "adminApproved",
         ];
         if (disabled.includes(field.id)) return false;
         return true;

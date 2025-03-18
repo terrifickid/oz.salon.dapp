@@ -216,7 +216,7 @@ export default {
         "prettyId",
         "processState",
         "verified",
-        "AdminApproved",
+        "adminApproved",
       ],
       treasury: {},
     };
