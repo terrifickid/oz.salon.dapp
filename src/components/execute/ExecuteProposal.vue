@@ -1,7 +1,7 @@
 <template>
   <!-- Exchange -->
   <ExecuteExchange :item="proposal" v-if="type == 'exchange'" />
-  <!-- Kick -->
+  <!-- Kick 
   <ExecuteKick
     :item="proposal"
     v-else-if="type == 'kick' && passed && hasEnded"
@@ -11,6 +11,7 @@
     class="mb-32"
     v-else-if="type == 'invest' && hasEnded && passed"
   />
+  -->
 </template>
 
 <script>

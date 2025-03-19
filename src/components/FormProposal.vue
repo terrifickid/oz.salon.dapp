@@ -147,7 +147,7 @@
           </li>
         </ul>
 
-        <ExecuteProposal v-if="0" :proposal="proposal" />
+        <ExecuteProposal :proposal="proposal" />
 
         <router-link to="/manage/proposals">
           <button class="flex items-center mt-12 opacity-50">
