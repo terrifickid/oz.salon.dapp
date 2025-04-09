@@ -129,7 +129,7 @@
     </div>
 
     <router-link
-      to="/manage/proposals"
+      :to="'/manage/proposals/' + walletAddress"
       class="pt-16 flex items-center opacity-50"
       v-show="!editMode"
     >
