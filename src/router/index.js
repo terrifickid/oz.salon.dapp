@@ -139,6 +139,15 @@ const routes = [
         },
       },
       {
+        path: "exchange",
+        name: "Exchange",
+        component: function () {
+          return import(
+            /* webpackChunkName: "ViewTransfer" */ "../views/manage/ViewExchangeForm.vue"
+          );
+        },
+      },
+      {
         path: "propose",
         name: "Propose",
         component: function () {

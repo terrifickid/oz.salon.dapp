@@ -75,7 +75,7 @@
             {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
           </p>
 
-          <p class="pt-8 pb-12">{{ artwork.fields.description }}</p>
+          <p class="pt-8 pb-12" v-html="artwork.fields.description"></p>
         </div>
       </div>
       <div

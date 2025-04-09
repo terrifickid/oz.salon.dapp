@@ -128,9 +128,10 @@
               {{ format.format(artwork.fields.mostRecentAppraisalPrice) }}
             </p>
 
-            <p class="pt-8 md:pb-12 col-span-12">
-              {{ artwork.fields.description }}
-            </p>
+            <p
+              class="pt-8 md:pb-12 col-span-12"
+              v-html="artwork.fields.description"
+            ></p>
           </div>
         </div>
         <div
