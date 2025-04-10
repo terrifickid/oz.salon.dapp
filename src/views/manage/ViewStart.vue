@@ -26,7 +26,7 @@
               <p class="opacity-50">-> Add to your existing investment</p>
             </router-link>
           </li>
-          <li class="mb-5">
+          <li class="mb-5" v-if="0">
             <router-link to="/manage/exchange">
               <p>Exchange</p>
               <p class="opacity-50">-> Cash out some or all of your units</p>
