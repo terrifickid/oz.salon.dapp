@@ -4,7 +4,7 @@ import axios from "axios";
 import _ from "lodash";
 export default createStore({
   state: {
-    login: null,
+    login: JSON.parse(localStorage.getItem("saloncookie154")) || null,
     connecting: false,
     walletAddress: null,
     provider: null,
@@ -44,12 +44,15 @@ export default createStore({
         username: payload.username,
         password: payload.password,
       };
+      // Save to localStorage whenever login is updated
+      localStorage.setItem("saloncookie154", JSON.stringify(state.login));
     },
   },
   actions: {
     async disconnect() {
       this.state.login = null;
       this.state.profile = { loading: true };
+      localStorage.removeItem("saloncookie154");
     },
     async connect({ commit }, { username, password }) {
       console.log("Connecting!", { username, password });
@@ -64,7 +67,7 @@ export default createStore({
           case 200:
             this.state.profile = res.data;
             this.state.walletAddress = res.data.walletAddress;
-            this.state.login = { username, password };
+            commit("setLogin", { username, password });
             console.log("init profile", this.state.profile);
             break;
           default:

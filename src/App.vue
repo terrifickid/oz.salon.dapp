@@ -19,6 +19,9 @@ export default {
   },
   components: { AppHeader },
   computed: {
+    login() {
+      return this.$store.state.login;
+    },
     ready() {
       return true;
     },
@@ -40,8 +43,9 @@ export default {
   beforeUnmount() {
     window.removeEventListener("resize", this.hideUI);
   },
-  mounted() {
-    console.log("APP", process.env);
+  async mounted() {
+    console.log("APP", process.env, this.login);
+    if (this.login) await this.$store.dispatch("connect", this.login);
   },
 };
 </script>
