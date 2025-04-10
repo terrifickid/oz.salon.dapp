@@ -21,8 +21,11 @@ export default createStore({
       return JSON.parse(a);
     },
     activeProposalsCount(state) {
-      return state.proposals.filter(function (item) {
-        return !_.has(item, "fields.votes.passed");
+      return state.proposals.filter((item) => {
+        return (
+          !_.has(item, "fields.votes.passed") &&
+          _.get(item, "fields.adminApproved") === true
+        );
       }).length;
     },
     membersCount(state) {
