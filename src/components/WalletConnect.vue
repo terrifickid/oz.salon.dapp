@@ -51,7 +51,7 @@
           <p>Existing members may enter their credentials to access Salon.</p>
           <p>Prospective members must fill out an application.</p>
           <p>
-            <a href="mailto:hello@salondao.xyz" class="underline"
+            <a href="mailto:hello@salon.fund" class="underline"
               >Contact Salon</a
             >
             for troubleshooting.

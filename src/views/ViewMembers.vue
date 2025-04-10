@@ -13,7 +13,7 @@
         <div class="hidden md:block md:col-span-3">
           <p class="pb-8">Contact</p>
           <p class="opacity-50 pb-4">Jordan Huelskamp<br /><i>Founder</i></p>
-          <p class="opacity-50">hello@salondao.xyz</p>
+          <p class="opacity-50">hello@salon.fund</p>
         </div>
       </div>
       <div
