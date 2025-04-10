@@ -66,6 +66,27 @@
     </div>
 
     <div class="grid grid-cols-12">
+      <div class="col-span-12 md:pb-4 md:col-span-3 opacity-50">Username</div>
+      <div class="col-span-12 pb-4 md:col-span-3">
+        <template v-if="!editMode">
+          <input
+            type="text"
+            disabled
+            class="font-haffer bg-transparent block border-black w-full text-black outline-none placeholder-opb"
+            v-model="profile.username"
+          />
+        </template>
+        <template v-else>
+          <input
+            type="text"
+            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb"
+            v-model="update.username"
+          />
+        </template>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-3 opacity-50">Password</div>
       <div class="col-span-12 md:col-span-3">
         <template v-if="!editMode">
@@ -219,8 +240,16 @@ export default {
           process.env.VUE_APP_URI + "/profile/" + this.profile.id,
           this.update
         );
-        console.log(res);
-        await this.$store.dispatch("disconnect");
+        //Reset Username and Password
+        //
+        this.$store.commit("setLogin", {
+          username: this.update.username,
+          password: this.update.password,
+        });
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await this.$store.dispatch("connect", this.login);
+        await this.reup();
       } catch (e) {
         console.error(e);
       }
@@ -230,14 +259,18 @@ export default {
     updateDelegate(d) {
       this.update.delegate = d;
     },
+    async reup() {
+      this.update.firstName = this.profile.firstName;
+      this.update.lastName = this.profile.lastName;
+      this.update.emailAddress = this.profile.emailAddress;
+      this.update.biography = this.profile.biography;
+      this.update.delegate = this.profile.delegate;
+      this.update.username = this.profile.username;
+      this.update.password = this.profile.password;
+    },
   },
-  mounted() {
-    this.update.firstName = this.profile.firstName;
-    this.update.lastName = this.profile.lastName;
-    this.update.emailAddress = this.profile.emailAddress;
-    this.update.biography = this.profile.biography;
-    this.update.delegate = this.profile.delegate;
-    this.update.password = this.profile.password;
+  async mounted() {
+    await this.reup();
   },
 };
 </script>

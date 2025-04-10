@@ -39,6 +39,12 @@ export default createStore({
     showUI(state) {
       state.ui = true;
     },
+    setLogin(state, payload) {
+      state.login = {
+        username: payload.username,
+        password: payload.password,
+      };
+    },
   },
   actions: {
     async disconnect() {
@@ -72,6 +78,9 @@ export default createStore({
         }
       } catch (error) {
         console.log("init profile error", error);
+        this.state.profile = { loading: true };
+        this.state.walletAddress = null;
+        this.state.login = null;
         this.state.networkError = _.get(
           error,
           "response.data",
