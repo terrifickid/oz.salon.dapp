@@ -47,8 +47,10 @@
     </div>
 
     <div class="grid grid-cols-12">
-      <div class="col-span-12 md:col-span-3 opacity-50">Email Address</div>
-      <div class="col-span-12 md:col-span-3">
+      <div class="col-span-12 md:pb-4 md:col-span-3 opacity-50">
+        Email Address
+      </div>
+      <div class="col-span-12 pb-4 md:col-span-3">
         <template v-if="!editMode">
           <p class="border-b border-transparent">
             {{ profile.emailAddress }}
@@ -58,6 +60,26 @@
           <input
             class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb"
             v-model="update.emailAddress"
+          />
+        </template>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:col-span-3 opacity-50">Password</div>
+      <div class="col-span-12 md:col-span-3">
+        <template v-if="!editMode">
+          <input
+            type="password"
+            class="font-haffer bg-transparent block border-black w-full text-black outline-none placeholder-opb"
+            v-model="profile.password"
+          />
+        </template>
+        <template v-else>
+          <input
+            type="text"
+            class="font-haffer bg-transparent block border-b border-black w-full text-black outline-none placeholder-opb"
+            v-model="update.password"
           />
         </template>
       </div>
@@ -197,7 +219,7 @@ export default {
           this.update
         );
         console.log(res);
-        await this.$store.dispatch("connect", this.login);
+        await this.$store.dispatch("disconnect");
       } catch (e) {
         console.error(e);
       }
@@ -214,6 +236,7 @@ export default {
     this.update.emailAddress = this.profile.emailAddress;
     this.update.biography = this.profile.biography;
     this.update.delegate = this.profile.delegate;
+    this.update.password = this.profile.password;
   },
 };
 </script>

@@ -28,7 +28,7 @@
             />
             <AppCountdown
               v-else
-              :start="proposalFormat.createdAt"
+              :start="proposalFormat.updatedAt"
               :type="proposal.sys.contentType.sys.id"
             />
           </div>
@@ -331,7 +331,7 @@ export default {
 
         var item = {
           id: this.proposal.sys.id,
-          createdAt: this.proposal.sys.createdAt,
+          updatedAt: this.proposal.sys.updatedAt,
           contentType: this.proposal.sys.contentType.sys.id,
           votes: votes,
           fields: fields,

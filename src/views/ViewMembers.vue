@@ -110,8 +110,8 @@ export default {
 
           case "Date joined":
             this.members = this.members.sort((a, b) => {
-              const date1 = Date.parse(a.sys.createdAt);
-              const date2 = Date.parse(b.sys.createdAt);
+              const date1 = Date.parse(a.sys.updatedAt);
+              const date2 = Date.parse(b.sys.updatedAt);
 
               if (date1 > date2) {
                 return -1;

@@ -23,7 +23,7 @@
 
             <CounterVote :votes="item.votes" :weights="this.weights" />
 
-            <AppCountdown :start="item.createdAt" class="mt-2" />
+            <AppCountdown :start="item.updatedAt" class="mt-2" />
 
             <div class="mt-3 flex">
               <AppButtonVote
@@ -129,7 +129,7 @@ export default {
 
           var item = {
             id: value.sys.id,
-            createdAt: value.sys.createdAt,
+            updatedAt: value.sys.updatedAt,
             contentType: value.sys.contentType.sys.id,
             votes: votes,
             fields: fields,
