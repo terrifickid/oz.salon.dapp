@@ -1,7 +1,7 @@
 <template>
   <AppShell :isLoaded="ready" :protected="false" :kycAllowed="true" class="">
     <div class="pb-48">
-      <CollectionHero :collection="collection" />
+      <CollectionHero :collection="collection" v-if="0" />
 
       <div ref="nav" class="grid grid-cols-12 px-5 py-10 md:gap-5">
         <div class="col-span-12 md:col-span-2">
