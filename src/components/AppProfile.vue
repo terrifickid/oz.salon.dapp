@@ -71,6 +71,7 @@
         <template v-if="!editMode">
           <input
             type="password"
+            disabled
             class="font-haffer bg-transparent block border-black w-full text-black outline-none placeholder-opb"
             v-model="profile.password"
           />
