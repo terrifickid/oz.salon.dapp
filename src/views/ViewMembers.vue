@@ -7,7 +7,7 @@
       >
         <div class="col-span-12 md:col-span-6">
           <p class="text-2xl mb-8">Members</p>
-          <p class="text-2xl opacity-50" v-html="data.code"></p>
+          <p class="text-2xl" v-html="data.code"></p>
         </div>
         <div class="hidden md:block md:col-span-3"></div>
         <div class="hidden md:block md:col-span-3">
