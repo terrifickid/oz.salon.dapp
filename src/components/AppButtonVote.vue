@@ -8,7 +8,6 @@
   >
     <span v-if="!isProcessing">{{ label }}</span>
     <svg
-      v-else
       class="size-5 animate-spin"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
