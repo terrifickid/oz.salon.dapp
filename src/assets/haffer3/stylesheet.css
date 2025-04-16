@@ -1,0 +1,153 @@
+/* stylesheet.css */
+
+/* Thin */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Thin.woff2") format("woff2"),
+    url("Haffer-TRIAL-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-ThinItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Light */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Light.woff2") format("woff2"),
+    url("Haffer-TRIAL-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-LightItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Regular */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Regular.woff2") format("woff2"),
+    url("Haffer-TRIAL-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-RegularItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-RegularItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Medium */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Medium.woff2") format("woff2"),
+    url("Haffer-TRIAL-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-MediumItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* SemiBold */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-SemiBold.woff2") format("woff2"),
+    url("Haffer-TRIAL-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-SemiBoldItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Bold */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Bold.woff2") format("woff2"),
+    url("Haffer-TRIAL-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-BoldItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Heavy */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Heavy.woff2") format("woff2"),
+    url("Haffer-TRIAL-Heavy.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-HeavyItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-HeavyItalic.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Black */
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-Black.woff2") format("woff2"),
+    url("Haffer-TRIAL-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Haffer";
+  src: url("Haffer-TRIAL-BlackItalic.woff2") format("woff2"),
+    url("Haffer-TRIAL-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}

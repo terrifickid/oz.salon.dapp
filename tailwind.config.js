@@ -32,7 +32,7 @@ module.exports = {
         third: "33vw",
       },
       fontFamily: {
-        haffer: ["haffer-trialregular"],
+        haffer: ["Haffer"],
         // haffer: ["Haffer XH"],
         //mono: ["AkkuratMonoLLWebTrial-Regular"],
         //ak: ["AkkuratLLWebTrial-Light"],
