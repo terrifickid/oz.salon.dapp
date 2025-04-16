@@ -354,14 +354,13 @@ export default {
         this.treasury = res[0].data.message;
         this.proposal = res[1].data;
 
-        console.log(this.treasury);
-
         var r = await this.assembleProposalType(
           this.proposal.sys.contentType.sys.id
         );
         this.isVoting = false;
         this.proposalFormat = r;
 
+        console.log("propsoalforamt", r);
         if (_.get(this.proposalFormat, "votes.members.length")) {
           this.members = _.get(this.proposalFormat, "votes.members");
         } else {
