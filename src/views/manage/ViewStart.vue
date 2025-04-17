@@ -36,7 +36,7 @@
             <router-link to="/manage/sell">
               <p>Sell</p>
               <p class="opacity-50">
-                -> Initiate a vote to sell a work from our collection
+                -> Propose selling a work from Salon's collection
               </p>
             </router-link>
           </li>
