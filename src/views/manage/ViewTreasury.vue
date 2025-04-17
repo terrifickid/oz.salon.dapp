@@ -20,7 +20,7 @@
             >
           </li>
           <li class="pb-5">
-            <span class="opacity-50">Cash Assets Available</span><br /><span
+            <span class="opacity-50">Cash Assets</span><br /><span
               class="text-2xl"
               >{{ format.format(treasury.balance) }}</span
             >
