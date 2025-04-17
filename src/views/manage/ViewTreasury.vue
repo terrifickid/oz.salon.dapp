@@ -14,30 +14,54 @@
 
         <ul>
           <li class="pb-5">
-            <span class="opacity-50">Art Assets</span><br /><span class="text-2xl">{{
-              format.format(treasury.collectionValue) }}</span>
+            <span class="opacity-50">Art Assets</span><br /><span
+              class="text-2xl"
+              >{{ format.format(treasury.collectionValue) }}</span
+            >
           </li>
           <li class="pb-5">
-            <span class="opacity-50">Cash Assets Available</span><br /><span class="text-2xl">{{
-              format.format(treasury.balance) }}</span>
+            <span class="opacity-50">Cash Assets Available</span><br /><span
+              class="text-2xl"
+              >{{ format.format(treasury.balance) }}</span
+            >
           </li>
           <li class="pb-5">
-            <span class="opacity-50">Total Book Value</span><br /><span class="text-2xl">{{
-              format.format(treasury.balance + treasury.collectionValue)
-            }}</span>
+            <span class="opacity-50">Other Assets</span><br /><span
+              class="text-2xl"
+              >{{ format.format(treasury.otherAssetsValue) }}</span
+            >
           </li>
           <li class="pb-5">
-            <span class="opacity-50">Total Units Issued</span><br /><span class="text-2xl">{{
-              decimal.format(treasury.totalUnits) }}</span>
+            <span class="opacity-50">Total Book Value</span><br /><span
+              class="text-2xl"
+              >{{
+                format.format(
+                  treasury.balance +
+                    treasury.collectionValue +
+                    treasury.otherAssetsValue
+                )
+              }}</span
+            >
           </li>
           <li class="pb-5">
-            <span class="opacity-50">Book Value (per unit)</span><br /><span class="text-2xl">
+            <span class="opacity-50">Total Units Issued</span><br /><span
+              class="text-2xl"
+              >{{ decimal.format(treasury.totalUnits) }}</span
+            >
+          </li>
+          <li class="pb-5">
+            <span class="opacity-50">Book Value (per unit)</span><br /><span
+              class="text-2xl"
+            >
               {{
                 format.format(
-                  (treasury.collectionValue + treasury.balance) /
-                  treasury.totalUnits
+                  (treasury.collectionValue +
+                    treasury.otherAssetsValue +
+                    treasury.balance) /
+                    treasury.totalUnits
                 )
-              }}</span>
+              }}</span
+            >
           </li>
         </ul>
 
@@ -90,7 +114,7 @@ export default {
     try {
       const res = await axios.get(process.env.VUE_APP_URI + "/treasury");
       this.treasury = res.data.message;
-      console.log('treasury', this.treasury);
+      console.log("treasury", this.treasury);
     } catch (error) {
       console.log("error", error);
     }
