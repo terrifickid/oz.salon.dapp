@@ -43,7 +43,7 @@
           <li v-if="isAdmin" class="mb-5">
             <router-link to="/manage/kick">
               <p>Kick</p>
-              <p class="opacity-50">-> Initiate a vote to kick</p>
+              <p class="opacity-50">-> Vote to remove a member from Salon</p>
             </router-link>
           </li>
           <li class="mt-12 mb-5">
