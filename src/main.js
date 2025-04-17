@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 import "./assets/haffer/stylesheet.css";
-import "./assets/haffer3/stylesheet.css";
+import "./assets/haffer4/stylesheet.css";
 import "./assets/reg/stylesheet.css";
 import "./assets/mono/stylesheet.css";
 import "./assets/manrope.css";
