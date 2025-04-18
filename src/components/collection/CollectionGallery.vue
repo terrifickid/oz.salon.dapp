@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-100 p-5 relative flex mb-5"
+    class="bg-gray-100 p-5 relative flex mb-5 overflow-hidden"
     v-for="(artwork, index) in collection"
     :key="index"
   >
