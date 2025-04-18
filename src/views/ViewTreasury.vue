@@ -42,7 +42,9 @@
             ><span class="float-right">
               {{
                 format.format(
-                  (treasury.collectionValue + treasury.balance) /
+                  (treasury.collectionValue +
+                    treasury.otherAssetsValue +
+                    treasury.balance) /
                     treasury.totalUnits
                 )
               }}</span
@@ -54,7 +56,9 @@
               {{ treasury }}
               {{
                 format.format(
-                  ((treasury.collectionValue + treasury.balance) /
+                  ((treasury.collectionValue +
+                    treasury.otherAssetsValue +
+                    treasury.balance) /
                     treasury.totalUnits) *
                     1.25
                 )

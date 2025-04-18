@@ -2,7 +2,7 @@
   font-family: "Haffer";
   src: url("HafferThin.woff2") format("woff2"),
     url("HafferThin.woff") format("woff");
-  font-weight: 100; /* Thin */
+  font-weight: 100; /* Thin stays at 100 */
   font-style: normal;
   font-display: swap;
 }
@@ -11,7 +11,7 @@
   font-family: "Haffer";
   src: url("HafferThinItalic.woff2") format("woff2"),
     url("HafferThinItalic.woff") format("woff");
-  font-weight: 100; /* Thin */
+  font-weight: 100; /* Thin Italic stays at 100 */
   font-style: italic;
   font-display: swap;
 }
@@ -20,7 +20,7 @@
   font-family: "Haffer";
   src: url("HafferLight.woff2") format("woff2"),
     url("HafferLight.woff") format("woff");
-  font-weight: 300; /* Light */
+  font-weight: 400; /* Light recalibrated to 400 (appears as "regular") */
   font-style: normal;
   font-display: swap;
 }
@@ -29,7 +29,7 @@
   font-family: "Haffer";
   src: url("HafferLightItalic.woff2") format("woff2"),
     url("HafferLightItalic.woff") format("woff");
-  font-weight: 300; /* Light */
+  font-weight: 400; /* Light Italic recalibrated to 400 */
   font-style: italic;
   font-display: swap;
 }
@@ -38,7 +38,7 @@
   font-family: "Haffer";
   src: url("HafferRegular.woff2") format("woff2"),
     url("HafferRegular.woff") format("woff");
-  font-weight: 400; /* Regular */
+  font-weight: 500; /* Regular shifted to 500 (appears as "medium") */
   font-style: normal;
   font-display: swap;
 }
@@ -47,7 +47,7 @@
   font-family: "Haffer";
   src: url("HafferRegularItalic.woff2") format("woff2"),
     url("HafferRegularItalic.woff") format("woff");
-  font-weight: 400; /* Regular */
+  font-weight: 500; /* Regular Italic shifted to 500 */
   font-style: italic;
   font-display: swap;
 }
@@ -56,7 +56,7 @@
   font-family: "Haffer";
   src: url("HafferMedium.woff2") format("woff2"),
     url("HafferMedium.woff") format("woff");
-  font-weight: 500; /* Medium */
+  font-weight: 600; /* Medium shifted to 600 (appears as "bold") */
   font-style: normal;
   font-display: swap;
 }
@@ -65,23 +65,23 @@
   font-family: "Haffer";
   src: url("HafferMediumItalic.woff2") format("woff2"),
     url("HafferMediumItalic.woff") format("woff");
-  font-weight: 500; /* Medium */
+  font-weight: 600; /* Medium Italic shifted to 600 */
   font-style: italic;
   font-display: swap;
 }
 
-/* Example usage */
+/* Updated example usage */
 body {
   font-family: "Haffer", sans-serif;
-  font-weight: 400; /* Regular */
+  font-weight: 400; /* Now displays HafferLight */
   font-style: normal;
 }
 
 h1 {
-  font-weight: 700; /* Bold */
+  font-weight: 600; /* Now displays HafferMedium (acting as bold) */
   font-style: normal;
 }
 
 em {
-  font-style: italic;
+  font-style: italic; /* Will use italic version of the specified weight */
 }
