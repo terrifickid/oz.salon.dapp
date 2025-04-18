@@ -1,5 +1,5 @@
 <template>
-  <img :src="imageSrc" />
+  <img :src="src" />
 </template>
 <script>
 import axios from "axios";
@@ -11,19 +11,15 @@ export default {
     };
   },
   computed: {
-    uri() {
-      return process.env.VUE_APP_URI + "/asset/" + this.image.sys.id;
+    src() {
+      return (
+        process.env.VUE_APP_URI +
+        "/optimize?image=https:" +
+        this.image.fields.file.url
+      );
     },
   },
-  async mounted() {
-    try {
-      const res = await axios.get(this.uri);
-      this.imageSrc = res.data.url;
-      console.log("image is", this.image.sys.id, res.data);
-    } catch (error) {
-      console.log("error", error);
-    }
-  },
+  async mounted() {},
 };
 </script>
 <style scoped>
