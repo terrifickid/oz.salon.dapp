@@ -97,7 +97,7 @@ export default {
           vote: vote,
           signature: this.login,
         });
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 1 second
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait 1 second
         this.$emit("voted");
       } catch (err) {
         console.log(err);
