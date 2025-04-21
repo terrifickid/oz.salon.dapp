@@ -13,7 +13,7 @@
         "
         @mouseout="hover = false"
         class="max-h-third md:max-h-half"
-        :image="slide.fields.images[0]"
+        :image="slide"
       />
     </div>
     <div class="fixed bottom-5 w-full text-center">
