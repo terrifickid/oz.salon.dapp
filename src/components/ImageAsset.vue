@@ -12,14 +12,12 @@ export default {
   },
   computed: {
     src() {
-      return (
-        process.env.VUE_APP_URI +
-        "/optimize?image=https:" +
-        this.image.fields.file.url
-      );
+      return this.image.imagedata;
     },
   },
-  async mounted() {},
+  async mounted() {
+    console.log(this.image);
+  },
 };
 </script>
 <style scoped>

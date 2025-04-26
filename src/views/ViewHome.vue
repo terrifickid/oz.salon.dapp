@@ -1,6 +1,6 @@
 <template>
   <AppShell :isLoaded="isLoaded" :protected="false" class="font-haffer">
-    <HomeFaderSlide :slides="artworks" :key="test" />
+    <HomeFaderSlide :slides="payload" :key="test" />
   </AppShell>
 </template>
 
@@ -18,6 +18,7 @@ export default {
     return {
       collection: [],
       artworks: [],
+      payload: [],
       isLoaded: false,
       test: 0,
       shuffled: [],
@@ -35,23 +36,51 @@ export default {
     },
   },
   methods: {
+    async fetchImageAsBase64(url) {
+      try {
+        const response = await axios.get(url, { responseType: "blob" });
+        const blob = response.data;
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result); // Base64 string
+          reader.readAsDataURL(blob);
+        });
+      } catch (error) {
+        console.error("Error fetching image:", error);
+        return null;
+      }
+    },
     async disconnect() {
       await this.$store.dispatch("disconnect");
     },
     async randomlySelectArtwork() {
-      console.log(this.shuffled);
       this.shuffled = _.shuffle(this.shuffled);
-
       this.artworks.push(this.shuffled.shift());
     },
     async shuffle() {
       console.log("shuffle");
+
       this.shuffled = this.collection;
       this.artworks = [];
       while (this.artworks.length < 3) {
         await this.randomlySelectArtwork();
       }
-      console.log("artworks", this.artworks);
+      var scoped = this;
+      // Create an array of 3 promises for concurrent execution
+      const imgP = this.artworks.map(async function (work) {
+        var test = await scoped.fetchImageAsBase64(
+          process.env.VUE_APP_URI +
+            "/optimize?image=https:" +
+            _.get(work, "fields.images[0].fields.file.url")
+        );
+        work.imagedata = test;
+        return work;
+      });
+      // Wait for all promises to resolve
+      this.payload = [];
+      this.payload = await Promise.all(imgP);
+
+      console.log("artworks", this.payload);
     },
   },
   async mounted() {
@@ -66,7 +95,6 @@ export default {
     }
     setInterval(async () => {
       await this.shuffle();
-      this.test = Math.round(Math.random() * 1000);
     }, 12000);
   },
 };
