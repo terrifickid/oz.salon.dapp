@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed overflow-hidden left-0 right-0 bottom-0 p-5 z-50">
+  <div class="fixed overflow-hidden left-0 right-0 bottom-0 p-5 z-50 md:z-20">
     <div class="grid grid-cols-12">
       <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2">
         <a href="/#/" class="opacity-100"
