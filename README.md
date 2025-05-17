@@ -1,6 +1,6 @@
 # salon.fund
 
-A Vue 3 frontend for salon.fund, a platform for connecting salons with customers or funding salon businesses. This frontend pairs with the Node.js backend at [salondao/salonnode](https://github.com/salondao/salonnode).
+A Vue 3 frontend for salon.fund, Salon is a contemporary art fund assembling one of the most discerning private collections in the world. This frontend pairs with the Node.js backend at [salondao/salonnode](https://github.com/salondao/salonnode).
 
 ## Prerequisites
 
