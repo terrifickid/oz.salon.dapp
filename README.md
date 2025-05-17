@@ -1,23 +1,24 @@
 # salon.fund
 
-A Vue 3 frontend for salon.fund, a platform for connecting salons with customers or funding salon businesses.
+A Vue 3 frontend for salon.fund, a platform for connecting salons with customers or funding salon businesses. This frontend pairs with the Node.js backend at [salondao/salonnode](https://github.com/salondao/salonnode).
 
 ## Prerequisites
 
 - Node.js (v16.x or later recommended for Vue 3)
-- Yarn (v1.x)
+- npm (v8.x or later, typically bundled with Node.js)
+- Backend server: Follow setup instructions in [salondao/salonnode](https://github.com/salondao/salonnode)
 
 ## Project Setup
 
 1. Install dependencies:
 
 ```bash
-yarn install
+npm install
 ```
 
 2. Configure the environment variable:
    - Create a `.env` file in the project root.
-   - Add the following line, replacing `[your-backend-uri]` with the backend API URL:
+   - Add the following line, replacing `[your-backend-uri]` with the URL of the salonnode backend (e.g., `http://localhost:3000` for local development):
      ```env
      VUE_APP_URI=[your-backend-uri]
      ```
@@ -29,7 +30,7 @@ yarn install
 Run the app with hot-reloading:
 
 ```bash
-yarn serve
+npm run serve
 ```
 
 ### Production-Mode Development Server
@@ -37,7 +38,7 @@ yarn serve
 Run the app in production mode with hot-reloading:
 
 ```bash
-yarn live
+npm run live
 ```
 
 ### Production Build
@@ -45,7 +46,7 @@ yarn live
 Compile and minify for production:
 
 ```bash
-yarn build
+npm run build
 ```
 
 ### Development Build
@@ -53,7 +54,7 @@ yarn build
 Compile for development (non-minified):
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 ### Linting
@@ -61,14 +62,14 @@ yarn dev
 Lint and fix files:
 
 ```bash
-yarn lint
+npm run lint
 ```
 
 ## Key Dependencies
 
 - **Vue 3**: Frontend framework
 - **TailwindCSS**: Styling
-- **Axios**: API requests
+- **Axios**: API requests to the salonnode backend
 - **Vue Router**: Routing
 - **Vuex**: State management
 - **Vue3 Carousel & Vue Fullpage.js**: UI components
