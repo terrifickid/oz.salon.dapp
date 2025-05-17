@@ -1,5 +1,0 @@
-git checkout dev
-yarn dev
-git add -A
-git commit -a -m 'autodeploy'
-git push origin dev
