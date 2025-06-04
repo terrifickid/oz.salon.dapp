@@ -77,7 +77,3 @@ npm run lint
 ## Customize Configuration
 
 See [Vue CLI Configuration Reference](https://cli.vuejs.org/config/).
-
-## License
-
-[Specify license, e.g., MIT, or state "Proprietary" if not open-source.]
