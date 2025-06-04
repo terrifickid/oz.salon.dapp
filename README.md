@@ -1,4 +1,4 @@
-# salon.fund vue frontend
+# salon frontend
 
 A Vue 3 frontend for salon.fund. This frontend pairs with the Node.js backend at [salondao/salonnode](https://github.com/salondao/salonnode).
 
