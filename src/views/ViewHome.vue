@@ -22,6 +22,7 @@ export default {
       isLoaded: false,
       test: 0,
       shuffled: [],
+      intervalId: null,
     };
   },
   computed: {
@@ -93,9 +94,16 @@ export default {
     } catch (error) {
       console.log("error", error);
     }
-    setInterval(async () => {
+    this.intervalId = setInterval(async () => {
       await this.shuffle();
     }, 12000);
+  },
+  beforeDestroy() {
+    // Clear the interval when the component is destroyed
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      console.log("Interval cleared");
+    }
   },
 };
 </script>
