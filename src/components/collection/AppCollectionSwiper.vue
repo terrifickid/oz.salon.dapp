@@ -29,7 +29,7 @@ export default {
   props: ["images"],
   methods: {
     proxyImageURI(src) {
-      return process.env.VUE_APP_URI + "/proxy?image=https://" + src;
+      return process.env.VUE_APP_URI + "/proxy?image=https:" + src;
     },
     mousedown() {
       console.log("mousedown");

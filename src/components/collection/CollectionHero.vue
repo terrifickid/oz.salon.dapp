@@ -198,7 +198,7 @@ export default {
   },
   methods: {
     proxyImageURI(src) {
-      return process.env.VUE_APP_URI + "/proxy?image=https://" + src;
+      return process.env.VUE_APP_URI + "/proxy?image=https:" + src;
     },
     nextArtwork() {
       this.information = false;
