@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     proxyImageURI(src) {
-      return process.env.VUE_APP_URI + "/proxy?image=" + src;
+      return process.env.VUE_APP_URI + "/proxy?image=https://" + src;
     },
     image(item) {
       return this.proxyImageURI(
