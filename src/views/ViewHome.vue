@@ -98,7 +98,7 @@ export default {
       await this.shuffle();
     }, 12000);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     console.log("before destroy");
     // Clear the interval when the component is destroyed
     if (this.intervalId) {
