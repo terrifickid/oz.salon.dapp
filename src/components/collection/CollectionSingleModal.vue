@@ -134,7 +134,7 @@
         <div class="pb-20 sm:pb-0">
           <img
             v-for="(image, index) in artwork.fields.images"
-            :src="image.fields.file.url"
+            :src="proxyImageURI(image.fields.file.url)"
             :key="index"
             :class="{
               hidden: index != this.hikey,
@@ -150,7 +150,7 @@
           >
             <img
               v-for="(image, index) in artwork.fields.images"
-              :src="image.fields.file.url"
+              :src="proxyImageURI(image.fields.file.url)"
               :key="index"
               class="w-20 my-5 mx-2 cursor-pointer"
               @click="this.hikey = index"
@@ -176,6 +176,9 @@ export default {
     };
   },
   methods: {
+    proxyImageURI(src) {
+      return process.env.VUE_APP_URI + "/proxy?image=" + src;
+    },
     close() {
       document.body.style.overflow = "scroll";
       this.$emit("close");

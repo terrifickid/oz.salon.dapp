@@ -87,7 +87,7 @@
       >
         <img
           v-for="(image, index) in artwork.fields.images"
-          :src="image.fields.file.url"
+          :src="proxyImageURI(image.fields.file.url)"
           :key="index"
           v-show="index == this.hikey"
           class="w-full"
@@ -99,7 +99,7 @@
         >
           <img
             v-for="(image, index) in artwork.fields.images"
-            :src="image.fields.file.url"
+            :src="proxyImageURI(image.fields.file.url)"
             :key="index"
             class="w-20 my-5 mx-2 cursor-pointer"
             @click="this.hikey = index"
@@ -124,6 +124,9 @@ export default {
     };
   },
   methods: {
+    proxyImageURI(src) {
+      return process.env.VUE_APP_URI + "/proxy?image=" + src;
+    },
     nextArtwork() {
       this.information = false;
       this.hkey++;
