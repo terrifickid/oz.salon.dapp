@@ -99,6 +99,7 @@ export default {
     }, 12000);
   },
   beforeDestroy() {
+    console.log("before destroy");
     // Clear the interval when the component is destroyed
     if (this.intervalId) {
       clearInterval(this.intervalId);
