@@ -17,7 +17,7 @@
         <img
           @mousedown="mousedown"
           @mouseup="mouseup"
-          :src="image.fields.file.url"
+          :src="proxyImageURI(image.fields.file.url)"
           class="w-full cursor-pointer"
         />
       </div>
@@ -28,6 +28,9 @@
 export default {
   props: ["images"],
   methods: {
+    proxyImageURI(src) {
+      return process.env.VUE_APP_URI + "/proxy?image=https:" + src;
+    },
     mousedown() {
       console.log("mousedown");
     },

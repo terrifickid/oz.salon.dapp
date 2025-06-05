@@ -37,8 +37,13 @@ export default {
     };
   },
   methods: {
+    proxyImageURI(src) {
+      return process.env.VUE_APP_URI + "/proxy?image=https:" + src;
+    },
     image(item) {
-      return _.get(item, "fields.images[0].fields.file.url");
+      return this.proxyImageURI(
+        _.get(item, "fields.images[0].fields.file.url")
+      );
     },
   },
 };
