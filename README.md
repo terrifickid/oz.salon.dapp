@@ -72,7 +72,6 @@ npm run lint
 - **Axios**: API requests to the salonnode backend
 - **Vue Router**: Routing
 - **Vuex**: State management
-- **Vue3 Carousel & Vue Fullpage.js**: UI components
 
 ## Customize Configuration
 
