@@ -1,4 +1,4 @@
-# salon.fund vue frontend
+# salon frontend
 
 A Vue 3 frontend for salon.fund. This frontend pairs with the Node.js backend at [salondao/salonnode](https://github.com/salondao/salonnode).
 
@@ -72,12 +72,7 @@ npm run lint
 - **Axios**: API requests to the salonnode backend
 - **Vue Router**: Routing
 - **Vuex**: State management
-- **Vue3 Carousel & Vue Fullpage.js**: UI components
 
 ## Customize Configuration
 
 See [Vue CLI Configuration Reference](https://cli.vuejs.org/config/).
-
-## License
-
-[Specify license, e.g., MIT, or state "Proprietary" if not open-source.]
