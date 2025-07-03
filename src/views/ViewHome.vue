@@ -70,9 +70,7 @@ export default {
       // Create an array of 3 promises for concurrent execution
       const imgP = this.artworks.map(async function (work) {
         var test = await scoped.fetchImageAsBase64(
-          process.env.VUE_APP_URI +
-            "/optimize?image=https:" +
-            _.get(work, "fields.images[0].fields.file.url")
+          "https:" + _.get(work, "fields.images[0].fields.file.url")
         );
         work.imagedata = test;
         return work;
