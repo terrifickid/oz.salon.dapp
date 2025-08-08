@@ -1,0 +1,1 @@
+echo "$SALON_APP_DEV" > .env.json
