@@ -2,13 +2,17 @@
   <AppShell :isLoaded="loaded" :protected="false">
     <div
       v-if="loaded"
-      class="grid grid-cols-12 pt-20 w-full font-haffer px-5 pb-48"
+      class="grid grid-cols-12 pt-20 w-full font-haffer px-5 pb-48 gap-4"
     >
-      <div class="col-span-12 md:col-span-9 xl:col-span-7 text-2xl">
+      <div class="col-span-12 md:col-span-6 text-2xl">
         <p class="mb-8" v-html="data.fields.title"></p>
         <div v-html="data.fields.code"></div>
         <div v-html="data.fields.code2"></div>
-        <div id="contactForm">
+      </div>
+
+      <!-- Change col-start-3 to col-start-9 to move form to the right -->
+      <div class="col-span-12 md:col-span-4 md:col-start-9">
+        <div id="contactForm" class="w-full bg-gray-100 p-5">
           <form
             action="https://fund.us3.list-manage.com/subscribe/post?u=ba60d72b882bcc8cbf54db6b6&amp;id=dcce906d59&amp;f_id=0088dae0f0"
             method="post"
@@ -19,32 +23,44 @@
           >
             <div id="mc_embed_signup_scroll">
               <div class="mc-field-group mb-4">
-                <label for="mce-EMAIL" class="block mb-1">Email Address </label>
+                <label
+                  for="mce-EMAIL"
+                  class="block mb-10 flex items-center font-haffer"
+                  ><span class="mr-12">1</span>Email Address
+                </label>
                 <input
                   type="email"
                   name="EMAIL"
-                  class="required email border border-black p-2 rounded"
+                  class="font-haffer sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
                   id="mce-EMAIL"
                   value=""
                   required
                 />
               </div>
               <div class="mc-field-group mb-4">
-                <label for="mce-FNAME" class="block mb-1">First Name </label>
+                <label
+                  for="mce-FNAME"
+                  class="block mb-10 flex items-center font-haffer"
+                  ><span class="mr-12">2</span>First Name
+                </label>
                 <input
                   type="text"
                   name="FNAME"
-                  class="text border border-black rounded p-2"
+                  class="font-haffer sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
                   id="mce-FNAME"
                   value=""
                 />
               </div>
               <div class="mc-field-group mb-4">
-                <label for="mce-LNAME" class="block mb-1">Last Name </label>
+                <label
+                  for="mce-LNAME"
+                  class="block mb-10 flex items-center font-haffer"
+                  ><span class="mr-12">3</span>Last Name
+                </label>
                 <input
                   type="text"
                   name="LNAME"
-                  class="text border border-black rounded p-2"
+                  class="font-haffer sm:ml-0 bg-transparent block border-b border-black w-full text-black py-3 outline-none placeholder-opb"
                   id="mce-LNAME"
                   value=""
                 />
@@ -74,8 +90,8 @@
                   type="submit"
                   name="subscribe"
                   id="mc-embedded-subscribe"
-                  class="button border border-black p-2 cursor-pointer"
-                  value="Subscribe"
+                  class="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 block mb-2 cursor-pointer"
+                  value="Submit"
                 />
               </div>
             </div>
@@ -83,7 +99,6 @@
         </div>
       </div>
     </div>
-    <div class="lg:col-span-4"></div>
   </AppShell>
 </template>
 <script>
