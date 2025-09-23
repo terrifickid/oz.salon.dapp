@@ -25,7 +25,7 @@
         />
         <AppCountdown
           v-else
-          :start="item.sys.updatedAt"
+          :start="item.sys.createdAt"
           :type="item.sys.contentType.sys.id"
         />
       </div>
