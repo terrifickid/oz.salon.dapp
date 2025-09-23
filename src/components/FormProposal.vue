@@ -31,7 +31,6 @@
               :start="proposalFormat.createdAt"
               :type="proposal.sys.contentType.sys.id"
             />
-            craetdAt
           </div>
           <div class="col-span-12 lg:col-span-3">
             {{ proposalFormat.profile.firstName }}
