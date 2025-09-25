@@ -141,7 +141,7 @@ export default {
     },
     proposals() {
       return this.$store.state.proposals.filter(
-        (item) => _.get(item, "fields.adminApproved") == true
+        (item) => _.get(item, "fields.adminApproved", null) !== null
       );
     },
     walletAddress() {
