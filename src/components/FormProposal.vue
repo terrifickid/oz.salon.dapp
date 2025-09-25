@@ -37,7 +37,7 @@
             {{ proposalFormat.profile.lastName }}
           </div>
         </div>
-        {{ proposalFormat }}
+        <pre> {{ proposalFormat }} </pre>
         <CounterVote
           :votes="proposalFormat.votes"
           :members="members"
