@@ -21,7 +21,7 @@
               {{ member.fields.firstName }} {{ member.fields.lastName }}
             </div>
             <div class="col-span-12 md:col-span-4">
-              Since {{ dateFormated(member.sys.createdAt) }}
+              Since {{ dateFormated(member.fields.memberSince) }}
             </div>
 
             <div class="hidden md:block col-span-12 md:col-span-4">
