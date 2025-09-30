@@ -140,9 +140,9 @@ export default {
       });
     },
     proposals() {
-      return this.$store.state.proposals.filter(
-        (item) => _.get(item, "fields.adminApproved", null) !== null
-      );
+      return this.$store.state.proposals
+        .filter((item) => _.get(item, "fields.adminApproved", null) !== null)
+        .sort((a, b) => new Date(a.sys.createdAt) - new Date(b.sys.createdAt));
     },
     walletAddress() {
       return this.$store.state.walletAddress;
