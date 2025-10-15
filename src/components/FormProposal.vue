@@ -28,7 +28,7 @@
             />
             <AppCountdown
               v-else
-              :start="proposalFormat.updatedAt"
+              :start="adminApproved"
               :type="proposal.sys.contentType.sys.id"
             />
           </div>
@@ -222,6 +222,9 @@ export default {
     };
   },
   computed: {
+    adminApproved() {
+      return _.get(this.proposal, "fields.adminApproved", null);
+    },
     prettyId() {
       //return this.item.fields.prettyId;
       var zeroes = new Array(3 + 1).join("0");
@@ -331,7 +334,7 @@ export default {
 
         var item = {
           id: this.proposal.sys.id,
-          updatedAt: this.proposal.sys.updatedAt,
+          createdAt: this.proposal.sys.createdAt,
           contentType: this.proposal.sys.contentType.sys.id,
           votes: votes,
           fields: fields,

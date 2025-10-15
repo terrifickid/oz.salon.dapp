@@ -21,7 +21,7 @@
               {{ member.fields.firstName }} {{ member.fields.lastName }}
             </div>
             <div class="col-span-12 md:col-span-4">
-              Since {{ dateFormated(member.sys.createdAt) }}
+              Since {{ dateFormated(member.fields.memberSince) }}
             </div>
 
             <div class="hidden md:block col-span-12 md:col-span-4">
@@ -34,7 +34,7 @@
           >
             <div class="col-span-12 md:col-span-3 opacity-50">Biography</div>
             <div class="col-span-12 md:col-span-9">
-              {{ member.fields.biography }}
+              {{ member.fields.biography }} {{ member.fields.memberSince }}
             </div>
             <div class="col-span-12 opacity-50 hover:opacity-100 pt-4">
               <router-link to="/manage/proposals" class="flex items-center">
@@ -84,7 +84,10 @@ export default {
   },
   computed: {
     members() {
-      return this.$store.state.members;
+      return this.$store.state.members.sort(
+        (a, b) =>
+          Date.parse(a.fields.memberSince) - Date.parse(b.fields.memberSince)
+      );
     },
   },
   async mounted() {
