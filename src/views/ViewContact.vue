@@ -7,8 +7,8 @@
       <div class="col-span-12 md:col-span-6 text-2xl grid grid-cols-12">
         <p class="mb-8 col-span-12" v-html="data.fields.title"></p>
         <div class="col-span-12" v-html="data.fields.code"></div>
-        <div class="col-span-6" v-html="data.fields.code2"></div>
-        <div class="col-span-6">
+        <div class="col-span-12 xl:col-span-6" v-html="data.fields.code2"></div>
+        <div class="col-span-12 xl:col-span-6">
           <div v-html="data.fields.code3"></div>
           <ContactForm />
         </div>
