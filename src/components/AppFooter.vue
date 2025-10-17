@@ -10,10 +10,10 @@
         id="links"
         class="hidden md:flex col-span-8 sm:col-span-9 lg:col-span-10 flex items-end justify-end"
       >
+        <router-link class="ml-5" to="/mission">Mission</router-link>
         <router-link v-if="!isMember" class="ml-5" to="/members"
           >Members</router-link
         >
-        <router-link class="ml-5" to="/mission">Mission</router-link>
         <router-link class="ml-5" to="/faq">FAQ</router-link>
         <router-link class="ml-5" to="/contact">Contact</router-link>
         <router-link v-if="isMember" class="ml-5" to="/resources"
