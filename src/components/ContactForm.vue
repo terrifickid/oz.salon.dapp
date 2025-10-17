@@ -61,16 +61,22 @@
             value=""
           />
         </div>
-        <div class="clear mt-4">
-          <input
-            type="submit"
-            name="subscribe"
-            id="mc-embedded-subscribe"
-            class="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 block mb-2 cursor-pointer text-base"
-            value="Sign Up"
-          />
+        <div class="clear mt-4 text-base">
+          <AppButton>Sign Up</AppButton>
         </div>
       </div>
     </form>
   </div>
 </template>
+<script>
+import AppButton from "@/components/AppButton.vue";
+export default {
+  components: { AppButton },
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
+  async beforeMount() {},
+};
+</script>
