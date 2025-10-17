@@ -109,15 +109,15 @@
         >
       </div>
       <div class="pb-10">
+        <router-link @click="toggleDown()" class="block" to="/mission"
+          >Mission</router-link
+        >
         <router-link
           v-if="!isMember"
           @click="toggleDown()"
           class="block"
           to="/members"
           >Members</router-link
-        >
-        <router-link @click="toggleDown()" class="block" to="/mission"
-          >Mission</router-link
         >
         <router-link @click="toggleDown()" class="block" to="/faq"
           >FAQ</router-link
